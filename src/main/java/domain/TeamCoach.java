@@ -1,3 +1,5 @@
+package domain;
+
 public class TeamCoach extends TeamMember {
 
     // Constructor
