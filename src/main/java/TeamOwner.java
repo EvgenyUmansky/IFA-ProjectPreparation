@@ -1,4 +1,4 @@
-public class TeamOwner extends TeamMember {
+public class TeamOwner extends  Subscriber {
 
     // Constructor
     public TeamOwner() {
