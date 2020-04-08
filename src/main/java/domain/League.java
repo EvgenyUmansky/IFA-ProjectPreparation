@@ -25,14 +25,15 @@ public class League {
 //        this.leagueName = leagueName;
 //    }
 
+    //Setters
+    public void setLeaguePerSeasons(Set<LeaguePerSeason> leaguePerSeasons) {
+        this.leaguePerSeasons = leaguePerSeasons;
+    }
 
-
-
-
-
-
-
-
+    //add league per season
+    public void addLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
+        this.leaguePerSeasons.add(leaguePerSeason);
+    }
 
     //Getters
     public Controller getController() {

@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LeaguePerSeason {
 
@@ -14,7 +11,7 @@ public class LeaguePerSeason {
     /**
      * saves each team in a season and its points
      */
-    private HashMap<Team, Integer> teamsInLeaguePerSeason;
+    private HashMap<Team, Integer> teamsInLeaguePerSeasonTable;
     private Set<Game> gamesInLeaguePerSeason;
 
     /**
@@ -29,12 +26,19 @@ public class LeaguePerSeason {
         this.season = season;
         this.schedulingMethod = schedulingMethod;
         this.rankingMethod = rankingMethod;
-        this.teamsInLeaguePerSeason = new HashMap<Team, Integer>();
+        this.teamsInLeaguePerSeasonTable = new LinkedHashMap<>();
         this.gamesInLeaguePerSeason = new HashSet<Game>();
     }
 
-    public void setTeamsInLeaguePerSeason(HashMap<Team, Integer> teamsInLeaguePerSeason) {
-        this.teamsInLeaguePerSeason = teamsInLeaguePerSeason;
+    /**
+     * initialized the table of season so every team have 0 points
+     * @param teamsInLeaguePerSeason
+     */
+    public void initializedTeamsInLeaguePerSeason(Set<Team> teamsInLeaguePerSeason) {
+        this.teamsInLeaguePerSeasonTable.keySet().addAll( teamsInLeaguePerSeason);
+        for(Team team : this.teamsInLeaguePerSeasonTable.keySet()){
+            teamsInLeaguePerSeasonTable.put(team, 0);
+        }
     }
 
 
@@ -51,7 +55,7 @@ public class LeaguePerSeason {
         this.season = season;
         this.schedulingMethod = schedulingMethod;
         this.rankingMethod = rankingMethod;
-        this.teamsInLeaguePerSeason = teamsInLeaguePerSeason;
+        this.teamsInLeaguePerSeasonTable = teamsInLeaguePerSeason;
         this.gamesInLeaguePerSeason = new HashSet<Game>();
     }
 
@@ -64,20 +68,20 @@ public class LeaguePerSeason {
      */
     public List<Game> scheduledGames(){
         int i = 0;
-        Team [] teamArray = new Team[this.teamsInLeaguePerSeason.size()];
-        for(Team team : this.teamsInLeaguePerSeason.keySet()){
+        Team [] teamArray = new Team[this.teamsInLeaguePerSeasonTable.size()];
+        for(Team team : this.teamsInLeaguePerSeasonTable.keySet()){
             teamArray[i] = team;
         }
         return this.schedulingMethod.scheduleGamePolicy(this, teamArray);
     }
 
 
-    //TODO: 2 - ranking method
-//    public Set<Game> scheduledGames(){
-//
-//
-//        return this.gamesInLeaguePerSeason;
-//    }
+    //TODO: 2 - ranking method rely on team
+    public  HashMap<Team, Integer> tableOfTheLeague(){
+        HashMap<Team, Integer> tableLeague = new HashMap<>();
+
+        return tableLeague;
+    }
 
 
     //Getters
@@ -99,7 +103,7 @@ public class LeaguePerSeason {
     }
 
     public HashMap<Team, Integer> getTeamsInLeaguePerSeason() {
-        return teamsInLeaguePerSeason;
+        return teamsInLeaguePerSeasonTable;
     }
 
     public Set<Game> getGamesInLeaguePerSeason() {
