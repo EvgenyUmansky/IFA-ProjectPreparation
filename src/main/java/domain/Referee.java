@@ -1,6 +1,6 @@
 package domain;
 
-public class Referee {
+public class Referee extends Subscriber{
 
     // Constructor
     public Referee() {
