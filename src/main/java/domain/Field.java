@@ -8,13 +8,15 @@ public class Field {
     private int fieldId;
 
     Team teamOwns;
+    double propertyCost;
     Set<Integer> gamesOnField;
 
 /////////// Constructors ///////////
-    public Field(Team teamOwns) {
+    public Field(Team teamOwns, double propertyCost) {
         staticFieldId++;
         this.fieldId = staticFieldId;
         this.teamOwns = teamOwns;
+        this.propertyCost = propertyCost;
         gamesOnField = new HashSet<>();
     }
 

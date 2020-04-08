@@ -9,7 +9,7 @@ public class Game {
     private static int staticGameId = 0;
 
     private int gameId;
-    private int seasonId;
+    private LeaguePerSeason leaguePerSeason;
     private Team hostTeam;
     private Team guestTeam;
     private Field field;
@@ -22,10 +22,10 @@ public class Game {
 /////////// Constructors ///////////
 
     // Constructor sets manual date with gameDateStr
-    public Game(int seasonId, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
+    public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
         staticGameId++;
         this.gameId = staticGameId;
-        this.seasonId = seasonId;
+        this.leaguePerSeason = leaguePerSeason;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
         this.field = field;
@@ -40,10 +40,10 @@ public class Game {
     }
 
     // Constructor sets manual date with gameDateStr
-    public Game(int seasonId, Team hostTeam, Team guestTeam, Field field, ArrayList<Referee> referees) {
+    public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, ArrayList<Referee> referees) {
         staticGameId++;
         this.gameId = staticGameId;
-        this.seasonId = seasonId;
+        this.leaguePerSeason = leaguePerSeason;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
         this.field = field;
@@ -64,12 +64,12 @@ public class Game {
         return gameId;
     }
 
-    public int getSeason() {
-        return seasonId;
+    public LeaguePerSeason getLeaguePerSeason() {
+        return leaguePerSeason;
     }
 
-    public void setSeason(int season) {
-        this.seasonId = season;
+    public void setLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
+        this.leaguePerSeason = leaguePerSeason;
     }
 
     public Team getHostTeam() {
