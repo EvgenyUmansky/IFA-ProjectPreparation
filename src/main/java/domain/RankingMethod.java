@@ -1,6 +1,6 @@
 package domain;
 
-public class RankingMethod extends Season {
+public class RankingMethod  {
 
     // Constructor
     public RankingMethod() {

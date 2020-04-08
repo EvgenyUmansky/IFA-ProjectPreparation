@@ -1,6 +1,6 @@
 package domain;
 
-public class SchedulingMethod extends Season {
+public class SchedulingMethod  {
 
     // Constructor
     public SchedulingMethod() {
