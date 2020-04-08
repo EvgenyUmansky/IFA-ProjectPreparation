@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class twoGameSchedulingMethod implements SchedulingMethod{
+public class TwoGameSchedulingMethod implements SchedulingMethod{
 
     /**
      * leagueTeams[i] = first Team |  leagueTeams[j] = second Team
