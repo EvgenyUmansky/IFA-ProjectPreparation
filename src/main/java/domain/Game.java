@@ -61,6 +61,17 @@ public class Game {
         alert.sendAlert("The score of the game between " +  "..." + "is " + getGameScore() );
     }
 
+    // Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
+    public boolean addGameEvent(GameEvent event){
+        // date time of event earlier than game
+        if(event.dateTime.compareTo(this.gameDate) <= 0){
+            return false;
+        }
+
+        this.inGameEvents.addEvent(event);
+        return true;
+    }
+
 
 
 /////////// Getters and Setters ///////////
