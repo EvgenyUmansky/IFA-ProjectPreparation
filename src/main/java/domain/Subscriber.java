@@ -3,12 +3,16 @@ package domain;
 public abstract class Subscriber extends User {
 
     private boolean connected;
-    String userName;
-    String password;
+    private String userName;
+    private String password;
+    private String name;
 
     // Constructor
-    public Subscriber(){
+    public Subscriber(String userName, String password, String name){
         connected = false;
+        this.userName = userName;
+        this.name = name;
+        this.password = password;
     }
 
 
