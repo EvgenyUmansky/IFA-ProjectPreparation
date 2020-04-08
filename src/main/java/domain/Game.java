@@ -15,9 +15,10 @@ public class Game {
     private Field field;
     private LocalDateTime gameDate;
     private ArrayList<Referee> referees;
-    private GameEvent gameEvent;
+    private InGameEvents inGameEvents;
     private int hostTeamScore;
     private int guestTeamScore;
+    private int gameMinutes;
 
 /////////// Constructors ///////////
 
@@ -30,9 +31,10 @@ public class Game {
         this.guestTeam = guestTeam;
         this.field = field;
         this.referees = referees;
-        this.gameEvent = new GameEvent();
+        this.inGameEvents = new InGameEvents();
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
+        this.gameMinutes = 0;
 
         // Game date string format: "2016-11-09 11:44"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -48,9 +50,10 @@ public class Game {
         this.guestTeam = guestTeam;
         this.field = field;
         this.referees = referees;
-        this.gameEvent = new GameEvent();
+        this.inGameEvents = new InGameEvents();
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
+        this.gameMinutes = 0;
 
         // Game date
         this.gameDate = LocalDateTime.now();
@@ -104,12 +107,12 @@ public class Game {
         this.referees = referees;
     }
 
-    public GameEvent getGameEvent() {
-        return gameEvent;
+    public InGameEvents getInGameEvents() {
+        return inGameEvents;
     }
 
-    public void setGameEvent(GameEvent gameEvent) {
-        this.gameEvent = gameEvent;
+    public void setInGameEvents(InGameEvents inGameEvents) {
+        this.inGameEvents = inGameEvents;
     }
 
     public int getHostTeamScore() {
@@ -126,6 +129,14 @@ public class Game {
 
     public void setGuestTeamScore(int guestTeamScore) {
         this.guestTeamScore = guestTeamScore;
+    }
+
+    public int getGameMinutes() {
+        return gameMinutes;
+    }
+
+    public void setGameMinutes(int gameMinutes) {
+        this.gameMinutes = gameMinutes;
     }
 
     /**

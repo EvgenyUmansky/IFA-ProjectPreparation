@@ -9,7 +9,7 @@ public class Field {
 
     Team teamOwns;
     double propertyCost;
-    Set<Integer> gamesOnField;
+    Set<Game> gamesOnField;
 
 /////////// Constructors ///////////
     public Field(Team teamOwns, double propertyCost) {
@@ -20,14 +20,17 @@ public class Field {
         gamesOnField = new HashSet<>();
     }
 
-    public void addGame(int gameId){
-        this.gamesOnField.add(gameId);
+
+/////////// Functionality ///////////
+    public void addGame(Game game){
+        this.gamesOnField.add(game);
+    }
+    public void removeGame(Game game){
+        this.gamesOnField.remove(game);
     }
 
 
 /////////// Getters and Setters ///////////
-
-
     public int getFieldId() {
         return fieldId;
     }
@@ -40,7 +43,7 @@ public class Field {
         this.teamOwns = teamOwns;
     }
 
-    public Set<Integer> getGamesOnField() {
+    public Set<Game> getGamesOnField() {
         return gamesOnField;
     }
 }
