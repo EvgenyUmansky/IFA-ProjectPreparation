@@ -45,7 +45,7 @@ public class Controller {
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
-    public boolean register(String userName, String password, String userType){
+    public boolean register(String userName, String password, String name, String userType){
         if(users.containsKey(userName)){
             return false;
         }
@@ -58,31 +58,31 @@ public class Controller {
                 break;
 
             case "System Administrator":
-                newUser = new SystemAdministrator();
+                newUser = new SystemAdministrator(userName,password,name);
                 break;
 
             case "Referee":
-                newUser = new Referee();
+                newUser = new Referee(userName,password,name);
                 break;
 
             case "Association Agent":
-                newUser = new AssociationAgent();
+                newUser = new AssociationAgent(userName,password,name);
                 break;
 
             case "Team Player":
-                newUser = new TeamPlayer();
+                newUser = new TeamPlayer(userName,password,name);
                 break;
 
             case "Team Coach":
-                newUser = new TeamCoach();
+                newUser = new TeamCoach(userName,password,name);
                 break;
 
             case "Team Admin":
-                newUser = new TeamAdmin();
+                newUser = new TeamAdmin(userName,password,name);
                 break;
 
             case "Team Owner":
-                newUser = new TeamOwner();
+                newUser = new TeamOwner(userName,password,name);
                 break;
 
             default:
