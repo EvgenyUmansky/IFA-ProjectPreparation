@@ -21,8 +21,6 @@ public class Game {
     private int gameMinutes;
 
 /////////// Constructors ///////////
-
-    // Constructor sets manual date with gameDateStr
     public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
         staticGameId++;
         this.gameId = staticGameId;
@@ -40,26 +38,6 @@ public class Game {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
     }
-
-    // Constructor sets manual date with gameDateStr
-    public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, ArrayList<Referee> referees) {
-        staticGameId++;
-        this.gameId = staticGameId;
-        this.leaguePerSeason = leaguePerSeason;
-        this.hostTeam = hostTeam;
-        this.guestTeam = guestTeam;
-        this.field = field;
-        this.referees = referees;
-        this.inGameEvents = new InGameEvents();
-        this.hostTeamScore = 0;
-        this.guestTeamScore = 0;
-        this.gameMinutes = 0;
-
-        // Game date
-        this.gameDate = LocalDateTime.now();
-    }
-
-
 
 
 /////////// Getters and Setters ///////////
