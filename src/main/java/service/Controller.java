@@ -2,6 +2,8 @@ package service;
 
 import domain.*;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -58,7 +60,7 @@ public class Controller {
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
-    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification){
+    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification, RefereeType refereeType){
         if(users.containsKey(userName)){
             return false;
         }
@@ -82,8 +84,8 @@ public class Controller {
                 break;
 
             case "Referee":
-                //TODO think about refereeQualification
-                newUser = new Referee(userName,password,name,mail,refereeQualification);
+                //TODO think about refereeQualification and refereeType
+                newUser = new Referee(userName,password,name,mail,refereeQualification,refereeType);
                 break;
 
             case "Association Agent":
@@ -154,14 +156,14 @@ public class Controller {
             user.setUserName(newUserName);
         }
         else{
-            System.out.println("The new user name is empty. The user name not changed");
+            System.out.println("The new user name is empty. The user name is not changed");
         }
 
         if(!newPassword.isEmpty()){
             user.setPassword(newPassword);
         }
         else{
-            System.out.println("The new password is empty. The password not changed");
+            System.out.println("The new password is empty. The password is not changed");
         }
 
         // set name
@@ -169,7 +171,7 @@ public class Controller {
             user.setName(newName);
         }
         else{
-            System.out.println("The new name is empty. The name not changed");
+            System.out.println("The new name is empty. The name is not changed");
         }
         // set mail
         if(isEmptyMail){
@@ -179,7 +181,7 @@ public class Controller {
             user.setMail(newMail);
         }
         else{
-            System.out.println("The mail not changed");
+            System.out.println("The mail is not changed");
         }
 
         return true;
@@ -264,7 +266,7 @@ public class Controller {
     }
 
     // Envelope function for setProfileDetails
-    public boolean setRefereeProfileDetails(String userName, int qualification, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
+    public boolean setRefereeProfileDetails(String userName, int qualification, RefereeType refereeType, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
         Subscriber referee = (Subscriber) (users.get(userName));
         if (!(referee instanceof Referee)) {
             System.out.println("Not referee instance");
@@ -272,11 +274,14 @@ public class Controller {
         }
 
         if(qualification < 1 || qualification > 5){
-            System.out.println("Qualification must be between 1 to 5");
-            return false;
+            System.out.println("Qualification must be between 1 to 5, the qualification is not changed");
         }
         else{
             ((Referee) referee).setQualification(qualification);
+        }
+
+        if(refereeType != null){
+            ((Referee) referee).setRefereeType(refereeType);
         }
 
         return setProfileDetails(referee, newUserName, newPassword, newName, newMail, isEmptyMail);
@@ -309,6 +314,47 @@ public class Controller {
 
         // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
         game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
+        return true;
+    }
+
+    // UC 10.4 - update/change game events by main referee
+    public boolean changeGameEvent(String userName, Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription ){
+        Subscriber user = (Subscriber) (users.get(userName));
+        if (!(user instanceof Referee)) {
+            System.out.println("Not referee instance");
+            return false;
+        }
+
+        Referee referee = (Referee) user;
+        if(!referee.getRefereeType().equals(RefereeType.MAIN)){
+            System.out.println("Not MAIN referee");
+            return false;
+        }
+
+        long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
+        if(diffInHours > 5){
+            System.out.println("Not allowed to change the game events: out of time");
+            return false;
+        }
+
+        GameEvent gameEvent = game.getGameEvents().get(gameEventId);
+
+        if(!dateTimeStr.isEmpty()){
+            gameEvent.setGameDate(dateTimeStr);
+        }
+
+        if(gameMinutes > -1){
+            gameEvent.setGameMinutes(gameMinutes);
+        }
+
+        if(eventName != null){
+            gameEvent.setEventName(eventName);
+        }
+
+        if(!subscription.isEmpty()){
+            gameEvent.setSubscription(subscription);
+        }
+
         return true;
     }
 
