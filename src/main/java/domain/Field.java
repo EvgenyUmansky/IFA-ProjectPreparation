@@ -11,17 +11,17 @@ public class Field {
     double propertyCost;
     Set<Game> gamesOnField;
 
-    /////////// Constructors ///////////
+/////////// Constructors ///////////
     public Field(Team teamOwns, double propertyCost) {
         staticFieldId++;
         this.fieldId = staticFieldId;
         this.teamOwns = teamOwns;
         this.propertyCost = propertyCost;
-        gamesOnField = new HashSet<Game>();
+        gamesOnField = new HashSet<>();
     }
 
 
-    /////////// Functionality ///////////
+/////////// Functionality ///////////
     public void addGame(Game game){
         this.gamesOnField.add(game);
     }
@@ -30,7 +30,7 @@ public class Field {
     }
 
 
-    /////////// Getters and Setters ///////////
+/////////// Getters and Setters ///////////
     public int getFieldId() {
         return fieldId;
     }

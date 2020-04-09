@@ -19,8 +19,9 @@ public class Game {
     private int hostTeamScore;
     private int guestTeamScore;
     private int gameMinutes;
+    private Alert alert;
 
-/////////// Constructors ///////////
+/////////// Constructor ///////////
     public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
         staticGameId++;
         this.gameId = staticGameId;
@@ -33,11 +34,59 @@ public class Game {
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
         this.gameMinutes = 0;
+        this.alert = new Alert();
 
         // Game date string format: "2016-11-09 11:44"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
     }
+
+
+/////////// Functionality ///////////
+
+    // UC 3.3
+
+    /**
+     * Add subscriber to list of subscribers on a game
+     * @param user - want to get news about a game
+     * @param isMail - true: get new on user's mail, false: get news on profile
+     */
+    public void addSubscriber(Subscriber user, boolean isMail){
+        if(isMail) {
+            this.alert.addToMailSet(user);
+        }
+        else{
+            this.alert.addToSystemSet(user);
+        }
+    }
+
+    /**
+     * Send score to subscribers when game ends
+     */
+    public void sendAlertScore(){
+
+        // some logic with observer...
+
+        alert.sendAlert("The score of the game between " +  "..." + "is " + getGameScore() );
+    }
+
+
+    /**
+     * add game event to list of game events
+     * @param event - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
+     * @return true if success, false if not
+     */
+    //
+    public boolean addGameEvent(GameEvent event){
+        // date time of event earlier than game
+        if(event.dateTime.compareTo(this.gameDate) <= 0){
+            return false;
+        }
+
+        this.inGameEvents.addEvent(event);
+        return true;
+    }
+
 
 
 /////////// Getters and Setters ///////////
@@ -116,6 +165,7 @@ public class Game {
     public void setGameMinutes(int gameMinutes) {
         this.gameMinutes = gameMinutes;
     }
+
 
     /**
      *
