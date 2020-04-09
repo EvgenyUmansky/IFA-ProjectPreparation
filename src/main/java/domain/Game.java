@@ -45,6 +45,12 @@ public class Game {
 /////////// Functionality ///////////
 
     // UC 3.3
+
+    /**
+     * Add subscriber to list of subscribers on a game
+     * @param user - want to get news about a game
+     * @param isMail - true: get new on user's mail, false: get news on profile
+     */
     public void addSubscriber(Subscriber user, boolean isMail){
         if(isMail) {
             this.alert.addToMailSet(user);
@@ -54,6 +60,9 @@ public class Game {
         }
     }
 
+    /**
+     * Send score to subscribers when game ends
+     */
     public void sendAlertScore(){
 
         // some logic with observer...
@@ -61,7 +70,13 @@ public class Game {
         alert.sendAlert("The score of the game between " +  "..." + "is " + getGameScore() );
     }
 
-    // Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
+
+    /**
+     * add game event to list of game events
+     * @param event - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
+     * @return true if success, false if not
+     */
+    //
     public boolean addGameEvent(GameEvent event){
         // date time of event earlier than game
         if(event.dateTime.compareTo(this.gameDate) <= 0){
