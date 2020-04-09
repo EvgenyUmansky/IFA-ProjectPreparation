@@ -1,9 +1,9 @@
 package domain;
 
-public class SchedulingMethod  {
+import java.util.List;
+import java.util.Set;
 
-    // Constructor
-    public SchedulingMethod() {
+public interface SchedulingMethod  {
 
-    }
+    public List<Game> scheduleGamePolicy(LeaguePerSeason leaguePerSeason, Team[] leagueTeams);
 }

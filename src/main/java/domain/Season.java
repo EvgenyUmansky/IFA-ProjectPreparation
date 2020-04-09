@@ -5,23 +5,22 @@ import service.Controller;
 import java.util.*;
 
 
-//TODO : fix new class Diagram!
 public class Season {
     private Controller controller;
     private Set<LeaguePerSeason> leaguePerSeasons;
 
     private int year;
 
-    public Season(Controller controller, Set<LeaguePerSeason> leaguePerSeasons, int year) {
+    public Season(Controller controller, int year) {
         this.controller = controller;
-        this.leaguePerSeasons = leaguePerSeasons;
         this.year = year;
+        this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
     }
 
     // Constructor
-    public Season() {
+    public Season(Controller controller) {
         this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
-        this.controller = new Controller();
+        this.controller = controller;
         this.year = Calendar.getInstance().get(Calendar.YEAR);
     }
 
