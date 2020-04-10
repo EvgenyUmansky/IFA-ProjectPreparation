@@ -227,15 +227,14 @@ public class Controller {
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
-    public boolean sendAlertToSysAdmin(String userName, String message){
+    public boolean sendAlertToSysAdmin(String userName, String title, String message){
         Subscriber fan = (Subscriber)(users.get(userName));
         if(!(fan instanceof Fan)){
             System.out.println("Not fan instance");
             return false;
         }
 
-        sysAdminsAlert.sendAlert(message);
-
+        sysAdminsAlert.sendAlert(new AlertNotification(title, message));
         return true;
     }
 
