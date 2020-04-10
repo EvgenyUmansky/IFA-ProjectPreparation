@@ -9,13 +9,15 @@ public class League {
     private Controller controller;
     private Set<LeaguePerSeason> leaguePerSeasons;
     private String leagueName;
+    private int leagueQualification; // From 1 to 5 (5 is the best league....)
     //TODO: referees?
 
     // Constructor
-    public League(Controller controller, String leagueName) {
+    public League(Controller controller, String leagueName, int leagueQualification) {
         this.controller = controller;
         this.leagueName = leagueName;
         this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
+        this.leagueQualification = leagueQualification;
 
     }
 
@@ -35,6 +37,10 @@ public class League {
         this.leaguePerSeasons.add(leaguePerSeason);
     }
 
+    public void setLeagueQualification(int leagueQualification) {
+        this.leagueQualification = leagueQualification;
+    }
+
     //Getters
     public Controller getController() {
         return controller;
@@ -46,5 +52,9 @@ public class League {
 
     public String getLeagueName() {
         return leagueName;
+    }
+
+    public int getLeagueQualification() {
+        return leagueQualification;
     }
 }

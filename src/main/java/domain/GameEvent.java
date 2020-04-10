@@ -4,13 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class GameEvent {
-    LocalDateTime dateTime;
-    int gameMinutes;
-    GameAlert eventName;
-    String subscription;
+    private static int gameEventCounter = 0;
+    private int gameEventId;
+
+    private LocalDateTime dateTime;
+    private int gameMinutes;
+    private GameAlert eventName;
+    private String subscription;
 
 /////////// Constructors ///////////
     public GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
+        gameEventCounter++;
+        gameEventId = gameEventCounter;
         // Game date string format: "2016-11-09 11:44"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.dateTime = LocalDateTime.parse(dateTimeStr, formatter);
@@ -22,12 +27,12 @@ public class GameEvent {
 
 
 /////////// Getters and Setters ///////////
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public int getGameEventId() {
+        return gameEventId;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**

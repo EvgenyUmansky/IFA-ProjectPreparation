@@ -3,9 +3,12 @@ package service;
 import domain.*;
 
 import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Controller {
 
@@ -70,7 +73,7 @@ public class Controller {
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
-    public boolean register(String userName, String password, String name, String userType, String mail){
+    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification, RefereeType refereeType){
         if(users.containsKey(userName)){
             return false;
         }
@@ -94,7 +97,8 @@ public class Controller {
                 break;
 
             case "Referee":
-                newUser = new Referee(userName,password,name,mail);
+                //TODO think about refereeQualification and refereeType
+                newUser = new Referee(userName,password,name,mail,refereeQualification,refereeType);
                 break;
 
             case "Association Agent":
@@ -149,13 +153,61 @@ public class Controller {
         return false;
     }
 
+    // UC 3.6
+    private String getProfileDetails(Subscriber user) {
 
-/////////// Use Case 3 ///////////
+        return  "User Name: " + user.getUserName() + "\n" +
+                "Password: " + user.getPassword() + "\n" +
+                "Name: " + user.getName() + "\n" +
+                "Mail: " + user.getMail();
+    }
 
-    // UC 3.2
+    // UC 3.6, UC 10.1
+    private boolean setProfileDetails(Subscriber user, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
+
+        if(!newUserName.isEmpty()){
+            user.setUserName(newUserName);
+        }
+        else{
+            System.out.println("The new user name is empty. The user name is not changed");
+        }
+
+        if(!newPassword.isEmpty()){
+            user.setPassword(newPassword);
+        }
+        else{
+            System.out.println("The new password is empty. The password is not changed");
+        }
+
+        // set name
+        if(!newName.isEmpty()){
+            user.setName(newName);
+        }
+        else{
+            System.out.println("The new name is empty. The name is not changed");
+        }
+        // set mail
+        if(isEmptyMail){
+            user.setMail("");
+        }
+        else if(!newMail.isEmpty()){
+            user.setMail(newMail);
+        }
+        else{
+            System.out.println("The mail is not changed");
+        }
+
+        return true;
+    }
+
+
+/////////// Use Case 3 - Fan ///////////
+
+    // UC 3.2 - add fan to subscription list of the personal page
     public boolean addFanSubscriptionToPersonalPage(PersonalPage page, String userName, boolean isMail){
         Subscriber fan = (Subscriber)(users.get(userName));
         if(!(fan instanceof Fan)){
+            System.out.println("Not fan instance");
             return false;
         }
 
@@ -163,10 +215,11 @@ public class Controller {
         return true;
     }
 
-    // UC 3.3
+    // UC 3.3 - add fan to subscription list of the game
     public boolean addFanSubscriptionToGame(Game game, String userName, boolean isMail){
         Subscriber fan = (Subscriber)(users.get(userName));
         if(!(fan instanceof Fan)){
+            System.out.println("Not fan instance");
             return false;
         }
 
@@ -174,10 +227,11 @@ public class Controller {
         return true;
     }
 
-    // UC 3.4
+    // UC 3.4 - send complaint (by fan) to System Administrator
     public boolean sendAlertToSysAdmin(String userName, String message){
         Subscriber fan = (Subscriber)(users.get(userName));
         if(!(fan instanceof Fan)){
+            System.out.println("Not fan instance");
             return false;
         }
 
@@ -186,47 +240,136 @@ public class Controller {
         return true;
     }
 
-    // 3.5
+    // 3.5 -
     //TODO See all history. We need UI for this? Evgeny
 
-    // UC 3.6
-    public String getProfileDetails(String userName) {
+    // UC 3.6 Envelope function for getProfileDetails - get and set fan info (fields)
+    public String getFanProfileDetails(String userName) {
         Subscriber fan = (Subscriber) (users.get(userName));
         if (!(fan instanceof Fan)) {
+            System.out.println("Not fan instance");
             return "";
         }
 
-        return  "User Name: " + fan.getUserName() + "\n" +
-                "Password: " + fan.getPassword() + "\n" +
-                "Name: " + fan.getName() + "\n" +
-                "Mail: " + fan.getMail();
+        return  getProfileDetails(fan);
     }
 
-    public boolean setProfileDetails(String userName, String newUserName, String newPassword, String newName, String newMail){
+    // Envelope function for setProfileDetails
+    public boolean setFanProfileDetails(String userName, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
         Subscriber fan = (Subscriber) (users.get(userName));
         if (!(fan instanceof Fan)) {
+            System.out.println("Not fan instance");
             return false;
         }
 
-        if(!newUserName.isEmpty()){
-            fan.setUserName(newUserName);
+        return setProfileDetails(fan, newUserName, newPassword, newName, newMail, isEmptyMail);
+    }
+
+/////////// Use Case 10 - Referee ///////////
+
+    // UC 10.1, envelope function for getProfileDetails - get and set referee info (fields)
+    public String getRefereeProfileDetails(String userName) {
+        Subscriber referee = (Subscriber) (users.get(userName));
+        if (!(referee instanceof Referee)) {
+            System.out.println("Not referee instance");
+            return "";
         }
 
-        if(!newPassword.isEmpty()){
-            fan.setPassword(newPassword);
+        return  getProfileDetails(referee) + "\nQualification: " + ((Referee) referee).getQualification();
+    }
+
+    // Envelope function for setProfileDetails
+    public boolean setRefereeProfileDetails(String userName, int qualification, RefereeType refereeType, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
+        Subscriber referee = (Subscriber) (users.get(userName));
+        if (!(referee instanceof Referee)) {
+            System.out.println("Not referee instance");
+            return false;
         }
 
-        if(!newName.isEmpty()){
-            fan.setName(newName);
+        if(qualification < 1 || qualification > 5){
+            System.out.println("Qualification must be between 1 to 5, the qualification is not changed");
+        }
+        else{
+            ((Referee) referee).setQualification(qualification);
         }
 
-        if(!newMail.isEmpty()){
-            fan.setMail(newMail);
+        if(refereeType != null){
+            ((Referee) referee).setRefereeType(refereeType);
+        }
+
+        return setProfileDetails(referee, newUserName, newPassword, newName, newMail, isEmptyMail);
+    }
+
+    // UC 10.2 - get all games the referee judge
+    public Set<Game> getRefereeGames(String userName){
+        Subscriber referee = (Subscriber) (users.get(userName));
+        if (!(referee instanceof Referee)) {
+            System.out.println("Not referee instance");
+            return null;
+        }
+
+        return ((Referee) referee).getGames();
+    }
+
+    // UC 10.3 - create new game event and add it to list of game events of the game
+    public boolean updateGameEvent(String userName, Game game, String dateTime, int gameMinutes, GameAlert eventName, String subscription){
+        Subscriber user = (Subscriber) (users.get(userName));
+        if (!(user instanceof Referee)) {
+            System.out.println("Not referee instance");
+            return false;
+        }
+
+        Referee referee = (Referee) user;
+        if(!referee.getGames().contains(game)){
+            System.out.println("The referee does not judge this game");
+            return false;
+        }
+
+        // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
+        game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
+        return true;
+    }
+
+    // UC 10.4 - update/change game events by main referee
+    public boolean changeGameEvent(String userName, Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription ){
+        Subscriber user = (Subscriber) (users.get(userName));
+        if (!(user instanceof Referee)) {
+            System.out.println("Not referee instance");
+            return false;
+        }
+
+        Referee referee = (Referee) user;
+        if(!referee.getRefereeType().equals(RefereeType.MAIN)){
+            System.out.println("Not MAIN referee");
+            return false;
+        }
+
+        long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
+        if(diffInHours > 5){
+            System.out.println("Not allowed to change the game events: out of time");
+            return false;
+        }
+
+        GameEvent gameEvent = game.getGameEvents().get(gameEventId);
+
+        if(!dateTimeStr.isEmpty()){
+            gameEvent.setGameDate(dateTimeStr);
+        }
+
+        if(gameMinutes > -1){
+            gameEvent.setGameMinutes(gameMinutes);
+        }
+
+        if(eventName != null){
+            gameEvent.setEventName(eventName);
+        }
+
+        if(!subscription.isEmpty()){
+            gameEvent.setSubscription(subscription);
         }
 
         return true;
     }
-
 
     // ----------------------------------------------- Team Owner Use Cases (6) ----------------------------------------------- //
 
@@ -259,6 +402,5 @@ public class Controller {
         owner.updateCoachDetails(userName,name,validation,role);
         return true;
     }
-
 
 }
