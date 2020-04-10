@@ -7,13 +7,23 @@ public class Referee extends Subscriber{
     int qualification; // From 1 to 5 (5 is the best league....)
     RefereeType refereeType;
     Set<Game> games;
+    boolean acceptedRequest;
 
-/////////// Constructor ///////////
+    public boolean isAcceptedRequest() {
+        return acceptedRequest;
+    }
+
+    public void setAcceptedRequest(boolean acceptedRequest) {
+        this.acceptedRequest = acceptedRequest;
+    }
+
+    /////////// Constructor ///////////
     public Referee(String userName, String password, String name, String mail, int qualification, RefereeType refereeType) {
         super(userName, password, name, mail);
         this.qualification = qualification;
         this.refereeType = refereeType;
         games = new HashSet<>();
+        this.acceptedRequest = false;
     }
 
 /////////// Functionality ///////////

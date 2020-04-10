@@ -3,11 +3,12 @@ package domain;
 import java.util.*;
 
 public class LeaguePerSeason {
-
+    private boolean isBegin;
     private League league;
     private Season season;
     private SchedulingMethod schedulingMethod;
     private RankingMethod rankingMethod;
+    private HashSet<Referee> referees;
     /**
      * saves each team in a season and its points
      */
@@ -28,6 +29,12 @@ public class LeaguePerSeason {
         this.rankingMethod = rankingMethod;
         this.teamsInLeaguePerSeasonTable = new LinkedHashMap<>();
         this.gamesInLeaguePerSeason = new HashSet<Game>();
+        this.isBegin = false;
+        this.referees = new HashSet<>();
+    }
+
+    public void addReferee(Referee referee) {
+        this.referees.add(referee);
     }
 
     /**
@@ -57,6 +64,7 @@ public class LeaguePerSeason {
         this.rankingMethod = rankingMethod;
         this.teamsInLeaguePerSeasonTable = teamsInLeaguePerSeason;
         this.gamesInLeaguePerSeason = new HashSet<Game>();
+        this.isBegin = false;
     }
 
 
@@ -96,6 +104,18 @@ public class LeaguePerSeason {
 
     public SchedulingMethod getSchedulingMethod() {
         return schedulingMethod;
+    }
+
+    public void setRankingMethod(RankingMethod rankingMethod) {
+        this.rankingMethod = rankingMethod;
+    }
+
+    public boolean isBegin() {
+        return isBegin;
+    }
+
+    public void setSchedulingMethod(SchedulingMethod schedulingMethod) {
+        this.schedulingMethod = schedulingMethod;
     }
 
     public RankingMethod getRankingMethod() {
