@@ -1,9 +1,17 @@
 package domain;
 
+
+import java.util.Date;
+
 public class SystemEvent {
 
-    // Constructor
-    public SystemEvent() {
+    private String description;
+    private Date date;
 
+    // Constructor
+    public SystemEvent(String description) {
+        this.date = new Date();
+        this.description = description;
     }
+
 }

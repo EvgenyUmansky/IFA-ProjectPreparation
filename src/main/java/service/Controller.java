@@ -2,6 +2,7 @@ package service;
 
 import domain.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -21,8 +22,20 @@ public class Controller {
     public Controller() {
         users = new HashMap<>();
         sysAdminsAlert = new Alert();
+        systemEvents = new LinkedList<>();
     }
 
+
+    //UC 1.1.1
+    public boolean connectToExternalSystems(){
+
+        return false;
+    }
+
+
+    public void writeSystemEventsInLogger(SystemEvent event){
+
+    }
 
     /**
      *
@@ -211,6 +224,39 @@ public class Controller {
             fan.setMail(newMail);
         }
 
+        return true;
+    }
+
+
+    // ----------------------------------------------- Team Owner Use Cases (6) ----------------------------------------------- //
+
+    public boolean addPropertyToTeam(TeamOwner owner, Object property){
+        if(!(property instanceof TeamMember || property instanceof Field)){
+            return false;
+        }
+
+        owner.addProperty(property);
+        return true;
+    }
+
+
+    public boolean removePropertyFromTeam(TeamOwner owner, Object property){
+        if(!(property instanceof TeamMember || property instanceof Field)){
+            return false;
+        }
+
+        owner.removeProperty(property);
+        return true;
+    }
+
+
+    public boolean updatePlayerDetails(TeamOwner owner, String userName, String name, Date birthDate, String role){
+        owner.updatePlayerDetails(userName, name, birthDate, role);
+        return true;
+    }
+
+    public boolean updateCoachDetails(TeamOwner owner, String userName, String name, String validation, String role){
+        owner.updateCoachDetails(userName,name,validation,role);
         return true;
     }
 
