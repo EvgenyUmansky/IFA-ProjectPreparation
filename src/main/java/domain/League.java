@@ -20,11 +20,6 @@ public class League {
     }
 
 
-//    public League(String leagueName) {
-//        this.controller = new Controller();
-//        this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
-//        this.leagueName = leagueName;
-//    }
 
     //Setters
     public void setLeaguePerSeasons(Set<LeaguePerSeason> leaguePerSeasons) {
@@ -37,7 +32,10 @@ public class League {
     }
 
     public void setLeagueQualification(int leagueQualification) {
-        this.leagueQualification = leagueQualification;
+        if(leagueQualification >= 1 && leagueQualification <=5){
+            this.leagueQualification = leagueQualification;
+        }
+
     }
 
     //Getters
