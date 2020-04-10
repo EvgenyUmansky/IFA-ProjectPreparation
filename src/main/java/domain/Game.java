@@ -3,6 +3,8 @@ package domain;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
 
@@ -15,11 +17,11 @@ public class Game {
     private Field field;
     private LocalDateTime gameDate;
     private ArrayList<Referee> referees;
-    private InGameEvents inGameEvents;
+    private Map<Integer, GameEvent> gameEvents;
     private int hostTeamScore;
     private int guestTeamScore;
     private int gameMinutes;
-    private Alert alert;
+    private Alert alertFans;
 
 /////////// Constructor ///////////
     public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
@@ -30,11 +32,11 @@ public class Game {
         this.guestTeam = guestTeam;
         this.field = field;
         this.referees = referees;
-        this.inGameEvents = new InGameEvents();
+        this.gameEvents = new HashMap<>();
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
         this.gameMinutes = 0;
-        this.alert = new Alert();
+        this.alertFans = new Alert();
 
         // Game date string format: "2016-11-09 11:44"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -53,10 +55,10 @@ public class Game {
      */
     public void addSubscriber(Subscriber user, boolean isMail){
         if(isMail) {
-            this.alert.addToMailSet(user);
+            this.alertFans.addToMailSet(user);
         }
         else{
-            this.alert.addToSystemSet(user);
+            this.alertFans.addToSystemSet(user);
         }
     }
 
@@ -67,7 +69,7 @@ public class Game {
 
         // some logic with observer...
 
-        alert.sendAlert("The score of the game between " +  "..." + "is " + getGameScore() );
+        alertFans.sendAlert("The score of the game between " +  "..." + "is " + getGameScore() );
     }
 
 
@@ -79,11 +81,11 @@ public class Game {
     //
     public boolean addGameEvent(GameEvent event){
         // date time of event earlier than game
-        if(event.dateTime.compareTo(this.gameDate) <= 0){
+        if(event.getDateTime().compareTo(this.gameDate) <= 0){
             return false;
         }
 
-        this.inGameEvents.addEvent(event);
+        this.gameEvents.put(event.getGameEventId(), event);
         return true;
     }
 
@@ -134,12 +136,12 @@ public class Game {
         this.referees = referees;
     }
 
-    public InGameEvents getInGameEvents() {
-        return inGameEvents;
+    public Map<Integer, GameEvent> getGameEvents() {
+        return gameEvents;
     }
 
-    public void setInGameEvents(InGameEvents inGameEvents) {
-        this.inGameEvents = inGameEvents;
+    public void setGameEvents(Map<Integer, GameEvent> gameEvents) {
+        this.gameEvents = gameEvents;
     }
 
     public int getHostTeamScore() {
