@@ -163,7 +163,7 @@ public class Controller {
     }
 
     // UC 3.6, UC 10.1
-    private boolean setProfileDetails(Subscriber user, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
+    private void setProfileDetails(Subscriber user, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail){
 
         if(!newUserName.isEmpty()){
             user.setUserName(newUserName);
@@ -197,7 +197,6 @@ public class Controller {
             System.out.println("The mail is not changed");
         }
 
-        return true;
     }
 
 
@@ -262,7 +261,9 @@ public class Controller {
             return false;
         }
 
-        return setProfileDetails(fan, newUserName, newPassword, newName, newMail, isEmptyMail);
+        setProfileDetails(fan, newUserName, newPassword, newName, newMail, isEmptyMail);
+
+        return true;
     }
 
 /////////// Use Case 10 - Referee ///////////
@@ -286,18 +287,11 @@ public class Controller {
             return false;
         }
 
-        if(qualification < 1 || qualification > 5){
-            System.out.println("Qualification must be between 1 to 5, the qualification is not changed");
-        }
-        else{
-            ((Referee) referee).setQualification(qualification);
-        }
+        ((Referee) referee).setQualification(qualification);
+        ((Referee) referee).setRefereeType(refereeType);
+        setProfileDetails(referee, newUserName, newPassword, newName, newMail, isEmptyMail);
 
-        if(refereeType != null){
-            ((Referee) referee).setRefereeType(refereeType);
-        }
-
-        return setProfileDetails(referee, newUserName, newPassword, newName, newMail, isEmptyMail);
+        return  true;
     }
 
     // UC 10.2 - get all games the referee judge
@@ -313,60 +307,25 @@ public class Controller {
 
     // UC 10.3 - create new game event and add it to list of game events of the game
     public boolean updateGameEvent(String userName, Game game, String dateTime, int gameMinutes, GameAlert eventName, String subscription){
-        Subscriber user = (Subscriber) (users.get(userName));
-        if (!(user instanceof Referee)) {
+        Subscriber referee = (Subscriber) (users.get(userName));
+        if (!(referee instanceof Referee)) {
             System.out.println("Not referee instance");
             return false;
         }
 
-        Referee referee = (Referee) user;
-        if(!referee.getGames().contains(game)){
-            System.out.println("The referee does not judge this game");
-            return false;
-        }
-
-        // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
-        game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
+        ((Referee) referee).updateGameEvent(game, dateTime, gameMinutes, eventName, subscription);
         return true;
     }
 
     // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String userName, Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription ){
-        Subscriber user = (Subscriber) (users.get(userName));
-        if (!(user instanceof Referee)) {
+    public boolean changeGameEvent(String userName, Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription){
+        Subscriber referee = (Subscriber) (users.get(userName));
+        if (!(referee instanceof Referee)) {
             System.out.println("Not referee instance");
             return false;
         }
 
-        Referee referee = (Referee) user;
-        if(!referee.getRefereeType().equals(RefereeType.MAIN)){
-            System.out.println("Not MAIN referee");
-            return false;
-        }
-
-        long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
-        if(diffInHours > 5){
-            System.out.println("Not allowed to change the game events: out of time");
-            return false;
-        }
-
-        GameEvent gameEvent = game.getGameEvents().get(gameEventId);
-
-        if(!dateTimeStr.isEmpty()){
-            gameEvent.setGameDate(dateTimeStr);
-        }
-
-        if(gameMinutes > -1){
-            gameEvent.setGameMinutes(gameMinutes);
-        }
-
-        if(eventName != null){
-            gameEvent.setEventName(eventName);
-        }
-
-        if(!subscription.isEmpty()){
-            gameEvent.setSubscription(subscription);
-        }
+        ((Referee) referee).changeGameEvent(game, gameEventId, dateTimeStr, gameMinutes, eventName, subscription);
 
         return true;
     }
