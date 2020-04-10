@@ -6,20 +6,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class League {
-    private Controller controller;
     private Set<LeaguePerSeason> leaguePerSeasons;
     private String leagueName;
     private int leagueQualification; // From 1 to 5 (5 is the best league....)
     //TODO: referees?
 
     // Constructor
-    public League(Controller controller, String leagueName, int leagueQualification) {
-        this.controller = controller;
+    public League( String leagueName, int leagueQualification) {
         this.leagueName = leagueName;
         this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
         this.leagueQualification = leagueQualification;
 
     }
+
 
 //    public League(String leagueName) {
 //        this.controller = new Controller();
@@ -42,9 +41,6 @@ public class League {
     }
 
     //Getters
-    public Controller getController() {
-        return controller;
-    }
 
     public Set<LeaguePerSeason> getLeagueSeasons() {
         return leaguePerSeasons;
