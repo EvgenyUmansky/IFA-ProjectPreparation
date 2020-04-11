@@ -5,7 +5,7 @@ import java.util.*;
 public class LeaguePerSeason {
     private boolean isBegin;
     private League league;
-    private Season season;
+    private int season;
     private SchedulingMethod schedulingMethod;
     private RankingMethod rankingMethod;
     private HashSet<Referee> referees;
@@ -17,12 +17,11 @@ public class LeaguePerSeason {
 
     /**
      *
-     * @param league
      * @param season
      * @param schedulingMethod
      * @param rankingMethod
      */
-    public LeaguePerSeason(League league, Season season, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
+    public LeaguePerSeason(int season, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
         this.league = league;
         this.season = season;
         this.schedulingMethod = schedulingMethod;
@@ -51,13 +50,12 @@ public class LeaguePerSeason {
 
     /**
      * With the teams in the constructor
-     * @param league
      * @param season
      * @param teamsInLeaguePerSeason
      * @param schedulingMethod
      * @param rankingMethod
      */
-    public LeaguePerSeason(League league, Season season, HashMap<Team, Integer> teamsInLeaguePerSeason, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
+    public LeaguePerSeason(int season, HashMap<Team, Integer> teamsInLeaguePerSeason, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
         this.league = league;
         this.season = season;
         this.schedulingMethod = schedulingMethod;
@@ -98,7 +96,7 @@ public class LeaguePerSeason {
         return league;
     }
 
-    public Season getSeason() {
+    public int getSeason() {
         return season;
     }
 

@@ -413,7 +413,7 @@ public class Controller {
 
     public boolean setSeasonToLeagueByAssociationAgent(Subscriber assAgent, int year, League league, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
         if (leagues.contains(league) && assAgent instanceof AssociationAgent) {
-            league.addLeaguePerSeason(new LeaguePerSeason(league, new Season(year), schedulingMethod, rankingMethod));
+            league.addLeaguePerSeason(new LeaguePerSeason(year, schedulingMethod, rankingMethod));
             return true;
         }
         return false;
