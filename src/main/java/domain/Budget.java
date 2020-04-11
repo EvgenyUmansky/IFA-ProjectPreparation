@@ -62,6 +62,14 @@ public class Budget {
         this.budget = budget;
     }
 
+    public void setQuarterOfYear(int quarterOfYear) {
+        this.quarterOfYear = quarterOfYear;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     //Getters
 
     public int getYear() {
@@ -80,4 +88,7 @@ public class Budget {
         return quarterOfYear;
     }
 
+    public double getBudget() {
+        return budget;
+    }
 }

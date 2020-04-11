@@ -4,8 +4,7 @@ import java.util.*;
 
 public class LeaguePerSeason {
 
-    private League league;
-    private Season season;
+    private int season;
     private SchedulingMethod schedulingMethod;
     private RankingMethod rankingMethod;
     /**
@@ -16,13 +15,11 @@ public class LeaguePerSeason {
 
     /**
      *
-     * @param league
      * @param season
      * @param schedulingMethod
      * @param rankingMethod
      */
-    public LeaguePerSeason(League league, Season season, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
-        this.league = league;
+    public LeaguePerSeason(int season, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
         this.season = season;
         this.schedulingMethod = schedulingMethod;
         this.rankingMethod = rankingMethod;
@@ -44,14 +41,12 @@ public class LeaguePerSeason {
 
     /**
      * With the teams in the constructor
-     * @param league
      * @param season
      * @param teamsInLeaguePerSeason
      * @param schedulingMethod
      * @param rankingMethod
      */
-    public LeaguePerSeason(League league, Season season, HashMap<Team, Integer> teamsInLeaguePerSeason, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
-        this.league = league;
+    public LeaguePerSeason(int season, HashMap<Team, Integer> teamsInLeaguePerSeason, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
         this.season = season;
         this.schedulingMethod = schedulingMethod;
         this.rankingMethod = rankingMethod;
@@ -83,14 +78,18 @@ public class LeaguePerSeason {
         return tableLeague;
     }
 
+    //Setters
+
+    public void setSchedulingMethod(SchedulingMethod schedulingMethod) {
+        this.schedulingMethod = schedulingMethod;
+    }
+
+
 
     //Getters
 
-    public League getLeague() {
-        return league;
-    }
 
-    public Season getSeason() {
+    public int getSeason() {
         return season;
     }
 
