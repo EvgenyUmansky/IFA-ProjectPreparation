@@ -7,6 +7,7 @@ public class TeamOwner extends  Subscriber {
 
     private Team team;
     private HashSet<TeamAdmin> managerAppointments;
+    private HashSet<TeamOwner> ownerAppointments;
 
 
 
@@ -14,6 +15,7 @@ public class TeamOwner extends  Subscriber {
     public TeamOwner(String userName, String password, String name, String mail) {
         super(userName, password, name, mail);
         managerAppointments = new HashSet<>();
+        ownerAppointments = new HashSet<>();
     }
 
 
@@ -51,4 +53,17 @@ public class TeamOwner extends  Subscriber {
         coach.updateDetails(name,validation,role);
         return true;
     }
+
+    public boolean updateManagerDetails(String userName, String name){
+        TeamAdmin manager = this.team.getManager(userName);
+        manager.setName(name);
+        return true;
+    }
+
+
+    public void appointTeamOwner(TeamOwner newOwner){
+        ownerAppointments.add(newOwner);
+        newOwner.setTeam(this.team);
+    }
+
 }

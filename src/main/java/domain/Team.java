@@ -108,4 +108,6 @@ public class Team {
         return coaches.get(userName);
     }
 
+    public TeamAdmin getManager(String userName){ return managers.get(userName);}
+
 }

@@ -403,4 +403,18 @@ public class Controller {
         return true;
     }
 
+    public boolean updateManagerDetails(TeamOwner owner, String userName, String name){
+        owner.updateManagerDetails(userName,name);
+        return true;
+    }
+
+
+    //TODO: figure out how to turn a subscriber into a TeamOwner
+    public boolean appointTeamManager(TeamOwner owner){
+        owner.appointTeamOwner(new TeamOwner(null,null,null,null));
+        return false;
+    }
+
+
+
 }
