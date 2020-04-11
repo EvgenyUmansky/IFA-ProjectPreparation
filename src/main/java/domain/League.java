@@ -16,6 +16,11 @@ public class League {
         this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
         this.leagueQualification = leagueQualification;
 
+    }    // Constructor no controller
+    public League(String leagueName, int leagueQualification) {
+        this.leagueName = leagueName;
+        this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
+        this.leagueQualification = leagueQualification;
     }
 
 
