@@ -76,7 +76,7 @@ public class Referee extends Subscriber{
         }
 
         if(!subscription.isEmpty()){
-            gameEvent.setSubscription(subscription);
+            gameEvent.setDescription(subscription);
         }
 
         return true;

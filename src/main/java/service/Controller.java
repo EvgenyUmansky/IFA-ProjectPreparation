@@ -2,18 +2,9 @@ package service;
 
 import domain.*;
 
-import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class Controller {
-
-    //TODO think about best solution
-    private Alert sysAdminsAlert;
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
@@ -24,7 +15,6 @@ public class Controller {
 /////////// Constructor ///////////
     public Controller() {
         users = new HashMap<>();
-        sysAdminsAlert = new Alert();
         systemEvents = new LinkedList<>();
     }
 
@@ -87,13 +77,6 @@ public class Controller {
 
             case "System Administrator":
                 newUser = new SystemAdministrator(userName,password,name,mail);
-
-                //TODO think about best solution
-                sysAdminsAlert.addToSystemSet(newUser);
-                if(!mail.isEmpty()){
-                    sysAdminsAlert.addToMailSet(newUser);
-                }
-
                 break;
 
             case "Referee":
@@ -114,7 +97,7 @@ public class Controller {
                 break;
 
             case "Team Admin":
-                newUser = new TeamAdmin(userName,password,name,mail);
+                newUser = new TeamManager(userName,password,name,mail);
                 break;
 
             case "Team Owner":
@@ -227,14 +210,23 @@ public class Controller {
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
-    public boolean sendAlertToSysAdmin(String userName, String title, String message){
+    public boolean sendComplaintToSysAdmin(String userName, String title, String message){
         Subscriber fan = (Subscriber)(users.get(userName));
         if(!(fan instanceof Fan)){
             System.out.println("Not fan instance");
             return false;
         }
 
-        sysAdminsAlert.sendAlert(new AlertNotification(title, message));
+        ArrayList<SystemAdministrator> sysAdmins = new ArrayList<>();
+
+        for(String sysAdminUserName : this.users.keySet()){
+            Subscriber sysAdmin = (Subscriber)(users.get(userName));
+            if(sysAdmin instanceof SystemAdministrator){
+                sysAdmins.add((SystemAdministrator) sysAdmin);
+            }
+        }
+
+        ((Fan) fan).sendComplaintToSysAdmin(sysAdmins, new AlertNotification(title, message));
         return true;
     }
 
