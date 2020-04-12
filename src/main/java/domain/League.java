@@ -21,20 +21,29 @@ public class League {
 
 
     //Setters
-    public void setLeaguePerSeasons(Set<LeaguePerSeason> leaguePerSeasons) {
-        this.leaguePerSeasons = leaguePerSeasons;
+    public boolean setLeaguePerSeasons(Set<LeaguePerSeason> leaguePerSeasons) {
+        if(leaguePerSeasons != null){
+            this.leaguePerSeasons = leaguePerSeasons;
+            return true;
+        }
+        return false;
     }
 
     //add league per season
-    public void addLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
-        this.leaguePerSeasons.add(leaguePerSeason);
+    public boolean addLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
+        if(leaguePerSeason != null){
+            this.leaguePerSeasons.add(leaguePerSeason);
+            return true;
+        }
+        return false;
     }
 
-    public void setLeagueQualification(int leagueQualification) {
+    public boolean setLeagueQualification(int leagueQualification) {
         if(leagueQualification >= 1 && leagueQualification <=5){
             this.leagueQualification = leagueQualification;
+            return true;
         }
-
+        return false;
     }
 
     //Getters

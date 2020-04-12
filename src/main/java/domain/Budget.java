@@ -9,6 +9,10 @@ public class Budget {
      * quarter of year budget from 1 to 4
      */
     private int quarterOfYear;
+
+    /**
+     * year of the season
+     */
     private int year;
 
     /**
@@ -41,29 +45,56 @@ public class Budget {
         this.totalProfit = 0;
         this.totalLoss = 0;
         this.quarterOfYear = 1;
-        this.budget = 1000000;
+        this.budget = 1000000; // default value of budget
     }
 
 
 
 
     //Setters
-    public void setTotalProfit(double addToProfit) {
-        this.totalProfit = this.totalProfit + addToProfit;
-        this.budget = this.budget + addToProfit;
+
+    /**
+     * update the totalProfit and budget values
+     * @param addToProfit
+     * @return true if "addToProfit" POSITIVE INTEGER
+     */
+    public boolean setTotalProfit(double addToProfit) {
+        if(addToProfit >= 0){
+            this.totalProfit = this.totalProfit + addToProfit;
+            this.budget = this.budget + addToProfit;
+            return true;
+        }
+        return false;
+
     }
 
-    public void setTotalLoss(double addToLoss) {
-        this.totalLoss = this.totalLoss - addToLoss;
-        this.budget = this.budget - addToLoss;
+    /**
+     * update the totalLoos and budget values
+     * @param addToLoss
+     * @return true if "addToLoss" POSITIVE INTEGER
+     */
+    public boolean setTotalLoss(double addToLoss) {
+        if(addToLoss >= 0){
+            this.totalLoss = this.totalLoss - addToLoss;
+            this.budget = this.budget - addToLoss;
+            return true;
+        }
+        return false;
+
     }
 
     public void setBudget(double budget) {
         this.budget = budget;
     }
 
-    public void setQuarterOfYear(int quarterOfYear) {
-        this.quarterOfYear = quarterOfYear;
+    public boolean setQuarterOfYear(int quarterOfYear) {
+        if(quarterOfYear >=1 && quarterOfYear <=4){
+            this.quarterOfYear = quarterOfYear;
+            return true;
+        }
+        return false;
+
+
     }
 
     public void setYear(int year) {
