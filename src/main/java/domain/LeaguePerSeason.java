@@ -54,10 +54,14 @@ public class LeaguePerSeason {
      * initialized the table of season so every team have 0 points
      * @param teamsInLeaguePerSeason
      */
-    public void initializedTeamsInLeaguePerSeason(Set<Team> teamsInLeaguePerSeason) {
-        for(Team team : teamsInLeaguePerSeason){
-            teamsInLeaguePerSeasonTable.put(team, 0);
+    public boolean initializedTeamsInLeaguePerSeason(Set<Team> teamsInLeaguePerSeason) {
+        if(teamsInLeaguePerSeason != null){
+            for(Team team : teamsInLeaguePerSeason){
+                teamsInLeaguePerSeasonTable.put(team, 0);
+            }
+            return true;
         }
+       return false;
     }
 
 
@@ -99,20 +103,35 @@ public class LeaguePerSeason {
             }
         }
 
-        if(hostTeamScore > awayTeamScore){
-            teamsInLeaguePerSeasonTable.put(homeTeam, teamsInLeaguePerSeasonTable.get(homeTeam) + rankingMethod.getWinPoints());
-            teamsInLeaguePerSeasonTable.put(awayTeam, teamsInLeaguePerSeasonTable.get(awayTeam) + rankingMethod.getLoosPoints());
-        }else if(awayTeamScore > hostTeamScore){
-            teamsInLeaguePerSeasonTable.put(homeTeam, teamsInLeaguePerSeasonTable.get(homeTeam) + rankingMethod.getLoosPoints());
-            teamsInLeaguePerSeasonTable.put(awayTeam, teamsInLeaguePerSeasonTable.get(awayTeam) + rankingMethod.getWinPoints());
-        }else{
-            teamsInLeaguePerSeasonTable.put(homeTeam, teamsInLeaguePerSeasonTable.get(homeTeam) + rankingMethod.getDrawPoints());
-            teamsInLeaguePerSeasonTable.put(awayTeam, teamsInLeaguePerSeasonTable.get(awayTeam) + rankingMethod.getDrawPoints());
-        }
+        //update The Table
+        updateTable(homeTeam, awayTeam, hostTeamScore, awayTeamScore);
+
         return teamsInLeaguePerSeasonTable;
     }
 
-
+    /**
+     * Update the table according to the result of the game
+     * @param homeTeam
+     * @param awayTeam
+     * @param hostTeamScore
+     * @param awayTeamScore
+     */
+    private boolean updateTable(Team homeTeam, Team awayTeam, int hostTeamScore, int awayTeamScore){
+        if(homeTeam != null && awayTeam != null){
+            if(hostTeamScore > awayTeamScore){
+                teamsInLeaguePerSeasonTable.put(homeTeam, teamsInLeaguePerSeasonTable.get(homeTeam) + rankingMethod.getWinPoints());
+                teamsInLeaguePerSeasonTable.put(awayTeam, teamsInLeaguePerSeasonTable.get(awayTeam) + rankingMethod.getLoosPoints());
+            }else if(awayTeamScore > hostTeamScore){
+                teamsInLeaguePerSeasonTable.put(homeTeam, teamsInLeaguePerSeasonTable.get(homeTeam) + rankingMethod.getLoosPoints());
+                teamsInLeaguePerSeasonTable.put(awayTeam, teamsInLeaguePerSeasonTable.get(awayTeam) + rankingMethod.getWinPoints());
+            }else{
+                teamsInLeaguePerSeasonTable.put(homeTeam, teamsInLeaguePerSeasonTable.get(homeTeam) + rankingMethod.getDrawPoints());
+                teamsInLeaguePerSeasonTable.put(awayTeam, teamsInLeaguePerSeasonTable.get(awayTeam) + rankingMethod.getDrawPoints());
+            }
+            return true;
+        }
+        return false;
+    }
 
     //Setters
     public boolean addReferee(Referee referee) {
