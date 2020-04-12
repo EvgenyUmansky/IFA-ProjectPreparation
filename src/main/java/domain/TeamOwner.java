@@ -6,7 +6,7 @@ import java.util.HashSet;
 public class TeamOwner extends  Subscriber {
 
     private Team team;
-    private HashSet<TeamAdmin> managerAppointments;
+    private HashSet<TeamManager> managerAppointments;
 
 
 
@@ -28,8 +28,8 @@ public class TeamOwner extends  Subscriber {
     }
 
     public boolean removeProperty(Object property){
-        if(property instanceof TeamAdmin){
-            if(!(managerAppointments.contains((TeamAdmin)property))){
+        if(property instanceof TeamManager){
+            if(!(managerAppointments.contains((TeamManager)property))){
                 return false;
             }
         }

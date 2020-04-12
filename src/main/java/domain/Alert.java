@@ -34,15 +34,15 @@ public class Alert {
 
     /**
      * public function to send alert to user. Chooses from list where to send the alert: mail or system
-     * @param alertMessage
+     * @param alertNotification
      */
-    public void sendAlert(String alertMessage){
+    public void sendAlert(AlertNotification alertNotification){
         for(Subscriber user : this.mailAlertList){
-            sendMailAlert(user.getMail(), alertMessage);
+            sendMailAlert(user.getMail(), alertNotification);
         }
 
         for(Subscriber user : this.inSystemAlertList){
-            sendInSystemAlert(user, alertMessage);
+            sendInSystemAlert(user, alertNotification);
         }
     }
 
@@ -50,10 +50,10 @@ public class Alert {
     /**
      * send alert to mail
      * @param to
-     * @param alertMessage
+     * @param alertNotification
      * @return
      */
-    private boolean sendMailAlert(String to, String alertMessage){
+    private boolean sendMailAlert(String to, AlertNotification alertNotification){
         // Recipient's email ID needs to be mentioned.
         //String to = mail;
 
@@ -84,10 +84,10 @@ public class Alert {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("Football System Alert!");
+            message.setSubject(alertNotification.getTitle());
 
             // Now set the actual message
-            message.setText(alertMessage);
+            message.setText(alertNotification.getMessage());
 
             // Send message
             Transport.send(message);
@@ -103,11 +103,11 @@ public class Alert {
     /**
      * Send alert to user in system
      * @param user
-     * @param alertMessage
+     * @param alertNotification
      * @return
      */
-    private boolean sendInSystemAlert(Subscriber user, String alertMessage){
-        user.addAlertMessage(alertMessage);
+    private boolean sendInSystemAlert(Subscriber user, AlertNotification alertNotification){
+        user.addAlertMessage(alertNotification);
         return true;
     }
 

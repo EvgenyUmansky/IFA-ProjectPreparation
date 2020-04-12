@@ -1,50 +1,52 @@
 package domain;
 
-import service.Controller;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class League {
-    private Controller controller;
     private Set<LeaguePerSeason> leaguePerSeasons;
     private String leagueName;
     private int leagueQualification; // From 1 to 5 (5 is the best league....)
     //TODO: referees?
 
     // Constructor
-    public League(Controller controller, String leagueName, int leagueQualification) {
-        this.controller = controller;
+    public League( String leagueName, int leagueQualification) {
         this.leagueName = leagueName;
         this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
         this.leagueQualification = leagueQualification;
 
     }
 
-//    public League(String leagueName) {
-//        this.controller = new Controller();
-//        this.leaguePerSeasons = new HashSet<LeaguePerSeason>();
-//        this.leagueName = leagueName;
-//    }
+
 
     //Setters
-    public void setLeaguePerSeasons(Set<LeaguePerSeason> leaguePerSeasons) {
-        this.leaguePerSeasons = leaguePerSeasons;
+    public boolean setLeaguePerSeasons(Set<LeaguePerSeason> leaguePerSeasons) {
+        if(leaguePerSeasons != null){
+            this.leaguePerSeasons = leaguePerSeasons;
+            return true;
+        }
+        return false;
     }
 
     //add league per season
-    public void addLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
-        this.leaguePerSeasons.add(leaguePerSeason);
+    public boolean addLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
+        if(leaguePerSeason != null){
+            this.leaguePerSeasons.add(leaguePerSeason);
+            return true;
+        }
+        return false;
     }
 
-    public void setLeagueQualification(int leagueQualification) {
-        this.leagueQualification = leagueQualification;
+    public boolean setLeagueQualification(int leagueQualification) {
+        if(leagueQualification >= 1 && leagueQualification <=5){
+            this.leagueQualification = leagueQualification;
+            return true;
+        }
+        return false;
     }
 
     //Getters
-    public Controller getController() {
-        return controller;
-    }
 
     public Set<LeaguePerSeason> getLeagueSeasons() {
         return leaguePerSeasons;

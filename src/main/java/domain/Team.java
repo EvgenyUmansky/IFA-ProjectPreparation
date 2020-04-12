@@ -11,8 +11,7 @@ public class Team {
     private HashMap<String,TeamPlayer> players;
     private HashMap<String,TeamCoach> coaches;
     private HashMap<String,TeamAdmin> managers;
-    private HashMap<String,Game> games;
-
+    private Budget budget;
     // Constructor
     public Team(String name, Field stadium)
     {
@@ -20,6 +19,7 @@ public class Team {
         this.stadium = stadium;
         this.fields = new HashSet<>();
         addField(stadium);
+
     }
 
 

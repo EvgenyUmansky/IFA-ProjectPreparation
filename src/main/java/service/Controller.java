@@ -2,18 +2,9 @@ package service;
 
 import domain.*;
 
-import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class Controller {
-
-    //TODO think about best solution
-    private Alert sysAdminsAlert;
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
@@ -24,7 +15,6 @@ public class Controller {
 /////////// Constructor ///////////
     public Controller() {
         users = new HashMap<>();
-        sysAdminsAlert = new Alert();
         systemEvents = new LinkedList<>();
     }
 
@@ -46,13 +36,13 @@ public class Controller {
      * @param password
      * @return
      */
-    public boolean login(String userName, String password){
-        if(!users.containsKey(userName)){
+    public boolean login(String userName, String password) {
+        if (!users.containsKey(userName)) {
             return false;
         }
 
-        Subscriber user = (Subscriber)(users.get(userName));
-        if(!user.getPassword().equals(password)){
+        Subscriber user = (Subscriber) (users.get(userName));
+        if (!user.getPassword().equals(password)) {
             return false;
         }
 
@@ -60,12 +50,12 @@ public class Controller {
         return true;
     }
 
-    public boolean logout(String userName, boolean isOut){
-        if(!isOut){
+    public boolean logout(String userName, boolean isOut) {
+        if (!isOut) {
             return false;
         }
 
-        Subscriber user = (Subscriber)(users.get(userName));
+        Subscriber user = (Subscriber) (users.get(userName));
         user.disconnect();
         return true;
     }
@@ -73,59 +63,52 @@ public class Controller {
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
-    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification, RefereeType refereeType){
-        if(users.containsKey(userName)){
+    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification, RefereeType refereeType) {
+        if (users.containsKey(userName)) {
             return false;
         }
 
         Subscriber newUser = null;
         //TODO: change the instances of each user according to its constructor
-        switch (userType){
+        switch (userType) {
             case "Fan":
-                newUser = new Fan(userName,password,name,mail);
+                newUser = new Fan(userName, password, name, mail);
                 break;
 
             case "System Administrator":
                 newUser = new SystemAdministrator(userName,password,name,mail);
-
-                //TODO think about best solution
-                sysAdminsAlert.addToSystemSet(newUser);
-                if(!mail.isEmpty()){
-                    sysAdminsAlert.addToMailSet(newUser);
-                }
-
                 break;
 
             case "Referee":
                 //TODO think about refereeQualification and refereeType
-                newUser = new Referee(userName,password,name,mail,refereeQualification,refereeType);
+                newUser = new Referee(userName, password, name, mail, refereeQualification, refereeType);
                 break;
 
             case "Association Agent":
-                newUser = new AssociationAgent(userName,password,name,mail);
+                newUser = new AssociationAgent(userName, password, name, mail);
                 break;
 
             case "Team Player":
-                newUser = new TeamPlayer(userName,password,name,mail);
+                newUser = new TeamPlayer(userName, password, name, mail);
                 break;
 
             case "Team Coach":
-                newUser = new TeamCoach(userName,password,name,mail);
+                newUser = new TeamCoach(userName, password, name, mail);
                 break;
 
             case "Team Admin":
-                newUser = new TeamAdmin(userName,password,name,mail);
+                newUser = new TeamAdmin(userName, password, name, mail);
                 break;
 
             case "Team Owner":
-                newUser = new TeamOwner(userName,password,name,mail);
+                newUser = new TeamOwner(userName, password, name, mail);
                 break;
 
             default:
                 return false;
         }
 
-        users.put(userName,newUser);
+        users.put(userName, newUser);
         //newUser.connect();
         return true;
     }
@@ -360,6 +343,99 @@ public class Controller {
     public boolean updateCoachDetails(TeamOwner owner, String userName, String name, String validation, String role){
         owner.updateCoachDetails(userName,name,validation,role);
         return true;
+    }
+
+    // AssociationAgent UC 9.1
+
+    public boolean setLeagueByAssociationAgent(Subscriber assAgent, String leaguename, int leaguequalification) {
+        if (assAgent instanceof AssociationAgent == true) {
+            //better to check in ui level
+            if (leaguequalification >= 1 && leaguequalification <= 5) {
+                leagues.add(new League(leaguename, leaguequalification));
+                return true;
+            } else {
+                System.out.println("league qualification not in legal range");
+            }
+        }
+        return false;
+    }
+
+    //UC9.2
+
+    public boolean setSeasonToLeagueByAssociationAgent(Subscriber assAgent, int year, League league, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
+        if (leagues.contains(league) && assAgent instanceof AssociationAgent) {
+            league.addLeaguePerSeason(new LeaguePerSeason(year, schedulingMethod, rankingMethod));
+            return true;
+        }
+        return false;
+    }
+
+    //UC 9.3A
+    // TODO: 10/04/2020
+    public boolean addReferee(Subscriber assAgent, String userName, String password, String name, String mail, int qualification, RefereeType refereeType) {
+        if (assAgent instanceof AssociationAgent) {
+            User referee = new Referee(userName, password, name, mail, qualification, refereeType);
+            users.put(userName, referee);
+            return true;
+        }
+        return false;
+    }
+
+    //UC 9.3B
+    // TODO: 10/04/2020
+    public boolean removeReferee(Subscriber assAgent, String userName) {
+        if (assAgent instanceof AssociationAgent) {
+            users.remove(userName);
+            return true;
+        }
+        return false;
+    }
+
+    //UC 9.4
+    // TODO: 10/04/2020
+    public boolean addRefereeToLeagueBySeason(Subscriber assAgent, LeaguePerSeason leaguePerSeason, String userNameReferee) {
+        if (assAgent instanceof AssociationAgent) {
+            if(users.containsKey(userNameReferee) == true){
+                User user = users.get(userNameReferee);
+                if(user instanceof  Referee){
+                    leaguePerSeason.addReferee((Referee) user);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    //UC9.5
+    public boolean setRankingMethod(Subscriber assAgent, int winP, int loseP, int drawP, LeaguePerSeason leaguePerSeason) {
+        if (leaguePerSeason.isBegin() == false && assAgent instanceof AssociationAgent == true) {
+            leaguePerSeason.getRankingMethod().setWinPoints(winP);
+            leaguePerSeason.getRankingMethod().setLoosPoints(loseP);
+            leaguePerSeason.getRankingMethod().setDrawPoints(drawP);
+            return true;
+        }
+        return false;
+    }
+
+    //UC9.6
+    public boolean setSchedulingMethod(Subscriber assAgent, LeaguePerSeason leaguePerSeason, SchedulingMethod schedulingMethod) {
+        if (assAgent instanceof AssociationAgent) {
+            leaguePerSeason.setSchedulingMethod(schedulingMethod);
+            return true;
+        }
+        return false;
+    }
+
+    //UC9.7
+    public boolean startScheduleMethod(SchedulingMethod schedulingMethod, Subscriber assAgent, LeaguePerSeason leaguePerSeason)
+    {
+        if(assAgent instanceof AssociationAgent){
+            Team[] teams = leaguePerSeason.getTeamsInLeaguePerSeason().keySet().toArray(new Team[leaguePerSeason.getTeamsInLeaguePerSeason().size()]);
+            schedulingMethod.scheduleGamePolicy(leaguePerSeason, teams);
+            return true;
+        }
+        return false;
     }
 
 }

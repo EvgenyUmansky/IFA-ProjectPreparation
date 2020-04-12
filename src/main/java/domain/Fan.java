@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+
 public class Fan extends Subscriber{
 
 /////////// Constructor ///////////
@@ -7,4 +9,9 @@ public class Fan extends Subscriber{
         super(userName, password, name, mail);
     }
 
+    public void sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
+        for(SystemAdministrator sysAdmin : sysAdmins){
+            sysAdmin.addAlertMessage(alertNotification);
+        }
+    }
 }

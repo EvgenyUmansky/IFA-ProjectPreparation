@@ -11,7 +11,7 @@ public abstract class Subscriber extends User {
     private String name;
     private String mail;
 
-    private ArrayList<String> alertsMessages;
+    private ArrayList<AlertNotification> alertsMessages;
 
 /////////// Constructor ///////////
 
@@ -58,10 +58,10 @@ public abstract class Subscriber extends User {
     }
 
     // when the function activated - send message to screen
-    public String addAlertMessage(String message){
-        this.alertsMessages.add(message);
+    public AlertNotification addAlertMessage(AlertNotification alertNotification){
+        this.alertsMessages.add(alertNotification);
 
-        return message;
+        return alertNotification;
     }
 
     public boolean isConnected(){
@@ -109,7 +109,7 @@ public abstract class Subscriber extends User {
         this.mail = mail;
     }
 
-    public ArrayList<String> getAlertsMessages() {
+    public ArrayList<AlertNotification> getAlertsMessages() {
         return alertsMessages;
     }
 }
