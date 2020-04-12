@@ -7,15 +7,17 @@ public class Field {
     private static int staticFieldId = 0;
     private int fieldId;
 
-    Team teamOwns;
-    double propertyCost;
-    Set<Game> gamesOnField;
+    //Team teamOwns;
+    private String fieldName;
+    private double propertyCost;
+    private Set<Game> gamesOnField;
 
 /////////// Constructors ///////////
-    public Field(Team teamOwns, double propertyCost) {
+    public Field(String fieldName, double propertyCost) {
         staticFieldId++;
+        this.fieldName = fieldName;
         this.fieldId = staticFieldId;
-        this.teamOwns = teamOwns;
+        //this.teamOwns = teamOwns;
         this.propertyCost = propertyCost;
         gamesOnField = new HashSet<>();
     }
@@ -35,15 +37,23 @@ public class Field {
         return fieldId;
     }
 
-    public Team getTeamOwns() {
-        return teamOwns;
-    }
-
-    public void setTeamOwns(Team teamOwns) {
-        this.teamOwns = teamOwns;
-    }
+//    public Team getTeamOwns() {
+//        return teamOwns;
+//    }
+//
+//    public void setTeamOwns(Team teamOwns) {
+//        this.teamOwns = teamOwns;
+//    }
 
     public Set<Game> getGamesOnField() {
         return gamesOnField;
+    }
+
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
     }
 }
