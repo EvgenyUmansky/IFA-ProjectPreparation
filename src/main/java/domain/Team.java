@@ -11,6 +11,7 @@ public class Team {
     private HashMap<String,TeamPlayer> players;
     private HashMap<String,TeamCoach> coaches;
     private HashMap<String,TeamAdmin> managers;
+    private HashMap<String,Game> games;
 
     // Constructor
     public Team(String name, Field stadium)
