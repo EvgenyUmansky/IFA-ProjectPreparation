@@ -69,7 +69,11 @@ public class Game {
 
         // some logic with observer...
 
-        alertFans.sendAlert("The score of the game between " +  "..." + "is " + getGameScore() );
+        String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam;
+        String message = "The score of the game between " +  "..." + "is " + getGameScore();
+        AlertNotification alertNotification = new AlertNotification(title, message);
+
+        alertFans.sendAlert(alertNotification);
     }
 
 
