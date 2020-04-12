@@ -97,7 +97,7 @@ public class Controller {
                 break;
 
             case "Team Admin":
-                newUser = new TeamAdmin(userName, password, name, mail);
+                newUser = new TeamManager(userName, password, name, mail);
                 break;
 
             case "Team Owner":
@@ -210,15 +210,23 @@ public class Controller {
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
-    public boolean sendAlertToSysAdmin(String userName, String message){
+    public boolean sendComplaintToSysAdmin(String userName, String title, String message){
         Subscriber fan = (Subscriber)(users.get(userName));
         if(!(fan instanceof Fan)){
             System.out.println("Not fan instance");
             return false;
         }
 
-        sysAdminsAlert.sendAlert(message);
+        ArrayList<SystemAdministrator> sysAdmins = new ArrayList<>();
 
+        for(String sysAdminUserName : this.users.keySet()){
+            Subscriber sysAdmin = (Subscriber)(users.get(userName));
+            if(sysAdmin instanceof SystemAdministrator){
+                sysAdmins.add((SystemAdministrator) sysAdmin);
+            }
+        }
+
+        ((Fan) fan).sendComplaintToSysAdmin(sysAdmins, new AlertNotification(title, message));
         return true;
     }
 
@@ -348,7 +356,7 @@ public class Controller {
     // AssociationAgent UC 9.1
 
     public boolean setLeagueByAssociationAgent(Subscriber assAgent, String leaguename, int leaguequalification) {
-        if (assAgent instanceof AssociationAgent == true) {
+        if (assAgent instanceof AssociationAgent) {
             //better to check in ui level
             if (leaguequalification >= 1 && leaguequalification <= 5) {
                 leagues.add(new League(leaguename, leaguequalification));
@@ -395,7 +403,7 @@ public class Controller {
     // TODO: 10/04/2020
     public boolean addRefereeToLeagueBySeason(Subscriber assAgent, LeaguePerSeason leaguePerSeason, String userNameReferee) {
         if (assAgent instanceof AssociationAgent) {
-            if(users.containsKey(userNameReferee) == true){
+            if(users.containsKey(userNameReferee)){
                 User user = users.get(userNameReferee);
                 if(user instanceof  Referee){
                     leaguePerSeason.addReferee((Referee) user);
@@ -409,7 +417,7 @@ public class Controller {
 
     //UC9.5
     public boolean setRankingMethod(Subscriber assAgent, int winP, int loseP, int drawP, LeaguePerSeason leaguePerSeason) {
-        if (leaguePerSeason.isBegin() == false && assAgent instanceof AssociationAgent == true) {
+        if (!leaguePerSeason.isBegin() && assAgent instanceof AssociationAgent) {
             leaguePerSeason.getRankingMethod().setWinPoints(winP);
             leaguePerSeason.getRankingMethod().setLoosPoints(loseP);
             leaguePerSeason.getRankingMethod().setDrawPoints(drawP);
