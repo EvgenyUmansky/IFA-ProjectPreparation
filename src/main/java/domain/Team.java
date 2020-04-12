@@ -10,7 +10,7 @@ public class Team {
     private HashSet<Field> fields; //All the team's fields, including the stadium and training fields
     private HashMap<String,TeamPlayer> players;
     private HashMap<String,TeamCoach> coaches;
-    private HashMap<String,TeamAdmin> managers;
+    private HashMap<String,TeamManager> managers;
     private Budget budget;
     // Constructor
     public Team(String name, Field stadium)
@@ -45,8 +45,8 @@ public class Team {
             addCoach((TeamCoach)property);
         }
 
-        if(property instanceof TeamAdmin){
-            addManager((TeamAdmin)property);
+        if(property instanceof TeamManager){
+            addManager((TeamManager)property);
         }
     }
 
@@ -63,8 +63,8 @@ public class Team {
             removeCoach((TeamCoach)property);
         }
 
-        if(property instanceof TeamAdmin){
-            removeManager((TeamAdmin)property);
+        if(property instanceof TeamManager){
+            removeManager((TeamManager)property);
         }
     }
 
@@ -80,7 +80,7 @@ public class Team {
         this.coaches.put(coach.getUserName(),coach);
     }
 
-    public void addManager(TeamAdmin manager){
+    public void addManager(TeamManager manager){
         this.managers.put(manager.getUserName(),manager);
     }
 
@@ -97,7 +97,7 @@ public class Team {
         this.coaches.remove(coach.getUserName());
     }
 
-    public void removeManager(TeamAdmin manager){
+    public void removeManager(TeamManager manager){
         this.managers.remove(manager.getUserName());
     }
 
