@@ -12,14 +12,16 @@ public class Team {
     private HashMap<String,TeamCoach> coaches;
     private HashMap<String,TeamManager> managers;
     private Budget budget;
+    private HashMap<String,TeamManager> owners;
+
     // Constructor
-    public Team(String name, Field stadium)
+    public Team(String name, HashMap<String,TeamManager> owners)
     {
         this.teamName = name;
         this.stadium = stadium;
         this.fields = new HashSet<>();
         addField(stadium);
-
+        this.owners = owners;
     }
 
 
