@@ -6,6 +6,7 @@ public class Field {
 
     private static int staticFieldId = 0;
     private int fieldId;
+    private String fieldName;
 
     Team teamOwns;
     double propertyCost;
@@ -45,5 +46,9 @@ public class Field {
 
     public Set<Game> getGamesOnField() {
         return gamesOnField;
+    }
+
+    public String getFieldName() {
+        return fieldName;
     }
 }
