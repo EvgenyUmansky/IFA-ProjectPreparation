@@ -14,12 +14,16 @@ public class TwoGameSchedulingMethod implements SchedulingMethod{
      */
     public List<Game> scheduleGamePolicy(LeaguePerSeason leaguePerSeason, Team[]leagueTeams) {
         List<Game> gamesList = new ArrayList<Game>();
-        for(int i = 0; i < leagueTeams.length; i++){
+        for(int i = 0; i < leagueTeams.length - 1; i++){
             for (int j = 1; j < leagueTeams.length; j++){
-                Game firstGame = new Game(leaguePerSeason, leagueTeams[i], leagueTeams[j], leagueTeams[i].getMyField(), "", new ArrayList<>());
-                gamesList.add(firstGame);
-                Game secondGame = new Game(leaguePerSeason, leagueTeams[j], leagueTeams[i], leagueTeams[j].getMyField(), "", new ArrayList<>());
-                gamesList.add(secondGame);
+                if (!leagueTeams[i].equals(leagueTeams[j]) ) {
+                    Game firstGame = new Game(leaguePerSeason, leagueTeams[i], leagueTeams[j], leagueTeams[i].getMyField(), "2016-11-09 11:44", new ArrayList<>());
+                    Game secondGame = new Game(leaguePerSeason, leagueTeams[j], leagueTeams[i], leagueTeams[j].getMyField(), "2016-11-09 11:44", new ArrayList<>());
+                    if (!gamesList.contains(firstGame) && !gamesList.contains(secondGame)) {
+                        gamesList.add(firstGame);
+                        gamesList.add(secondGame);
+                    }
+                }
             }
         }
         return gamesList;
