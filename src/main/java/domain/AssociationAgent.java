@@ -5,7 +5,7 @@ public class AssociationAgent extends Subscriber {
     // Constructor
 
 
-    public AssociationAgent(String userName, String mail) {
-        super(userName, mail);
+    public AssociationAgent(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
     }
 }

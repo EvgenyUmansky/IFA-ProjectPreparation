@@ -3,8 +3,6 @@ package service;
 import domain.*;
 
 import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -71,7 +69,7 @@ public class Controller {
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
-    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification, RefereeType refereeType) {
+    public boolean register(String userName, String password, String name, String userType, String mail, boolean isMail, int refereeQualification, RefereeType refereeType) {
 //        if (users.containsKey(userName)) {
 //            return false;
 //        }
@@ -84,12 +82,12 @@ public class Controller {
         //TODO: change the instances of each user according to its constructor
         switch (userType) {
             case "Fan":
-                newSubscriber = new Fan(userName,mail);
+                newSubscriber = new Fan(userName,mail,isMail);
                 newUser.addRoleToUser("Fan",newSubscriber);
                 break;
 
             case "System Administrator":
-                newSubscriber = new SystemAdministrator(userName,mail);
+                newSubscriber = new SystemAdministrator(userName,mail,isMail);
                 newUser.addRoleToUser("System Administrator",newSubscriber);
 
                 //TODO think about best solution
@@ -102,35 +100,35 @@ public class Controller {
 
             case "Referee":
                 //TODO think about refereeQualification and refereeType
-                newSubscriber = new Referee(userName, mail, refereeQualification, refereeType);
+                newSubscriber = new Referee(userName, mail, isMail, refereeQualification, refereeType);
                 newUser.addRoleToUser("Referee",newSubscriber);
                 break;
 
             case "Association Agent":
-                newSubscriber = new AssociationAgent(userName,mail);
+                newSubscriber = new AssociationAgent(userName,mail,isMail);
                 newUser.addRoleToUser("Association Agent",newSubscriber);
                 break;
 
             case "Team Player":
                 //need to add position and birthdate
-                newSubscriber = new TeamPlayer(userName,mail);
+                newSubscriber = new TeamPlayer(userName,mail,isMail);
                 newUser.addRoleToUser("Team Player",newSubscriber);
                 break;
 
             case "Team Coach":
                 //need to add role and validation
-                newSubscriber = new TeamCoach(userName,mail);
+                newSubscriber = new TeamCoach(userName,mail, isMail);
                 newUser.addRoleToUser("Team Coach",newSubscriber);
                 break;
 
             case "Team Manager":
-                newSubscriber = new TeamManager(userName, mail);
+                newSubscriber = new TeamManager(userName, mail,isMail);
                 newUser.addRoleToUser("Team Manager",newSubscriber);
                 break;
 
             case "Team Owner":
                 //need to update team
-                newSubscriber = new TeamOwner(userName, mail);
+                newSubscriber = new TeamOwner(userName, mail,isMail);
                 newUser.addRoleToUser("Team Owner",newSubscriber);
                 break;
 
@@ -234,7 +232,7 @@ public class Controller {
             return false;
         }
 
-        game.addSubscriber(fanUser.getRoles().get("Fan"), isMail);
+        game.addFanToAlerts(fanUser.getRoles().get("Fan"));
         return true;
     }
 
@@ -389,6 +387,72 @@ public class Controller {
         return true;
     }
 
+    //UC 6.2
+    // TODO: 15/04/2020 manage list of added owners for removing
+    public boolean addTeamOwner(Subscriber owner,Subscriber secondOwner) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(secondOwner.getUserName())){
+                User userNewOwner = users.get(secondOwner.getUserName());
+                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(),secondOwner.getMail(),false,teamOwner.getTeam(), teamOwner.getManagerAppointments());
+                userNewOwner.getRoles().put("Team Owner",newSubsOwner);
+                return true;
+            }
+        }
+        return false;
+    }
+    //UC 6.3
+    // TODO: 15/04/2020 recursive removing?
+    public boolean removeTeamOwner(Subscriber owner,Subscriber ownerToRemove) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(ownerToRemove.getUserName())) {
+                User userRemoveOwner = users.get(ownerToRemove.getUserName());
+                if (userRemoveOwner.getRoles().containsKey("Team Owner")) {
+                    userRemoveOwner.getRoles().remove("Team Owner");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+
+    //UC 6.4
+
+    // TODO: 15/04/2020 manage list of added managers for removing
+    public boolean addTeamManager(Subscriber owner,Subscriber newManager) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(newManager.getUserName())){
+                User userNewManager = users.get(newManager.getUserName());
+                Subscriber newSubManager = new TeamManager(newManager.getUserName(),newManager.getMail(),false);
+                userNewManager.getRoles().put("Team Manager",newSubManager);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //UC 6.5
+    // TODO: 15/04/2020 recursive removing?
+    public boolean removeTeamManager(Subscriber owner,Subscriber managerToRemove) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(managerToRemove.getUserName())) {
+                User userRemoveManager = users.get(managerToRemove.getUserName());
+                if (userRemoveManager.getRoles().containsKey("Team Manager")) {
+                    userRemoveManager.getRoles().remove("Team Manager");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     // AssociationAgent UC 9.1
 
     public boolean setLeagueByAssociationAgent(Subscriber assAgent, String leaguename, int leaguequalification) {
@@ -416,9 +480,9 @@ public class Controller {
 
     //UC 9.3A
     // TODO: 10/04/2020
-    public boolean addReferee(Subscriber assAgent, String userName, String password, String name, String mail, int qualification, RefereeType refereeType) {
+    public boolean addReferee(Subscriber assAgent, String userName, String password, String name, String mail, boolean isMail, int qualification, RefereeType refereeType) {
         if (assAgent instanceof AssociationAgent) {
-            Subscriber referee = new Referee(userName, mail, qualification, refereeType);
+            Subscriber referee = new Referee(userName, mail, isMail, qualification, refereeType);
            users.get(userName).addRoleToUser("Referee",referee);
             return true;
         }

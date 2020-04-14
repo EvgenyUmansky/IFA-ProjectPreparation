@@ -5,7 +5,7 @@ public class SystemAdministrator extends Subscriber {
 
 /////////// Constructor ///////////
 
-    public SystemAdministrator(String userName, String mail) {
-        super(userName, mail);
+    public SystemAdministrator(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
     }
 }
