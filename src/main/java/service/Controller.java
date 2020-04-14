@@ -71,7 +71,7 @@ public class Controller {
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
-    public boolean register(String userName, String password, String name, String userType, String mail, int refereeQualification, RefereeType refereeType) {
+    public boolean register(String userName, String password, String name, String userType, String mail, boolean isMail, int refereeQualification, RefereeType refereeType) {
 //        if (users.containsKey(userName)) {
 //            return false;
 //        }
@@ -84,12 +84,12 @@ public class Controller {
         //TODO: change the instances of each user according to its constructor
         switch (userType) {
             case "Fan":
-                newSubscriber = new Fan(userName,mail);
+                newSubscriber = new Fan(userName,mail,isMail);
                 newUser.addRoleToUser("Fan",newSubscriber);
                 break;
 
             case "System Administrator":
-                newSubscriber = new SystemAdministrator(userName,mail);
+                newSubscriber = new SystemAdministrator(userName,mail,isMail);
                 newUser.addRoleToUser("System Administrator",newSubscriber);
 
                 //TODO think about best solution
@@ -102,35 +102,35 @@ public class Controller {
 
             case "Referee":
                 //TODO think about refereeQualification and refereeType
-                newSubscriber = new Referee(userName, mail, refereeQualification, refereeType);
+                newSubscriber = new Referee(userName, mail, isMail, refereeQualification, refereeType);
                 newUser.addRoleToUser("Referee",newSubscriber);
                 break;
 
             case "Association Agent":
-                newSubscriber = new AssociationAgent(userName,mail);
+                newSubscriber = new AssociationAgent(userName,mail,isMail);
                 newUser.addRoleToUser("Association Agent",newSubscriber);
                 break;
 
             case "Team Player":
                 //need to add position and birthdate
-                newSubscriber = new TeamPlayer(userName,mail);
+                newSubscriber = new TeamPlayer(userName,mail,isMail);
                 newUser.addRoleToUser("Team Player",newSubscriber);
                 break;
 
             case "Team Coach":
                 //need to add role and validation
-                newSubscriber = new TeamCoach(userName,mail);
+                newSubscriber = new TeamCoach(userName,mail, isMail);
                 newUser.addRoleToUser("Team Coach",newSubscriber);
                 break;
 
             case "Team Manager":
-                newSubscriber = new TeamManager(userName, mail);
+                newSubscriber = new TeamManager(userName, mail,isMail);
                 newUser.addRoleToUser("Team Manager",newSubscriber);
                 break;
 
             case "Team Owner":
                 //need to update team
-                newSubscriber = new TeamOwner(userName, mail);
+                newSubscriber = new TeamOwner(userName, mail,isMail);
                 newUser.addRoleToUser("Team Owner",newSubscriber);
                 break;
 
@@ -234,7 +234,7 @@ public class Controller {
             return false;
         }
 
-        game.addSubscriber(fanUser.getRoles().get("Fan"), isMail);
+        game.addFanSubscriber(fanUser.getRoles().get("Fan"), isMail);
         return true;
     }
 
@@ -416,9 +416,9 @@ public class Controller {
 
     //UC 9.3A
     // TODO: 10/04/2020
-    public boolean addReferee(Subscriber assAgent, String userName, String password, String name, String mail, int qualification, RefereeType refereeType) {
+    public boolean addReferee(Subscriber assAgent, String userName, String password, String name, String mail, boolean isMail, int qualification, RefereeType refereeType) {
         if (assAgent instanceof AssociationAgent) {
-            Subscriber referee = new Referee(userName, mail, qualification, refereeType);
+            Subscriber referee = new Referee(userName, mail, isMail, qualification, refereeType);
            users.get(userName).addRoleToUser("Referee",referee);
             return true;
         }

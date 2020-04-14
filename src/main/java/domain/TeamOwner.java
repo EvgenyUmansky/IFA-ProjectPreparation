@@ -13,13 +13,13 @@ public class TeamOwner extends  Subscriber {
     // Constructor
 
 
-    public TeamOwner(String userName, String mail, Team team, HashSet<TeamManager> managerAppointments) {
-        super(userName, mail);
+    public TeamOwner(String userName, String mail, boolean isMail, Team team, HashSet<TeamManager> managerAppointments) {
+        super(userName, mail, isMail);
         this.team = team;
         this.managerAppointments = managerAppointments;
     }
-    public TeamOwner(String userName, String mail) {
-        super(userName, mail);
+    public TeamOwner(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
         this.managerAppointments = new HashSet<>();
     }
 

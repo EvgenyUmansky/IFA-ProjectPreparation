@@ -4,7 +4,7 @@ public class TeamManager extends TeamMember {
 
     // Constructor
 
-    public TeamManager(String userName, String mail) {
-        super(userName, mail);
+    public TeamManager(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
     }
 }

@@ -22,6 +22,7 @@ public class Game {
     private int guestTeamScore;
     private int gameMinutes;
     private Alert alertFans;
+    private Alert alertReferee;
 
 /////////// Constructor ///////////
     public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
@@ -37,6 +38,7 @@ public class Game {
         this.guestTeamScore = 0;
         this.gameMinutes = 0;
         this.alertFans = new Alert();
+        this.alertReferee = new Alert();
 
         // Game date string format: "2016-11-09 11:44"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -49,11 +51,25 @@ public class Game {
     // UC 3.3
 
     /**
-     * Add subscriber to list of subscribers on a game
+     * Add fan to list of subscribers on a game
      * @param user - want to get news about a game
      * @param isMail - true: get new on user's mail, false: get news on profile
      */
-    public void addSubscriber(Subscriber user, boolean isMail){
+    public void addFanSubscriber(Subscriber user, boolean isMail){
+        if(isMail) {
+            this.alertFans.addToMailSet(user);
+        }
+        else{
+            this.alertFans.addToSystemSet(user);
+        }
+    }
+
+    /**
+     * Add referee to list of subscribers on a game
+     * @param user - want to get news about a game
+     * @param isMail - true: get new on user's mail, false: get news on profile
+     */
+    public void addRefereeSubscriber(Subscriber user, boolean isMail){
         if(isMail) {
             this.alertFans.addToMailSet(user);
         }
@@ -65,7 +81,7 @@ public class Game {
     /**
      * Send score to subscribers when game ends
      */
-    public void sendAlertScore(){
+    public void sendAlertScoreToFan(){
 
         // some logic with observer...
 
@@ -75,7 +91,6 @@ public class Game {
 
         alertFans.sendAlert(alertNotification);
     }
-
 
     /**
      * add game event to list of game events
