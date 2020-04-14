@@ -18,48 +18,35 @@ public abstract class PersonalPage {
     }
 
     //-----Getters and Setters--------
-    public boolean setName(String name, String user) {
-        if(pageOwners.containsKey(user)){
-            this.name = name;
-            return true;
-        }
-        else{
-            return false;
-        }
+    protected void setName(String name) {
+        this.name = name;
     }
 
-    public boolean setInfo(String info, String user) {
-        if(pageOwners.containsKey(user)){
-            this.info = info;
-            return true;
-        }
-        else{
-            return false;
-        }
+    protected void setInfo(String info) {
+        this.info = info;
+
     }
 
-    public boolean setMail(String mail, String user) {
-        if(pageOwners.containsKey(user)){
-            this.mail = mail;
-            return true;
-        }
-        else{
-            return false;
-        }
+    protected void setMail(String mail) {
+        this.mail = mail;
     }
 
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
-    public String getInfo() {
+    protected String getInfo() {
         return info;
+    }
+
+    protected HashMap<String, Subscriber> getPageOwners() {
+        return pageOwners;
     }
 
     /////////// Functionality ///////////
 
     // UC 3.2
-    public void addSubscriber(Subscriber user, boolean isMail) {
+    protected void addSubscriber(Subscriber user, boolean isMail) {
         if(isMail) {
             this.alert.addToMailSet(user);
         }
@@ -68,7 +55,7 @@ public abstract class PersonalPage {
         }
     }
 
-    public void addPermissions(Subscriber owner) {
+    protected void addPermissions(Subscriber owner) {
         this.pageOwners.put(owner.getUserName(),owner);
     }
 
