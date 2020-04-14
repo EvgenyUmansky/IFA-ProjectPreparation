@@ -6,6 +6,7 @@ public class TeamPlayer extends TeamMember {
 
     private Date birthDate;
     private String position;
+    private String squadNumber;
 
     // Constructor
 
@@ -21,12 +22,24 @@ public class TeamPlayer extends TeamMember {
         this.position = position;
     }
 
-    public boolean updateDetails(Date birthDate, String position){
+    public boolean updateDetails(Date birthDate, String position, String squadNumber){
+        setSquadNumber(squadNumber);
         setBirthDate(birthDate);
         setPosition(position);
         return true;
     }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public String getSquadNumber() {
+        return squadNumber;
+    }
+
+    public String getPosition() {
+        return position;
+    }
 
     public void setBirthDate(Date birthDate){
         this.birthDate = birthDate;
@@ -35,4 +48,9 @@ public class TeamPlayer extends TeamMember {
     public void setPosition(String position){
         this.position = position;
     }
+
+    public void setSquadNumber(String squadNumber){
+        this.squadNumber = squadNumber;
+    }
+
 }

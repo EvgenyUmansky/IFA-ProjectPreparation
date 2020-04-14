@@ -379,8 +379,8 @@ public class Controller {
     }
 
 
-    public boolean updatePlayerDetails(TeamOwner owner, String userName, Date birthDate, String role) {
-        owner.updatePlayerDetails(userName, birthDate, role);
+    public boolean updatePlayerDetails(TeamOwner owner,String squadNumber ,String userName, Date birthDate, String position) {
+        owner.updatePlayerDetails(userName,squadNumber ,birthDate, position);
         return true;
     }
 

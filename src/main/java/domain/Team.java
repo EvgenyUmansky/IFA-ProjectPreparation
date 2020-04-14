@@ -1,5 +1,6 @@
 package domain;
 
+import java.security.acl.Owner;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -11,17 +12,43 @@ public class Team {
     private HashMap<String,TeamPlayer> players;
     private HashMap<String,TeamCoach> coaches;
     private HashMap<String,TeamManager> managers;
+    private HashMap<String,TeamOwner> owners;
+    private String teamEmail;
     private Budget budget;
+    private PersonalPage teamPage;
     // Constructor
-    public Team(String name, Field stadium)
+    public Team(String name, Field stadium, TeamOwner owner)
     {
         this.teamName = name;
         this.stadium = stadium;
         this.fields = new HashSet<>();
         addField(stadium);
-
+        addOwner(owner);
     }
 
+    public HashMap<String, TeamPlayer> getPlayers() {
+        return players;
+    }
+
+    public HashMap<String, TeamCoach> getCoaches() {
+        return coaches;
+    }
+
+    public HashMap<String, TeamManager> getManagers() {
+        return managers;
+    }
+
+    public Field getStadium() {
+        return stadium;
+    }
+
+    public String getTeamEmail() {
+        return teamEmail;
+    }
+
+    public void setTeamEmail(String teamEmail) {
+        this.teamEmail = teamEmail;
+    }
 
     public Field getMyField() {
         return stadium;
@@ -70,6 +97,10 @@ public class Team {
 
     public void addField(Field field){
         this.fields.add(field);
+    }
+
+    public void addOwner(TeamOwner owner){
+        this.owners.put(owner.getUserName(),owner);
     }
 
     public void addPlayer(TeamPlayer player){

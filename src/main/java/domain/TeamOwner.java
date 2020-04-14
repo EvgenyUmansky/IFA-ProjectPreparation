@@ -45,9 +45,9 @@ public class TeamOwner extends  Subscriber {
     }
 
 
-    public boolean updatePlayerDetails(String userName, Date birthDate, String position){
+    public boolean updatePlayerDetails(String userName, String squadNumber, Date birthDate, String position){
         TeamPlayer player = this.team.getPlayer(userName);
-        player.updateDetails(birthDate,position);
+       player.updateDetails(birthDate,position,squadNumber);
         return true;
     }
 
