@@ -8,12 +8,20 @@ public class TeamPlayer extends TeamMember {
     private String position;
 
     // Constructor
-    public TeamPlayer(String userName, String password, String name, String mail) {
-        super(userName, password, name, mail);
+
+
+    public TeamPlayer(String userName, String mail, Date birthDate, String position) {
+        super(userName, mail);
+        this.birthDate = birthDate;
+        this.position = position;
+    }
+    public TeamPlayer(String userName, String mail) {
+        super(userName, mail);
+        this.birthDate = birthDate;
+        this.position = position;
     }
 
-    public boolean updateDetails(String name, Date birthDate, String position){
-        super.setName(name);
+    public boolean updateDetails(Date birthDate, String position){
         setBirthDate(birthDate);
         setPosition(position);
         return true;
