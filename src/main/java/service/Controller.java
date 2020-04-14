@@ -3,8 +3,6 @@ package service;
 import domain.*;
 
 import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -234,7 +232,7 @@ public class Controller {
             return false;
         }
 
-        game.addFanSubscriber(fanUser.getRoles().get("Fan"), isMail);
+        game.addFanToAlerts(fanUser.getRoles().get("Fan"));
         return true;
     }
 
