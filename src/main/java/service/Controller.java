@@ -2,6 +2,7 @@ package service;
 
 import domain.*;
 
+import javax.mail.MessagingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -237,7 +238,7 @@ public class Controller {
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
-    public boolean sendAlertToSysAdmin(String userName, AlertNotification message) {
+    public boolean sendAlertToSysAdmin(String userName, AlertNotification message) throws MessagingException {
 //        Subscriber fan = (Subscriber) (users.get(userName));
 //        if (!(fan instanceof Fan)) {
         User fanUser = users.get(userName);
