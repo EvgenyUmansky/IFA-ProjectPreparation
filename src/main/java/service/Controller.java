@@ -387,6 +387,72 @@ public class Controller {
         return true;
     }
 
+    //UC 6.2
+    // TODO: 15/04/2020 manage list of added owners for removing
+    public boolean addTeamOwner(Subscriber owner,Subscriber secondOwner) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(secondOwner.getUserName())){
+                User userNewOwner = users.get(secondOwner.getUserName());
+                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(),secondOwner.getMail(),false,teamOwner.getTeam(), teamOwner.getManagerAppointments());
+                userNewOwner.getRoles().put("Team Owner",newSubsOwner);
+                return true;
+            }
+        }
+        return false;
+    }
+    //UC 6.3
+    // TODO: 15/04/2020 recursive removing?
+    public boolean removeTeamOwner(Subscriber owner,Subscriber ownerToRemove) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(ownerToRemove.getUserName())) {
+                User userRemoveOwner = users.get(ownerToRemove.getUserName());
+                if (userRemoveOwner.getRoles().containsKey("Team Owner")) {
+                    userRemoveOwner.getRoles().remove("Team Owner");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+
+    //UC 6.4
+
+    // TODO: 15/04/2020 manage list of added managers for removing
+    public boolean addTeamManager(Subscriber owner,Subscriber newManager) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(newManager.getUserName())){
+                User userNewManager = users.get(newManager.getUserName());
+                Subscriber newSubManager = new TeamManager(newManager.getUserName(),newManager.getMail(),false);
+                userNewManager.getRoles().put("Team Manager",newSubManager);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //UC 6.5
+    // TODO: 15/04/2020 recursive removing?
+    public boolean removeTeamManager(Subscriber owner,Subscriber managerToRemove) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner)owner;
+            if(users.containsKey(managerToRemove.getUserName())) {
+                User userRemoveManager = users.get(managerToRemove.getUserName());
+                if (userRemoveManager.getRoles().containsKey("Team Manager")) {
+                    userRemoveManager.getRoles().remove("Team Manager");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     // AssociationAgent UC 9.1
 
     public boolean setLeagueByAssociationAgent(Subscriber assAgent, String leaguename, int leaguequalification) {

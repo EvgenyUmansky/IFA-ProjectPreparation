@@ -5,6 +5,14 @@ import java.util.HashSet;
 
 public class TeamOwner extends  Subscriber {
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public HashSet<TeamManager> getManagerAppointments() {
+        return managerAppointments;
+    }
+
     private Team team;
     private HashSet<TeamManager> managerAppointments;
 
