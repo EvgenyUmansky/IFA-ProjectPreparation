@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Fan extends Subscriber{
 
@@ -9,9 +10,14 @@ public class Fan extends Subscriber{
         super(userName, mail, isMail);
     }
 
-    public void sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
+
+/////////// Functionality ///////////
+    public Map<String, Boolean> sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
+        Alert alert = new Alert();
         for(SystemAdministrator sysAdmin : sysAdmins){
-            sysAdmin.addAlertMessage(alertNotification);
+            alert.addSubscriber(sysAdmin);
         }
+
+        return alert.sendAlert(alertNotification);
     }
 }

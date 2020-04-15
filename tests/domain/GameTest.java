@@ -1,13 +1,12 @@
 package domain;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.mail.MessagingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +23,7 @@ class GameTest {
     Game game;
 
     @BeforeEach
-    public void createStubs() {
+    public void insert() {
         fans = new ArrayList<>();
         fans.add(new Fan("Messi", "euguman@gmail.com", true));
         fans.add(new Fan("unMessi", "", false));
@@ -59,7 +58,7 @@ class GameTest {
     }
 
     @AfterEach
-    public void deleteStubs(){
+    public void delete(){
         fans = null;
         referees = null;
         gameEvents = null;
@@ -117,6 +116,8 @@ class GameTest {
 
     @Test
     void removeRefereeToAlerts(){
+        game.addFanToAlerts(fans.get(0));
+        game.addFanToAlerts(fans.get(1));
 
         game.addRefereeToAlerts(referees.get(0));
         game.addRefereeToAlerts(referees.get(1));
@@ -144,6 +145,16 @@ class GameTest {
 
     @Test
     void sendAlertChangeDateGame() {
+        game.addFanToAlerts(fans.get(0));
+        game.addFanToAlerts(fans.get(1));
+
+        game.addRefereeToAlerts(referees.get(0));
+        game.addRefereeToAlerts(referees.get(1));
+
+        Map<String, Boolean> isSentMap = new HashMap(game.setGameDate("2021-03-04 11:11"));
+        for(String user : isSentMap.keySet()){
+            assertTrue(isSentMap.get(user));
+        }
     }
 
     @Test
@@ -256,13 +267,13 @@ class GameTest {
     }
 
     @Test
-    void getGameDate() throws MessagingException {
+    void getGameDate()  {
         game.setGameDate("2020-12-12 13:00");
         assertEquals("2020-12-12T13:00", game.getGameDate().toString());
     }
 
     @Test
-    void setGameDate() throws MessagingException {
+    void setGameDate() {
         game.setGameDate("2020-12-12 13:00");
         assertEquals("2020-12-12T13:00", game.getGameDate().toString());
     }

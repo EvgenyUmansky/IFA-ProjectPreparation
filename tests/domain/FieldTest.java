@@ -1,14 +1,30 @@
 package domain;
 
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FieldTest {
 
-    Field field1 = new Field("Metallurg", 200);
-    Field field2 = new Field("Dinamo", 999);
+    Field field1;
+    Field field2;
+
+    @BeforeEach
+    public void insert() {
+        field1 = new Field("Metallurg", 200);
+        field2 = new Field("Dinamo", 999);
+    }
+
+    @AfterEach
+    public void delete(){
+        field1 = null;
+        field2 = null;
+    }
 
     
     @Test
