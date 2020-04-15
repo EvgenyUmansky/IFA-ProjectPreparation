@@ -1,8 +1,9 @@
 package domain;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 class BudgetTest {
     Budget budgetQ1 = new Budget(1998, 5000, 0, 0, 1);

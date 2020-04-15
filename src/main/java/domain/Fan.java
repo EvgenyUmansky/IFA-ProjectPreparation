@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Fan extends Subscriber{
 
 /////////// Constructor ///////////
-    public Fan(String userName, String password, String name, String mail){
-        super(userName, password, name, mail);
+    public Fan(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
     }
 
     public void sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
