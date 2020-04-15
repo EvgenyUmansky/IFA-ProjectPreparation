@@ -51,6 +51,16 @@ public class Game {
 
 /////////// Functionality ///////////
 
+    public void addRefereeToGame(Referee referee){
+        this.referees.add(referee);
+        addRefereeToAlerts(referee);
+    }
+
+    public void removeRefereeToGame(Referee referee){
+        this.referees.remove(referee);
+        deleteRefereeToAlerts(referee);
+    }
+
     // UC 3.3
 
     /**
@@ -66,16 +76,34 @@ public class Game {
         }
     }
 
+    public void removeFanToAlerts(Subscriber fan){
+        if(fan.isMail()) {
+            this.alertFans.removeFromMailSet(fan);
+        }
+        else{
+            this.alertFans.removeFromSystemSet(fan);
+        }
+    }
+
     /**
      * Add referee to list of subscribers on a game
      * @param referee - want to get news about a game
      */
     public void addRefereeToAlerts(Subscriber referee){
         if(referee.isMail()) {
-            this.alertFans.addToMailSet(referee);
+            this.alertReferees.addToMailSet(referee);
         }
         else{
-            this.alertFans.addToSystemSet(referee);
+            this.alertReferees.addToSystemSet(referee);
+        }
+    }
+
+    public void  deleteRefereeToAlerts(Referee referee){
+        if(referee.isMail()) {
+            this.alertReferees.removeFromMailSet(referee);
+        }
+        else{
+            this.alertReferees.removeFromSystemSet(referee);
         }
     }
 
@@ -86,11 +114,11 @@ public class Game {
     }
 
     /**
-     * Send score to subscribers when game ends
+     * Send score to fans when game ends
      */
     public void sendAlertScoreToFan(){
 
-        // some logic with observer...
+        //TODO some logic with observer: when the game ends
 
         String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName();
         String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + getGameScore();
@@ -99,12 +127,28 @@ public class Game {
         alertFans.sendAlert(alertNotification);
     }
 
+
+    /**
+     * Send alert to fans and referees when remains one day before a game
+     */
     public void sendAlertCloseGame(){
 
-        // some logic with observer...
+        //TODO some logic with observer: when remains one day
 
         String title =  "It's close! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
-        String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "remains " + "...";
+        String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "remains " + "one day!";
+        AlertNotification alertNotification = new AlertNotification(title, message);
+
+        alertFans.sendAlert(alertNotification);
+        alertReferees.sendAlert(alertNotification);
+    }
+
+    /**
+     * Send alert to fans and referees when date of the game changed
+     */
+    public void sendAlertChangeDateGame(){
+        String title =  "The date is changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
+        String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + this.gameDate.toString();
         AlertNotification alertNotification = new AlertNotification(title, message);
 
         alertFans.sendAlert(alertNotification);
@@ -117,7 +161,6 @@ public class Game {
      * @param event - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
      * @return true if success, false if not
      */
-    //
     public boolean addGameEvent(GameEvent event){
         // date time of event earlier than game
         if(event.getDateTime().compareTo(this.gameDate) <= 0){
@@ -207,6 +250,13 @@ public class Game {
         this.gameMinutes = gameMinutes;
     }
 
+    public Alert getAlertFans() {
+        return alertFans;
+    }
+
+    public Alert getAlertReferees() {
+        return alertReferees;
+    }
 
     /**
      *
@@ -227,5 +277,6 @@ public class Game {
     public void setGameDate(String gameDateStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
+        sendAlertChangeDateGame();
     }
 }
