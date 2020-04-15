@@ -92,6 +92,7 @@ public class LeaguePerSeason {
         int hostTeamScore = 0; Team homeTeam = null;
         int awayTeamScore = 0; Team awayTeam = null;
         Team homeGameTeam = game.getHostTeam(); Team awayGameTeam = game.getGuestTeam();
+        //TODO: remove
         for(Team team : teamsInLeaguePerSeasonTable.keySet()){
             if(team.equals(homeGameTeam)){
                 hostTeamScore = game.getHostTeamScore();

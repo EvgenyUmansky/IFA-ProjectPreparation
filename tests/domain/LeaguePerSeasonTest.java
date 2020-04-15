@@ -1,7 +1,8 @@
 package domain;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,8 +10,22 @@ import java.util.HashSet;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LeaguePerSeasonTest {
-    LeaguePerSeason leaguePerSeason1 = new LeaguePerSeason(2020, new OneGameSchedulingMethod(),new RankingMethod());
-    LeaguePerSeason leaguePerSeason2 = new LeaguePerSeason(2020, new TwoGameSchedulingMethod(), new RankingMethod());
+    LeaguePerSeason leaguePerSeason1;
+    LeaguePerSeason leaguePerSeason2;
+
+
+    @BeforeEach
+    public void init(){
+        leaguePerSeason1 = new LeaguePerSeason(2020, new OneGameSchedulingMethod(),new RankingMethod());
+        leaguePerSeason2 = new LeaguePerSeason(2020, new TwoGameSchedulingMethod(), new RankingMethod());
+    }
+
+    @AfterEach
+    public void finish(){
+        leaguePerSeason1 = null;
+        leaguePerSeason2 = null;
+    }
+
     @Test
     void initializedTeamsInLeaguePerSeason() {
         assertEquals(true, leaguePerSeason1.initializedTeamsInLeaguePerSeason(new HashSet<>()));
@@ -30,7 +45,7 @@ class LeaguePerSeasonTest {
     }
 
 
-
+//TODO:
     @Test
     void updateTableOfTheLeague() {
     }
@@ -64,35 +79,35 @@ class LeaguePerSeasonTest {
 
     }
 
-    @Test
-    void getSeason() {
-    }
-
-    @Test
-    void getSchedulingMethod() {
-    }
-
-    @Test
-    void setRankingMethod() {
-    }
-
-    @Test
-    void isBegin() {
-    }
-
-    @Test
-    void setSchedulingMethod() {
-    }
-
-    @Test
-    void getRankingMethod() {
-    }
-
-    @Test
-    void getTeamsInLeaguePerSeason() {
-    }
-
-    @Test
-    void getGamesInLeaguePerSeason() {
-    }
+//    @Test
+//    void getSeason() {
+//    }
+//
+//    @Test
+//    void getSchedulingMethod() {
+//    }
+//
+//    @Test
+//    void setRankingMethod() {
+//    }
+//
+//    @Test
+//    void isBegin() {
+//    }
+//
+//    @Test
+//    void setSchedulingMethod() {
+//    }
+//
+//    @Test
+//    void getRankingMethod() {
+//    }
+//
+//    @Test
+//    void getTeamsInLeaguePerSeason() {
+//    }
+//
+//    @Test
+//    void getGamesInLeaguePerSeason() {
+//    }
 }
