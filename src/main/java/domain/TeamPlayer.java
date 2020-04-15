@@ -11,15 +11,14 @@ public class TeamPlayer extends TeamMember {
     // Constructor
 
 
-    public TeamPlayer(String userName, String mail, boolean isMail, Date birthDate, String position) {
+    public TeamPlayer(String userName, String mail, boolean isMail, Date birthDate, String position, String squadNumber) {
         super(userName, mail, isMail);
         this.birthDate = birthDate;
         this.position = position;
+        this.squadNumber = squadNumber;
     }
     public TeamPlayer(String userName, String mail, boolean isMail) {
         super(userName, mail, isMail);
-        this.birthDate = birthDate;
-        this.position = position;
     }
 
     public boolean updateDetails(Date birthDate, String position, String squadNumber){

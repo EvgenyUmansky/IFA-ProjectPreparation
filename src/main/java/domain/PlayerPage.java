@@ -7,6 +7,7 @@ public class PlayerPage extends PersonalPage {
     private Date birthDate;
     private String position;
     private String squadNumber;
+    private Team currentTeam;
 
     public PlayerPage(TeamPlayer player, String name) {
         //get name using controller while creating page
@@ -14,6 +15,7 @@ public class PlayerPage extends PersonalPage {
         this.birthDate = player.getBirthDate();
         this.squadNumber = player.getSquadNumber();
         this.position = player.getSquadNumber();
+        this.currentTeam = player.getCurrentTeam();
         addPermissions(player);
     }
 
@@ -27,5 +29,9 @@ public class PlayerPage extends PersonalPage {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public void setCurrentTeam(Team currentTeam) {
+        this.currentTeam = currentTeam;
     }
 }

@@ -7,4 +7,6 @@ public class TeamManager extends TeamMember {
     public TeamManager(String userName, String mail, boolean isMail) {
         super(userName, mail, isMail);
     }
+
+
 }

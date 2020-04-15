@@ -32,4 +32,5 @@ public class TeamCoach extends TeamMember {
     public String getQualification() {
         return qualification;
     }
+
 }

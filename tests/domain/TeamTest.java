@@ -21,6 +21,7 @@ class TeamTest {
         team = new Team("test",field,owner);
     }
 
+    //TODO: in the next versions, we should delete the objects from the DB
     @AfterEach
     public void finish(){
         field = null;
@@ -37,7 +38,7 @@ class TeamTest {
     @Test
     void addProperty() {
         Field field1 = new Field("test",1000);
-        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player");
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player","5");
         TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com",true);
         TeamManager manager = new TeamManager("manageUser","man@gmail.com",true);
 
@@ -53,14 +54,18 @@ class TeamTest {
 
         assertEquals(2,team.getFields().size());
         assertEquals(1,team.getPlayers().size());
+        assertEquals(this.team,team.getPlayers().get(player.getUserName()).getCurrentTeam());
         assertEquals(1,team.getCoaches().size());
+        assertEquals(this.team,team.getCoaches().get(coach.getUserName()).getCurrentTeam());
         assertEquals(1,team.getManagers().size());
+        assertEquals(this.team,team.getManagers().get(manager.getUserName()).getCurrentTeam());
+
     }
 
     @Test
     void removeProperty() {
         Field field1 = new Field("test",1000);
-        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player");
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player","5");
         TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com",true);
         TeamManager manager = new TeamManager("manageUser","man@gmail.com",true);
 
@@ -112,8 +117,5 @@ class TeamTest {
         assertFalse(team.removeOwner(owner));
         assertEquals(1,team.getOwners().size());
     }
-
-
-
 
 }

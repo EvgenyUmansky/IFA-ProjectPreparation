@@ -69,14 +69,17 @@ public class Team {
         }
 
         if(property instanceof TeamPlayer){
+            ((TeamPlayer)property).setCurrentTeam(this);
             this.players.put(((TeamPlayer)property).getUserName(),(TeamPlayer)property);
         }
 
         if(property instanceof TeamCoach){
+            ((TeamCoach)property).setCurrentTeam(this);
             this.coaches.put(((TeamCoach)property).getUserName(),(TeamCoach)property);
         }
 
         if(property instanceof TeamManager){
+            ((TeamManager)property).setCurrentTeam(this);
             this.managers.put(((TeamManager)property).getUserName(),(TeamManager)property);
         }
     }
