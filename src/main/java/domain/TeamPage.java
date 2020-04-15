@@ -22,43 +22,19 @@ public class TeamPage extends PersonalPage {
         }
     }
 
-    public boolean setStadium(Field stadium, String user) {
-        if(pageOwners.containsKey(user)){
-            this.stadium = stadium;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setStadium(Field stadium) {
+        this.stadium = stadium;
+
     }
-    public boolean setPlayers(HashMap<String,TeamPlayer> players , String user) {
-        if(pageOwners.containsKey(user)){
-            this.players = players;
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    public boolean setCoaches(HashMap<String,TeamCoach> coaches, String user) {
-        if(pageOwners.containsKey(user)){
-            this.coaches = coaches;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setPlayers(HashMap<String,TeamPlayer> players) {
+        this.players = players;
     }
 
-    public boolean setManagers(HashMap<String,TeamManager> managers, String user) {
+    public void setCoaches(HashMap<String,TeamCoach> coaches) {
+        this.coaches = coaches;
+    }
 
-        if(pageOwners.containsKey(user)){
-            this.managers = managers;
-            return true;
-        }
-        else{
-            return false;
-        }
-
+    public void setManagers(HashMap<String,TeamManager> managers) {
+        this.managers = managers;
     }
 }

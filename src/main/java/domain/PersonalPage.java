@@ -18,34 +18,16 @@ public abstract class PersonalPage {
     }
 
     //-----Getters and Setters--------
-    public boolean setName(String name, String user) {
-        if(pageOwners.containsKey(user)){
-            this.name = name;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setName(String name, String user) {
+        this.name = name;
     }
 
-    public boolean setInfo(String info, String user) {
-        if(pageOwners.containsKey(user)){
-            this.info = info;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setInfo(String info) {
+        this.info = info;
     }
 
-    public boolean setMail(String mail, String user) {
-        if(pageOwners.containsKey(user)){
-            this.mail = mail;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
 

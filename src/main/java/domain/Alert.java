@@ -1,5 +1,6 @@
 package domain;
 
+import java.security.Security;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -36,7 +37,7 @@ public class Alert {
      * public function to send alert to user. Chooses from list where to send the alert: mail or system
      * @param alertNotification
      */
-    public void sendAlert(AlertNotification alertNotification){
+    public void sendAlert(AlertNotification alertNotification) throws MessagingException {
         for(Subscriber user : this.mailAlertList){
             sendMailAlert(user.getMail(), alertNotification);
         }
@@ -53,50 +54,38 @@ public class Alert {
      * @param alertNotification
      * @return
      */
-    private boolean sendMailAlert(String to, AlertNotification alertNotification){
-        // Recipient's email ID needs to be mentioned.
-        //String to = mail;
+    public boolean sendMailAlert(String to, AlertNotification alertNotification) throws MessagingException {
+       // Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
-        // Sender's email ID needs to be mentioned
-        String from = "euguman@gmail.com";
+        // Get a Properties object
+        Properties props = System.getProperties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+        props.setProperty("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.auth", "true");
+        final String username = "euguman";
+        final String password = "sevela92";
+        Session session = Session.getDefaultInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
 
-        // Assuming you are sending email from localhost
-        String host = "localhost";
+        // -- Create a new message --
+        Message msg = new MimeMessage(session);
 
-        // Get system properties
-        Properties properties = System.getProperties();
+        // -- Set the FROM and TO fields --
+        msg.setFrom(new InternetAddress(username + "@gmail.com"));
+        msg.setRecipients(Message.RecipientType.TO,
+                InternetAddress.parse(to, false));
+        msg.setSubject(alertNotification.getTitle());
+        msg.setText(alertNotification.getMessage());
+        Transport.send(msg);
 
-        // Setup mail server
-        // if problem: https://stackoverflow.com/questions/40650229/getting-syntax-error-in-property-setpropertymail-smtp-host-host
-        properties.setProperty("mail.smtp.host", host);
-
-        // Get the default Session object.
-        Session session = Session.getDefaultInstance(properties);
-
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
-            message.setSubject(alertNotification.getTitle());
-
-            // Now set the actual message
-            message.setText(alertNotification.getMessage());
-
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-            return false;
-        }
-
+        System.out.println("Message sent.");
         return true;
     }
 

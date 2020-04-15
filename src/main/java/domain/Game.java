@@ -1,5 +1,6 @@
 package domain;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -8,9 +9,6 @@ import java.util.Map;
 
 public class Game {
 
-    private static int staticGameId = 0;
-
-    private int gameId;
     private LeaguePerSeason leaguePerSeason;
     private Team hostTeam;
     private Team guestTeam;
@@ -26,8 +24,6 @@ public class Game {
 
 /////////// Constructor ///////////
     public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
-        staticGameId++;
-        this.gameId = staticGameId;
         this.leaguePerSeason = leaguePerSeason;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
@@ -50,7 +46,6 @@ public class Game {
 
 
 /////////// Functionality ///////////
-
     public void addRefereeToGame(Referee referee){
         this.referees.add(referee);
         addRefereeToAlerts(referee);
@@ -116,7 +111,7 @@ public class Game {
     /**
      * Send score to fans when game ends
      */
-    public void sendAlertScoreToFan(){
+    public void sendAlertScoreToFan() throws MessagingException {
 
         //TODO some logic with observer: when the game ends
 
@@ -131,7 +126,7 @@ public class Game {
     /**
      * Send alert to fans and referees when remains one day before a game
      */
-    public void sendAlertCloseGame(){
+    public void sendAlertCloseGame() throws MessagingException {
 
         //TODO some logic with observer: when remains one day
 
@@ -146,7 +141,7 @@ public class Game {
     /**
      * Send alert to fans and referees when date of the game changed
      */
-    public void sendAlertChangeDateGame(){
+    public void sendAlertChangeDateGame() throws MessagingException {
         String title =  "The date is changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + this.gameDate.toString();
         AlertNotification alertNotification = new AlertNotification(title, message);
@@ -174,9 +169,6 @@ public class Game {
 
 
 /////////// Getters and Setters ///////////
-    public int getGameId() {
-        return gameId;
-    }
 
     public LeaguePerSeason getLeaguePerSeason() {
         return leaguePerSeason;
@@ -214,16 +206,8 @@ public class Game {
         return referees;
     }
 
-    public void setReferees(ArrayList<Referee> referees) {
-        this.referees = referees;
-    }
-
     public Map<Integer, GameEvent> getGameEvents() {
         return gameEvents;
-    }
-
-    public void setGameEvents(Map<Integer, GameEvent> gameEvents) {
-        this.gameEvents = gameEvents;
     }
 
     public int getHostTeamScore() {
@@ -274,7 +258,7 @@ public class Game {
      * string format: "2016-11-09 11:44"
      * @param gameDateStr
      */
-    public void setGameDate(String gameDateStr) {
+    public void setGameDate(String gameDateStr) throws MessagingException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
         sendAlertChangeDateGame();

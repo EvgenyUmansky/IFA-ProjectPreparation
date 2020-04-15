@@ -1,80 +1,119 @@
 package domain;
 
-/*
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.util.Date;
 
-@RunWith(Arquillian.class)
-public class TeamTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(Team.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+import static org.junit.jupiter.api.Assertions.*;
+
+class TeamTest {
+    Field field;
+    TeamOwner owner;
+    Team team;
+
+    @BeforeEach
+    public void init(){
+        field = new Field("test",100);
+        owner = new TeamOwner("ownerUser","owner@gmail.com",true);
+        team = new Team("test",field,owner);
     }
 
-    @org.junit.Test
-    public void getMyField() {
+    @AfterEach
+    public void finish(){
+        field = null;
+        owner = null;
+        team =  null;
     }
 
-    @org.junit.Test
-    public void getTeamName() {
+    @Test
+    void setTeamEmail() {
+        team.setTeamEmail("new@gmail.com");
+        assertEquals("new@gmail.com",team.getTeamEmail());
     }
 
-    @org.junit.Test
-    public void addProperty() {
+    @Test
+    void addProperty() {
+        Field field1 = new Field("test",1000);
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player");
+        TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com",true);
+        TeamManager manager = new TeamManager("manageUser","man@gmail.com",true);
+
+        assertEquals(1,team.getFields().size());
+        assertEquals(0,team.getPlayers().size());
+        assertEquals(0,team.getCoaches().size());
+        assertEquals(0,team.getManagers().size());
+
+        team.addProperty(field1);
+        team.addProperty(player);
+        team.addProperty(coach);
+        team.addProperty(manager);
+
+        assertEquals(2,team.getFields().size());
+        assertEquals(1,team.getPlayers().size());
+        assertEquals(1,team.getCoaches().size());
+        assertEquals(1,team.getManagers().size());
     }
 
-    @org.junit.Test
-    public void removeProperty() {
+    @Test
+    void removeProperty() {
+        Field field1 = new Field("test",1000);
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player");
+        TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com",true);
+        TeamManager manager = new TeamManager("manageUser","man@gmail.com",true);
+
+        team.addProperty(field1);
+        team.addProperty(player);
+        team.addProperty(coach);
+        team.addProperty(manager);
+
+        assertEquals(2,team.getFields().size());
+        assertEquals(1,team.getPlayers().size());
+        assertEquals(1,team.getCoaches().size());
+        assertEquals(1,team.getManagers().size());
+
+        team.removeProperty(field1);
+        team.removeProperty(player);
+        team.removeProperty(coach);
+        team.removeProperty(manager);
+
+        assertEquals(1,team.getFields().size());
+        assertEquals(0,team.getPlayers().size());
+        assertEquals(0,team.getCoaches().size());
+        assertEquals(0,team.getManagers().size());
     }
 
-    @org.junit.Test
-    public void addField() {
+
+    @Test
+    void addOwner() {
+        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com",true);
+        assertEquals(1,team.getOwners().size());
+        team.addOwner(ownerTest2);
+        assertEquals(2,team.getOwners().size());
+
     }
 
-    @org.junit.Test
-    public void addPlayer() {
+    @Test
+    void removeOwnerPositiveCase() {
+        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com",true);
+        assertEquals(1,team.getOwners().size());
+        team.addOwner(ownerTest2);
+        assertEquals(2,team.getOwners().size());
+        assertTrue(team.removeOwner(ownerTest2));
+        assertEquals(1,team.getOwners().size());
+
     }
 
-    @org.junit.Test
-    public void addCoach() {
+    @Test
+    void removeOwnerNegativeCase() {
+        assertEquals(1,team.getOwners().size());
+        assertFalse(team.removeOwner(owner));
+        assertEquals(1,team.getOwners().size());
     }
 
-    @org.junit.Test
-    public void addManager() {
-    }
 
-    @org.junit.Test
-    public void removeField() {
-    }
 
-    @org.junit.Test
-    public void removePlayer() {
-    }
-
-    @org.junit.Test
-    public void removeCoach() {
-    }
-
-    @org.junit.Test
-    public void removeManager() {
-    }
-
-    @org.junit.Test
-    public void getPlayer() {
-    }
-
-    @org.junit.Test
-    public void getCoach() {
-    }
 
 }
-
- */

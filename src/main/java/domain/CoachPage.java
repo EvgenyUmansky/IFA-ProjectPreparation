@@ -15,23 +15,11 @@ public class CoachPage extends PersonalPage {
     }
 
 
-    public boolean setRole(String role, String user) {
-        if(pageOwners.containsKey(user)){
-            this.role = role;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public boolean setQualification(String qualification, String user) {
-        if(pageOwners.containsKey(user)){
-            this.qualification = qualification;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
     }
 }
