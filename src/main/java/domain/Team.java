@@ -23,9 +23,11 @@ public class Team {
         this.stadium = stadium;
         this.fields = new HashSet<>();
         this.owners = new HashMap<>();
-
-        addField(stadium);
-        addOwner(owner);
+        this.managers = new HashMap<>();
+        this.coaches = new HashMap<>();
+        this.players = new HashMap<>();
+        this.fields.add(stadium);
+        this.owners.put(owner.getUserName(),owner);
     }
 
     public HashMap<String, TeamPlayer> getPlayers() {
@@ -63,42 +65,38 @@ public class Team {
 
     public void addProperty(Object property){
         if(property instanceof Field){
-          addField((Field)property);
+            this.fields.add((Field)property);
         }
 
         if(property instanceof TeamPlayer){
-            addPlayer((TeamPlayer)property);
+            this.players.put(((TeamPlayer)property).getUserName(),(TeamPlayer)property);
         }
 
         if(property instanceof TeamCoach){
-            addCoach((TeamCoach)property);
+            this.coaches.put(((TeamCoach)property).getUserName(),(TeamCoach)property);
         }
 
         if(property instanceof TeamManager){
-            addManager((TeamManager)property);
+            this.managers.put(((TeamManager)property).getUserName(),(TeamManager)property);
         }
     }
 
     public void removeProperty(Object property){
         if(property instanceof Field){
-            removeField((Field)property);
+            this.fields.remove(property);
         }
 
         if(property instanceof TeamPlayer){
-            removePlayer((TeamPlayer)property);
+            this.players.remove(((TeamPlayer)property).getUserName());
         }
 
         if(property instanceof TeamCoach){
-            removeCoach((TeamCoach)property);
+            this.coaches.remove(((TeamCoach)property).getUserName());
         }
 
         if(property instanceof TeamManager){
-            removeManager((TeamManager)property);
+            this.managers.remove(((TeamManager)property).getUserName());
         }
-    }
-
-    public void addField(Field field){
-        this.fields.add(field);
     }
 
     public void addOwner(TeamOwner owner){
@@ -109,33 +107,15 @@ public class Team {
         this.owners.put(owner.getUserName(),owner);
     }
 
-    public void addPlayer(TeamPlayer player){
-        this.players.put(player.getUserName(),player);
-    }
-
-    public void addCoach(TeamCoach coach){
-        this.coaches.put(coach.getUserName(),coach);
-    }
-
-    public void addManager(TeamManager manager){
-        this.managers.put(manager.getUserName(),manager);
-    }
-
-    public void removeField(Field field){
-        this.fields.remove(field);
-    }
-
-
-    public void removePlayer(TeamPlayer player){
-        this.players.remove(player.getUserName());
-    }
-
-    public void removeCoach(TeamCoach coach){
-        this.coaches.remove(coach.getUserName());
-    }
-
-    public void removeManager(TeamManager manager){
-        this.managers.remove(manager.getUserName());
+    public boolean removeOwner(TeamOwner owner){
+        //Impossible to leave the Team without an Owner
+        if(this.owners.size() == 1){
+            return false;
+        }else{
+            this.owners.remove(owner.getUserName());
+            owner.setTeam(null);
+            return true;
+        }
     }
 
     public TeamPlayer getPlayer(String userName){
@@ -146,4 +126,19 @@ public class Team {
         return coaches.get(userName);
     }
 
+    public HashSet<Field> getFields() {
+        return fields;
+    }
+
+    public HashMap<String, TeamOwner> getOwners() {
+        return owners;
+    }
+
+    public Budget getBudget() {
+        return budget;
+    }
+
+    public PersonalPage getTeamPage() {
+        return teamPage;
+    }
 }
