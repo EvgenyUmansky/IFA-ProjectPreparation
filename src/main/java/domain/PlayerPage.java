@@ -17,33 +17,15 @@ public class PlayerPage extends PersonalPage {
         addPermissions(player);
     }
 
-    public boolean setBirthDate(Date birthDate, String user) {
-        if(pageOwners.containsKey(user)){
-            this.birthDate = birthDate;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public boolean setSquadNumber(String squadNumber, String user) {
-        if(pageOwners.containsKey(user)){
-            this.squadNumber = squadNumber;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setSquadNumber(String squadNumber) {
+        this.squadNumber = squadNumber;
     }
 
-    public boolean setPosition(String position, String user) {
-        if(pageOwners.containsKey(user)){
-            this.position = position;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
