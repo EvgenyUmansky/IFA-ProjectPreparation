@@ -4,51 +4,49 @@ import java.util.Set;
 
 public class Field {
 
-    private static int staticFieldId = 0;
-    private int fieldId;
     private String fieldName;
-
-    Team teamOwns;
-    double propertyCost;
-    Set<Game> gamesOnField;
+    private double propertyCost;
 
 /////////// Constructors ///////////
-    public Field(Team teamOwns, double propertyCost) {
-        staticFieldId++;
-        this.fieldId = staticFieldId;
-        this.teamOwns = teamOwns;
+    public Field(String fieldName, double propertyCost) {
+        this.fieldName = fieldName;
         this.propertyCost = propertyCost;
-        gamesOnField = new HashSet<>();
     }
 
 
 /////////// Functionality ///////////
-    public void addGame(Game game){
-        this.gamesOnField.add(game);
-    }
-    public void removeGame(Game game){
-        this.gamesOnField.remove(game);
-    }
 
 
 /////////// Getters and Setters ///////////
-    public int getFieldId() {
-        return fieldId;
-    }
-
-    public Team getTeamOwns() {
-        return teamOwns;
-    }
-
-    public void setTeamOwns(Team teamOwns) {
-        this.teamOwns = teamOwns;
-    }
-
-    public Set<Game> getGamesOnField() {
-        return gamesOnField;
-    }
 
     public String getFieldName() {
-        return fieldName;
+        return this.fieldName;
     }
+
+    public boolean setFieldName(String fieldName) {
+        if(fieldName.isEmpty()){
+            System.out.println("The name of a field cannot be empty");
+            return false;
+        }
+
+        this.fieldName = fieldName;
+
+        return true;
+    }
+
+    public double getPropertyCost() {
+        return this.propertyCost;
+    }
+
+    public boolean setPropertyCost(double propertyCost) {
+        if (propertyCost < 0){
+            System.out.println("The cost of a field cannot be negative");
+            return false;
+        }
+
+        this.propertyCost = propertyCost;
+
+        return true;
+    }
+
 }

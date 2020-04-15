@@ -11,6 +11,8 @@ public class Referee extends Subscriber{
     Set<Game> games;
     boolean acceptedRequest;
 
+
+
     public boolean isAcceptedRequest() {
         return acceptedRequest;
     }
@@ -20,8 +22,8 @@ public class Referee extends Subscriber{
     }
 
     /////////// Constructor ///////////
-    public Referee(String userName, String password, String name, String mail, int qualification, RefereeType refereeType) {
-        super(userName, password, name, mail);
+    public Referee(String userName, String mail, boolean isMail, int qualification, RefereeType refereeType) {
+        super(userName, mail, isMail);
         this.qualification = qualification;
         this.refereeType = refereeType;
         games = new HashSet<>();

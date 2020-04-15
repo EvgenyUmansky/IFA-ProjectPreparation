@@ -22,6 +22,8 @@ public class Team {
         this.teamName = name;
         this.stadium = stadium;
         this.fields = new HashSet<>();
+        this.owners = new HashMap<>();
+
         addField(stadium);
         addOwner(owner);
     }
@@ -100,6 +102,10 @@ public class Team {
     }
 
     public void addOwner(TeamOwner owner){
+        if(owner.getTeam() == null){
+            owner.setTeam(this);
+        }
+
         this.owners.put(owner.getUserName(),owner);
     }
 

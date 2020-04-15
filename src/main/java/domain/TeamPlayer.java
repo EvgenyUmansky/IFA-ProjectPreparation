@@ -9,12 +9,20 @@ public class TeamPlayer extends TeamMember {
     private String squadNumber;
 
     // Constructor
-    public TeamPlayer(String userName, String password, String name, String mail) {
-        super(userName, password, name, mail);
+
+
+    public TeamPlayer(String userName, String mail, boolean isMail, Date birthDate, String position) {
+        super(userName, mail, isMail);
+        this.birthDate = birthDate;
+        this.position = position;
+    }
+    public TeamPlayer(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
+        this.birthDate = birthDate;
+        this.position = position;
     }
 
-    public boolean updateDetails(String name, Date birthDate, String position, String squadNumber){
-        super.setName(name);
+    public boolean updateDetails(Date birthDate, String position, String squadNumber){
         setSquadNumber(squadNumber);
         setBirthDate(birthDate);
         setPosition(position);

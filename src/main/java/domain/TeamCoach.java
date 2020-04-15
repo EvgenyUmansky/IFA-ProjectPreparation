@@ -7,13 +7,12 @@ public class TeamCoach extends TeamMember {
     private String qualification;
 
     // Constructor
-    public TeamCoach(String userName, String password, String name, String mail) {
-        super(userName, password, name, mail);
+    public TeamCoach(String userName, String mail, boolean isMail) {
+        super(userName, mail, isMail);
     }
 
 
-    public boolean updateDetails(String name, String qualification, String role){
-        super.setName(name);
+    public boolean updateDetails(String qualification, String role){
         setQualification(qualification);
         setRole(role);
         return true;
