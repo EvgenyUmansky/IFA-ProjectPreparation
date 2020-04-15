@@ -67,7 +67,7 @@ public class Alert {
         props.setProperty("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.auth", "true");
         final String username = "euguman";
-        final String password = "SeVeLa92";
+        final String password = "sevela92";
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);

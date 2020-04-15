@@ -46,13 +46,12 @@ class AlertTest {
     void sendAlert() {
 
     }
-        /*
+
     @Test
     void sendMailAlert() throws MessagingException {
         assertTrue(alert.sendMailAlert("euguman@gmail.com", new AlertNotification("Title", "Text")));
     }
 
-       */
     @Test
     void getMailAlertList() {
         assertEquals(0, alert.getMailAlertList().size());
