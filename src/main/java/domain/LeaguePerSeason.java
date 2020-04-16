@@ -77,6 +77,7 @@ public class LeaguePerSeason {
         Team [] teamArray = new Team[this.teamsInLeaguePerSeasonTable.size()];
         for(Team team : this.teamsInLeaguePerSeasonTable.keySet()){
             teamArray[i] = team;
+            i++;
         }
         this.gamesInLeaguePerSeason.addAll(this.schedulingMethod.scheduleGamePolicy(this, teamArray));
         return true;
@@ -92,14 +93,14 @@ public class LeaguePerSeason {
         int hostTeamScore = 0; Team homeTeam = null;
         int awayTeamScore = 0; Team awayTeam = null;
         Team homeGameTeam = game.getHostTeam(); Team awayGameTeam = game.getGuestTeam();
-        //TODO: remove
+        //checking if the home/away team in this leaguePerSeason
         for(Team team : teamsInLeaguePerSeasonTable.keySet()){
             if(team.equals(homeGameTeam)){
                 hostTeamScore = game.getHostTeamScore();
                 homeTeam = team;
             }
             if (team.equals(awayGameTeam)){
-                awayTeamScore = game.getHostTeamScore();
+                awayTeamScore = game.getGuestTeamScore();
                 awayTeam = team;
             }
         }
@@ -116,6 +117,7 @@ public class LeaguePerSeason {
      * @param awayTeam
      * @param hostTeamScore
      * @param awayTeamScore
+     * @return false if one of the teams doesnt belong to this leaguePerSeason
      */
     private boolean updateTable(Team homeTeam, Team awayTeam, int hostTeamScore, int awayTeamScore){
         if(homeTeam != null && awayTeam != null){
