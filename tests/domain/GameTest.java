@@ -53,8 +53,6 @@ class GameTest {
         fields.add(new Field("1eg0", 400));
 
         game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), "2019-02-02 22:00", new ArrayList<>());
-
-
     }
 
     @AfterEach

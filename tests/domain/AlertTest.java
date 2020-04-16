@@ -82,6 +82,11 @@ class AlertTest {
         assertEquals(1, alert.getInSystemAlertList().size());
         alert.removeFromSystemSet((Fan) alert.getInSystemAlertList().toArray()[0]);
         assertEquals(0, alert.getInSystemAlertList().size());
+
+        alert.addToSystemSet(fans.get(0));
+        assertEquals(1, alert.getInSystemAlertList().size());
+        alert.removeFromSystemSet((Fan) alert.getInSystemAlertList().toArray()[0]);
+        assertEquals(0, alert.getInSystemAlertList().size());
     }
 
     @Test

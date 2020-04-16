@@ -42,7 +42,7 @@ class BudgetTest {
     @Test
     void setBudget() {
         budgetQ1.setBudget(1000000);
-        assertEquals(1000000, budgetQ1.getBudget());
+        assertEquals((int)1000000, (int)budgetQ1.getBudget());
 
     }
 
