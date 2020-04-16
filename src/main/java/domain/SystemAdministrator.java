@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.HashMap;
+
 public class SystemAdministrator extends Subscriber {
     Alert alert;
 

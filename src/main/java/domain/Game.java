@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Game {
 
-    private LeaguePerSeason leaguePerSeason;
+    private League league;
     private Team hostTeam;
     private Team guestTeam;
     private Field field;
@@ -23,8 +23,8 @@ public class Game {
     private Alert alertReferees;
 
 /////////// Constructor ///////////
-    public Game(LeaguePerSeason leaguePerSeason, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
-        this.leaguePerSeason = leaguePerSeason;
+    public Game(League league, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
+        this.league = league;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
         this.field = field;
@@ -170,12 +170,12 @@ public class Game {
 
 /////////// Getters and Setters ///////////
 
-    public LeaguePerSeason getLeaguePerSeason() {
-        return leaguePerSeason;
+    public League getLeague() {
+        return league;
     }
 
-    public void setLeaguePerSeason(LeaguePerSeason leaguePerSeason) {
-        this.leaguePerSeason = leaguePerSeason;
+    public void setLeague(League league) {
+        this.league = league;
     }
 
     public Team getHostTeam() {

@@ -9,36 +9,97 @@ public class User {
     private String userName;
     private String password;
     private String name;
-    private HashMap<String,Subscriber> roles;
-
+    private HashMap<Role,Subscriber> roles;
+    private String mail;
 
 // Constructor
 
 
-    public User(boolean connected, String userName, String password, String name, String mail) {
+    public User(String userName, String password, String name, String mail) {
         this.connected = connected;
         this.userName = userName;
         this.password = password;
         this.name = name;
+        this.mail = mail;
         this.roles = new HashMap<>();
     }
 
-    public boolean addRoleToUser(String role,Subscriber subscriber){
-        roles.put(role,subscriber);
+    // Getters & Setters
+    public String getMail(){
+        return this.mail;
+    }
+
+
+    // ====================== Edit Profile ======================
+    // ==========================================================
+    // UC 3.6
+    private String getProfileDetails(User user, Subscriber subscriber) {
+
+        return "User Name: " + user.getUserName() + "\n" +
+                "Password: " + user.getPassword() + "\n" +
+                "Name: " + user.getName() + "\n" +
+                "Mail: " + subscriber.getMail();
+    }
+
+    // UC 3.6, UC 10.1
+    private boolean setProfileDetails(User user, Subscriber subscriber, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail) {
+
+        if (!newUserName.isEmpty()) {
+            user.setUserName(newUserName);
+        } else {
+            System.out.println("The new user name is empty. The user name is not changed");
+        }
+
+        if (!newPassword.isEmpty()) {
+            user.setPassword(newPassword);
+        } else {
+            System.out.println("The new password is empty. The password is not changed");
+        }
+
+        // set name
+        if (!newName.isEmpty()) {
+            user.setName(newName);
+        } else {
+            System.out.println("The new name is empty. The name is not changed");
+        }
+        // set mail
+
+        if (isEmptyMail) {
+            subscriber.setMail("");
+        } else if (!newMail.isEmpty()) {
+            subscriber.setMail(newMail);
+        } else {
+            System.out.println("The mail is not changed");
+        }
+
         return true;
     }
-    public boolean removeRoleFromUser(String role){
+
+
+
+
+
+    public boolean addRoleToUser(Role role,Subscriber subscriber){
+        roles.put(role, subscriber);
+        return true;
+    }
+    public boolean removeRoleFromUser(Role role){
         roles.remove(role);
         return true;
     }
 
+    public static HashMap<String, User> getUsersByRole(Role role){
+        // TODO: Get users from DB
+        HashMap<String, User> usersByRole = new HashMap<>();
+        usersByRole.put("Admin", new User("Admin", "Admin1234", "Admin", "Admin@ifa.com"));
+        return usersByRole;
+    }
 
-
-    public void setRoles(HashMap<String, Subscriber> roles) {
+    public void setRoles(HashMap<Role, Subscriber> roles) {
         this.roles = roles;
     }
 
-    public HashMap<String, Subscriber> getRoles() {
+    public HashMap<Role, Subscriber> getRoles() {
         return roles;
     }
 

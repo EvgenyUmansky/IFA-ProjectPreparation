@@ -122,7 +122,9 @@ public class Referee extends Subscriber{
         this.refereeType = refereeType;
     }
 
+    // UC 10.2 - get all games the referee judge
     public Set<Game> getGames() {
         return games;
     }
+
 }
