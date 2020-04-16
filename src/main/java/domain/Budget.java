@@ -83,6 +83,7 @@ public class Budget {
 
     }
 
+    //TODO: min budget to each league
     public void setBudget(double budget) {
         this.budget = budget;
     }

@@ -2,16 +2,22 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class Referee extends Subscriber{
     int qualification; // From 1 to 5 (5 is the best league....)
     RefereeType refereeType;
-    Set<Game> games;
     boolean acceptedRequest;
 
+    /////////// Constructor ///////////
+    public Referee(String userName, String mail, boolean isMail, int qualification, RefereeType refereeType) {
+        super(userName, mail, isMail);
+        this.qualification = qualification;
+        this.refereeType = refereeType;
+        this.acceptedRequest = false;
+    }
 
+/////////// Functionality ///////////
 
     public boolean isAcceptedRequest() {
         return acceptedRequest;
@@ -21,47 +27,26 @@ public class Referee extends Subscriber{
         this.acceptedRequest = acceptedRequest;
     }
 
-    /////////// Constructor ///////////
-    public Referee(String userName, String mail, boolean isMail, int qualification, RefereeType refereeType) {
-        super(userName, mail, isMail);
-        this.qualification = qualification;
-        this.refereeType = refereeType;
-        games = new HashSet<>();
-        this.acceptedRequest = false;
-    }
+    // UC 10.2 - get all games the referee judge
+    public ArrayList<Game> getRefereeGames(ArrayList<Game> games){
+        ArrayList<Game> refereeGames = new ArrayList<>();
 
-/////////// Functionality ///////////
+        for(Game game : games){
+            if(game.getReferees().contains(this)){
+                refereeGames.add(game);
+            }
+        }
 
-    // add game referee judge
-    public void addGame(Game game){
-        games.add(game);
-    }
-
-    // remove game referee judge
-    public void removeGame(Game game){
-        games.remove(game);
-    }
-
-    // remove all games referee judge
-    public void clearGames(){
-        games = new HashSet<>();
+        return refereeGames;
     }
 
     // UC 10.3 - create new game event and add it to list of game events of the game
-    public boolean updateGameEvent(Game game, String dateTime, int gameMinutes, GameAlert eventName, String subscription){
-
-        if(!this.games.contains(game)){
-            System.out.println("The referee does not judge this game");
-            return false;
-        }
-
-        // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
-        game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
-        return true;
+    public void addGameEventToGame(Game game, GameEvent gameEvent) {
+        game.addGameEvent(gameEvent);
     }
 
     // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription ){
+    public boolean changeGameEvent(Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription ){
         if(!this.refereeType.equals(RefereeType.MAIN)){
             System.out.println("Not MAIN referee");
             return false;
@@ -72,8 +57,6 @@ public class Referee extends Subscriber{
             System.out.println("Not allowed to change the game events: out of time");
             return false;
         }
-
-        GameEvent gameEvent = game.getGameEvents().get(gameEventId);
 
         if(!dateTimeStr.isEmpty()){
             gameEvent.setGameDate(dateTimeStr);
@@ -122,7 +105,5 @@ public class Referee extends Subscriber{
         this.refereeType = refereeType;
     }
 
-    public Set<Game> getGames() {
-        return games;
-    }
+
 }

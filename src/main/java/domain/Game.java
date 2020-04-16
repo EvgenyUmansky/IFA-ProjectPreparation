@@ -15,7 +15,7 @@ public class Game {
     private Field field;
     private LocalDateTime gameDate;
     private ArrayList<Referee> referees;
-    private Map<Integer, GameEvent> gameEvents;
+    private ArrayList<GameEvent> gameEvents;
     private int hostTeamScore;
     private int guestTeamScore;
     private int gameMinutes;
@@ -29,7 +29,7 @@ public class Game {
         this.guestTeam = guestTeam;
         this.field = field;
         this.referees = referees;
-        this.gameEvents = new HashMap<>();
+        this.gameEvents = new ArrayList<>();
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
         this.gameMinutes = 0;
@@ -110,8 +110,9 @@ public class Game {
 
     /**
      * Send score to fans when game ends
+     * @return dictionary: userName, isSent
      */
-    public void sendAlertScoreToFan() throws MessagingException {
+    public Map<String, Boolean> sendAlertScoreToFan()  {
 
         //TODO some logic with observer: when the game ends
 
@@ -119,14 +120,15 @@ public class Game {
         String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + getGameScore();
         AlertNotification alertNotification = new AlertNotification(title, message);
 
-        alertFans.sendAlert(alertNotification);
+        return alertFans.sendAlert(alertNotification);
     }
 
 
     /**
      * Send alert to fans and referees when remains one day before a game
+     * @return dictionary: userName, isSent
      */
-    public void sendAlertCloseGame() throws MessagingException {
+    public Map<String, Boolean> sendAlertCloseGame()  {
 
         //TODO some logic with observer: when remains one day
 
@@ -134,20 +136,28 @@ public class Game {
         String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "remains " + "one day!";
         AlertNotification alertNotification = new AlertNotification(title, message);
 
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Map<String, Boolean> isSentMap = new HashMap<>();
+        isSentMap.putAll(alertFans.sendAlert(alertNotification));
+        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+
+        return isSentMap;
     }
+
 
     /**
      * Send alert to fans and referees when date of the game changed
+     * @return dictionary: userName, isSent
      */
-    public void sendAlertChangeDateGame() throws MessagingException {
-        String title =  "The date is changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
-        String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + this.gameDate.toString();
+    public Map<String, Boolean> sendAlertChangeDateGame() {
+        String title =  "The date has changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
+        String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.toString();
         AlertNotification alertNotification = new AlertNotification(title, message);
 
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Map<String, Boolean> isSentMap = new HashMap<>();
+        isSentMap.putAll(alertFans.sendAlert(alertNotification));
+        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+
+        return isSentMap;
     }
 
 
@@ -162,7 +172,7 @@ public class Game {
             return false;
         }
 
-        this.gameEvents.put(event.getGameEventId(), event);
+        this.gameEvents.add(event);
         return true;
     }
 
@@ -206,7 +216,7 @@ public class Game {
         return referees;
     }
 
-    public Map<Integer, GameEvent> getGameEvents() {
+    public ArrayList<GameEvent> getGameEvents() {
         return gameEvents;
     }
 
@@ -256,11 +266,13 @@ public class Game {
 
     /**
      * string format: "2016-11-09 11:44"
+     * send alerts to all subscribers to the game
      * @param gameDateStr
+     * @return dict: user, isSent
      */
-    public void setGameDate(String gameDateStr) throws MessagingException {
+    public Map<String, Boolean> setGameDate(String gameDateStr)  {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
-        sendAlertChangeDateGame();
+        return sendAlertChangeDateGame();
     }
 }

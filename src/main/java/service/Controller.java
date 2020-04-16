@@ -3,11 +3,7 @@ package service;
 import domain.*;
 
 import javax.mail.MessagingException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class Controller {
 
@@ -315,47 +311,54 @@ public class Controller {
     }
 
     // UC 10.2 - get all games the referee judge
-    public Set<Game> getRefereeGames(String userName) {
+    /**
+     *
+     * @param userName
+     * @param games - list of all games
+     * @return
+     */
+    public ArrayList<Game> getRefereeGames(String userName, ArrayList<Game> games) {
         User refereeUser = users.get(userName);
         if(!refereeUser.getRoles().containsKey("Referee")){
             System.out.println("Not referee instance");
             return null;
         }
 
-        return ((Referee)refereeUser.getRoles().get("Referee")).getGames();
+        return ((Referee)refereeUser.getRoles().get("Referee")).getRefereeGames(games);
     }
 
     // UC 10.3 - create new game event and add it to list of game events of the game
-    public boolean updateGameEvent(String userName, Game game, String dateTime, int gameMinutes, GameAlert eventName, String subscription) {
+    public boolean addGameEventToGame(String userName, Game game, GameEvent gameEvent) {
         User refereeUser = users.get(userName);
         if(!refereeUser.getRoles().containsKey("Referee")){
             System.out.println("Not referee instance");
             return false;
         }
 
+
         Referee referee = ((Referee)refereeUser.getRoles().get("Referee"));
-        if (!referee.getGames().contains(game)) {
+         /*
+        if (!referee.getRefereeGames(games).contains(game)) {
             System.out.println("The referee does not judge this game");
             return false;
         }
+         */
 
-        // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
-        game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
+        referee.addGameEventToGame(game, gameEvent);
         return true;
     }
 
     // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String userName, Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription){
+    public boolean changeGameEvent(String userName, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription){
         User refereeUser = users.get(userName);
         if(!refereeUser.getRoles().containsKey("Referee")){
             System.out.println("Not referee instance");
             return false;
         }
 
-        ((Referee)refereeUser.getRoles().get("Referee")).changeGameEvent(game, gameEventId, dateTimeStr, gameMinutes, eventName, subscription);
-
-        return true;
+        return ((Referee)refereeUser.getRoles().get("Referee")).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
     }
+
     // ----------------------------------------------- Team Owner Use Cases (6) ----------------------------------------------- //
 
     public boolean addPropertyToTeam(TeamOwner owner, Object property) {
