@@ -21,7 +21,8 @@ public class TeamCoach extends TeamMember {
     public void setRole(String role){
         this.role = role;
     }
-    private void setQualification(String qualification) {
+
+    public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 

@@ -28,4 +28,16 @@ public class CoachPage extends PersonalPage {
     public void setCurrentTeam(Team currentTeam) {
         this.currentTeam = currentTeam;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getQualification() {
+        return qualification;
+    }
+
+    public Team getCurrentTeam() {
+        return currentTeam;
+    }
 }

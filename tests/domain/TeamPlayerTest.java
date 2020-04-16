@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,11 @@ class TeamPlayerTest {
     @BeforeEach
     public void init(){
         player = new TeamPlayer("playeruser","player@gmail.com",true);
+    }
+
+    @AfterEach
+    public void finish(){
+        player = null;
     }
 
     @Test
