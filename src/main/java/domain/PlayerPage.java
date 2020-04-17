@@ -34,4 +34,20 @@ public class PlayerPage extends PersonalPage {
     public void setCurrentTeam(Team currentTeam) {
         this.currentTeam = currentTeam;
     }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getSquadNumber() {
+        return squadNumber;
+    }
+
+    public Team getCurrentTeam() {
+        return currentTeam;
+    }
 }
