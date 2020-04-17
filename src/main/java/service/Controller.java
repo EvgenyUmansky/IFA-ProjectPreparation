@@ -71,6 +71,22 @@ public class Controller {
         return newUser;
     }
 
+    // =================== User functions ===========================
+    // ==============================================================
+
+    public ArrayList<PersonalPage> getPagesByUsername(String username) {
+        return User.getUserByID(username).getPages();
+    }
+
+
+    // =================== Personal Pages functions =================
+    // ==============================================================
+
+    // U.C 4.1 5.1
+    public PersonalPage updateInfo(PersonalPage page, String info){
+        return page.setInfo(info);
+    }
+
     // =================== Team Player functions ====================
     // ==============================================================
 
@@ -88,8 +104,7 @@ public class Controller {
 
     }
 
-
-    // =================== Coach functions ====================
+    // ======================= Coach functions ============================
     // ====================================================================
 
     // UC 5.1 - update coach's details
@@ -166,12 +181,12 @@ public class Controller {
 
     // UC 3.6 - get and set fan info
     public String getFanProfileDetails(String username) {
-        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getFanDetails();
+        return User.getUserByID(username).getProfileDetails();
     }
 
     // for now it's only mail - iteration 2
-    public void setFanProfileDetails(String username, String newMail) {
-        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).setFanDetails(newMail);
+    public void setFanProfileDetails(String username, String newPassword, String newName, String newMail) {
+        User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
     }
 
     // ========================= Referee functions ============================
