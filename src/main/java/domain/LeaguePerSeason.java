@@ -8,7 +8,8 @@ public class LeaguePerSeason {
     private SchedulingMethod schedulingMethod;
     private RankingMethod rankingMethod;
     private HashSet<Referee> referees;
-    /**
+    //commit
+    /****
      * saves each team in a season and its points
      */
     private HashMap<Team, Integer> teamsInLeaguePerSeasonTable;
