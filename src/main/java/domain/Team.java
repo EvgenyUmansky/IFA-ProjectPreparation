@@ -113,7 +113,7 @@ public class Team {
     //UC 6.2
     public void addOwner(User currentOwner, User newOwner) {
         if (this.owners.containsKey(currentOwner.getUserName())) {
-            TeamOwner newTeamOwner = new TeamOwner(newOwner.getUserName(), newOwner.getMail(), false); // TODO: Check what is the isMail...
+            TeamOwner newTeamOwner = new TeamOwner(newOwner.getUserName(), newOwner.getMail());
             newOwner.addRoleToUser(Role.TEAM_OWNER, newTeamOwner);
             this.addOwner(newTeamOwner);
         }

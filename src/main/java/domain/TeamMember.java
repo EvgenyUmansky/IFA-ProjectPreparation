@@ -6,8 +6,8 @@ public abstract class TeamMember extends Subscriber {
 
     // Constructor
 
-    public TeamMember(String userName, String mail, boolean isMail) {
-        super(userName, mail, isMail);
+    public TeamMember(String userName, String mail) {
+        super(userName, mail);
     }
 
     public Team getCurrentTeam() {

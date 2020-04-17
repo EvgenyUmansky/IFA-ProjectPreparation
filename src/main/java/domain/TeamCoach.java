@@ -7,8 +7,8 @@ public class TeamCoach extends TeamMember {
     private String qualification;
 
     // Constructor
-    public TeamCoach(String userName, String mail, boolean isMail) {
-        super(userName, mail, isMail);
+    public TeamCoach(String userName, String mail) {
+        super(userName, mail);
     }
 
 

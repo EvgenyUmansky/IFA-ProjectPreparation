@@ -2,6 +2,7 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,14 +23,19 @@ public class Referee extends Subscriber{
     }
 
     /////////// Constructor ///////////
-    public Referee(String userName, String mail, boolean isMail, int qualification, RefereeType refereeType) {
-        super(userName, mail, isMail);
+    public Referee(String userName, String mail, int qualification, RefereeType refereeType) {
+        super(userName, mail);
         this.qualification = qualification;
         this.refereeType = refereeType;
         games = new HashSet<>();
         this.acceptedRequest = false;
     }
 
+    public Referee(String userName, String mail) {
+        super(userName, mail);
+        games = new HashSet<>();
+        this.acceptedRequest = false;
+    }
 /////////// Functionality ///////////
 
     // add game referee judge
