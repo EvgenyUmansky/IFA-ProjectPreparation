@@ -6,8 +6,8 @@ import java.util.Map;
 public class Fan extends Subscriber{
 
 /////////// Constructor ///////////
-    public Fan(String userName, String mail, boolean isMail) {
-        super(userName, mail, isMail);
+    public Fan(String userName, String mail) {
+        super(userName, mail);
     }
 
 
@@ -19,5 +19,14 @@ public class Fan extends Subscriber{
         }
 
         return alert.sendAlert(alertNotification);
+    }
+
+    public String getFanDetails(){
+        return "User name: " + this.getUserName() + "\n" +
+               "Mail: " + this.getMail();
+    }
+
+    public void setFanDetails(String newMail){
+        this.setMail(newMail);
     }
 }
