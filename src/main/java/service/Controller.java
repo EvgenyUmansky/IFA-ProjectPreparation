@@ -71,6 +71,37 @@ public class Controller {
         return newUser;
     }
 
+    // =================== Team Player functions ====================
+    // ==============================================================
+
+
+    // ATTENTION PLEASE: Naor, UC4.1 == UC 5.1 AND UC4.2 == UC5.2
+
+
+    // UC 4.1 - update player's details
+    public void updatePlayerDetails(String userName, String mail, Date birthDate, String position, String squadNumber) {
+
+    }
+
+    // UC 4.2 upload Content To Page
+    public void uploadContentPlayerToPage() {
+
+    }
+
+
+    // =================== Coach functions ====================
+    // ====================================================================
+
+    // UC 5.1 - update coach's details
+    public void updateCoachDetails(String userName, String mail, String qualification, String role) {
+
+    }
+
+    // UC 5.2 upload Content To Page
+    public void uploadContentToCoachPage() {
+
+    }
+
     // ========================= Guess functions ============================
     // ====================================================================
 
@@ -231,7 +262,7 @@ public class Controller {
 
 
     // =================== Team Owner functions ====================
-    // ====================================================================
+    // =============================================================
 
     //6.1
 
@@ -293,6 +324,54 @@ public class Controller {
 
     }
 
+
+    // =================== Team Manager functions ====================
+    // ====================================================================
+
+    //UC7.1 - set permissions to team manager
+    //responsible of Team Owner!
+    public void setPermissionsToManager() {
+
+    }
+
+
+    // =================== System Manager functions ====================
+    // ====================================================================
+
+
+    //UC8.1 - close team
+    public void closeTeam(Team team) {
+
+    }
+
+
+    //UC8.2 - remove user from System
+    public void removeUserFromSystem(User user) {
+
+    }
+
+
+    //UC8.3A - show Complaint
+    public void showComplain() {
+
+    }
+
+
+    //UC8.3B - add comment to complaint
+    public void commentToComplaint() {
+
+    }
+
+    //UC8.4 - show log document
+    public void showLogDocument() {
+
+    }
+
+
+    //UC8.5 - start model of recommendation Systems
+    public void startModelRecommendationSystem() {
+
+    }
 
     // ====================================================================
 
