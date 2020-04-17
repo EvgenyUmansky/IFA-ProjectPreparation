@@ -6,27 +6,33 @@ public class RankingMethod  {
     private int drawPoints;
 
 
-    // Constructor
+    // ========================= Constructor ==========================
+
     public RankingMethod() {
         this.winPoints = 3;
         this.loosPoints = 0;
         this.drawPoints = 1;
     }
 
-    //Setters
-    public void setWinPoints(int winPoints) {
+    // ========================= Setters ==========================
+
+    public RankingMethod setWinPoints(int winPoints) {
         this.winPoints = winPoints;
+        return this;
     }
 
-    public void setLoosPoints(int loosPoints) {
+    public RankingMethod setLoosPoints(int loosPoints) {
         this.loosPoints = loosPoints;
+        return this;
     }
 
-    public void setDrawPoints(int drawPoints) {
+    public RankingMethod setDrawPoints(int drawPoints) {
         this.drawPoints = drawPoints;
+        return this;
     }
 
-    //Getters
+    // ========================= Getters ==========================
+
     public int getWinPoints() {
         return winPoints;
     }
