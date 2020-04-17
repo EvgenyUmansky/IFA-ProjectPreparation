@@ -105,6 +105,73 @@ public class Controller {
     }
 
     // ====================================================================
+
+
+    // =================== Team Owner functions ====================
+    // ====================================================================
+
+    //6.1
+
+    public void addField(String fieldName){
+
+    }
+
+
+    public void addPlayer(String userName){
+
+    }
+
+
+    public void addCoach(String userName){
+
+    }
+
+
+    public void addManager(String userName){
+
+    }
+
+
+    //6.2
+
+    public void removeField(String fieldName){
+
+    }
+
+
+    public void removePlayer(String userName){
+
+    }
+
+
+    public void removeCoach(String userName){
+
+    }
+
+
+    public void removeManager(String userName){
+
+    }
+
+
+    //6.3
+
+    public void updatePlayerDetails(String userName){
+
+    }
+
+
+    public void updateCoachDetails(String userName){
+
+    }
+
+
+    public void updateManagerDetails(String userName){
+
+    }
+
+
+
     // ====================================================================
 
     public Team getTeamByName(String teamName) {
