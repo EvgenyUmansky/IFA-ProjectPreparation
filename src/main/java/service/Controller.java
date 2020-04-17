@@ -44,7 +44,7 @@ public class Controller {
             return false;
         }
 
-        User user =  users.get(userName);
+        User user = users.get(userName);
         if (!user.getPassword().equals(password)) {
             return false;
         }
@@ -71,21 +71,20 @@ public class Controller {
 //            return false;
 //        }
 
-        User newUser = new User(false,userName,password,name,mail);
-
+        User newUser = new User(false, userName, password, name, mail);
 
 
         Subscriber newSubscriber = null;
         //TODO: change the instances of each user according to its constructor
         switch (userType) {
             case "Fan":
-                newSubscriber = new Fan(userName,mail,isMail);
-                newUser.addRoleToUser("Fan",newSubscriber);
+                newSubscriber = new Fan(userName, mail, isMail);
+                newUser.addRoleToUser("Fan", newSubscriber);
                 break;
 
             case "System Administrator":
-                newSubscriber = new SystemAdministrator(userName,mail,isMail);
-                newUser.addRoleToUser("System Administrator",newSubscriber);
+                newSubscriber = new SystemAdministrator(userName, mail, isMail);
+                newUser.addRoleToUser("System Administrator", newSubscriber);
 
                 //TODO think about best solution
                 sysAdminsAlert.addToSystemSet(newSubscriber);
@@ -98,35 +97,35 @@ public class Controller {
             case "Referee":
                 //TODO think about refereeQualification and refereeType
                 newSubscriber = new Referee(userName, mail, isMail, refereeQualification, refereeType);
-                newUser.addRoleToUser("Referee",newSubscriber);
+                newUser.addRoleToUser("Referee", newSubscriber);
                 break;
 
             case "Association Agent":
-                newSubscriber = new AssociationAgent(userName,mail,isMail);
-                newUser.addRoleToUser("Association Agent",newSubscriber);
+                newSubscriber = new AssociationAgent(userName, mail, isMail);
+                newUser.addRoleToUser("Association Agent", newSubscriber);
                 break;
 
             case "Team Player":
                 //need to add position and birthdate
-                newSubscriber = new TeamPlayer(userName,mail,isMail);
-                newUser.addRoleToUser("Team Player",newSubscriber);
+                newSubscriber = new TeamPlayer(userName, mail, isMail);
+                newUser.addRoleToUser("Team Player", newSubscriber);
                 break;
 
             case "Team Coach":
                 //need to add role and validation
-                newSubscriber = new TeamCoach(userName,mail, isMail);
-                newUser.addRoleToUser("Team Coach",newSubscriber);
+                newSubscriber = new TeamCoach(userName, mail, isMail);
+                newUser.addRoleToUser("Team Coach", newSubscriber);
                 break;
 
             case "Team Manager":
-                newSubscriber = new TeamManager(userName, mail,isMail);
-                newUser.addRoleToUser("Team Manager",newSubscriber);
+                newSubscriber = new TeamManager(userName, mail, isMail);
+                newUser.addRoleToUser("Team Manager", newSubscriber);
                 break;
 
             case "Team Owner":
                 //need to update team
-                newSubscriber = new TeamOwner(userName, mail,isMail);
-                newUser.addRoleToUser("Team Owner",newSubscriber);
+                newSubscriber = new TeamOwner(userName, mail, isMail);
+                newUser.addRoleToUser("Team Owner", newSubscriber);
                 break;
 
             default:
@@ -171,7 +170,7 @@ public class Controller {
     }
 
     // UC 3.6, UC 10.1
-    private boolean setProfileDetails(User user,Subscriber subscriber, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail) {
+    private boolean setProfileDetails(User user, Subscriber subscriber, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail) {
 
         if (!newUserName.isEmpty()) {
             user.setUserName(newUserName);
@@ -211,7 +210,7 @@ public class Controller {
     public boolean addFanSubscriptionToPersonalPage(PersonalPage page, String userName, boolean isMail) {
         User fanUser = users.get(userName);
 //        if (!(fan instanceof Fan)) {
-        if(!fanUser.getRoles().containsKey("Fan")){
+        if (!fanUser.getRoles().containsKey("Fan")) {
             System.out.println("Not fan instance");
             return false;
         }
@@ -224,7 +223,7 @@ public class Controller {
     public boolean addFanSubscriptionToGame(Game game, String userName, boolean isMail) {
         User fanUser = users.get(userName);
 //        if (!(fan instanceof Fan)) {
-        if(!fanUser.getRoles().containsKey("Fan")){
+        if (!fanUser.getRoles().containsKey("Fan")) {
             System.out.println("Not fan instance");
             return false;
         }
@@ -238,8 +237,8 @@ public class Controller {
 //        Subscriber fan = (Subscriber) (users.get(userName));
 //        if (!(fan instanceof Fan)) {
         User fanUser = users.get(userName);
-        if(!fanUser.getRoles().containsKey("Fan")){
-        System.out.println("Not fan instance");
+        if (!fanUser.getRoles().containsKey("Fan")) {
+            System.out.println("Not fan instance");
             return false;
         }
 
@@ -256,8 +255,8 @@ public class Controller {
 //        Subscriber fan = (Subscriber) (users.get(userName));
 //        if (!(fan instanceof Fan)) {
         User fanUser = users.get(userName);
-        if(!fanUser.getRoles().containsKey("Fan")){
-        System.out.println("Not fan instance");
+        if (!fanUser.getRoles().containsKey("Fan")) {
+            System.out.println("Not fan instance");
             return "";
         }
 
@@ -267,7 +266,7 @@ public class Controller {
     // Envelope function for setProfileDetails
     public boolean setFanProfileDetails(String userName, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail) {
         User fanUser = users.get(userName);
-        if(!fanUser.getRoles().containsKey("Fan")){
+        if (!fanUser.getRoles().containsKey("Fan")) {
             System.out.println("Not fan instance");
             return false;
         }
@@ -281,18 +280,18 @@ public class Controller {
     public String getRefereeProfileDetails(String userName) {
 //        Subscriber referee = (Subscriber) (users.get(userName));
         User refereeUser = users.get(userName);
-        if(!refereeUser.getRoles().containsKey("Referee")){
+        if (!refereeUser.getRoles().containsKey("Referee")) {
             System.out.println("Not referee instance");
             return "";
         }
 
-        return getProfileDetails(refereeUser, refereeUser.getRoles().get("Referee")) + "\nQualification: " + ((Referee)refereeUser.getRoles().get("Referee")).getQualification();
+        return getProfileDetails(refereeUser, refereeUser.getRoles().get("Referee")) + "\nQualification: " + ((Referee) refereeUser.getRoles().get("Referee")).getQualification();
     }
 
     // Envelope function for setProfileDetails
     public boolean setRefereeProfileDetails(String userName, int qualification, RefereeType refereeType, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail) {
         User refereeUser = users.get(userName);
-        if(!refereeUser.getRoles().containsKey("Referee")){
+        if (!refereeUser.getRoles().containsKey("Referee")) {
             System.out.println("Not referee instance");
             return false;
         }
@@ -300,43 +299,43 @@ public class Controller {
         if (qualification < 1 || qualification > 5) {
             System.out.println("Qualification must be between 1 to 5, the qualification is not changed");
         } else {
-            ((Referee)refereeUser.getRoles().get("Referee")).setQualification(qualification);
+            ((Referee) refereeUser.getRoles().get("Referee")).setQualification(qualification);
         }
 
         if (refereeType != null) {
-            ((Referee)refereeUser.getRoles().get("Referee")).setRefereeType(refereeType);
+            ((Referee) refereeUser.getRoles().get("Referee")).setRefereeType(refereeType);
         }
 
-        return setProfileDetails(refereeUser,refereeUser.getRoles().get("Referee"), newUserName, newPassword, newName, newMail, isEmptyMail);
+        return setProfileDetails(refereeUser, refereeUser.getRoles().get("Referee"), newUserName, newPassword, newName, newMail, isEmptyMail);
     }
 
     // UC 10.2 - get all games the referee judge
+
     /**
-     *
      * @param userName
-     * @param games - list of all games
+     * @param games    - list of all games
      * @return
      */
     public ArrayList<Game> getRefereeGames(String userName, ArrayList<Game> games) {
         User refereeUser = users.get(userName);
-        if(!refereeUser.getRoles().containsKey("Referee")){
+        if (!refereeUser.getRoles().containsKey("Referee")) {
             System.out.println("Not referee instance");
             return null;
         }
 
-        return ((Referee)refereeUser.getRoles().get("Referee")).getRefereeGames(games);
+        return ((Referee) refereeUser.getRoles().get("Referee")).getRefereeGames(games);
     }
 
     // UC 10.3 - create new game event and add it to list of game events of the game
     public boolean addGameEventToGame(String userName, Game game, GameEvent gameEvent) {
         User refereeUser = users.get(userName);
-        if(!refereeUser.getRoles().containsKey("Referee")){
+        if (!refereeUser.getRoles().containsKey("Referee")) {
             System.out.println("Not referee instance");
             return false;
         }
 
 
-        Referee referee = ((Referee)refereeUser.getRoles().get("Referee"));
+        Referee referee = ((Referee) refereeUser.getRoles().get("Referee"));
          /*
         if (!referee.getRefereeGames(games).contains(game)) {
             System.out.println("The referee does not judge this game");
@@ -349,14 +348,14 @@ public class Controller {
     }
 
     // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String userName, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription){
+    public boolean changeGameEvent(String userName, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
         User refereeUser = users.get(userName);
-        if(!refereeUser.getRoles().containsKey("Referee")){
+        if (!refereeUser.getRoles().containsKey("Referee")) {
             System.out.println("Not referee instance");
             return false;
         }
 
-        return ((Referee)refereeUser.getRoles().get("Referee")).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
+        return ((Referee) refereeUser.getRoles().get("Referee")).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
     }
 
     // ----------------------------------------------- Team Owner Use Cases (6) ----------------------------------------------- //
@@ -381,8 +380,8 @@ public class Controller {
     }
 
 
-    public boolean updatePlayerDetails(TeamOwner owner,String squadNumber ,String userName, Date birthDate, String position) {
-        owner.updatePlayerDetails(userName,squadNumber ,birthDate, position);
+    public boolean updatePlayerDetails(TeamOwner owner, String squadNumber, String userName, Date birthDate, String position) {
+        owner.updatePlayerDetails(userName, squadNumber, birthDate, position);
         return true;
     }
 
@@ -393,24 +392,25 @@ public class Controller {
 
     //UC 6.2
     // TODO: 15/04/2020 manage list of added owners for removing
-    public boolean addTeamOwner(Subscriber owner,Subscriber secondOwner) {
+    public boolean addTeamOwner(Subscriber owner, Subscriber secondOwner) {
         if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(secondOwner.getUserName())){
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(secondOwner.getUserName())) {
                 User userNewOwner = users.get(secondOwner.getUserName());
-                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(),secondOwner.getMail(),false,teamOwner.getTeam(), teamOwner.getManagerAppointments());
-                userNewOwner.getRoles().put("Team Owner",newSubsOwner);
+                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(), secondOwner.getMail(), false, teamOwner.getTeam(), new HashSet<>());
+                userNewOwner.getRoles().put("Team Owner", newSubsOwner);
                 return true;
             }
         }
         return false;
     }
+
     //UC 6.3
     // TODO: 15/04/2020 recursive removing?
-    public boolean removeTeamOwner(Subscriber owner,Subscriber ownerToRemove) {
+    public boolean removeTeamOwner(Subscriber owner, Subscriber ownerToRemove) {
         if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(ownerToRemove.getUserName())) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(ownerToRemove.getUserName())) {
                 User userRemoveOwner = users.get(ownerToRemove.getUserName());
                 if (userRemoveOwner.getRoles().containsKey("Team Owner")) {
                     userRemoveOwner.getRoles().remove("Team Owner");
@@ -422,18 +422,16 @@ public class Controller {
     }
 
 
-
-
     //UC 6.4
 
     // TODO: 15/04/2020 manage list of added managers for removing
-    public boolean addTeamManager(Subscriber owner,Subscriber newManager) {
+    public boolean addTeamManager(Subscriber owner, Subscriber newManager) {
         if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(newManager.getUserName())){
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(newManager.getUserName())) {
                 User userNewManager = users.get(newManager.getUserName());
-                Subscriber newSubManager = new TeamManager(newManager.getUserName(),newManager.getMail(),false);
-                userNewManager.getRoles().put("Team Manager",newSubManager);
+                Subscriber newSubManager = new TeamManager(newManager.getUserName(), newManager.getMail(), false);
+                userNewManager.getRoles().put("Team Manager", newSubManager);
                 return true;
             }
         }
@@ -442,10 +440,10 @@ public class Controller {
 
     //UC 6.5
     // TODO: 15/04/2020 recursive removing?
-    public boolean removeTeamManager(Subscriber owner,Subscriber managerToRemove) {
+    public boolean removeTeamManager(Subscriber owner, Subscriber managerToRemove) {
         if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(managerToRemove.getUserName())) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(managerToRemove.getUserName())) {
                 User userRemoveManager = users.get(managerToRemove.getUserName());
                 if (userRemoveManager.getRoles().containsKey("Team Manager")) {
                     userRemoveManager.getRoles().remove("Team Manager");
@@ -460,14 +458,9 @@ public class Controller {
     // AssociationAgent UC 9.1
 
     public boolean setLeagueByAssociationAgent(Subscriber assAgent, String leaguename, int leaguequalification) {
-        if (assAgent instanceof AssociationAgent == true) {
-            //better to check in ui level
-            if (leaguequalification >= 1 && leaguequalification <= 5) {
-                leagues.add(new League(leaguename, leaguequalification));
-                return true;
-            } else {
-                System.out.println("league qualification not in legal range");
-            }
+        if (assAgent instanceof AssociationAgent) {
+            ((AssociationAgent) assAgent).setLeague(leaguename, leaguequalification, leagues);
+            return true;
         }
         return false;
     }
@@ -476,7 +469,7 @@ public class Controller {
 // TODO: 14/04/2020 need to update teams
     public boolean setSeasonToLeagueByAssociationAgent(Subscriber assAgent, int year, League league, SchedulingMethod schedulingMethod, RankingMethod rankingMethod) {
         if (leagues.contains(league) && assAgent instanceof AssociationAgent) {
-            league.addLeaguePerSeason(new LeaguePerSeason( year, schedulingMethod, rankingMethod));
+            ((AssociationAgent) assAgent).setSeasonToLeague(year, league, schedulingMethod, rankingMethod, leagues);
             return true;
         }
         return false;
@@ -486,8 +479,8 @@ public class Controller {
     // TODO: 10/04/2020
     public boolean addReferee(Subscriber assAgent, String userName, String password, String name, String mail, boolean isMail, int qualification, RefereeType refereeType) {
         if (assAgent instanceof AssociationAgent) {
-            Subscriber referee = new Referee(userName, mail, isMail, qualification, refereeType);
-           users.get(userName).addRoleToUser("Referee",referee);
+
+            ((AssociationAgent) assAgent).addReferee(userName, password, name, mail, isMail, qualification, refereeType, users.get(userName));
             return true;
         }
         return false;
@@ -497,8 +490,7 @@ public class Controller {
     // TODO: 10/04/2020
     public boolean removeReferee(Subscriber assAgent, String userName) {
         if (assAgent instanceof AssociationAgent) {
-
-            users.get(userName).removeRoleFromUser("Referee");
+            ((AssociationAgent) assAgent).removeReferee(userName, users.get(userName));
             return true;
         }
         return false;
@@ -508,24 +500,20 @@ public class Controller {
     // TODO: 10/04/2020
     public boolean addRefereeToLeagueBySeason(Subscriber assAgent, LeaguePerSeason leaguePerSeason, String userNameReferee) {
         if (assAgent instanceof AssociationAgent) {
-            if(users.containsKey(userNameReferee) == true){
+            if (users.containsKey(userNameReferee) == true) {
                 User user = users.get(userNameReferee);
-                if(user.getRoles().containsKey("Referee")){
-                    leaguePerSeason.addReferee((Referee) user.getRoles().get("Referee"));
-                    return true;
-                }
+                ((AssociationAgent) assAgent).addRefereeToLeagueBySeason(assAgent, leaguePerSeason, user);
+                return true;
             }
         }
-
         return false;
     }
 
     //UC9.5
     public boolean setRankingMethod(Subscriber assAgent, int winP, int loseP, int drawP, LeaguePerSeason leaguePerSeason) {
         if (leaguePerSeason.isBegin() == false && assAgent instanceof AssociationAgent == true) {
-            leaguePerSeason.getRankingMethod().setWinPoints(winP);
-            leaguePerSeason.getRankingMethod().setLoosPoints(loseP);
-            leaguePerSeason.getRankingMethod().setDrawPoints(drawP);
+
+            ((AssociationAgent) assAgent).setRankingMethod(winP, loseP, drawP, leaguePerSeason);
             return true;
         }
         return false;
@@ -534,23 +522,20 @@ public class Controller {
     //UC9.6
     public boolean setSchedulingMethod(Subscriber assAgent, LeaguePerSeason leaguePerSeason, SchedulingMethod schedulingMethod) {
         if (assAgent instanceof AssociationAgent) {
-            leaguePerSeason.setSchedulingMethod(schedulingMethod);
+            ((AssociationAgent) assAgent).setSchedulingMethod(leaguePerSeason, schedulingMethod);
             return true;
         }
         return false;
     }
 
     //UC9.7
-    public boolean startScheduleMethod(SchedulingMethod schedulingMethod, Subscriber assAgent, LeaguePerSeason leaguePerSeason)
-        {
-            if(assAgent instanceof AssociationAgent){
-                Team[] teams = leaguePerSeason.getTeamsInLeaguePerSeason().keySet().toArray(new Team[leaguePerSeason.getTeamsInLeaguePerSeason().size()]);
-                schedulingMethod.scheduleGamePolicy(leaguePerSeason, teams);
+    public boolean startScheduleMethod(SchedulingMethod schedulingMethod, Subscriber assAgent, LeaguePerSeason leaguePerSeason) {
+        if (assAgent instanceof AssociationAgent) {
+            ((AssociationAgent) assAgent).startScheduleMethod(schedulingMethod, assAgent, leaguePerSeason);
             return true;
-            }
-            return false;
         }
-
+        return false;
+    }
 
 
 }
