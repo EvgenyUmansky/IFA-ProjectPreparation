@@ -18,12 +18,10 @@ public abstract class Subscriber {
 /////////// Constructor ///////////
 
     // With mail
-    public Subscriber(String userName, String mail, boolean isMail){
+    public Subscriber(String userName, String mail){
         this.userName = userName;
         this.alertsMessages = new ArrayList<>();
         this.mail = mail;
-        this.isMail = isMail;
-
     }
     // when the function activated - send message to screen
     public AlertNotification addAlertMessage(AlertNotification message){
