@@ -119,6 +119,42 @@ public class Team {
         }
     }
 
+/*    //UC 6.2
+    // TODO: 15/04/2020 manage list of added owners for removing
+    public boolean addTeamOwner(Subscriber owner, Subscriber secondOwner) {
+        if (owner instanceof TeamOwner) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(secondOwner.getUserName())) {
+                User userNewOwner = users.get(secondOwner.getUserName());
+                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(), secondOwner.getMail(), false, teamOwner.getTeam(), teamOwner.getManagerAppointments());
+                userNewOwner.getRoles().put(Role.TEAM_OWNER, newSubsOwner);
+                return true;
+            }
+        }
+        return false;
+    }*/
+
+/*
+    //UC 6.3
+    // TODO: 15/04/2020 recursive removing?
+    public boolean removeTeamOwner(Subscriber owner, Subscriber ownerToRemove) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(ownerToRemove.getUserName())) {
+                User userRemoveOwner = users.get(ownerToRemove.getUserName());
+                if (userRemoveOwner.getRoles().containsKey(Role.TEAM_OWNER)) {
+                    userRemoveOwner.getRoles().remove(Role.TEAM_OWNER);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+*/
+
+
+
     //UC 6.3
     public boolean removeOwner(TeamOwner owner) {
         //Impossible to leave the Team without an Owner
@@ -129,6 +165,39 @@ public class Team {
             owner.setTeam(null);
             return true;
         }
+    }
+
+    //UC 6.4
+
+/*    // TODO: 15/04/2020 manage list of added managers for removing
+    public boolean addTeamManager(Subscriber owner, Subscriber newManager) {
+        if (owner instanceof TeamOwner == true) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(newManager.getUserName())) {
+                User userNewManager = users.get(newManager.getUserName());
+                Subscriber newSubManager = new TeamManager(newManager.getUserName(), newManager.getMail(), false);
+                userNewManager.getRoles().put(Role.TEAM_MANAGER, newSubManager);
+                return true;
+            }
+        }
+        return false;
+    }
+    */
+    //UC 6.5
+    // TODO: 15/04/2020 recursive removing?
+    public boolean removeTeamManager(Subscriber owner, Subscriber managerToRemove) {
+        if (owner instanceof TeamOwner) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (managers.containsKey(managerToRemove.getUserName())) {
+                TeamManager userRemoveManager = managers.get(managerToRemove.getUserName());
+                //TODO: We need to get the manager's User: by a static method from User or a User field in TeamMember (Naor)
+/*                if (userRemoveManager.getRoles().containsKey(Role.TEAM_MANAGER)) {
+                    userRemoveManager.getRoles().remove(Role.TEAM_MANAGER);
+                    return true;
+                }*/
+            }
+        }
+        return false;
     }
 
     public TeamPlayer getPlayer(String userName) {
