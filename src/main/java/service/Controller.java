@@ -131,7 +131,7 @@ public class Controller {
         ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
     }
 
-    // 3.5 - get history of fans searches
+    // UC 3.5 - get history of fans searches
     // mock
     public ArrayList<String> getFanHistory(String username) {
         //TODO - get from data base
@@ -148,7 +148,8 @@ public class Controller {
         ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).setFanDetails(newMail);
     }
 
-    // =================== Team Player functions ====================
+
+    // =================== Team Player functions ==========================
     // ====================================================================
 
 
@@ -166,7 +167,8 @@ public class Controller {
     }
 
 
-    // =================== Coach functions ====================
+
+    // =================== Coach functions ================================
     // ====================================================================
 
     // UC 5.1 - update coach's details
@@ -180,7 +182,8 @@ public class Controller {
     }
 
 
-    // =================== Team Owner functions ====================
+
+    // =================== Team Owner functions ===========================
     // ====================================================================
 
     //6.1
@@ -243,7 +246,7 @@ public class Controller {
 
     }
 
-    // =================== Team Manager functions ====================
+    // =================== Team Manager functions =========================
     // ====================================================================
 
     //UC7.1 - set permissions to team manager
@@ -253,9 +256,9 @@ public class Controller {
     }
 
 
-    // =================== Team Manager functions ====================
-    // ====================================================================
 
+    // =================== Team Manager functions =========================
+    // ====================================================================
 
     //UC8.1 - close team
     public void closeTeam(Team team) {
@@ -351,6 +354,7 @@ public class Controller {
 
     // ========================= Referee functions ============================
     // ====================================================================
+
 
     // UC 10.1 - get and set referee info (fields)
     public String getRefereeDetails(String username) {
