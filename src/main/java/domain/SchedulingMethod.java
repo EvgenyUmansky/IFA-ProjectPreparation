@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface SchedulingMethod  {
 
-    public List<Game> scheduleGamePolicy(LeaguePerSeason leaguePerSeason, Team[] leagueTeams);
+    public List<Game> scheduleGamePolicy(League league, Team[] leagueTeams);
 }
