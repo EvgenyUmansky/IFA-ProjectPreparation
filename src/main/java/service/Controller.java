@@ -71,18 +71,69 @@ public class Controller {
         return newUser;
     }
 
+    // ========================= Guess functions ============================
+    // ====================================================================
+
+    //UC 2.4
+    //show Teams details
+    public void showTeamDetails(Team team){
+
+    }
+
+    //show players details
+    public void showPlayersDetails(TeamPlayer player) {
+
+    }
+
+    //show coach details
+    public void showCoachDetails(TeamCoach teamCoach) {
+
+    }
+
+    //show league details
+    public void showLeagueDetails(League league) {
+
+    }
+
+    //show season details
+    public void showSeasonDetails(League league, int year) {
+
+    }
+
+    // UC 2.5
+    //search by key word
+    public void searchByKeyWord(String words) {
+
+    }
+
 
     // ========================= Fan functions ============================
     // ====================================================================
 
     // UC 3.2 - add fan to subscription list of the personal page
-    public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
-        page.addSubscriber((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
+    public boolean addFanSubscriptionToPersonalPage(PersonalPage page, String userName, boolean isMail) {
+        User fanUser = users.get(userName);
+//        if (!(fan instanceof Fan)) {
+        if(!fanUser.getRoles().containsKey("Fan")){
+            System.out.println("Not fan instance");
+            return false;
+        }
+
+        page.addSubscriber(fanUser.getRoles().get("Fan"), isMail);
+        return true;
     }
 
     // UC 3.3 - add fan to subscription list of the game
-    public void addFanSubscriptionToGame(Game game, String username) {
-        game.addFanToAlerts(User.getUserByID(username).getRoles().get(Role.FAN));
+    public boolean addFanSubscriptionToGame(Game game, String userName, boolean isMail) {
+        User fanUser = users.get(userName);
+//        if (!(fan instanceof Fan)) {
+        if(!fanUser.getRoles().containsKey("Fan")){
+            System.out.println("Not fan instance");
+            return false;
+        }
+
+        game.addFanToAlerts(fanUser.getRoles().get("Fan"));
+        return true;
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
