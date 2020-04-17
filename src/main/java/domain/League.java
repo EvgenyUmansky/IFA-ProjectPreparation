@@ -57,7 +57,7 @@ public class League {
     public static League getLeauePerSeason(int season, String leagueName){
         return new League(season, null, null, null, leagueName); // TODO: Replace with DB call
     }
-    public static League getLeaueByName(String leagueName){
+    public static League getLeagueByName(String leagueName){
         return new League(leagueName); // TODO: Replace with DB call
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -2,22 +2,15 @@ package service;
 
 import domain.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Controller {
-
-    //TODO think about best solution
-    private Alert sysAdminsAlert;
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
 
     /////////// Constructor ///////////
     public Controller() {
-        sysAdminsAlert = new Alert();
         systemEvents = new LinkedList<>();
     }
 
@@ -79,6 +72,70 @@ public class Controller {
     }
 
 
+    // ========================= Fan functions ============================
+    // ====================================================================
+
+    // UC 3.2 - add fan to subscription list of the personal page
+    public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
+        page.addSubscriber((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
+    }
+
+    // UC 3.3 - add fan to subscription list of the game
+    public void addFanSubscriptionToGame(Game game, String username) {
+        game.addFanToAlerts(User.getUserByID(username).getRoles().get(Role.FAN));
+    }
+
+    // UC 3.4 - send complaint (by fan) to System Administrator
+    public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, AlertNotification message) {
+        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
+    }
+
+    // 3.5 - get history of fans searches
+    // mock
+    public ArrayList<String> getFanHistory(String username){
+        //TODO - get from data base
+        return new ArrayList<>();
+    }
+
+    // UC 3.6 - get and set fan info
+    public String getFanProfileDetails(String username) {
+        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getFanDetails();
+    }
+
+    // for now it's only mail - iteration 2
+    public void setFanProfileDetails(String username, String newMail) {
+        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).setFanDetails(newMail);
+    }
+
+    // ========================= Referee functions ============================
+    // ====================================================================
+
+    // UC 10.1 - get and set referee info (fields)
+    public String getRefereeDetails(String username) {
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
+    }
+
+    // Envelope function for setProfileDetails
+    public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
+        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
+    }
+
+    // UC 10.2 - get all games the referee judge
+    public ArrayList<Game> getRefereeGames(String username, ArrayList<Game> allGames) {
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeGames(allGames);
+    }
+
+    // UC 10.3 - create new game event and add it to list of game events of the game
+    public void addGameEventToGame(String username, Game game, GameEvent gameEvent) {
+        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).addGameEventToGame(game, gameEvent);
+    }
+
+    // UC 10.4 - update/change game events by main referee
+    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription){
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
+    }
+
+
     // =================== Association Agent functions ====================
     // ====================================================================
 
@@ -90,7 +147,7 @@ public class Controller {
 
     // UC 9.2
     public League updateSeasonForLeague(String leagueName, int season){
-        return League.getLeaueByName(leagueName).setSeason(season);
+        return League.getLeagueByName(leagueName).setSeason(season);
     }
 
     // UC 9.3
@@ -99,8 +156,8 @@ public class Controller {
         // TODO: Send invitation to referee
     }
 
-    // UC 9.3
-    public void removeReferre(String username){
+    // 9.3
+    public void removeReferee(String username){
         User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
 
@@ -137,7 +194,72 @@ public class Controller {
     }
 
 
+
+    // =================== Team Owner functions ====================
     // ====================================================================
+
+    //6.1
+
+    public void addField(String fieldName){
+
+    }
+
+
+    public void addPlayer(String userName){
+
+    }
+
+
+    public void addCoach(String userName){
+
+    }
+
+
+    public void addManager(String userName){
+
+    }
+
+
+    //6.2
+
+    public void removeField(String fieldName){
+
+    }
+
+
+    public void removePlayer(String userName){
+
+    }
+
+
+    public void removeCoach(String userName){
+
+    }
+
+
+    public void removeManager(String userName){
+
+    }
+
+
+    //6.3
+
+    public void updatePlayerDetails(String userName){
+
+    }
+
+
+    public void updateCoachDetails(String userName){
+
+    }
+
+
+    public void updateManagerDetails(String userName){
+
+    }
+
+
+
     // ====================================================================
 
     public Team getTeamByName(String teamName) {

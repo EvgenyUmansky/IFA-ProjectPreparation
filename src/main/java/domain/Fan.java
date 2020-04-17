@@ -1,36 +1,32 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class Fan extends Subscriber {
+public class Fan extends Subscriber{
 
-    /////////// Constructor ///////////
+/////////// Constructor ///////////
     public Fan(String userName, String mail) {
         super(userName, mail);
     }
 
-    public void sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
-        for (SystemAdministrator sysAdmin : sysAdmins) {
-            sysAdmin.addAlertMessage(alertNotification);
-        }
-    }
 
-    /////////// Use Case 3 - Fan ///////////
-    // UC 3.4 - send complaint (by fan) to System Administrator
-/*
-    public boolean sendAlertToSysAdmin(String userName, AlertNotification message) {
-//        Subscriber fan = (Subscriber) (users.get(userName));
-//        if (!(fan instanceof Fan)) {
-        User fanUser = users.get(userName);
-        if (!fanUser.getRoles().containsKey(Role.FAN)) {
-            System.out.println("Not fan instance");
-            return false;
+/////////// Functionality ///////////
+    public Map<String, Boolean> sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
+        Alert alert = new Alert();
+        for(SystemAdministrator sysAdmin : sysAdmins){
+            alert.addSubscriber(sysAdmin);
         }
 
-        sysAdminsAlert.sendAlert(message);
-
-        return true;
+        return alert.sendAlert(alertNotification);
     }
-*/
 
+    public String getFanDetails(){
+        return "User name: " + this.getUserName() + "\n" +
+               "Mail: " + this.getMail();
+    }
+
+    public void setFanDetails(String newMail){
+        this.setMail(newMail);
+    }
 }
