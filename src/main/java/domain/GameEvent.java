@@ -10,10 +10,10 @@ public class GameEvent {
     private LocalDateTime dateTime;
     private int gameMinutes;
     private GameAlert eventName;
-    private String subscription;
+    private String description;
 
 /////////// Constructors ///////////
-    public GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
+    public GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String description) {
         gameEventCounter++;
         gameEventId = gameEventCounter;
         // Game date string format: "2016-11-09 11:44"
@@ -22,7 +22,7 @@ public class GameEvent {
 
         this.gameMinutes = gameMinutes;
         this.eventName = eventName;
-        this.subscription = subscription;
+        this.description = description;
     }
 
 
@@ -60,12 +60,12 @@ public class GameEvent {
         this.eventName = eventName;
     }
 
-    public String getSubscription() {
-        return subscription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSubscription(String subscription) {
-        this.subscription = subscription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -73,6 +73,6 @@ public class GameEvent {
         return  dateTime + " " +
                 gameMinutes + ", " +
                 eventName.toString() +" " +
-                subscription;
+                description;
     }
 }

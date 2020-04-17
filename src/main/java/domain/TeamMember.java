@@ -2,8 +2,19 @@ package domain;
 
 public abstract class TeamMember extends Subscriber {
 
+    protected Team currentTeam;
+
     // Constructor
-    public TeamMember(String userName, String password, String name, String mail) {
-        super(userName, password, name, mail);
-}
+
+    public TeamMember(String userName, String mail) {
+        super(userName, mail);
+    }
+
+    public Team getCurrentTeam() {
+        return currentTeam;
+    }
+
+    public void setCurrentTeam(Team currentTeam) {
+        this.currentTeam = currentTeam;
+    }
 }

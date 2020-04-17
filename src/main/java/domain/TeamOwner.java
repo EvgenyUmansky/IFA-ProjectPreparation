@@ -5,19 +5,31 @@ import java.util.HashSet;
 
 public class TeamOwner extends  Subscriber {
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public HashSet<TeamManager> getManagerAppointments() {
+        return managerAppointments;
+    }
+
     private Team team;
-    private HashSet<TeamAdmin> managerAppointments;
-    private HashSet<TeamOwner> ownerAppointments;
+    private HashSet<TeamManager> managerAppointments;
 
 
 
     // Constructor
-    public TeamOwner(String userName, String password, String name, String mail) {
-        super(userName, password, name, mail);
-        managerAppointments = new HashSet<>();
-        ownerAppointments = new HashSet<>();
-    }
 
+
+    public TeamOwner(String userName, String mail, Team team, HashSet<TeamManager> managerAppointments) {
+        super(userName, mail);
+        this.team = team;
+        this.managerAppointments = managerAppointments;
+    }
+    public TeamOwner(String userName, String mail) {
+        super(userName, mail);
+        this.managerAppointments = new HashSet<>();
+    }
 
     public void setTeam(Team team){
         this.team = team;
@@ -30,8 +42,8 @@ public class TeamOwner extends  Subscriber {
     }
 
     public boolean removeProperty(Object property){
-        if(property instanceof TeamAdmin){
-            if(!(managerAppointments.contains((TeamAdmin)property))){
+        if(property instanceof TeamManager){
+            if(!(managerAppointments.contains((TeamManager)property))){
                 return false;
             }
         }
@@ -41,29 +53,17 @@ public class TeamOwner extends  Subscriber {
     }
 
 
-    public boolean updatePlayerDetails(String userName, String name, Date birthDate, String position){
+    public boolean updatePlayerDetails(String userName, String squadNumber, Date birthDate, String position){
         TeamPlayer player = this.team.getPlayer(userName);
-        player.updateDetails(name,birthDate,position);
+       player.updateDetails(birthDate,position,squadNumber);
         return true;
     }
 
 
-    public boolean updateCoachDetails(String userName, String name, String validation, String role){
+    public boolean updateCoachDetails(String userName,  String validation, String role){
         TeamCoach coach = this.team.getCoach(userName);
-        coach.updateDetails(name,validation,role);
+        coach.updateDetails(validation,role);
         return true;
-    }
-
-    public boolean updateManagerDetails(String userName, String name){
-        TeamAdmin manager = this.team.getManager(userName);
-        manager.setName(name);
-        return true;
-    }
-
-
-    public void appointTeamOwner(TeamOwner newOwner){
-        ownerAppointments.add(newOwner);
-        newOwner.setTeam(this.team);
     }
 
 }

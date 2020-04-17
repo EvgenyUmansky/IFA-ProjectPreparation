@@ -1,7 +1,7 @@
 package domain;
 
 public enum GameAlert {
-    GATE,
+    GOAL,
     OFFSIDE,
     OFFENSE,
     RED_CARD,
