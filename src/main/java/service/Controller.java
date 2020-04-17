@@ -84,6 +84,19 @@ public class Controller {
         return User.isValidPassword(password);
     }
 
+    public Team getTeamByName(String teamName){
+        return Team.getTeamByName(teamName);
+    }
+
+    public HashMap<Role,Subscriber> getRolesPerUser(String userName){
+        return User.getUserByID(userName).getRoles();
+    }
+
+    public User getUser(String userName){
+        return User.getUserByID(userName);
+    }
+
+
 
 
     // ----------------------------------------------- Team Owner Use Cases (6) ----------------------------------------------- //

@@ -223,4 +223,9 @@ public class Team {
     public PersonalPage getTeamPage() {
         return teamPage;
     }
+
+    public static Team getTeamByName(String teamName){
+        //TODO: change the mock to DB
+        return new Team(teamName,null,null);
+    }
 }

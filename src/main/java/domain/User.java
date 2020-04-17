@@ -95,6 +95,12 @@ public class User {
         return usersByRole;
     }
 
+    public static User getUserByID(String userName){
+        // TODO: Get user from DB
+        return new User(userName, null,null,null);
+    }
+
+
     public void setRoles(HashMap<Role, Subscriber> roles) {
         this.roles = roles;
     }
@@ -171,6 +177,8 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
 
 
