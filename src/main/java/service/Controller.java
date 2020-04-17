@@ -76,7 +76,7 @@ public class Controller {
 
     //UC 2.4
     //show Teams details
-    public void showTeamDetails(Team team){
+    public void showTeamDetails(Team team) {
 
     }
 
@@ -111,29 +111,14 @@ public class Controller {
     // ====================================================================
 
     // UC 3.2 - add fan to subscription list of the personal page
-    public boolean addFanSubscriptionToPersonalPage(PersonalPage page, String userName, boolean isMail) {
-        User fanUser = users.get(userName);
-//        if (!(fan instanceof Fan)) {
-        if(!fanUser.getRoles().containsKey("Fan")){
-            System.out.println("Not fan instance");
-            return false;
-        }
 
-        page.addSubscriber(fanUser.getRoles().get("Fan"), isMail);
-        return true;
+    public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
+        page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
     }
 
     // UC 3.3 - add fan to subscription list of the game
-    public boolean addFanSubscriptionToGame(Game game, String userName, boolean isMail) {
-        User fanUser = users.get(userName);
-//        if (!(fan instanceof Fan)) {
-        if(!fanUser.getRoles().containsKey("Fan")){
-            System.out.println("Not fan instance");
-            return false;
-        }
-
-        game.addFanToAlerts(fanUser.getRoles().get("Fan"));
-        return true;
+    public void addFanSubscriptionToGame(Game game, String username) {
+        game.addFanToAlerts(User.getUserByID(username).getRoles().get(Role.FAN));
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
@@ -143,7 +128,7 @@ public class Controller {
 
     // 3.5 - get history of fans searches
     // mock
-    public ArrayList<String> getFanHistory(String username){
+    public ArrayList<String> getFanHistory(String username) {
         //TODO - get from data base
         return new ArrayList<>();
     }
@@ -182,7 +167,7 @@ public class Controller {
     }
 
     // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription){
+    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
         return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
     }
 
@@ -192,12 +177,12 @@ public class Controller {
 
 
     // UC 9.1
-    public League setLeague(String leagueName){
+    public League setLeague(String leagueName) {
         return new League(leagueName);
     }
 
     // UC 9.2
-    public League updateSeasonForLeague(String leagueName, int season){
+    public League updateSeasonForLeague(String leagueName, int season) {
         return League.getLeagueByName(leagueName).setSeason(season);
     }
 
@@ -208,7 +193,7 @@ public class Controller {
     }
 
     // 9.3
-    public void removeReferee(String username){
+    public void removeReferee(String username) {
         User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
 
@@ -218,32 +203,31 @@ public class Controller {
     }
 
     // UC 9.5
-    public void setRankingMethod(int winP, int loseP, int drawP, League league){
+    public void setRankingMethod(int winP, int loseP, int drawP, League league) {
         league.getRankingMethod().setWinPoints(winP).setLoosPoints(loseP).setDrawPoints(drawP);
     }
 
     // UC 9.6
-    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod){
+    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod) {
         league.setSchedulingMethod(schedulingMethod);
     }
 
     // UC 9.7
     // Click this button after you have all the teams in league, Automatic scheduling
-    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league){
+    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league) {
         Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
         schedulingMethod.scheduleGamePolicy(league, teams);
     }
 
     // UC 9.8
-    public void setRulesForBudgetControl(){
+    public void setRulesForBudgetControl() {
 
     }
 
     // UC 9.9
-    public void setTeamBudget(){
+    public void setTeamBudget() {
 
     }
-
 
 
     // =================== Team Owner functions ====================
@@ -251,64 +235,63 @@ public class Controller {
 
     //6.1
 
-    public void addField(String fieldName){
+    public void addField(String fieldName) {
 
     }
 
 
-    public void addPlayer(String userName){
+    public void addPlayer(String userName) {
 
     }
 
 
-    public void addCoach(String userName){
+    public void addCoach(String userName) {
 
     }
 
 
-    public void addManager(String userName){
+    public void addManager(String userName) {
 
     }
 
 
     //6.2
 
-    public void removeField(String fieldName){
+    public void removeField(String fieldName) {
 
     }
 
 
-    public void removePlayer(String userName){
+    public void removePlayer(String userName) {
 
     }
 
 
-    public void removeCoach(String userName){
+    public void removeCoach(String userName) {
 
     }
 
 
-    public void removeManager(String userName){
+    public void removeManager(String userName) {
 
     }
 
 
     //6.3
 
-    public void updatePlayerDetails(String userName){
+    public void updatePlayerDetails(String userName) {
 
     }
 
 
-    public void updateCoachDetails(String userName){
+    public void updateCoachDetails(String userName) {
 
     }
 
 
-    public void updateManagerDetails(String userName){
+    public void updateManagerDetails(String userName) {
 
     }
-
 
 
     // ====================================================================
