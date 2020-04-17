@@ -101,83 +101,9 @@ public class Controller {
         return true;
     }
 
-    // UC 10.3 - create new game event and add it to list of game events of the game
-    public boolean updateGameEvent(String userName, Game game, String dateTime, int gameMinutes, GameAlert eventName, String subscription) {
-        User refereeUser = users.get(userName);
-        if (!refereeUser.getRoles().containsKey("Referee")) {
-            System.out.println("Not referee instance");
-            return false;
-        }
-
-        Referee referee = ((Referee) refereeUser.getRoles().get("Referee"));
-        if (!referee.getGames().contains(game)) {
-            System.out.println("The referee does not judge this game");
-            return false;
-        }
-
-        // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
-        game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
-        return true;
-    }
-
-    // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String userName, Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
-        User refereeUser = users.get(userName);
-        if (!refereeUser.getRoles().containsKey("Referee")) {
-            System.out.println("Not referee instance");
-            return false;
-        }
-
-        ((Referee) refereeUser.getRoles().get("Referee")).changeGameEvent(game, gameEventId, dateTimeStr, gameMinutes, eventName, subscription);
-
-        return true;
-    }
     // ----------------------------------------------- Team Owner Use Cases (6) ----------------------------------------------- //
 
-    public boolean addPropertyToTeam(TeamOwner owner, Object property) {
-        if (!(property instanceof TeamMember || property instanceof Field)) {
-            return false;
-        }
 
-        owner.addProperty(property);
-        return true;
-    }
-
-
-    public boolean removePropertyFromTeam(TeamOwner owner, Object property) {
-        if (!(property instanceof TeamMember || property instanceof Field)) {
-            return false;
-        }
-
-        owner.removeProperty(property);
-        return true;
-    }
-
-
-    public boolean updatePlayerDetails(TeamOwner owner, String squadNumber, String userName, Date birthDate, String position) {
-        owner.updatePlayerDetails(userName, squadNumber, birthDate, position);
-        return true;
-    }
-
-    public boolean updateCoachDetails(TeamOwner owner, String userName, String validation, String role) {
-        owner.updateCoachDetails(userName, validation, role);
-        return true;
-    }
-
-    //UC 6.2
-    // TODO: 15/04/2020 manage list of added owners for removing
-    public boolean addTeamOwner(Subscriber owner, Subscriber secondOwner) {
-        if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (users.containsKey(secondOwner.getUserName())) {
-                User userNewOwner = users.get(secondOwner.getUserName());
-                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(), secondOwner.getMail(), false, teamOwner.getTeam(), teamOwner.getManagerAppointments());
-                userNewOwner.getRoles().put(Role.TEAM_OWNER, newSubsOwner);
-                return true;
-            }
-        }
-        return false;
-    }
 
     //UC 6.3
     // TODO: 15/04/2020 recursive removing?
@@ -190,6 +116,21 @@ public class Controller {
                     userRemoveOwner.getRoles().remove(Role.TEAM_OWNER);
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    //UC 6.2
+    // TODO: 15/04/2020 manage list of added owners for removing
+    public boolean addTeamOwner(Subscriber owner, Subscriber secondOwner) {
+        if (owner instanceof TeamOwner) {
+            TeamOwner teamOwner = (TeamOwner) owner;
+            if (users.containsKey(secondOwner.getUserName())) {
+                User userNewOwner = users.get(secondOwner.getUserName());
+                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(), secondOwner.getMail(), false, teamOwner.getTeam(), teamOwner.getManagerAppointments());
+                userNewOwner.getRoles().put(Role.TEAM_OWNER, newSubsOwner);
+                return true;
             }
         }
         return false;

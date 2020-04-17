@@ -1,6 +1,5 @@
 package domain;
 
-import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -111,7 +110,7 @@ public class Game {
     /**
      * Send score to fans when game ends
      */
-    public void sendAlertScoreToFan() throws MessagingException {
+    public void sendAlertScoreToFan() {
 
         //TODO some logic with observer: when the game ends
 
@@ -126,7 +125,7 @@ public class Game {
     /**
      * Send alert to fans and referees when remains one day before a game
      */
-    public void sendAlertCloseGame() throws MessagingException {
+    public void sendAlertCloseGame() {
 
         //TODO some logic with observer: when remains one day
 
@@ -141,7 +140,7 @@ public class Game {
     /**
      * Send alert to fans and referees when date of the game changed
      */
-    public void sendAlertChangeDateGame() throws MessagingException {
+    public void sendAlertChangeDateGame() {
         String title =  "The date is changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + this.gameDate.toString();
         AlertNotification alertNotification = new AlertNotification(title, message);
@@ -258,7 +257,7 @@ public class Game {
      * string format: "2016-11-09 11:44"
      * @param gameDateStr
      */
-    public void setGameDate(String gameDateStr) throws MessagingException {
+    public void setGameDate(String gameDateStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
         sendAlertChangeDateGame();
