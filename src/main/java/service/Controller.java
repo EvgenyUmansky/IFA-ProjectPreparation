@@ -3,6 +3,10 @@ package service;
 import domain.*;
 
 import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Controller {
 
@@ -140,26 +144,59 @@ public class Controller {
     // ====================================================================
 
 
-    // 9.1
+    // UC 9.1
     public League setLeague(String leagueName){
         return new League(leagueName);
     }
 
-    // 9.2
+    // UC 9.2
     public League updateSeasonForLeague(String leagueName, int season){
         return League.getLeagueByName(leagueName).setSeason(season);
     }
 
-    // 9.3
+    // UC 9.3
     public void addNewReferee(String username, String password, String name, String mail) throws Exception {
         this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
         // TODO: Send invitation to referee
     }
 
-    // 9.3
+    // UC 9.3
     public void removeReferee(String username){
         User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
+
+    // UC 9.4
+    //This method will be shown after the user chose a referee from the list (using getReferees() method)
+    public void addRefereeToLeaguePerSeason() {
+    }
+
+    // UC 9.5
+    public void setRankingMethod(int winP, int loseP, int drawP, League league){
+        league.getRankingMethod().setWinPoints(winP).setLoosPoints(loseP).setDrawPoints(drawP);
+    }
+
+    // UC 9.6
+    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod){
+        league.setSchedulingMethod(schedulingMethod);
+    }
+
+    // UC 9.7
+    // Click this button after you have all the teams in league, Automatic scheduling
+    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league){
+        Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
+        schedulingMethod.scheduleGamePolicy(league, teams);
+    }
+
+    // UC 9.8
+    public void setRulesForBudgetControl(){
+
+    }
+
+    // UC 9.9
+    public void setTeamBudget(){
+
+    }
+
 
     // ====================================================================
 

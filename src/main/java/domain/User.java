@@ -12,8 +12,7 @@ public class User {
     private HashMap<Role, Subscriber> roles;
     private String mail;
 
-// Constructor
-
+    // ========================= Constructor ==========================
 
     public User(String userName, String password, String name, String mail) {
         this.userName = userName;
@@ -24,9 +23,44 @@ public class User {
         addRoleToUser(Role.FAN);
     }
 
-    // Getters & Setters
+    // ========================= Getters ==========================
+
     public String getMail() {
         return this.mail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public HashMap<Role, Subscriber> getRoles() {
+        return roles;
+    }
+
+    // ========================= Setters ==========================
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRoles(HashMap<Role, Subscriber> roles) {
+        this.roles = roles;
     }
 
 
@@ -122,13 +156,9 @@ public class User {
     }
 
 
-    public void setRoles(HashMap<Role, Subscriber> roles) {
-        this.roles = roles;
-    }
 
-    public HashMap<Role, Subscriber> getRoles() {
-        return roles;
-    }
+
+
 
     public static boolean isValidUserName(String userName) {
         int userNameLength = userName.length();
@@ -174,29 +204,8 @@ public class User {
     }
 
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 
 }
