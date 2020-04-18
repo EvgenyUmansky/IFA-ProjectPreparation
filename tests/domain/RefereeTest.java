@@ -83,7 +83,7 @@ class RefereeTest {
     void addGameEventToGame() {
         games.get(0).addRefereeToGame(referee);
         assertEquals(0, games.get(0).getGameEvents().size());
-        referee.addGameEventToGame(games.get(0), gameEvents.get(0));
+        referee.addEvent(games.get(0), gameEvents.get(0));
         assertEquals(1, games.get(0).getGameEvents().size());
     }
 
@@ -93,13 +93,13 @@ class RefereeTest {
         String eventTimePlus05 = LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         games.get(0).addRefereeToGame(referees.get(0));
-        referees.get(0).addGameEventToGame(games.get(0), gameEvents.get(0));
+        referees.get(0).addEvent(games.get(0), gameEvents.get(0));
 
         // Not MAIN referee
         assertFalse(referees.get(0).changeGameEvent(games.get(0), gameEvents.get(0), "2020-01-02 12:00", 29, GameAlert.GOAL, "desc"));
 
         games.get(0).addRefereeToGame(referee);
-        games.get(0).addGameEvent(gameEvents.get(0));
+        games.get(0).addEvent(gameEvents.get(0));
         // Not event of this game
         assertFalse(referee.changeGameEvent(games.get(0), gameEvents.get(1), "2020-01-02 12:00", 29, GameAlert.GOAL, "desc"));
 
