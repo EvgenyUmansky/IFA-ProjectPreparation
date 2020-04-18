@@ -12,12 +12,13 @@ public class Fan extends Subscriber{
 
 
 /////////// Functionality ///////////
+
+    // U.C 3.4
     public Map<String, Boolean> sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
         Alert alert = new Alert();
         for(SystemAdministrator sysAdmin : sysAdmins){
             alert.addSubscriber(sysAdmin);
         }
-
         return alert.sendAlert(alertNotification);
     }
 
@@ -29,4 +30,11 @@ public class Fan extends Subscriber{
     public void setFanDetails(String newMail){
         this.setMail(newMail);
     }
+
+    // U.C 3.5
+    public String[] getSearchHistory() {
+        // TODO: Get from db
+        return new String[]{"A", "B", "C", "D"};
+    }
+}
 }

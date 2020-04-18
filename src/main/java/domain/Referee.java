@@ -28,18 +28,18 @@ public class Referee extends Subscriber {
     }
 
     // UC 10.1 - get and set referee details
-    public String getRefereeDetails(){
+    public String getRefereeDetails() {
         return "User name: " + getUserName() + "\n" +
-               "Mail: " + getMail() + "\n" +
-               "Qualification: " + getQualification() + "\n" +
-               "Type: " + getRefereeType();
+                "Mail: " + getMail() + "\n" +
+                "Qualification: " + getQualification() + "\n" +
+                "Type: " + getRefereeType();
     }
 
-    public void setRefereeDetails(String newMail, int qualification, RefereeType refereeType){
+    public void setRefereeDetails(String newMail, int qualification, RefereeType refereeType) {
         setMail(newMail);
         setRefereeType(refereeType);
 
-        if(qualification > 0 && qualification < 6){
+        if (qualification > 0 && qualification < 6) {
             setQualification(qualification);
         }
         else {

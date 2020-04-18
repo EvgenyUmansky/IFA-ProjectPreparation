@@ -21,6 +21,8 @@ public class TeamPlayer extends TeamMember {
         super(userName, mail);
     }
 
+
+    // U.C 4.1
     public boolean updateDetails(Date birthDate, String position, String squadNumber){
         setSquadNumber(squadNumber);
         setBirthDate(birthDate);

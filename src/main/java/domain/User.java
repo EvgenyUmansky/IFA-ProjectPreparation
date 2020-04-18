@@ -45,68 +45,64 @@ public class User {
         return roles;
     }
 
+    public ArrayList<PersonalPage> getPages() {
+        String username = this.getUserName();
+        String mail = this.getMail();
+        // TODO: Get pages from DB (all pages that the user had permission to edit them)
+        return new ArrayList<PersonalPage>() {{
+            add(new PlayerPage(new TeamPlayer(username, mail), null));
+        }};
+    }
+
     // ========================= Setters ==========================
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public User setPassword(String password) {
+        if (password != null)
+            this.password = password;
+        return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public User setName(String name) {
+        if (name != null)
+            this.name = name;
+        return this;
     }
 
-    public void setRoles(HashMap<Role, Subscriber> roles) {
-        this.roles = roles;
+    public User setRoles(HashMap<Role, Subscriber> roles) {
+        if (roles != null)
+            this.roles = roles;
+        return this;
+    }
+
+    private User setMail(String newMail) {
+        if (newMail != null) {
+            this.mail = newMail;
+        }
+        return this;
     }
 
 
     // ====================== Edit Profile ======================
     // ==========================================================
     // UC 3.6
-    private String getProfileDetails(User user, Subscriber subscriber) {
-
-        return "User Name: " + user.getUserName() + "\n" +
-                "Password: " + user.getPassword() + "\n" +
-                "Name: " + user.getName() + "\n" +
-                "Mail: " + subscriber.getMail();
+    public String getProfileDetails() {
+        // TODO: Get subscriber extra details if exist
+        return "User Name: " + this.getUserName() + "\n" +
+                "Password: " + this.getPassword() + "\n" +
+                "Name: " + this.getName() + "\n" +
+                "Mail: " + this.getMail();
     }
 
     // UC 3.6, UC 10.1
-    private boolean setProfileDetails(User user, Subscriber subscriber, String newUserName, String newPassword, String newName, String newMail, boolean isEmptyMail) {
-
-        if (!newUserName.isEmpty()) {
-            user.setUserName(newUserName);
-        } else {
-            System.out.println("The new user name is empty. The user name is not changed");
-        }
-
-        if (!newPassword.isEmpty()) {
-            user.setPassword(newPassword);
-        } else {
-            System.out.println("The new password is empty. The password is not changed");
-        }
-
-        // set name
-        if (!newName.isEmpty()) {
-            user.setName(newName);
-        } else {
-            System.out.println("The new name is empty. The name is not changed");
-        }
-        // set mail
-
-        if (isEmptyMail) {
-            subscriber.setMail("");
-        } else if (!newMail.isEmpty()) {
-            subscriber.setMail(newMail);
-        } else {
-            System.out.println("The mail is not changed");
-        }
-
-        return true;
+    public User setProfileDetails(String newPassword, String newName, String newMail) {
+        this.setPassword(newPassword);
+        this.setName(newName);
+        this.setMail(newMail);
+        return this;
     }
 
 
@@ -137,9 +133,9 @@ public class User {
         return this;
     }
 
-    public boolean removeRoleFromUser(Role role) {
+    public User removeRoleFromUser(Role role) {
         roles.remove(role);
-        return true;
+        return this;
     }
 
 
@@ -154,10 +150,6 @@ public class User {
         // TODO: Get user from DB
         return new User(userName, "1234", null, null).addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT);
     }
-
-
-
-
 
 
     public static boolean isValidUserName(String userName) {

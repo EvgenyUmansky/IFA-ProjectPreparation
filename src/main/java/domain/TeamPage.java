@@ -26,16 +26,19 @@ public class TeamPage extends PersonalPage {
         this.stadium = stadium;
 
     }
-    public void setPlayers(HashMap<String,TeamPlayer> players) {
+    public TeamPage setPlayers(HashMap<String,TeamPlayer> players) {
         this.players = players;
+        return this;
     }
 
-    public void setCoaches(HashMap<String,TeamCoach> coaches) {
+    public TeamPage setCoaches(HashMap<String,TeamCoach> coaches) {
         this.coaches = coaches;
+        return this;
     }
 
-    public void setManagers(HashMap<String,TeamManager> managers) {
+    public TeamPage setManagers(HashMap<String,TeamManager> managers) {
         this.managers = managers;
+        return this;
     }
 
     public Field getStadium() {
