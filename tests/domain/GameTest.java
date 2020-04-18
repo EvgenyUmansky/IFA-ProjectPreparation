@@ -15,7 +15,7 @@ class GameTest {
     ArrayList<Fan> fans;
     ArrayList<Referee> referees;
     ArrayList<GameEvent> gameEvents;
-    ArrayList<LeaguePerSeason> leaguePerSeasons;
+    ArrayList<League> leaguePerSeasons;
     ArrayList<Team> hostTeams;
     ArrayList<Team> guestTeams;
     ArrayList<Field> fields;
@@ -38,8 +38,8 @@ class GameTest {
         gameEvents.add(new GameEvent("2019-02-02 21:30", 30, GameAlert.GOAL, "desc"));
 
         leaguePerSeasons = new ArrayList<>();
-        leaguePerSeasons.add(new LeaguePerSeason(2020, new TwoGameSchedulingMethod(), new RankingMethod()));
-        leaguePerSeasons.add(new LeaguePerSeason(2021, new TwoGameSchedulingMethod(), new RankingMethod()));
+        leaguePerSeasons.add(new League(2020, new TwoGameSchedulingMethod(), new RankingMethod()));
+        leaguePerSeasons.add(new League(2021, new TwoGameSchedulingMethod(), new RankingMethod()));
 
         hostTeams = new ArrayList<>();
         hostTeams.add(new Team("Real Madrid", new Field("Enspania", 100), new TeamOwner("Zidane", "euguman@gmail.com", true)));

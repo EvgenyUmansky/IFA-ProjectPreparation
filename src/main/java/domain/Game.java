@@ -168,7 +168,7 @@ public class Game {
      * @return true if success, false if not
      */
     // U.C 10.3
-    public boolean addEvent(GameEvent event){
+    public boolean addGameEvent(GameEvent event){
         // date time of event earlier than game
         if(event.getDateTime().compareTo(this.gameDate) <= 0){
             return false;
