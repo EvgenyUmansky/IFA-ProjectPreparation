@@ -19,20 +19,24 @@ public class PlayerPage extends PersonalPage {
         addPermissions(player);
     }
 
-    public void setBirthDate(Date birthDate) {
+    public PlayerPage setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+        return this;
     }
 
-    public void setSquadNumber(String squadNumber) {
+    public PlayerPage setSquadNumber(String squadNumber) {
         this.squadNumber = squadNumber;
+        return this;
     }
 
-    public void setPosition(String position) {
+    public PlayerPage setPosition(String position) {
         this.position = position;
+        return this;
     }
 
-    public void setCurrentTeam(Team currentTeam) {
+    public PlayerPage setCurrentTeam(Team currentTeam) {
         this.currentTeam = currentTeam;
+        return this;
     }
 
     public Date getBirthDate() {

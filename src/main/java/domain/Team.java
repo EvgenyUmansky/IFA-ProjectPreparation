@@ -16,6 +16,7 @@ public class Team {
     private String teamEmail;
     private Budget budget;
     private PersonalPage teamPage;
+    private TeamStatus teamStatus;
 
     // Constructor
     public Team(String name, Field stadium, TeamOwner owner) {
@@ -27,8 +28,11 @@ public class Team {
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
         this.fields.add(stadium);
+        this.teamStatus =TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
     }
+
+
 
     public HashMap<String, TeamPlayer> getPlayers() {
         return players;
@@ -64,6 +68,9 @@ public class Team {
 
 
     public void addProperty(Object property) {
+        if(teamStatus != TeamStatus.Open){
+            return;
+        }
         if (property instanceof Field) {
             this.fields.add((Field) property);
         }
@@ -85,6 +92,9 @@ public class Team {
     }
 
     public void removeProperty(Object property) {
+        if(teamStatus != TeamStatus.Open){
+            return;
+        }
         if (property instanceof Field) {
             this.fields.remove(property);
         }
@@ -102,7 +112,40 @@ public class Team {
         }
     }
 
+
+    public void closeTeam(User user) {
+        // TODO: 18/04/2020 add relevant subscribers to mailSet
+        Alert alert = new Alert();
+        //alert.addToMailSet();
+        if (teamStatus == TeamStatus.Open) {
+            if(user.getRoles().containsKey(Role.SYSTEM_ADMIN)){
+                teamStatus = TeamStatus.PermanentlyClose;
+                alert.sendAlert(new AlertNotification("close team permanently","you team close permanently"));
+
+            }
+            else if(user.getRoles().containsKey(Role.SYSTEM_ADMIN)){
+                teamStatus = TeamStatus.TempClose;
+                alert.sendAlert(new AlertNotification("close team temporary","you team close temporary"));
+            }
+        }
+    }
+
+    public void openTeam() {
+        // TODO: 18/04/2020 add relevant subscribers to mailSet
+        Alert alert = new Alert();
+        //alert.addToMailSet();
+        if(teamStatus == TeamStatus.TempClose){
+            teamStatus = TeamStatus.Open;
+            alert.sendAlert(new AlertNotification("open your team","your team open again"));
+        }
+    }
+
+
+    //UC 6.2
     public void addOwner(TeamOwner owner) {
+        if(teamStatus != TeamStatus.Open){
+            return;
+        }
         if (owner.getTeam() == null) {
             owner.setTeam(this);
         }
@@ -110,8 +153,11 @@ public class Team {
         this.owners.put(owner.getUserName(), owner);
     }
 
-    //UC 6.2
+
     public void addOwner(User currentOwner, User newOwner) {
+        if(teamStatus != TeamStatus.Open){
+            return;
+        }
         if (this.owners.containsKey(currentOwner.getUserName())) {
             TeamOwner newTeamOwner = new TeamOwner(newOwner.getUserName(), newOwner.getMail());
             newOwner.addRoleToUser(Role.TEAM_OWNER, newTeamOwner);
@@ -119,86 +165,46 @@ public class Team {
         }
     }
 
-/*    //UC 6.2
-    // TODO: 15/04/2020 manage list of added owners for removing
-    public boolean addTeamOwner(Subscriber owner, Subscriber secondOwner) {
-        if (owner instanceof TeamOwner) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (users.containsKey(secondOwner.getUserName())) {
-                User userNewOwner = users.get(secondOwner.getUserName());
-                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(), secondOwner.getMail(), false, teamOwner.getTeam(), teamOwner.getManagerAppointments());
-                userNewOwner.getRoles().put(Role.TEAM_OWNER, newSubsOwner);
-                return true;
-            }
-        }
-        return false;
-    }*/
-
-/*
-    //UC 6.3
-    // TODO: 15/04/2020 recursive removing?
-    public boolean removeTeamOwner(Subscriber owner, Subscriber ownerToRemove) {
-        if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (users.containsKey(ownerToRemove.getUserName())) {
-                User userRemoveOwner = users.get(ownerToRemove.getUserName());
-                if (userRemoveOwner.getRoles().containsKey(Role.TEAM_OWNER)) {
-                    userRemoveOwner.getRoles().remove(Role.TEAM_OWNER);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-*/
-
-
 
     //UC 6.3
-    public boolean removeOwner(TeamOwner owner) {
+    public void removeOwner(User user) {
+        if(teamStatus != TeamStatus.Open){
+            return;
+        }
         //Impossible to leave the Team without an Owner
         if (this.owners.size() <= 1) {
-            return false; // TODO: Throw an error instead. stop using boolean as return value. we are not in C++ anymore
+           throw new Error("Team cannot be without owner");
         } else {
-            this.owners.remove(owner.getUserName());
-            owner.setTeam(null);
-            return true;
+            this.owners.remove(user.getUserName());
+            user.removeRoleFromUser(Role.TEAM_OWNER);
         }
     }
 
-    //UC 6.4
+//    //UC 6.4
+//    public Team addTeamManager(User user) {
+//        user.addRoleToUser(Role.TEAM_MANAGER);
+//        this.managers.put(user.getUserName(), (TeamManager) user.getRoles().get(Role.TEAM_MANAGER));
+//        // TODO: Implement permissions
+//        return this;
+//    }
 
-/*    // TODO: 15/04/2020 manage list of added managers for removing
-    public boolean addTeamManager(Subscriber owner, Subscriber newManager) {
-        if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (users.containsKey(newManager.getUserName())) {
-                User userNewManager = users.get(newManager.getUserName());
-                Subscriber newSubManager = new TeamManager(newManager.getUserName(), newManager.getMail(), false);
-                userNewManager.getRoles().put(Role.TEAM_MANAGER, newSubManager);
-                return true;
-            }
-        }
-        return false;
-    }
-    */
-    //UC 6.5
-    // TODO: 15/04/2020 recursive removing?
-    public boolean removeTeamManager(Subscriber owner, Subscriber managerToRemove) {
-        if (owner instanceof TeamOwner) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (managers.containsKey(managerToRemove.getUserName())) {
-                TeamManager userRemoveManager = managers.get(managerToRemove.getUserName());
-                //TODO: We need to get the manager's User: by a static method from User or a User field in TeamMember (Naor)
-/*                if (userRemoveManager.getRoles().containsKey(Role.TEAM_MANAGER)) {
-                    userRemoveManager.getRoles().remove(Role.TEAM_MANAGER);
-                    return true;
-                }*/
-            }
-        }
-        return false;
-    }
+
+//    //UC 6.5
+//    // TODO: 15/04/2020 recursive removing?
+//    public boolean removeTeamManager(Subscriber owner, Subscriber managerToRemove) {
+//        if (owner instanceof TeamOwner) {
+//            TeamOwner teamOwner = (TeamOwner) owner;
+//            if (managers.containsKey(managerToRemove.getUserName())) {
+//                TeamManager userRemoveManager = managers.get(managerToRemove.getUserName());
+//                //TODO: We need to get the manager's User: by a static method from User or a User field in TeamMember (Naor)
+///*                if (userRemoveManager.getRoles().containsKey(Role.TEAM_MANAGER)) {
+//                    userRemoveManager.getRoles().remove(Role.TEAM_MANAGER);
+//                    return true;
+//                }*/
+//            }
+//        }
+//        return false;
+//    }
 
     public TeamPlayer getPlayer(String userName) {
         return players.get(userName);
@@ -224,8 +230,8 @@ public class Team {
         return teamPage;
     }
 
-    public static Team getTeamByName(String teamName){
+    public static Team getTeamByName(String teamName) {
         //TODO: change the mock to DB
-        return new Team(teamName,null,null);
+        return new Team(teamName, null, null);
     }
 }

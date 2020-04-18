@@ -157,8 +157,8 @@ class GameTest {
 
     @Test
     void addGameEvent() {
-        assertTrue(game.addGameEvent(gameEvents.get(0)));
-        assertFalse(game.addGameEvent(gameEvents.get(1)));
+        assertTrue(game.addEvent(gameEvents.get(0)));
+        assertFalse(game.addEvent(gameEvents.get(1)));
 
         assertEquals(1, game.getGameEvents().size());
     }
@@ -217,7 +217,7 @@ class GameTest {
     @Test
     void getGameEvents() {
         assertEquals(0, game.getGameEvents().size());
-        game.addGameEvent(gameEvents.get(0));
+        game.addEvent(gameEvents.get(0));
         assertEquals(1, game.getGameEvents().size());
     }
 
