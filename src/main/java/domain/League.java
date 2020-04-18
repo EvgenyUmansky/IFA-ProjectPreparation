@@ -182,8 +182,16 @@ public class League {
         return this;
     }
 
+    public void setLeagueName(String leagueName) {
+        this.leagueName = leagueName;
+    }
 
     //Getters
+
+
+    public String getLeagueName() {
+        return leagueName;
+    }
 
     public int getSeason() {
         return season;
