@@ -37,4 +37,4 @@ public class Fan extends Subscriber{
         return new String[]{"A", "B", "C", "D"};
     }
 }
-}
+

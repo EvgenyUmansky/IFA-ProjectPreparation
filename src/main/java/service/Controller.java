@@ -4,6 +4,7 @@ import domain.*;
 
 import java.util.*;
 
+
 public class Controller {
 
     private LinkedList<SystemEvent> systemEvents;
@@ -79,45 +80,10 @@ public class Controller {
     }
 
 
-    // =================== Personal Pages functions =================
-    // ==============================================================
-
-    // U.C 4.1 5.1
-    public PersonalPage updateInfo(PersonalPage page, String info){
-        return page.setInfo(info);
-    }
-
-    // =================== Team Player functions ====================
-    // ==============================================================
 
 
-    // ATTENTION PLEASE: Naor, UC4.1 == UC 5.1 AND UC4.2 == UC5.2
 
-
-    // UC 4.1 - update player's details
-    public void updatePlayerDetails(String userName, String mail, Date birthDate, String position, String squadNumber) {
-
-    }
-
-    // UC 4.2 upload Content To Page
-    public void uploadContentPlayerToPage() {
-
-    }
-
-    // ======================= Coach functions ============================
-    // ====================================================================
-
-    // UC 5.1 - update coach's details
-    public void updateCoachDetails(String userName, String mail, String qualification, String role) {
-
-    }
-
-    // UC 5.2 upload Content To Page
-    public void uploadContentToCoachPage() {
-
-    }
-
-    // ========================= Guess functions ============================
+    // ========================= Guest functions ============================
     // ====================================================================
 
     //UC 2.4
@@ -174,9 +140,9 @@ public class Controller {
 
     // 3.5 - get history of fans searches
     // mock
-    public ArrayList<String> getFanHistory(String username) {
+    public String[] getSearchHistory(String username) {
         //TODO - get from data base
-        return new ArrayList<>();
+        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getSearchHistory();
     }
 
     // UC 3.6 - get and set fan info
@@ -189,89 +155,40 @@ public class Controller {
         User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
     }
 
-    // ========================= Referee functions ============================
+    // =================== Team Player functions ====================
+    // ==============================================================
+
+    // ATTENTION PLEASE: Naor, UC4.1 == UC 5.1 AND UC4.2 == UC5.2
+
+    // UC 4.1 - update player's details
+    public void updatePlayerDetails(String userName, String mail, Date birthDate, String position, String squadNumber) {
+
+    }
+
+    // UC 4.2 upload Content To Page
+    public void uploadContentPlayerToPage() {
+
+    }
+
+    // =================== Personal Pages functions =================
+    // ==============================================================
+
+    // U.C 4.1 5.1
+    public PersonalPage updateInfo(PersonalPage page, String info){
+        return page.setInfo(info);
+    }
+
+
+    // ======================= Coach functions ============================
     // ====================================================================
 
-    // UC 10.1 - get and set referee info (fields)
-    public String getRefereeDetails(String username) {
-        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
-    }
-
-    // Envelope function for setProfileDetails
-    public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
-        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
-    }
-
-    // UC 10.2 - get all games the referee judge
-    public ArrayList<Game> getRefereeGames(String username, ArrayList<Game> allGames) {
-        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeGames(allGames);
-    }
-
-    // UC 10.3 - create new game event and add it to list of game events of the game
-    public void addGameEventToGame(String username, Game game, GameEvent gameEvent) {
-        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).addGameEventToGame(game, gameEvent);
-    }
-
-    // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
-        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
-    }
-
-
-    // =================== Association Agent functions ====================
-    // ====================================================================
-
-
-    // UC 9.1
-    public League setLeague(String leagueName) {
-        return new League(leagueName);
-    }
-
-    // UC 9.2
-    public League updateSeasonForLeague(String leagueName, int season) {
-        return League.getLeagueByName(leagueName).setSeason(season);
-    }
-
-    // UC 9.3
-    public void addNewReferee(String username, String password, String name, String mail) throws Exception {
-        this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
-        // TODO: Send invitation to referee
-    }
-
-    // 9.3
-    public void removeReferee(String username) {
-        User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
-    }
-
-    // UC 9.4
-    //This method will be shown after the user chose a referee from the list (using getReferees() method)
-    public void addRefereeToLeaguePerSeason() {
-    }
-
-    // UC 9.5
-    public void setRankingMethod(int winP, int loseP, int drawP, League league) {
-        league.getRankingMethod().setWinPoints(winP).setLoosPoints(loseP).setDrawPoints(drawP);
-    }
-
-    // UC 9.6
-    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod) {
-        league.setSchedulingMethod(schedulingMethod);
-    }
-
-    // UC 9.7
-    // Click this button after you have all the teams in league, Automatic scheduling
-    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league) {
-        Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
-        schedulingMethod.scheduleGamePolicy(league, teams);
-    }
-
-    // UC 9.8
-    public void setRulesForBudgetControl() {
+    // UC 5.1 - update coach's details
+    public void updateCoachDetails(String userName, String mail, String qualification, String role) {
 
     }
 
-    // UC 9.9
-    public void setTeamBudget() {
+    // UC 5.2 upload Content To Page
+    public void uploadContentToCoachPage() {
 
     }
 
@@ -386,6 +303,91 @@ public class Controller {
     //UC8.5 - start model of recommendation Systems
     public void startModelRecommendationSystem() {
 
+    }
+
+    // =================== Association Agent functions ====================
+    // ====================================================================
+
+
+    // UC 9.1
+    public League setLeague(String leagueName) {
+        return new League(leagueName);
+    }
+
+    // UC 9.2
+    public League updateSeasonForLeague(String leagueName, int season) {
+        return League.getLeagueByName(leagueName).setSeason(season);
+    }
+
+    // UC 9.3
+    public void addNewReferee(String username, String password, String name, String mail) throws Exception {
+        this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
+        // TODO: Send invitation to referee
+    }
+
+    // 9.3
+    public void removeReferee(String username) {
+        User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
+    }
+
+    // UC 9.4
+    //This method will be shown after the user chose a referee from the list (using getReferees() method)
+    public void addRefereeToLeaguePerSeason() {
+    }
+
+    // UC 9.5
+    public void setRankingMethod(int winP, int loseP, int drawP, League league) {
+        league.getRankingMethod().setWinPoints(winP).setLoosPoints(loseP).setDrawPoints(drawP);
+    }
+
+    // UC 9.6
+    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod) {
+        league.setSchedulingMethod(schedulingMethod);
+    }
+
+    // UC 9.7
+    // Click this button after you have all the teams in league, Automatic scheduling
+    public void scheduleGamePolicy(SchedulingMethod schedulingMethod, League league) {
+        Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
+        schedulingMethod.scheduleGamePolicy(league, teams);
+    }
+
+    // UC 9.8
+    public void setRulesForBudgetControl() {
+
+    }
+
+    // UC 9.9
+    public void setTeamBudget() {
+
+    }
+
+    // ========================= Referee functions ============================
+    // ====================================================================
+
+    // UC 10.1 - get and set referee info (fields)
+    public String getRefereeDetails(String username) {
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
+    }
+
+    // Envelope function for setProfileDetails
+    public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
+        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
+    }
+
+    // UC 10.2 - get all games the referee judge
+    public ArrayList<Game> getRefereeGames(String username, ArrayList<Game> allGames) {
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeGames(allGames);
+    }
+
+    // UC 10.3 - create new game event and add it to list of game events of the game
+    public void addGameEventToGame(String username, Game game, GameEvent gameEvent) {
+        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).addGameEventToGame(game, gameEvent);
+    }
+
+    // UC 10.4 - update/change game events by main referee
+    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
     }
 
     // ====================================================================
