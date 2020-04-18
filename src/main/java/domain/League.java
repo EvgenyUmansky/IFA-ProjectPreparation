@@ -89,6 +89,7 @@ public class League {
         Team [] teamArray = new Team[this.teamsTable.size()];
         for(Team team : this.teamsTable.keySet()){
             teamArray[i] = team;
+            i++;
         }
         this.games.addAll(this.schedulingMethod.scheduleGamePolicy(this, teamArray));
         return true;
@@ -110,7 +111,7 @@ public class League {
                 homeTeam = team;
             }
             if (team.equals(awayGameTeam)){
-                awayTeamScore = game.getHostTeamScore();
+                awayTeamScore = game.getGuestTeamScore();
                 awayTeam = team;
             }
         }
@@ -181,8 +182,16 @@ public class League {
         return this;
     }
 
+    public void setLeagueName(String leagueName) {
+        this.leagueName = leagueName;
+    }
 
     //Getters
+
+
+    public String getLeagueName() {
+        return leagueName;
+    }
 
     public int getSeason() {
         return season;

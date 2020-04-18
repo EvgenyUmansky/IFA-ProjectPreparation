@@ -12,7 +12,7 @@ class TeamCoachTest {
 
     @BeforeEach
     public void init(){
-        coach = new TeamCoach("coachUser","player@gmail.com",true);
+        coach = new TeamCoach("coachUser","player@gmail.com");
     }
 
     @AfterEach
