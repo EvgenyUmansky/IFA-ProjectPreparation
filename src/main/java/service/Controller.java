@@ -334,7 +334,7 @@ public class Controller {
 
     // UC 9.7
     // Click this button after you have all the teams in league, Automatic scheduling
-    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league) {
+    public void scheduleGamePolicy(SchedulingMethod schedulingMethod, League league) {
         Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
         schedulingMethod.scheduleGamePolicy(league, teams);
     }
