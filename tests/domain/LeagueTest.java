@@ -40,7 +40,7 @@ class LeagueTest {
     }
     //// static functions
     @Test
-    void getLeauePerSeason() {
+    void getLeaguePerSeason() {
     }
 
     @Test
