@@ -30,9 +30,9 @@ public class Referee extends Subscriber {
     // UC 10.1 - get and set referee details
     public String getRefereeDetails(){
         return "User name: " + getUserName() + "\n" +
-               "Mail: " + getMail() + "\n" +
-               "Qualification: " + getQualification() + "\n" +
-               "Type: " + getRefereeType();
+                "Mail: " + getMail() + "\n" +
+                "Qualification: " + getQualification() + "\n" +
+                "Type: " + getRefereeType();
     }
 
     public void setRefereeDetails(String newMail, int qualification, RefereeType refereeType){
@@ -61,8 +61,8 @@ public class Referee extends Subscriber {
     }
 
     // UC 10.3 - create new game event and add it to list of game events of the game
-    public void addGameEventToGame(Game game, GameEvent gameEvent) {
-        game.addGameEvent(gameEvent);
+    public void addEvent(Game game, GameEvent gameEvent) {
+        game.addEvent(gameEvent);
     }
 
     // UC 10.4 - update/change game events by main referee
