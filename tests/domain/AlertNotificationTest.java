@@ -1,12 +1,24 @@
 package domain;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AlertNotificationTest {
 
-    AlertNotification alertNotification = new AlertNotification("Title", "Text");
+    AlertNotification alertNotification;
+
+    @BeforeEach
+    public void insert() {
+        alertNotification = new AlertNotification("Title", "Text");
+    }
+
+    @AfterEach
+    public void delete(){
+        alertNotification = null;
+    }
 
     @Test
     void getTitle() {

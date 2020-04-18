@@ -2,16 +2,22 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
-public class Referee extends Subscriber{
-    int qualification; // From 1 to 5 (5 is the best league....)
-    RefereeType refereeType;
-    Set<Game> games;
-    boolean acceptedRequest;
+public class Referee extends Subscriber {
+    private int qualification; // From 1 to 5 (5 is the best league....)
+    private RefereeType refereeType;
+    private boolean acceptedRequest;
 
+    /////////// Constructor ///////////
+    public Referee(String userName, String mail) {
+        super(userName, mail);
+        this.qualification = 0;
+        this.refereeType = null;
+        this.acceptedRequest = false;
+    }
 
+/////////// Functionality ///////////
 
     public boolean isAcceptedRequest() {
         return acceptedRequest;
@@ -21,108 +27,110 @@ public class Referee extends Subscriber{
         this.acceptedRequest = acceptedRequest;
     }
 
-    /////////// Constructor ///////////
-    public Referee(String userName, String mail, boolean isMail, int qualification, RefereeType refereeType) {
-        super(userName, mail, isMail);
-        this.qualification = qualification;
-        this.refereeType = refereeType;
-        games = new HashSet<>();
-        this.acceptedRequest = false;
+    // UC 10.1 - get and set referee details
+    public String getRefereeDetails(){
+        return "User name: " + getUserName() + "\n" +
+               "Mail: " + getMail() + "\n" +
+               "Qualification: " + getQualification() + "\n" +
+               "Type: " + getRefereeType();
     }
 
-/////////// Functionality ///////////
+    public void setRefereeDetails(String newMail, int qualification, RefereeType refereeType){
+        setMail(newMail);
+        setRefereeType(refereeType);
 
-    // add game referee judge
-    public void addGame(Game game){
-        games.add(game);
+        if(qualification > 0 && qualification < 6){
+            setQualification(qualification);
+        }
+        else {
+            System.out.println("The qualification is not valid");
+        }
     }
 
-    // remove game referee judge
-    public void removeGame(Game game){
-        games.remove(game);
-    }
+    // UC 10.2 - get all games the referee judge
+    public ArrayList<Game> getRefereeGames(ArrayList<Game> games) {
+        ArrayList<Game> refereeGames = new ArrayList<>();
 
-    // remove all games referee judge
-    public void clearGames(){
-        games = new HashSet<>();
+        for (Game game : games) {
+            if (game.getReferees().contains(this)) {
+                refereeGames.add(game);
+            }
+        }
+
+        return refereeGames;
     }
 
     // UC 10.3 - create new game event and add it to list of game events of the game
-    public boolean updateGameEvent(Game game, String dateTime, int gameMinutes, GameAlert eventName, String subscription){
-
-        if(!this.games.contains(game)){
-            System.out.println("The referee does not judge this game");
-            return false;
-        }
-
-        // new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription)
-        game.addGameEvent(new GameEvent(dateTime, gameMinutes, eventName, subscription));
-        return true;
+    public void addGameEventToGame(Game game, GameEvent gameEvent) {
+        game.addGameEvent(gameEvent);
     }
 
     // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(Game game, int gameEventId, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription ){
-        if(!this.refereeType.equals(RefereeType.MAIN)){
+
+    public boolean changeGameEvent(Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String description) {
+        if (!this.refereeType.equals(RefereeType.MAIN)) {
             System.out.println("Not MAIN referee");
             return false;
         }
 
+
+        if (!game.getGameEvents().contains(gameEvent)) {
+            System.out.println("Not event of this game");
+            return false;
+        }
+
         long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
-        if(diffInHours > 5){
+        if (diffInHours > 5) {
             System.out.println("Not allowed to change the game events: out of time");
             return false;
         }
 
-        GameEvent gameEvent = game.getGameEvents().get(gameEventId);
-
-        if(!dateTimeStr.isEmpty()){
+        if (!dateTimeStr.isEmpty()) {
             gameEvent.setGameDate(dateTimeStr);
         }
 
-        if(gameMinutes > -1){
+        if (gameMinutes > -1) {
             gameEvent.setGameMinutes(gameMinutes);
         }
 
-        if(eventName != null){
+        if (eventName != null) {
             gameEvent.setEventName(eventName);
         }
 
-        if(!subscription.isEmpty()){
-            gameEvent.setDescription(subscription);
+        if (!description.isEmpty()) {
+            gameEvent.setDescription(description);
         }
 
         return true;
     }
 
 
-/////////// Getters and Setters ///////////
 
-    public int getQualification() {
+
+    /////////// Getters and Setters ///////////
+
+    public int getQualification () {
         return qualification;
     }
 
-    public void setQualification(int qualification) {
-        if(qualification < 1 || qualification > 5){
+    public void setQualification ( int qualification){
+        if (qualification < 1 || qualification > 5) {
             System.out.println("Qualification must be between 1 to 5, the qualification is not changed");
             return;
         }
         this.qualification = qualification;
     }
 
-    public RefereeType getRefereeType() {
+    public RefereeType getRefereeType () {
         return refereeType;
     }
 
-    public void setRefereeType(RefereeType refereeType) {
-        if(refereeType == null){
+    public void setRefereeType (RefereeType refereeType){
+        if (refereeType == null) {
             System.out.println("RefereeType is empty");
             return;
         }
 
         this.refereeType = refereeType;
-    }
-
-    public Set<Game> getGames() {
-        return games;
     }
 }

@@ -1,6 +1,5 @@
 package domain;
 
-import java.security.Security;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -17,6 +16,25 @@ public class Alert {
 
 
 /////////// Functionality ///////////
+
+    public void addSubscriber(Subscriber user) {
+        if(user.isMail()){
+            this.mailAlertList.add(user);
+        }
+        else {
+            this.inSystemAlertList.add(user);
+        }
+    }
+
+    public void removeSubscriber(Subscriber user){
+        if(user.isMail()){
+            this.mailAlertList.remove(user);
+        }
+        else {
+            this.inSystemAlertList.remove(user);
+        }
+    }
+
     public void addToMailSet(Subscriber user){
         this.mailAlertList.add(user);
     }
@@ -37,67 +55,77 @@ public class Alert {
      * public function to send alert to user. Chooses from list where to send the alert: mail or system
      * @param alertNotification
      */
-    public void sendAlert(AlertNotification alertNotification) throws MessagingException {
+    public Map<String, Boolean> sendAlert(AlertNotification alertNotification)  {
+        Map isSentMap = new HashMap<>();
         for(Subscriber user : this.mailAlertList){
-            sendMailAlert(user.getMail(), alertNotification);
+            boolean isSent = sendMailAlert(user.getMail(), alertNotification);
+            isSentMap.put(user.getUserName(), isSent);
+
         }
 
         for(Subscriber user : this.inSystemAlertList){
             sendInSystemAlert(user, alertNotification);
+            isSentMap.put(user.getUserName(), true);
         }
+
+        return isSentMap;
     }
 
-    // Taken from https://www.tutorialspoint.com/java/java_sending_email.htm
     /**
      * send alert to mail
      * @param to
      * @param alertNotification
      * @return
      */
-    public boolean sendMailAlert(String to, AlertNotification alertNotification) throws MessagingException {
-       // Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+    private boolean sendMailAlert(String to, AlertNotification alertNotification) {
 
         // Get a Properties object
         Properties props = System.getProperties();
-        props.setProperty("mail.smtp.host", "smtp.gmail.com");
-        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
-        props.setProperty("mail.smtp.socketFactory.fallback", "false");
-        props.setProperty("mail.smtp.port", "465");
-        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "465");                 //TLS Port 465
+        props.put("mail.smtp.auth", "true");                //enable authentication
+        props.put("mail.smtp.starttls.enable", "true");     //enable STARTTLS
+        props.put("mail.smtp.ssl.enable", "true");          // enable ssl
         props.put("mail.smtp.auth", "true");
-        final String username = "euguman";
-        final String password = "sevela92";
-        Session session = Session.getDefaultInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
 
-        // -- Create a new message --
-        Message msg = new MimeMessage(session);
+        final String username = "fantasticfiveifa@gmail.com";
+        final String password = "naorevgenymohsenguyroy";
+        try {
+            Session session = Session.getDefaultInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
 
-        // -- Set the FROM and TO fields --
-        msg.setFrom(new InternetAddress(username + "@gmail.com"));
-        msg.setRecipients(Message.RecipientType.TO,
-                InternetAddress.parse(to, false));
-        msg.setSubject(alertNotification.getTitle());
-        msg.setText(alertNotification.getMessage());
-        Transport.send(msg);
+            // -- Create a new message --
+            Message msg = new MimeMessage(session);
 
-        System.out.println("Message sent.");
-        return true;
+
+            // -- Set the FROM and TO fields --
+            msg.setFrom(new InternetAddress(username));
+            msg.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(to, false));
+            msg.setSubject(alertNotification.getTitle());
+            msg.setText(alertNotification.getMessage());
+            Transport.send(msg);
+
+            System.out.println("The mail sent successfully");
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     /**
      * Send alert to user in system
      * @param user
      * @param alertNotification
-     * @return
      */
-    private boolean sendInSystemAlert(Subscriber user, AlertNotification alertNotification){
+    private void sendInSystemAlert(Subscriber user, AlertNotification alertNotification){
         user.addAlertMessage(alertNotification);
-        return true;
     }
 
 

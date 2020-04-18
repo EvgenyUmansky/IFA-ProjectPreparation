@@ -7,8 +7,8 @@ public class TeamCoach extends TeamMember {
     private String qualification;
 
     // Constructor
-    public TeamCoach(String userName, String mail, boolean isMail) {
-        super(userName, mail, isMail);
+    public TeamCoach(String userName, String mail) {
+        super(userName, mail);
     }
 
 
@@ -21,7 +21,8 @@ public class TeamCoach extends TeamMember {
     public void setRole(String role){
         this.role = role;
     }
-    private void setQualification(String qualification) {
+
+    public void setQualification(String qualification) {
         this.qualification = qualification;
     }
 
@@ -32,4 +33,5 @@ public class TeamCoach extends TeamMember {
     public String getQualification() {
         return qualification;
     }
+
 }

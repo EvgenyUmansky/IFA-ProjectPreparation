@@ -41,12 +41,12 @@ public abstract class PersonalPage {
     /////////// Functionality ///////////
 
     // UC 3.2
-    public void addSubscriber(Subscriber user, boolean isMail) {
-        if(isMail) {
-            this.alert.addToMailSet(user);
+    public void addSubscriber(Fan fan) {
+        if(fan.isMail()) {
+            this.alert.addToMailSet(fan);
         }
         else{
-            this.alert.addToSystemSet(user);
+            this.alert.addToSystemSet(fan);
         }
     }
 
