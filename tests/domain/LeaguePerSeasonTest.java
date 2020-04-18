@@ -9,15 +9,16 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LeaguePerSeasonTest {
-    LeaguePerSeason leaguePerSeason1;
-    LeaguePerSeason leaguePerSeason2;
+    League leaguePerSeason1;
+    League leaguePerSeason2;
     Team[]leagueTeams;
 
 
+    /*
     @BeforeEach
     public void init(){
-        leaguePerSeason1 = new LeaguePerSeason(2020, new OneGameSchedulingMethod(),new RankingMethod());
-        leaguePerSeason2 = new LeaguePerSeason(2020, new TwoGameSchedulingMethod(), new RankingMethod());
+        leaguePerSeason1 = new League(2020, new OneGameSchedulingMethod(),new RankingMethod(), "Prime");
+        leaguePerSeason2 = new League(2020, new TwoGameSchedulingMethod(), new RankingMethod(), "Prime");
 
 
         leagueTeams = new Team[3];
@@ -138,4 +139,6 @@ class LeaguePerSeasonTest {
 //    @Test
 //    void getGamesInLeaguePerSeason() {
 //    }
+
+     */
 }

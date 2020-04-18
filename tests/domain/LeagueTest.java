@@ -14,6 +14,7 @@ class LeagueTest {
     League league2;
     League league3;
 
+    /*
     @BeforeEach
     public void init(){
         league1 = new League("Israeli Premier League", 2);
@@ -78,4 +79,6 @@ class LeagueTest {
 //        league1.setLeagueQualification(4);
 //        assertEquals(4,league1.getLeagueQualification());
 //    }
+
+     */
 }
