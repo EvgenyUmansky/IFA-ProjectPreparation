@@ -7,7 +7,7 @@ public abstract class PersonalPage {
     private String name;
     private String info;
     private String mail;
-    protected HashMap<String,Subscriber> pageOwners;
+    protected HashMap<String, Subscriber> pageOwners;
 
 
     /////////// Constructor //////////
@@ -17,23 +17,32 @@ public abstract class PersonalPage {
         this.mail = mail;
     }
 
+    public static PersonalPage getPage(String pageName) {
+        return new PlayerPage(new TeamPlayer(null, null), pageName);
+    }
+
     //-----Getters and Setters--------
-    public void setName(String name, String user) {
+
+    public PersonalPage setName(String name, String user) {
         this.name = name;
+        return this;
     }
 
-    public void setInfo(String info) {
+    public PersonalPage setInfo(String info) {
         this.info = info;
+        return this;
     }
 
-    public void setMail(String mail) {
+    public PersonalPage setMail(String mail) {
         this.mail = mail;
+        return this;
     }
 
 
     public String getName() {
         return name;
     }
+
     public String getInfo() {
         return info;
     }
@@ -42,16 +51,16 @@ public abstract class PersonalPage {
 
     // UC 3.2
     public void addSubscriber(Fan fan) {
-        if(fan.isMail()) {
+        if (fan.isMail()) {
             this.alert.addToMailSet(fan);
-        }
-        else{
+        } else {
             this.alert.addToSystemSet(fan);
         }
     }
 
     public void addPermissions(Subscriber owner) {
-        this.pageOwners.put(owner.getUserName(),owner);
+        // TODO: Should update DB (maybe user-page table) and add new user to page permission
+        this.pageOwners.put(owner.getUserName(), owner);
     }
 
 }

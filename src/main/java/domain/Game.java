@@ -3,6 +3,7 @@ package domain;
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -166,14 +167,15 @@ public class Game {
      * @param event - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
      * @return true if success, false if not
      */
-    public boolean addGameEvent(GameEvent event){
+    // U.C 10.3
+    public boolean addEvent(GameEvent event){
         // date time of event earlier than game
         if(event.getDateTime().compareTo(this.gameDate) <= 0){
             return false;
         }
 
         this.gameEvents.add(event);
-        return true;
+        return true; // TODO: Change bolean to exceptions in general :)
     }
 
 
@@ -252,6 +254,40 @@ public class Game {
         return alertReferees;
     }
 
+    // UC 10.4 - update/change game events by main referee
+
+    public boolean changeEvent(GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String description) {
+
+        if (!this.getGameEvents().contains(gameEvent)) {
+            System.out.println("Not event of this game");
+            return false;
+        }
+
+        long diffInHours = ChronoUnit.HOURS.between(this.getGameDate(), LocalDateTime.now());
+        if (diffInHours > 5) {
+            System.out.println("Not allowed to change the game events: out of time");
+            return false;
+        }
+
+        if (!dateTimeStr.isEmpty()) {
+            gameEvent.setGameDate(dateTimeStr);
+        }
+
+        if (gameMinutes > -1) {
+            gameEvent.setGameMinutes(gameMinutes);
+        }
+
+        if (eventName != null) {
+            gameEvent.setEventName(eventName);
+        }
+
+        if (!description.isEmpty()) {
+            gameEvent.setDescription(description);
+        }
+
+        return true;
+    }
+
     /**
      *
      * @return string in format: "0:0"
@@ -274,5 +310,15 @@ public class Game {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
         return sendAlertChangeDateGame();
+    }
+
+    // UC 10.2 - get all games the referee judge
+    public static ArrayList<Game> getGamesByReferee(Referee referee){
+        //TODO: Get data from DB (like SELECT * FROM GAMES WHERE Referee=username)
+        return new ArrayList<Game>() {{
+            add(new Game(null, null, null, null, null, new ArrayList<Referee>() {{
+                add(referee);
+            }}));
+        }};
     }
 }
