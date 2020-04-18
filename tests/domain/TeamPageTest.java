@@ -17,7 +17,7 @@ class TeamPageTest {
     @BeforeEach
     public void init(){
         field = new Field("test",100);
-        owner = new TeamOwner("ownerUser","owner@gmail.com",true);
+        owner = new TeamOwner("ownerUser","owner@gmail.com");
         team = new Team("test",field,owner);
         teamPage = new TeamPage(team);
     }
@@ -33,7 +33,7 @@ class TeamPageTest {
     @Test
     void setPlayers() {
         assertEquals(team.getPlayers(),teamPage.getPlayers());
-        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true);
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com");
         HashMap<String,TeamPlayer> players = new HashMap<>();
         players.put(player.getUserName(),player);
         teamPage.setPlayers(players);
@@ -43,7 +43,7 @@ class TeamPageTest {
     @Test
     void setCoaches() {
         assertEquals(team.getCoaches(),teamPage.getCoaches());
-        TeamCoach coach = new TeamCoach("coachUser","coach@gmail.com",true);
+        TeamCoach coach = new TeamCoach("coachUser","coach@gmail.com");
         HashMap<String,TeamCoach> coachs = new HashMap<>();
         coachs.put(coach.getUserName(),coach);
         teamPage.setCoaches(coachs);
@@ -53,7 +53,7 @@ class TeamPageTest {
     @Test
     void setManagers() {
         assertEquals(team.getManagers(),teamPage.getManagers());
-        TeamManager manager = new TeamManager("managerUser","manager@gmail.com",true);
+        TeamManager manager = new TeamManager("managerUser","manager@gmail.com");
         HashMap<String,TeamManager> managers = new HashMap<>();
         managers.put(manager.getUserName(),manager);
         teamPage.setManagers(managers);
