@@ -12,20 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OneGameSchedulingMethodTest {
     SchedulingMethod schedulingMethod;
-    League leaguePerSeason;
+    LeaguePerSeason leaguePerSeason;
     Team[]leagueTeams;
 
 
 
     @BeforeEach
     public void init(){
-        schedulingMethod = new TwoGameSchedulingMethod();
-        leaguePerSeason = new League(2020, schedulingMethod,new RankingMethod(), "alpha");
+        schedulingMethod = new OneGameSchedulingMethod();
+        leaguePerSeason = new LeaguePerSeason(2020, schedulingMethod,new RankingMethod());
         leagueTeams = new Team[3];
-        leagueTeams[0] = new Team("FCB", new Field("Barca-Field", 5000), new TeamOwner("abc", "aa"));
-        leagueTeams[1] = new Team("Real", new Field("Real-Field", 5000), new TeamOwner("def", "bb"));
-        leagueTeams[2] = new Team("Kissra", new Field("Kissra-Field", 5000), new TeamOwner("ghk", "cc"));
-        leaguePerSeason.initTeams(new HashSet<>(Arrays.asList(leagueTeams)));
+        leagueTeams[0] = new Team("FCB", new Field("Barca-Field", 5000), new TeamOwner("abc", "aa", true));
+        leagueTeams[1] = new Team("Real", new Field("Real-Field", 5000), new TeamOwner("def", "bb", true));
+        leagueTeams[2] = new Team("Kissra", new Field("Kissra-Field", 5000), new TeamOwner("ghk", "cc", true));
+        leaguePerSeason.initializedTeamsInLeaguePerSeason(new HashSet<>(Arrays.asList(leagueTeams)));
 
     }
 

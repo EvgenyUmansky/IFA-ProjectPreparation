@@ -15,7 +15,7 @@ class GameTest {
     ArrayList<Fan> fans;
     ArrayList<Referee> referees;
     ArrayList<GameEvent> gameEvents;
-    ArrayList<League> leaguePerSeasons;
+    ArrayList<LeaguePerSeason> leaguePerSeasons;
     ArrayList<Team> hostTeams;
     ArrayList<Team> guestTeams;
     ArrayList<Field> fields;
@@ -25,29 +25,29 @@ class GameTest {
     @BeforeEach
     public void insert() {
         fans = new ArrayList<>();
-        fans.add(new Fan("Messi", "euguman@gmail.com"));
-        fans.add(new Fan("unMessi", ""));
+        fans.add(new Fan("Messi", "euguman@gmail.com", true));
+        fans.add(new Fan("unMessi", "", false));
 
         referees = new ArrayList<>();
-        referees.add(new Referee("Evgeny", ""));
-        referees.add(new Referee("Messi", "euguman@gmail.com"));
-        referees.add(new Referee("unMessi", ""));
+        referees.add(new Referee("Evgeny", "", false, 4, RefereeType.ASSISTANT));
+        referees.add(new Referee("Messi", "euguman@gmail.com", true, 4, RefereeType.MAIN));
+        referees.add(new Referee("unMessi", "", false, 4, RefereeType.ASSISTANT));
 
         gameEvents = new ArrayList<>();
         gameEvents.add(new GameEvent("2019-02-02 22:30", 30, GameAlert.GOAL, "desc"));
         gameEvents.add(new GameEvent("2019-02-02 21:30", 30, GameAlert.GOAL, "desc"));
 
         leaguePerSeasons = new ArrayList<>();
-        leaguePerSeasons.add(new League(2020, new TwoGameSchedulingMethod(), new RankingMethod(), "Prime"));
-        leaguePerSeasons.add(new League(2021, new TwoGameSchedulingMethod(), new RankingMethod(), "Prime"));
+        leaguePerSeasons.add(new LeaguePerSeason(2020, new TwoGameSchedulingMethod(), new RankingMethod()));
+        leaguePerSeasons.add(new LeaguePerSeason(2021, new TwoGameSchedulingMethod(), new RankingMethod()));
 
         hostTeams = new ArrayList<>();
-        hostTeams.add(new Team("Real Madrid", new Field("Enspania", 100), new TeamOwner("Zidane", "euguman@gmail.com")));
-        hostTeams.add(new Team("Real Hadera", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com")));
+        hostTeams.add(new Team("Real Madrid", new Field("Enspania", 100), new TeamOwner("Zidane", "euguman@gmail.com", true)));
+        hostTeams.add(new Team("Real Hadera", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com", true)));
 
         guestTeams = new ArrayList<>();
-        guestTeams.add(new Team("unReal Madrid", new Field("Magadan", 400), new TeamOwner("Ronaldo", "euguman@gmail.com")));
-        guestTeams.add(new Team("Real Nesher", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com")));
+        guestTeams.add(new Team("unReal Madrid", new Field("Magadan", 400), new TeamOwner("Ronaldo", "euguman@gmail.com", true)));
+        guestTeams.add(new Team("Real Nesher", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com", true)));
 
         fields = new ArrayList<>();
         fields.add(new Field("1eg0", 400));
@@ -157,21 +157,21 @@ class GameTest {
 
     @Test
     void addGameEvent() {
-        assertTrue(game.addEvent(gameEvents.get(0)));
-        assertFalse(game.addEvent(gameEvents.get(1)));
+        assertTrue(game.addGameEvent(gameEvents.get(0)));
+        assertFalse(game.addGameEvent(gameEvents.get(1)));
 
         assertEquals(1, game.getGameEvents().size());
     }
 
     @Test
     void getLeaguePerSeason() {
-        assertEquals(leaguePerSeasons.get(0).getSeason(), game.getLeague().getSeason());
+        assertEquals(leaguePerSeasons.get(0).getSeason(), game.getLeaguePerSeason().getSeason());
     }
 
     @Test
     void setLeaguePerSeason() {
-        game.setLeague(leaguePerSeasons.get(1));
-        assertEquals(2021, game.getLeague().getSeason());
+        game.setLeaguePerSeason(leaguePerSeasons.get(1));
+        assertEquals(2021, game.getLeaguePerSeason().getSeason());
     }
 
     @Test
@@ -217,7 +217,7 @@ class GameTest {
     @Test
     void getGameEvents() {
         assertEquals(0, game.getGameEvents().size());
-        game.addEvent(gameEvents.get(0));
+        game.addGameEvent(gameEvents.get(0));
         assertEquals(1, game.getGameEvents().size());
     }
 

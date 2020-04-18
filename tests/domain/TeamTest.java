@@ -17,7 +17,7 @@ class TeamTest {
     @BeforeEach
     public void init(){
         field = new Field("test",100);
-        owner = new TeamOwner("ownerUser","owner@gmail.com");
+        owner = new TeamOwner("ownerUser","owner@gmail.com",true);
         team = new Team("test",field,owner);
     }
 
@@ -38,9 +38,9 @@ class TeamTest {
     @Test
     void addProperty() {
         Field field1 = new Field("test",1000);
-        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",new Date(1998,02,02),"player","5");
-        TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com");
-        TeamManager manager = new TeamManager("manageUser","man@gmail.com");
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player","5");
+        TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com",true);
+        TeamManager manager = new TeamManager("manageUser","man@gmail.com",true);
 
         assertEquals(1,team.getFields().size());
         assertEquals(0,team.getPlayers().size());
@@ -65,9 +65,9 @@ class TeamTest {
     @Test
     void removeProperty() {
         Field field1 = new Field("test",1000);
-        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",new Date(1998,02,02),"player","5");
-        TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com");
-        TeamManager manager = new TeamManager("manageUser","man@gmail.com");
+        TeamPlayer player = new TeamPlayer("playeruser","player@gmail.com",true,new Date(1998,02,02),"player","5");
+        TeamCoach coach = new TeamCoach("coachPlayer","coach@gmail.com",true);
+        TeamManager manager = new TeamManager("manageUser","man@gmail.com",true);
 
         team.addProperty(field1);
         team.addProperty(player);
@@ -93,7 +93,7 @@ class TeamTest {
 
     @Test
     void addOwner() {
-        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com");
+        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com",true);
         assertEquals(1,team.getOwners().size());
         team.addOwner(ownerTest2);
         assertEquals(2,team.getOwners().size());
@@ -102,11 +102,11 @@ class TeamTest {
 
     @Test
     void removeOwnerPositiveCase() {
-        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com");
+        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com",true);
         assertEquals(1,team.getOwners().size());
         team.addOwner(ownerTest2);
         assertEquals(2,team.getOwners().size());
-        //assertTrue(team.removeOwner(ownerTest2));
+        assertTrue(team.removeOwner(ownerTest2));
         assertEquals(1,team.getOwners().size());
 
     }
@@ -114,7 +114,7 @@ class TeamTest {
     @Test
     void removeOwnerNegativeCase() {
         assertEquals(1,team.getOwners().size());
-        //assertFalse(team.removeOwner(owner));
+        assertFalse(team.removeOwner(owner));
         assertEquals(1,team.getOwners().size());
     }
 

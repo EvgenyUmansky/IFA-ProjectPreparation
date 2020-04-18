@@ -18,8 +18,8 @@ class AlertTest {
     @BeforeEach
     public void insert() {
         fans = new ArrayList<>();
-        fans.add(new Fan("Evgeny", "euguman@gmail.com"));
-        fans.add(new Fan("Alina", ""));
+        fans.add(new Fan("Evgeny", "euguman@gmail.com", true));
+        fans.add(new Fan("Alina", "", false));
 
         alert = new Alert();
     }

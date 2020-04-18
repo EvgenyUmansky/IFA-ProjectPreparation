@@ -14,7 +14,7 @@ class TeamPlayerTest {
 
     @BeforeEach
     public void init(){
-        player = new TeamPlayer("playeruser","player@gmail.com");
+        player = new TeamPlayer("playeruser","player@gmail.com",true);
     }
 
     @AfterEach
@@ -59,7 +59,7 @@ class TeamPlayerTest {
     @Test
     void setCurrentTeam() {
         Field field = new Field("test",100);
-        TeamOwner owner = new TeamOwner("ownerUser","owner@gmail.com");
+        TeamOwner owner = new TeamOwner("ownerUser","owner@gmail.com",true);
         Team team = new Team("test",field,owner);
 
         assertNull(player.getCurrentTeam());

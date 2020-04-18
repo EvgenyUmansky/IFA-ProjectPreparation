@@ -16,7 +16,7 @@ class RefereeTest {
 
     ArrayList<Referee> referees;
     ArrayList<GameEvent> gameEvents;
-    ArrayList<League> leaguePerSeasons;
+    ArrayList<LeaguePerSeason> leaguePerSeasons;
     ArrayList<Team> hostTeams;
     ArrayList<Team> guestTeams;
     ArrayList<Field> fields;
@@ -25,25 +25,25 @@ class RefereeTest {
     @BeforeEach
     public void insert() {
         referees = new ArrayList<>();
-        referees.add(new Referee("Evgeny", ""));
-        referees.add(new Referee("Messi", "euguman@gmail.com"));
-        referees.add(new Referee("unMessi", ""));
+        referees.add(new Referee("Evgeny", "", false, 4, RefereeType.ASSISTANT));
+        referees.add(new Referee("Messi", "euguman@gmail.com", true, 4, RefereeType.MAIN));
+        referees.add(new Referee("unMessi", "", false, 4, RefereeType.ASSISTANT));
 
         gameEvents = new ArrayList<>();
         gameEvents.add(new GameEvent(LocalDateTime.now().plusMinutes(15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), 30, GameAlert.GOAL, "desc"));
         gameEvents.add(new GameEvent("2020-01-02 12:29", 30, GameAlert.GOAL, "desc"));
 
         leaguePerSeasons = new ArrayList<>();
-        leaguePerSeasons.add(new League(2020, new TwoGameSchedulingMethod(), new RankingMethod(), "Prime"));
-        leaguePerSeasons.add(new League(2021, new TwoGameSchedulingMethod(), new RankingMethod(), "Prime"));
+        leaguePerSeasons.add(new LeaguePerSeason(2020, new TwoGameSchedulingMethod(), new RankingMethod()));
+        leaguePerSeasons.add(new LeaguePerSeason(2021, new TwoGameSchedulingMethod(), new RankingMethod()));
 
         hostTeams = new ArrayList<>();
-        hostTeams.add(new Team("Real Madrid", new Field("Enspania", 100), new TeamOwner("Zidane", "euguman@gmail.com")));
-        hostTeams.add(new Team("Real Hadera", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com")));
+        hostTeams.add(new Team("Real Madrid", new Field("Enspania", 100), new TeamOwner("Zidane", "euguman@gmail.com", true)));
+        hostTeams.add(new Team("Real Hadera", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com", true)));
 
         guestTeams = new ArrayList<>();
-        guestTeams.add(new Team("unReal Madrid", new Field("Magadan", 400), new TeamOwner("Ronaldo", "euguman@gmail.com")));
-        guestTeams.add(new Team("Real Nesher", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com")));
+        guestTeams.add(new Team("unReal Madrid", new Field("Magadan", 400), new TeamOwner("Ronaldo", "euguman@gmail.com", true)));
+        guestTeams.add(new Team("Real Nesher", new Field("Alina", 100), new TeamOwner("Evgeny", "euguman@gmail.com", true)));
 
         fields = new ArrayList<>();
         fields.add(new Field("1eg0", 400));
@@ -52,7 +52,7 @@ class RefereeTest {
         games.add(new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>()));
         games.add(new Game(null, null, null, null, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>()));
 
-        referee = new Referee("Evgeny", "euguman@gmail.com");
+        referee = new Referee("Evgeny", "euguman@gmail.com", true, 4, RefereeType.MAIN);
     }
 
     @AfterEach
@@ -83,7 +83,7 @@ class RefereeTest {
     void addGameEventToGame() {
         games.get(0).addRefereeToGame(referee);
         assertEquals(0, games.get(0).getGameEvents().size());
-        referee.addEvent(games.get(0), gameEvents.get(0));
+        referee.addGameEventToGame(games.get(0), gameEvents.get(0));
         assertEquals(1, games.get(0).getGameEvents().size());
     }
 
@@ -93,13 +93,13 @@ class RefereeTest {
         String eventTimePlus05 = LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         games.get(0).addRefereeToGame(referees.get(0));
-        referees.get(0).addEvent(games.get(0), gameEvents.get(0));
+        referees.get(0).addGameEventToGame(games.get(0), gameEvents.get(0));
 
         // Not MAIN referee
         assertFalse(referees.get(0).changeGameEvent(games.get(0), gameEvents.get(0), "2020-01-02 12:00", 29, GameAlert.GOAL, "desc"));
 
         games.get(0).addRefereeToGame(referee);
-        games.get(0).addEvent(gameEvents.get(0));
+        games.get(0).addGameEvent(gameEvents.get(0));
         // Not event of this game
         assertFalse(referee.changeGameEvent(games.get(0), gameEvents.get(1), "2020-01-02 12:00", 29, GameAlert.GOAL, "desc"));
 

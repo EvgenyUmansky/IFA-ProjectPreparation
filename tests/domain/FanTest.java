@@ -17,12 +17,12 @@ class FanTest {
 
     @BeforeEach
     public void insert() {
-        fan = new Fan("Evgeny", "euguman@gmail.com");
+        fan = new Fan("Evgeny", "euguman@gmail.com", true);
         alertNotification = new AlertNotification("Title sysAdmin", "Text");
 
         sysAdmins = new ArrayList<>();
-        sysAdmins.add(new SystemAdministrator("SysAdmin_1", "euguman@gmail.com"));
-        sysAdmins.add(new SystemAdministrator("SysAdmin_2", "euguman@gmail.com"));
+        sysAdmins.add(new SystemAdministrator("SysAdmin_1", "euguman@gmail.com", true));
+        sysAdmins.add(new SystemAdministrator("SysAdmin_2", "euguman@gmail.com", false));
     }
 
     @AfterEach
