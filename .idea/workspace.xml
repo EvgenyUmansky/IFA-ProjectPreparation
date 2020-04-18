@@ -2,39 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/League.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Budget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Budget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Fan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Fan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/OneGameSchedulingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/OneGameSchedulingMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/RankingMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/RankingMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Referee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Referee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TwoGameSchedulingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TwoGameSchedulingMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/AlertTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/AlertTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/FanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/FanTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeaguePerSeasonTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeagueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/LeagueTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/OneGameSchedulingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/OneGameSchedulingMethodTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/RefereeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/RefereeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TwoGameSchedulingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TwoGameSchedulingMethodTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +93,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.LeagueTest">
+  <component name="RunManager" selected="JUnit.RankingMethodTest">
     <configuration name="LeagueTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
@@ -133,38 +105,6 @@
       <option name="PACKAGE_NAME" value="domain" />
       <option name="MAIN_CLASS_NAME" value="domain.LeagueTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LeagueTest.initTeams" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="IFA-ProjectPreparation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.LeagueTest" />
-      <option name="METHOD_NAME" value="initTeams" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LeagueTest.scheduledGames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="IFA-ProjectPreparation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.LeagueTest" />
-      <option name="METHOD_NAME" value="scheduledGames" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -201,13 +141,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RankingMethodTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="domain" />
+      <option name="MAIN_CLASS_NAME" value="domain.RankingMethodTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RankingMethodTest.setWinPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="domain" />
+      <option name="MAIN_CLASS_NAME" value="domain.RankingMethodTest" />
+      <option name="METHOD_NAME" value="setWinPoints" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RankingMethodTest" />
+        <item itemvalue="JUnit.RankingMethodTest.setWinPoints" />
         <item itemvalue="JUnit.LeagueTest" />
         <item itemvalue="JUnit.LeagueTest.setBegin" />
         <item itemvalue="JUnit.LeagueTest.updateTableOfTheLeague" />
-        <item itemvalue="JUnit.LeagueTest.scheduledGames" />
-        <item itemvalue="JUnit.LeagueTest.initTeams" />
       </list>
     </recent_temporary>
   </component>
@@ -223,6 +194,14 @@
       <updated>1587130436310</updated>
       <workItem from="1587130437898" duration="4960000" />
     </task>
+    <task id="LOCAL-00001" summary="tests for the new code version">
+      <created>1587196825699</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587196825700</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +217,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tests for the new code version" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests for the new code version" />
   </component>
   <component name="WindowStateProjectService">
     <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
@@ -260,19 +243,9 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/domain/LeagueTest.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/domain/League.java</url>
           <line>88</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/domain/LeagueTest.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

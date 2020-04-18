@@ -327,7 +327,9 @@ public class Controller {
 
     // UC 9.5
     public void setRankingMethod(int winP, int loseP, int drawP, League league) {
-        league.getRankingMethod().setWinPoints(winP).setLoosPoints(loseP).setDrawPoints(drawP);
+        league.getRankingMethod().setWinPoints(winP);
+        league.getRankingMethod().setLoosPoints(loseP);
+        league.getRankingMethod().setDrawPoints(drawP);
     }
 
     // UC 9.6
