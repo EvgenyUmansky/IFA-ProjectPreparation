@@ -82,68 +82,68 @@ public class Controller {
     // =================== Personal Pages functions =================
     // ==============================================================
 
-    // U.C 4.1 5.1
+    // U.C 4.2, 5.2
     public PersonalPage updateInfo(PersonalPage page, String info){
         return page.setInfo(info);
     }
+
+
 
     // =================== Team Player functions ====================
     // ==============================================================
 
 
-    // ATTENTION PLEASE: Naor, UC4.1 == UC 5.1 AND UC4.2 == UC5.2
-
-
     // UC 4.1 - update player's details
-    public void updatePlayerDetails(String userName, String mail, Date birthDate, String position, String squadNumber) {
+    public void updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
+        User playerUser = User.getUserByID(username);
+        if(playerName!=null){
+            playerUser.setName(playerName);
+        }
+        ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
 
     }
 
-    // UC 4.2 upload Content To Page
-    public void uploadContentPlayerToPage() {
-
-    }
 
     // ======================= Coach functions ============================
     // ====================================================================
 
     // UC 5.1 - update coach's details
-    public void updateCoachDetails(String userName, String mail, String qualification, String role) {
-
+    public void updateCoachDetails(String username, String coachName, String qualification, String role) {
+        User coachUser = User.getUserByID(username);
+        if(coachName!=null){
+            coachUser.setName(coachName);
+        }
+        ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
     }
 
-    // UC 5.2 upload Content To Page
-    public void uploadContentToCoachPage() {
-
-    }
 
     // ========================= Guest functions ============================
     // ====================================================================
 
     //UC 2.4
     //show Teams details
-    public void showTeamDetails(Team team) {
-
+    public Team getTeamDetails(String teamName) {
+        return Team.getTeamByName(teamName);
     }
 
     //show players details
-    public void showPlayersDetails(TeamPlayer player) {
-
+    public TeamPlayer getPlayersDetails(String playerName) {
+        return TeamPlayer.getPlayerByName(playerName);
     }
 
     //show coach details
-    public void showCoachDetails(TeamCoach teamCoach) {
-
+    public TeamCoach getCoachDetails(String coachName) {
+        return TeamCoach.getCoachByName(coachName);
     }
 
     //show league details
-    public void showLeagueDetails(League league) {
-
+    public League getLeagueDetails(String leagueName) {
+        return League.getLeagueByName(leagueName);
     }
 
     //show season details
-    public void showSeasonDetails(League league, int year) {
-
+    public ArrayList<League> getSeasonDetails(int year) {
+        return League.getAllLeaguesPerSeason(year);
     }
 
     // UC 2.5
@@ -174,18 +174,17 @@ public class Controller {
 
     // 3.5 - get history of fans searches
     // mock
-    public String[] getFanHistory(String username) {
+    public ArrayList<String> getFanHistory(String username) {
         //TODO - get from data base
-        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getSearchHistory();
+        return new ArrayList<>();
     }
 
     // UC 3.6 - get and set fan info
-    // get info
     public String getFanProfileDetails(String username) {
         return User.getUserByID(username).getProfileDetails();
     }
 
-    // set info
+    // for now it's only mail - iteration 2
     public void setFanProfileDetails(String username, String newPassword, String newName, String newMail) {
         User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
     }
@@ -194,12 +193,11 @@ public class Controller {
     // ====================================================================
 
     // UC 10.1 - get and set referee info (fields)
-    // get info
     public String getRefereeDetails(String username) {
         return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
     }
 
-    // set info
+    // Envelope function for setProfileDetails
     public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
         ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
     }
@@ -214,36 +212,18 @@ public class Controller {
     public void addGameEventToGame(String username, Game game, GameEvent gameEvent) throws Exception {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
         if(Game.getGamesByReferee(ref).contains(game)){
-            try {
-                game.addEvent(gameEvent);
-            }
-            catch (Exception e){
-                e.printStackTrace(); // not valid date exception
-                // TODO: logger
-            }
-        }
-        else {
+            game.addEvent(gameEvent);
+        }else {
             throw new Exception("This referee doesn't judge in this game");
         }
     }
 
-    // UC 10.4 - update/change game events by main referee
-    // TODO: check the referee is MAIN in UI
-    public void changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) throws Exception {
-        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        if(Game.getGamesByReferee(ref).contains(game)) {
-            try {
-                game.changeEvent(gameEvent, dateTimeStr, gameMinutes, eventName,  subscription);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                // TODO: logger
-            }
-        }
-        else {
-            throw new Exception("This referee doesn't judge in this game");
-        }
-    }
+    //TODO: we may implement UC 10.4 within UC 10.3 - For Evegeny
+
+/*    // UC 10.4 - update/change game events by main referee
+    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
+        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
+    }*/
 
 
     // =================== Association Agent functions ====================
@@ -263,6 +243,7 @@ public class Controller {
     // UC 9.3
     public void addNewReferee(String username, String password, String name, String mail) throws Exception {
         this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
+        // TODO: Send invitation to referee
     }
 
     // 9.3
@@ -272,11 +253,7 @@ public class Controller {
 
     // UC 9.4
     //This method will be shown after the user chose a referee from the list (using getReferees() method)
-    public void addRefereeToLeaguePerSeason(League league, String userName) {
-        league.addReferee((Referee) User.getUserByID(userName).getRoles().get(Role.REFEREE));
-        Alert alert = new Alert();
-        alert.addToMailSet(User.getUserByID(userName).getRoles().get(Role.REFEREE));
-        alert.sendAlert(new AlertNotification("Invitation","MAZAL TOV! you are a referee!!"));
+    public void addRefereeToLeaguePerSeason() {
     }
 
     // UC 9.5
@@ -291,9 +268,9 @@ public class Controller {
 
     // UC 9.7
     // Click this button after you have all the teams in league, Automatic scheduling
-    public void sceduleGamesInLeagues(League league) {
+    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league) {
         Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
-        league.getSchedulingMethod().scheduleGamePolicy(league, teams);
+        schedulingMethod.scheduleGamePolicy(league, teams);
     }
 
     // UC 9.8
@@ -310,56 +287,63 @@ public class Controller {
     // =================== Team Owner functions ====================
     // =============================================================
 
+    //6.1
 
-    //6.1A - add property
-    public void addProperty(Team team,Object property) {
-        team.addProperty(property);
+    public void addField(String fieldName) {
+
     }
 
 
-    //6.1B - remove property
+    public void addPlayer(String userName) {
 
-    public void removeProperty(Team team,Object property) {
-        team.removeProperty(property);
-    }
-
-    //6.2 - add owner to team and new owner to listAppointments
-    public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){
-        User.getUserByID(userNameNewTeamOwner).getRoles().put(Role.TEAM_OWNER,new TeamOwner(userNameNewTeamOwner, User.getUserByID(userNameNewTeamOwner).getMail(), team, new HashSet<>()));
-        ((TeamOwner)User.getUserByID(userNameTeamOwner).getRoles().get(Role.TEAM_OWNER)).addToOwnerAppointments((TeamOwner) User.getUserByID(userNameNewTeamOwner).getRoles().get(Role.TEAM_OWNER));
     }
 
 
-    //6.3 - remove owner by owner
-    public void removeOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){
-        // TODO: 18/04/2020  //recursive or just one step??
-    }
+    public void addCoach(String userName) {
 
-    //6.4 - add team Manager
-    public void addManager(Team team, String userNameNewTeamManager, String userNameTeamOwner){
-        User.getUserByID(userNameNewTeamManager).getRoles().put(Role.TEAM_MANAGER,new TeamManager(userNameNewTeamManager, User.getUserByID(userNameNewTeamManager).getMail()));
-        ((TeamOwner)User.getUserByID(userNameTeamOwner).getRoles().get(Role.TEAM_MANAGER)).addToManagerAppointments((TeamManager) User.getUserByID(userNameNewTeamManager).getRoles().get(Role.TEAM_MANAGER));
-    }
-
-    //6.5 - remove manager by owner
-    public void removeManager(String userNameNewTeamManager, String userNameTeamOwner){
-        ((TeamOwner)User.getUserByID(userNameTeamOwner).getRoles().get(Role.TEAM_OWNER)).removeFromManagerAppointments((TeamManager) User.getUserByID(userNameNewTeamManager).getRoles().get(Role.TEAM_MANAGER));
     }
 
 
-    //UC6.6A - close team
-    public void closeTeam(String userName, Team team) {
-        team.closeTeam(User.getUserByID(userName));
-    }
+    public void addManager(String userName) {
 
-    //UC6.6B - open team
-    public void openTeam(Team team) {
-        team.openTeam();
     }
 
 
-    //UC6.7 - manage finance
-    public void manageFinance(){
+    //6.2
+
+    public void removeField(String fieldName) {
+
+    }
+
+
+    public void removePlayer(String userName) {
+
+    }
+
+
+    public void removeCoach(String userName) {
+
+    }
+
+
+    public void removeManager(String userName) {
+
+    }
+
+
+    //6.3
+
+    public void updatePlayerDetails(String userName) {
+
+    }
+
+
+    public void updateCoachDetails(String userName) {
+
+    }
+
+
+    public void updateManagerDetails(String userName) {
 
     }
 

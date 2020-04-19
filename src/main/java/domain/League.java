@@ -60,6 +60,10 @@ public class League {
     public static League getLeagueByName(String leagueName){
         return new League(leagueName); // TODO: Replace with DB call
     }
+    public static ArrayList<League> getAllLeaguesPerSeason(int season){
+        ArrayList<League> leaguesPerSeason = new ArrayList<>();
+        return leaguesPerSeason; // TODO: Replace with DB call
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
