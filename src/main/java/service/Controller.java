@@ -367,8 +367,8 @@ public class Controller {
 
 
     //UC8.2 - remove user from System
-    public void removeUserFromSystem(SystemAdministrator admin, String userName) {
-            admin.closeUser(User.getUserByID(userName));
+    public void removeUserFromSystem(String userName) {
+        User.getUserByID(userName).closeUser();
     }
 
 
