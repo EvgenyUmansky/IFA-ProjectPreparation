@@ -16,7 +16,7 @@ public class Team {
     private String teamEmail;
     private Budget budget;
     private PersonalPage teamPage;
-    private boolean isOpen;
+    private TeamStatus teamStatus;
 
     // Constructor
     public Team(String name, Field stadium, TeamOwner owner) {
@@ -28,23 +28,11 @@ public class Team {
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
         this.fields.add(stadium);
-        this.isOpen = true;
+        this.teamStatus =TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
     }
 
-    public void closeTeam() {
-        if (isOpen) {
-            isOpen = false;
-            // TODO: Add alert
-        }
-    }
 
-    public void openTeam() {
-        if(!isOpen){
-            isOpen = true;
-            // TODO: Add alert
-        }
-    }
 
     public HashMap<String, TeamPlayer> getPlayers() {
         return players;
@@ -80,7 +68,7 @@ public class Team {
 
 
     public void addProperty(Object property) {
-        if(!isOpen){
+        if(teamStatus != TeamStatus.Open){
             return;
         }
         if (property instanceof Field) {
@@ -104,7 +92,7 @@ public class Team {
     }
 
     public void removeProperty(Object property) {
-        if(!isOpen){
+        if(teamStatus != TeamStatus.Open){
             return;
         }
         if (property instanceof Field) {
@@ -124,9 +112,38 @@ public class Team {
         }
     }
 
+
+    public void closeTeam(User user) {
+        // TODO: 18/04/2020 add relevant subscribers to mailSet
+        Alert alert = new Alert();
+        //alert.addToMailSet();
+        if (teamStatus == TeamStatus.Open) {
+            if(user.getRoles().containsKey(Role.SYSTEM_ADMIN)){
+                teamStatus = TeamStatus.PermanentlyClose;
+                alert.sendAlert(new AlertNotification("close team permanently","you team close permanently"));
+
+            }
+            else if(user.getRoles().containsKey(Role.TEAM_OWNER)){
+                teamStatus = TeamStatus.TempClose;
+                alert.sendAlert(new AlertNotification("close team temporary","you team close temporary"));
+            }
+        }
+    }
+
+    public void openTeam() {
+        // TODO: 18/04/2020 add relevant subscribers to mailSet
+        Alert alert = new Alert();
+        //alert.addToMailSet();
+        if(teamStatus == TeamStatus.TempClose){
+            teamStatus = TeamStatus.Open;
+            alert.sendAlert(new AlertNotification("open your team","your team open again"));
+        }
+    }
+
+
     //UC 6.2
     public void addOwner(TeamOwner owner) {
-        if(!isOpen){
+        if(teamStatus != TeamStatus.Open){
             return;
         }
         if (owner.getTeam() == null) {
@@ -138,7 +155,7 @@ public class Team {
 
 
     public void addOwner(User currentOwner, User newOwner) {
-        if(!isOpen){
+        if(teamStatus != TeamStatus.Open){
             return;
         }
         if (this.owners.containsKey(currentOwner.getUserName())) {
@@ -151,7 +168,7 @@ public class Team {
 
     //UC 6.3
     public void removeOwner(User user) {
-        if(!isOpen){
+        if(teamStatus != TeamStatus.Open){
             return;
         }
         //Impossible to leave the Team without an Owner
@@ -163,31 +180,31 @@ public class Team {
         }
     }
 
-    //UC 6.4
-    public Team addTeamManager(User user) {
-        user.addRoleToUser(Role.TEAM_MANAGER);
-        this.managers.put(user.getUserName(), (TeamManager) user.getRoles().get(Role.TEAM_MANAGER));
-        // TODO: Implement permissions
-        return this;
-    }
+//    //UC 6.4
+//    public Team addTeamManager(User user) {
+//        user.addRoleToUser(Role.TEAM_MANAGER);
+//        this.managers.put(user.getUserName(), (TeamManager) user.getRoles().get(Role.TEAM_MANAGER));
+//        // TODO: Implement permissions
+//        return this;
+//    }
 
 
-    //UC 6.5
-    // TODO: 15/04/2020 recursive removing?
-    public boolean removeTeamManager(Subscriber owner, Subscriber managerToRemove) {
-        if (owner instanceof TeamOwner) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (managers.containsKey(managerToRemove.getUserName())) {
-                TeamManager userRemoveManager = managers.get(managerToRemove.getUserName());
-                //TODO: We need to get the manager's User: by a static method from User or a User field in TeamMember (Naor)
-/*                if (userRemoveManager.getRoles().containsKey(Role.TEAM_MANAGER)) {
-                    userRemoveManager.getRoles().remove(Role.TEAM_MANAGER);
-                    return true;
-                }*/
-            }
-        }
-        return false;
-    }
+//    //UC 6.5
+//    // TODO: 15/04/2020 recursive removing?
+//    public boolean removeTeamManager(Subscriber owner, Subscriber managerToRemove) {
+//        if (owner instanceof TeamOwner) {
+//            TeamOwner teamOwner = (TeamOwner) owner;
+//            if (managers.containsKey(managerToRemove.getUserName())) {
+//                TeamManager userRemoveManager = managers.get(managerToRemove.getUserName());
+//                //TODO: We need to get the manager's User: by a static method from User or a User field in TeamMember (Naor)
+///*                if (userRemoveManager.getRoles().containsKey(Role.TEAM_MANAGER)) {
+//                    userRemoveManager.getRoles().remove(Role.TEAM_MANAGER);
+//                    return true;
+//                }*/
+//            }
+//        }
+//        return false;
+//    }
 
     public TeamPlayer getPlayer(String userName) {
         return players.get(userName);

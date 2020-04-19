@@ -1,40 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fcaed18e-6703-4f63-a78e-8d855ec6bbff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Budget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Budget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Fan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Fan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Referee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Referee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Team.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/AlertTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/AlertTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/FanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/FanTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeaguePerSeasonTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeagueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/LeagueTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/OneGameSchedulingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/OneGameSchedulingMethodTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/RefereeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/RefereeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TwoGameSchedulingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TwoGameSchedulingMethodTest.java" afterDir="false" />
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Team.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,13 +26,12 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>setSea</find>
-      <find>get</find>
-      <find>getRefereeGames</find>
-      <find>getLeagueByName</find>
-    </findStrings>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,9 +57,21 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587220119559" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15234375" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -114,18 +93,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -146,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587149937495</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update association agent and team owner">
+      <created>1587239919440</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587239919440</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,38 +136,38 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="After merge with Dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="After merge with Dev" />
+    <MESSAGE value="update association agent and team owner" />
+    <option name="LAST_COMMIT_MESSAGE" value="update association agent and team owner" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587220227287" />
-    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1587220227287" />
-    <state width="1493" height="202" key="GridCell.Tab.0.bottom" timestamp="1587220577279">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="202" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587220577279" />
-    <state width="1493" height="202" key="GridCell.Tab.0.center" timestamp="1587220577279">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="202" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587220577279" />
-    <state width="1493" height="202" key="GridCell.Tab.0.left" timestamp="1587220577279">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="202" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587220577279" />
-    <state width="1493" height="202" key="GridCell.Tab.0.right" timestamp="1587220577279">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="202" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587220577279" />
-    <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1587220227287" />
-    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1587220227287" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1587220406759">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587220406759" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1587220235893">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587220235893" />
+    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
+    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" />
+    <state width="1493" height="202" key="GridCell.Tab.0.bottom" />
+    <state width="1493" height="202" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" />
+    <state width="1493" height="202" key="GridCell.Tab.0.center" />
+    <state width="1493" height="202" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" />
+    <state width="1493" height="202" key="GridCell.Tab.0.left" />
+    <state width="1493" height="202" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" />
+    <state width="1493" height="202" key="GridCell.Tab.0.right" />
+    <state width="1493" height="202" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" />
+    <state x="481" y="129" key="MultipleFileMergeDialog" />
+    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="249" y="0" key="SettingsEditor" />
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" />
   </component>
 </project>
