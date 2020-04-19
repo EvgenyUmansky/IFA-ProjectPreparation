@@ -19,7 +19,7 @@ class OneGameSchedulingMethodTest {
 
     @BeforeEach
     public void init(){
-        schedulingMethod = new TwoGameSchedulingMethod();
+        schedulingMethod = new OneGameSchedulingMethod();
         leaguePerSeason = new League(2020, schedulingMethod,new RankingMethod(), "alpha");
         leagueTeams = new Team[3];
         leagueTeams[0] = new Team("FCB", new Field("Barca-Field", 5000), new TeamOwner("abc", "aa"));

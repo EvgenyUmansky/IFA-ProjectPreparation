@@ -110,15 +110,15 @@ class GameTest {
     }
 
     @Test
-    void removeFanToAlerts(){
+    void removeFanFromAlerts(){
         game.addFanToAlerts(fans.get(0));
         game.addFanToAlerts(fans.get(1));
 
         assertEquals(1, game.getAlertFans().getMailAlertList().size());
         assertEquals(1, game.getAlertFans().getInSystemAlertList().size());
 
-        game.removeFanToAlerts((Fan) game.getAlertFans().getMailAlertList().toArray()[0]);
-        game.removeFanToAlerts((Fan) game.getAlertFans().getInSystemAlertList().toArray()[0]);
+        game.removeFanFromAlerts((Fan) game.getAlertFans().getMailAlertList().toArray()[0]);
+        game.removeFanFromAlerts((Fan) game.getAlertFans().getInSystemAlertList().toArray()[0]);
 
         assertEquals(0, game.getAlertFans().getMailAlertList().size());
         assertEquals(0, game.getAlertFans().getInSystemAlertList().size());
@@ -134,29 +134,32 @@ class GameTest {
 
         game.addRefereeToAlerts(referees.get(2));
         assertEquals(2, game.getAlertReferees().getInSystemAlertList().size());
-
     }
 
     @Test
-    void removeRefereeFromAlerts(){
-        game.addFanToAlerts(fans.get(0));
-        game.addFanToAlerts(fans.get(1));
-
+    void deleteRefereeFromAlerts(){
         game.addRefereeToAlerts(referees.get(0));
         game.addRefereeToAlerts(referees.get(1));
-
         assertEquals(1, game.getAlertReferees().getMailAlertList().size());
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
-
         game.addRefereeToAlerts(referees.get(2));
         assertEquals(2, game.getAlertReferees().getInSystemAlertList().size());
 
-        game.removeRefereeFromGame((Referee) game.getAlertReferees().getMailAlertList().toArray()[0]);
-        game.removeRefereeFromGame((Referee) game.getAlertReferees().getInSystemAlertList().toArray()[0]);
-
+        game.deleteRefereeFromAlerts(referees.get(0));
+        assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
+        game.deleteRefereeFromAlerts(referees.get(1));
         assertEquals(0, game.getAlertReferees().getMailAlertList().size());
+        game.deleteRefereeFromAlerts(referees.get(2));
+        assertEquals(0, game.getAlertReferees().getInSystemAlertList().size());
+    }
+
+    @Test
+    void addRefereesOfGameToAlerts(){
+        game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), "2019-02-02 22:00", new ArrayList<Referee>(){{add(referees.get(0));}});
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
     }
+
+
 
     @Test
     void sendAlertScoreToFan() {
@@ -188,9 +191,9 @@ class GameTest {
         assertEquals(1, game.getGameEvents().size());
 
         try {
-            game.addEvent(gameEvents.get(0));
+            game.addEvent(gameEvents.get(1));
         } catch (Exception e) {
-            assertEquals("The date of the game is invalid", e.toString());
+            assertEquals("java.lang.Exception: The date of the game is invalid", e.toString());
         }
     }
 

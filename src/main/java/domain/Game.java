@@ -72,7 +72,7 @@ public class Game {
         }
     }
 
-    public void removeFanToAlerts(Subscriber fan){
+    public void removeFanFromAlerts(Subscriber fan){
         if(fan.isMail()) {
             this.alertFans.removeFromMailSet(fan);
         }
@@ -95,12 +95,7 @@ public class Game {
     }
 
     public void deleteRefereeFromAlerts(Referee referee){
-        if(referee.isMail()) {
-            this.alertReferees.removeFromMailSet(referee);
-        }
-        else{
-            this.alertReferees.removeFromSystemSet(referee);
-        }
+        alertReferees.removeSubscriber(referee);
     }
 
     private void addRefereesOfGameToAlerts(){
