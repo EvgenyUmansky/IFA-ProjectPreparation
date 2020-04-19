@@ -12,10 +12,21 @@ public class TeamCoach extends TeamMember {
     }
 
 
-    public boolean updateDetails(String qualification, String role){
-        setQualification(qualification);
-        setRole(role);
-        return true;
+    //U.C 5.1
+    public void updateDetails(String newQualification, String newRole){
+        //update new details also in coach's page
+        String coachName = User.getUserByID(this.getUserName()).getName();
+        CoachPage coachPage = (CoachPage)PersonalPage.getPage(coachName);
+
+        if(newQualification != null) {
+            setQualification(newQualification);
+            coachPage.setQualification(newQualification);
+        }
+        if(newRole != null) {
+            setRole(newRole);
+            coachPage.setRole(newRole);
+        }
+
     }
 
     public void setRole(String role){
@@ -32,6 +43,11 @@ public class TeamCoach extends TeamMember {
 
     public String getQualification() {
         return qualification;
+    }
+
+    public static TeamCoach getCoachByName (String coachName){
+        //TODO: working with DB
+        return new TeamCoach(null,null);
     }
 
 }

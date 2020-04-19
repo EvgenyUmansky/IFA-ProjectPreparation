@@ -8,6 +8,7 @@ public class TeamPlayer extends TeamMember {
     private String position;
     private String squadNumber;
 
+
     // Constructor
 
 
@@ -23,11 +24,24 @@ public class TeamPlayer extends TeamMember {
 
 
     // U.C 4.1
-    public boolean updateDetails(Date birthDate, String position, String squadNumber){
-        setSquadNumber(squadNumber);
-        setBirthDate(birthDate);
-        setPosition(position);
-        return true;
+    public void updateDetails(Date newBirthDate, String newPosition, String newQuadNumber){
+        //update new details also in player's page
+        String playerName = User.getUserByID(this.getUserName()).getName();
+        PlayerPage playerPage = (PlayerPage)PersonalPage.getPage(playerName);
+
+        if(newBirthDate != null) {
+            setBirthDate(newBirthDate);
+            playerPage.setBirthDate(newBirthDate);
+        }
+        if(newPosition != null) {
+            setPosition(newPosition);
+            playerPage.setPosition(newPosition);
+        }
+        if(newQuadNumber != null) {
+            setSquadNumber(newQuadNumber);
+            playerPage.setSquadNumber(newQuadNumber);
+        }
+
     }
 
     public Date getBirthDate() {
@@ -54,4 +68,8 @@ public class TeamPlayer extends TeamMember {
         this.squadNumber = squadNumber;
     }
 
+    public static TeamPlayer getPlayerByName (String playerName){
+        //TODO: working with DB
+        return new TeamPlayer(null,null);
+    }
 }

@@ -82,68 +82,68 @@ public class Controller {
     // =================== Personal Pages functions =================
     // ==============================================================
 
-    // U.C 4.1 5.1
+    // U.C 4.2, 5.2
     public PersonalPage updateInfo(PersonalPage page, String info){
         return page.setInfo(info);
     }
+
+
 
     // =================== Team Player functions ====================
     // ==============================================================
 
 
-    // ATTENTION PLEASE: Naor, UC4.1 == UC 5.1 AND UC4.2 == UC5.2
-
-
     // UC 4.1 - update player's details
-    public void updatePlayerDetails(String userName, String mail, Date birthDate, String position, String squadNumber) {
+    public void updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
+        User playerUser = User.getUserByID(username);
+        if(playerName!=null){
+            playerUser.setName(playerName);
+        }
+        ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
 
     }
 
-    // UC 4.2 upload Content To Page
-    public void uploadContentPlayerToPage() {
-
-    }
 
     // ======================= Coach functions ============================
     // ====================================================================
 
     // UC 5.1 - update coach's details
-    public void updateCoachDetails(String userName, String mail, String qualification, String role) {
-
+    public void updateCoachDetails(String username, String coachName, String qualification, String role) {
+        User coachUser = User.getUserByID(username);
+        if(coachName!=null){
+            coachUser.setName(coachName);
+        }
+        ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
     }
 
-    // UC 5.2 upload Content To Page
-    public void uploadContentToCoachPage() {
 
-    }
-
-    // ========================= Guess functions ============================
+    // ========================= Guest functions ============================
     // ====================================================================
 
     //UC 2.4
     //show Teams details
-    public void showTeamDetails(Team team) {
-
+    public Team getTeamDetails(String teamName) {
+        return Team.getTeamByName(teamName);
     }
 
     //show players details
-    public void showPlayersDetails(TeamPlayer player) {
-
+    public TeamPlayer getPlayersDetails(String playerName) {
+        return TeamPlayer.getPlayerByName(playerName);
     }
 
     //show coach details
-    public void showCoachDetails(TeamCoach teamCoach) {
-
+    public TeamCoach getCoachDetails(String coachName) {
+        return TeamCoach.getCoachByName(coachName);
     }
 
     //show league details
-    public void showLeagueDetails(League league) {
-
+    public League getLeagueDetails(String leagueName) {
+        return League.getLeagueByName(leagueName);
     }
 
     //show season details
-    public void showSeasonDetails(League league, int year) {
-
+    public ArrayList<League> getSeasonDetails(int year) {
+        return League.getAllLeaguesPerSeason(year);
     }
 
     // UC 2.5
