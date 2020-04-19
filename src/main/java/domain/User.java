@@ -11,6 +11,7 @@ public class User {
     private String name;
     private HashMap<Role, Subscriber> roles;
     private String mail;
+    private boolean isClosed;
 
     // ========================= Constructor ==========================
 
@@ -21,9 +22,15 @@ public class User {
         this.mail = mail;
         this.roles = new HashMap<>();
         addRoleToUser(Role.FAN);
+        isClosed = false;
     }
 
     // ========================= Getters ==========================
+
+
+    public boolean isClosed() {
+        return isClosed;
+    }
 
     public String getMail() {
         return this.mail;
@@ -55,6 +62,11 @@ public class User {
     }
 
     // ========================= Setters ==========================
+
+
+    public void setClosed(boolean closed) {
+        isClosed = closed;
+    }
 
     public User setPassword(String password) {
         if (password != null)
