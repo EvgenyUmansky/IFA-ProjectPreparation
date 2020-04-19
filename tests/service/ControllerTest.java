@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
-
+    Controller controller = new Controller();
     @Test
     void connectToExternalSystems() {
     }
@@ -26,45 +26,84 @@ class ControllerTest {
     void register() {
     }
 
+    
+    // =================== User functions ===========================
+    // ==============================================================
+
     @Test
     void getPagesByUsername() {
     }
 
+
+    // =================== Personal Pages Tests =================
+    // ==============================================================
+
+    //T4.2, T5.2
     @Test
     void updateInfo() {
     }
 
+    // =================== Team Player functions ====================
+    // ==============================================================
+
+    //T4.1
     @Test
     void updatePlayerDetails() {
     }
 
+    // ======================= Coach Tests ============================
+    // ====================================================================
+
+    //T5.1
     @Test
     void updateCoachDetails() {
     }
 
+    // ========================= Guest Tests ============================
+    // ====================================================================
+    //T2.4A
     @Test
     void getTeamDetails() {
+        assertEquals("team", controller.getTeamDetails("team").getTeamName());
     }
 
+    //T2.4B
     @Test
     void getPlayersDetails() {
+        assertEquals("userName", controller.getPlayersDetails("userName").getUserName());
+
     }
 
+    //T2.4C
     @Test
     void getCoachDetails() {
+        assertEquals("userName", controller.getCoachDetails("userName").getUserName());
+
     }
 
+    //T2.4D
     @Test
     void getLeagueDetails() {
+        assertEquals("leagueName", controller.getLeagueDetails("leagueName").getLeagueName());
     }
 
+    //T2.4E
     @Test
     void getSeasonDetails() {
+        //TODO: change test accordingly
+        assertEquals(0 , controller.getSeasonDetails(1998).size());
     }
 
+
+    //T2.5
     @Test
     void searchByKeyWord() {
+        //TODO: next iteration
     }
+
+
+    // ========================= Fan Tests ============================
+    // ====================================================================
 
     @Test
     void addFanSubscriptionToPersonalPage() {

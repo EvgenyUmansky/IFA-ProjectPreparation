@@ -47,7 +47,7 @@ public class TeamCoach extends TeamMember {
 
     public static TeamCoach getCoachByName (String coachName){
         //TODO: working with DB
-        return new TeamCoach(null,null);
+        return new TeamCoach("userName",null);
     }
 
 }
