@@ -12,7 +12,6 @@ public class TeamOwner extends  Subscriber {
 
     // =================== Constructors ====================
 
-
     public TeamOwner(String userName, String mail, Team team, HashSet<TeamManager> managerAppointments) {
         super(userName, mail);
         this.team = team;
@@ -45,6 +44,13 @@ public class TeamOwner extends  Subscriber {
 
 
     // =================== Functionality ====================
+
+    // Add property use case
+
+    public boolean addProperty(Object property){
+        team.addProperty(property);
+        return true;
+    }
 
     //add Team Owner
     public void addToOwnerAppointments(TeamOwner owner) {
@@ -94,5 +100,4 @@ public class TeamOwner extends  Subscriber {
         coach.updateDetails(validation,role);
         return true;
     }
-}
 }
