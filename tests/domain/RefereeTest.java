@@ -60,6 +60,13 @@ class RefereeTest {
     @AfterEach
     public void delete(){
         referee = null;
+        referees = null;
+        gameEvents = null;
+        leaguePerSeasons = null;
+        hostTeams = null;
+        guestTeams = null;
+        fields = null;
+        games = null;
     }
 
     @Test
