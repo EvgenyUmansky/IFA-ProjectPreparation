@@ -16,9 +16,9 @@ class TeamMemberTest {
     @BeforeEach
     public void init(){
         field = new Field("test",100);
-        owner = new TeamOwner("ownerUser","owner@gmail.com",true);
+        owner = new TeamOwner("ownerUser","owner@gmail.com");
         team = new Team("test",field,owner);
-        TM = new TeamManager("teamManagerUser","man@gmail.com",true);
+        TM = new TeamManager("teamManagerUser","man@gmail.com");
     }
 
     @AfterEach
