@@ -12,18 +12,17 @@ public class TeamOwner extends  Subscriber {
 
     // =================== Constructors ====================
 
-
-
-
     public TeamOwner(String userName, String mail, Team team, HashSet<TeamManager> managerAppointments) {
         super(userName, mail);
         this.team = team;
         this.managerAppointments = managerAppointments;
+        this.ownerAppointments = new HashSet<>();
     }
 
     public TeamOwner(String userName, String mail) {
         super(userName, mail);
         this.managerAppointments = new HashSet<>();
+        this.ownerAppointments = new HashSet<>();
     }
 
 
@@ -41,6 +40,8 @@ public class TeamOwner extends  Subscriber {
         return managerAppointments;
     }
 
+    public HashSet<TeamOwner> getOwnerAppointments() {return ownerAppointments;}
+
 
     // =================== Functionality ====================
 
@@ -52,8 +53,8 @@ public class TeamOwner extends  Subscriber {
     }
 
     //add Team Owner
-    public void addToOwnerAppointments(TeamOwner Owner) {
-        this.ownerAppointments.add(Owner);
+    public void addToOwnerAppointments(TeamOwner owner) {
+        this.ownerAppointments.add(owner);
     }
 
     //add Manager Owner
@@ -61,8 +62,8 @@ public class TeamOwner extends  Subscriber {
         this.managerAppointments.add(teamManager);
     }
     //remove Team Owner
-    public void removeFromOwnerAppointments(TeamOwner OwnerToRemove) {
-        this.ownerAppointments.remove(OwnerToRemove);
+    public void removeFromOwnerAppointments(TeamOwner ownerToRemove) {
+        this.ownerAppointments.remove(ownerToRemove);
     }
 
     //remove Manager Owner
@@ -99,62 +100,4 @@ public class TeamOwner extends  Subscriber {
         coach.updateDetails(validation,role);
         return true;
     }
-
-    //UC 6.2
-    // TODO: 15/04/2020 manage list of added owners for removing
-    public void addTeamOwner(Subscriber secondOwner) {
-      /*  if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(secondOwner.getUserName())) {
-                User userNewOwner = users.get(secondOwner.getUserName());
-                Subscriber newSubsOwner = new TeamOwner(secondOwner.getUserName(), secondOwner.getMail(), false, teamOwner.getTeam(), teamOwner.getManagerAppointments());
-                userNewOwner.getRoles().put("Team Owner", newSubsOwner);
-            }*/
-    }
-    //UC 6.3
-    // TODO: 15/04/2020 recursive removing?
-    public void removeTeamOwner(Subscriber owner,Subscriber ownerToRemove) {
-       /* if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(ownerToRemove.getUserName())) {
-                User userRemoveOwner = users.get(ownerToRemove.getUserName());
-                if (userRemoveOwner.getRoles().containsKey("Team Owner")) {
-                    userRemoveOwner.getRoles().remove("Team Owner");
-                }
-            }
-        }*/
-    }
-
-
-
-
-    //UC 6.4
-
-    // TODO: 15/04/2020 manage list of added managers for removing
-    public void addTeamManager(Subscriber owner,Subscriber newManager) {
-        /*if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner) owner;
-            if (users.containsKey(newManager.getUserName())) {
-                User userNewManager = users.get(newManager.getUserName());
-                Subscriber newSubManager = new TeamManager(newManager.getUserName(), newManager.getMail(), false);
-                userNewManager.getRoles().put("Team Manager", newSubManager);
-            }
-        }*/
-    }
-
-    //UC 6.5
-    // TODO: 15/04/2020 recursive removing?
-    public void removeTeamManager(Subscriber owner,Subscriber managerToRemove) {
-        /*if (owner instanceof TeamOwner == true) {
-            TeamOwner teamOwner = (TeamOwner)owner;
-            if(users.containsKey(managerToRemove.getUserName())) {
-                User userRemoveManager = users.get(managerToRemove.getUserName());
-                if (userRemoveManager.getRoles().containsKey("Team Manager")) {
-                    userRemoveManager.getRoles().remove("Team Manager");
-                }
-            }
-        }*/
-    }
-
-
 }
