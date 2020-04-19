@@ -153,7 +153,7 @@ public class Team {
         this.owners.put(owner.getUserName(), owner);
     }
 
-
+    //UC 6.2
     public void addOwner(User currentOwner, User newOwner) {
         if(teamStatus != TeamStatus.Open){
             return;

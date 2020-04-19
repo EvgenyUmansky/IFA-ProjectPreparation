@@ -16,19 +16,28 @@ public class RankingMethod  {
 
     // ========================= Setters ==========================
 
-    public RankingMethod setWinPoints(int winPoints) {
-        this.winPoints = winPoints;
-        return this;
+    public boolean setWinPoints(int winPoints) {
+        if(winPoints > this.drawPoints && winPoints > this.drawPoints){
+            this.winPoints = winPoints;
+            return true;
+        }
+        return false;
     }
 
-    public RankingMethod setLoosPoints(int loosPoints) {
-        this.loosPoints = loosPoints;
-        return this;
+    public boolean setLoosPoints(int loosPoints) {
+        if(loosPoints < this.drawPoints && loosPoints < this.winPoints){
+            this.loosPoints = loosPoints;
+            return true;
+        }
+        return false;
     }
 
-    public RankingMethod setDrawPoints(int drawPoints) {
-        this.drawPoints = drawPoints;
-        return this;
+    public boolean setDrawPoints(int drawPoints) {
+        if(drawPoints > this.loosPoints && drawPoints < this.winPoints){
+            this.drawPoints = drawPoints;
+            return true;
+        }
+        return false;
     }
 
     // ========================= Getters ==========================
