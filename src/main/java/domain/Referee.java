@@ -37,7 +37,12 @@ public class Referee extends Subscriber {
 
     public void setRefereeDetails(String newMail, int qualification, RefereeType refereeType) {
         setMail(newMail);
-        setRefereeType(refereeType);
+        if (refereeType == null) {
+            System.out.println("RefereeType is empty");
+        }
+        else {
+            setRefereeType(refereeType);
+        }
 
         if (qualification > 0 && qualification < 6) {
             setQualification(qualification);

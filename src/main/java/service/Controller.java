@@ -117,7 +117,7 @@ public class Controller {
 
     }
 
-    // ========================= Guess functions ============================
+    // ========================= Guest functions ============================
     // ====================================================================
 
     //UC 2.4
@@ -174,17 +174,18 @@ public class Controller {
 
     // 3.5 - get history of fans searches
     // mock
-    public ArrayList<String> getFanHistory(String username) {
+    public String[] getFanHistory(String username) {
         //TODO - get from data base
-        return new ArrayList<>();
+        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getSearchHistory();
     }
 
     // UC 3.6 - get and set fan info
+    // get info
     public String getFanProfileDetails(String username) {
         return User.getUserByID(username).getProfileDetails();
     }
 
-    // for now it's only mail - iteration 2
+    // set info
     public void setFanProfileDetails(String username, String newPassword, String newName, String newMail) {
         User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
     }
@@ -193,11 +194,12 @@ public class Controller {
     // ====================================================================
 
     // UC 10.1 - get and set referee info (fields)
+    // get info
     public String getRefereeDetails(String username) {
         return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
     }
 
-    // Envelope function for setProfileDetails
+    // set info
     public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
         ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
     }
@@ -212,18 +214,36 @@ public class Controller {
     public void addGameEventToGame(String username, Game game, GameEvent gameEvent) throws Exception {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
         if(Game.getGamesByReferee(ref).contains(game)){
-            game.addEvent(gameEvent);
-        }else {
+            try {
+                game.addEvent(gameEvent);
+            }
+            catch (Exception e){
+                e.printStackTrace(); // not valid date exception
+                // TODO: logger
+            }
+        }
+        else {
             throw new Exception("This referee doesn't judge in this game");
         }
     }
 
-    //TODO: we may implement UC 10.4 within UC 10.3 - For Evegeny
-
-/*    // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
-        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
-    }*/
+    // UC 10.4 - update/change game events by main referee
+    // TODO: check the referee is MAIN in UI
+    public void changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) throws Exception {
+        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        if(Game.getGamesByReferee(ref).contains(game)) {
+            try {
+                game.changeEvent(gameEvent, dateTimeStr, gameMinutes, eventName,  subscription);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                // TODO: logger
+            }
+        }
+        else {
+            throw new Exception("This referee doesn't judge in this game");
+        }
+    }
 
 
     // =================== Association Agent functions ====================
