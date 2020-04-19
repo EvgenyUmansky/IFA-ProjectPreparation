@@ -204,18 +204,26 @@ public class Controller {
 
     // UC 10.2 - get all games the referee judge
     public ArrayList<Game> getRefereeGames(String username) {
-        return Game.getGamesByReferee(((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)));
+        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        return Game.getGamesByReferee(ref);
     }
 
     // UC 10.3 - create new game event and add it to list of game events of the game
-    public void addEvent(String username, Game game, GameEvent gameEvent) {
-        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).addEvent(game, gameEvent);
+    public void addGameEventToGame(String username, Game game, GameEvent gameEvent) throws Exception {
+        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        if(Game.getGamesByReferee(ref).contains(game)){
+            game.addEvent(gameEvent);
+        }else {
+            throw new Exception("This referee doesn't judge in this game");
+        }
     }
 
-    // UC 10.4 - update/change game events by main referee
+    //TODO: we may implement UC 10.4 within UC 10.3 - For Evegeny
+
+/*    // UC 10.4 - update/change game events by main referee
     public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
         return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
-    }
+    }*/
 
 
     // =================== Association Agent functions ====================
