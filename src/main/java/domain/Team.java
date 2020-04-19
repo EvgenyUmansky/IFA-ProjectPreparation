@@ -179,8 +179,12 @@ public class Team {
             user.removeRoleFromUser(Role.TEAM_OWNER);
             removeSubscriber(owner);
             HashSet<TeamOwner> ownerAppointments = owner.getOwnerAppointments();
+            HashSet<TeamManager> managerAppointments = owner.getManagerAppointments();
             for(TeamOwner appointment: ownerAppointments){
                 removeOwner(User.getUserByID(appointment.getUserName()));
+            }
+            for(TeamManager appointment : managerAppointments){
+                removeManager(User.getUserByID(appointment.getUserName()));
             }
         }
     }
@@ -276,4 +280,9 @@ public class Team {
     public void removeSubscriber(Subscriber user){
         alert.removeSubscriber(user);
     }
+
+    public TeamStatus getTeamStatus(){
+        return this.teamStatus;
+    }
+
 }

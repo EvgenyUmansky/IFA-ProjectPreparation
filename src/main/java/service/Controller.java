@@ -305,7 +305,9 @@ public class Controller {
 
     //6.2 - add owner to team and new owner to listAppointments
     public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){
-        //FIXME - check the team status first
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
         User ownerUser = User.getUserByID(userNameTeamOwner), newOwnerUser = User.getUserByID(userNameNewTeamOwner);
         TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
         newOwnerUser.getRoles().put(Role.TEAM_OWNER,new TeamOwner(userNameNewTeamOwner, newOwnerUser.getMail(), team, new HashSet<>()));
@@ -316,7 +318,9 @@ public class Controller {
 
     //6.3 - remove owner by owner
     public void removeOwner(Team team, String userNameTeamOwner, String userNameRemovedTeamOwner){
-        //FIXME - check the team status first
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
         User ownerUser = User.getUserByID(userNameTeamOwner), removedOwnerUser = User.getUserByID(userNameRemovedTeamOwner);
         TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER), removedOwner = (TeamOwner)removedOwnerUser.getRoles().get(Role.TEAM_OWNER);
         owner.removeFromOwnerAppointments(removedOwner);
@@ -325,7 +329,9 @@ public class Controller {
 
     //6.4 - add team Manager
     public void addManager(Team team, String userNameNewTeamManager, String userNameTeamOwner){
-        //FIXME - check the team status first
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
         User ownerUser = User.getUserByID(userNameTeamOwner), newManagerUser = User.getUserByID(userNameNewTeamManager);
         TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
         newManagerUser.getRoles().put(Role.TEAM_MANAGER,new TeamManager(userNameNewTeamManager, newManagerUser.getMail()));
@@ -335,7 +341,9 @@ public class Controller {
 
     //6.5 - remove manager by owner
     public void removeManager(Team team, String userNameRemovedTeamManager, String userNameTeamOwner){
-        //FIXME - check the team status first
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
         User ownerUser = User.getUserByID(userNameTeamOwner), removedManagerUser = User.getUserByID(userNameRemovedTeamManager);
         TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER);
         TeamManager manager = (TeamManager)removedManagerUser.getRoles().get(Role.TEAM_MANAGER);
