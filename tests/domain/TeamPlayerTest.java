@@ -28,7 +28,7 @@ class TeamPlayerTest {
         assertNull(player.getBirthDate());
         assertNull(player.getPosition());
         assertNull(player.getSquadNumber());
-        //assertTrue(player.updateDetails(date,"player","5"));
+        assertTrue(player.updateDetails(date,"player","5"));
         assertNotNull(player.getBirthDate());
         assertNotNull(player.getPosition());
         assertNotNull(player.getSquadNumber());
