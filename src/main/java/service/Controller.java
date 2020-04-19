@@ -273,7 +273,11 @@ public class Controller {
 
     // UC 9.4
     //This method will be shown after the user chose a referee from the list (using getReferees() method)
-    public void addRefereeToLeaguePerSeason() {
+    public void addRefereeToLeaguePerSeason(League league, String userName) {
+        league.addReferee((Referee) User.getUserByID(userName).getRoles().get(Role.REFEREE));
+        Alert alert = new Alert();
+        alert.addToMailSet(User.getUserByID(userName).getRoles().get(Role.REFEREE));
+        alert.sendAlert(new AlertNotification("Invitation","MAZAL TOV! you are a referee!!"));
     }
 
     // UC 9.5
@@ -288,9 +292,9 @@ public class Controller {
 
     // UC 9.7
     // Click this button after you have all the teams in league, Automatic scheduling
-    public void sceduleGamesInLeagues(SchedulingMethod schedulingMethod, League league) {
+    public void scheduleGamesInLeagues(League league) {
         Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
-        schedulingMethod.scheduleGamePolicy(league, teams);
+        league.getSchedulingMethod().scheduleGamePolicy(league, teams);
     }
 
     // UC 9.8
@@ -308,63 +312,56 @@ public class Controller {
     // =================== Team Owner functions ====================
     // =============================================================
 
-    //6.1
 
-    public void addField(String fieldName) {
-
+    //6.1A - add property
+    public void addProperty(Team team,Object property) {
+        team.addProperty(property);
     }
 
 
-    public void addPlayer(String userName) {
+    //6.1B - remove property
 
+    public void removeProperty(Team team,Object property) {
+        team.removeProperty(property);
+    }
+
+    //6.2 - add owner to team and new owner to listAppointments
+    public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){
+        User.getUserByID(userNameNewTeamOwner).getRoles().put(Role.TEAM_OWNER,new TeamOwner(userNameNewTeamOwner, User.getUserByID(userNameNewTeamOwner).getMail(), team, new HashSet<>()));
+        ((TeamOwner)User.getUserByID(userNameTeamOwner).getRoles().get(Role.TEAM_OWNER)).addToOwnerAppointments((TeamOwner) User.getUserByID(userNameNewTeamOwner).getRoles().get(Role.TEAM_OWNER));
     }
 
 
-    public void addCoach(String userName) {
+    //6.3 - remove owner by owner
+    public void removeOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){
+        // TODO: 18/04/2020  //recursive or just one step??
+    }
 
+    //6.4 - add team Manager
+    public void addManager(Team team, String userNameNewTeamManager, String userNameTeamOwner){
+        User.getUserByID(userNameNewTeamManager).getRoles().put(Role.TEAM_MANAGER,new TeamManager(userNameNewTeamManager, User.getUserByID(userNameNewTeamManager).getMail()));
+        ((TeamOwner)User.getUserByID(userNameTeamOwner).getRoles().get(Role.TEAM_MANAGER)).addToManagerAppointments((TeamManager) User.getUserByID(userNameNewTeamManager).getRoles().get(Role.TEAM_MANAGER));
+    }
+
+    //6.5 - remove manager by owner
+    public void removeManager(String userNameNewTeamManager, String userNameTeamOwner){
+        ((TeamOwner)User.getUserByID(userNameTeamOwner).getRoles().get(Role.TEAM_OWNER)).removeFromManagerAppointments((TeamManager) User.getUserByID(userNameNewTeamManager).getRoles().get(Role.TEAM_MANAGER));
     }
 
 
-    public void addManager(String userName) {
+    //UC6.6A - close team
+    public void closeTeam(String userName, Team team) {
+        team.closeTeam(User.getUserByID(userName));
+    }
 
+    //UC6.6B - open team
+    public void openTeam(Team team) {
+        team.openTeam();
     }
 
 
-    //6.2
-
-    public void removeField(String fieldName) {
-
-    }
-
-
-    public void removePlayer(String userName) {
-
-    }
-
-
-    public void removeCoach(String userName) {
-
-    }
-
-
-    public void removeManager(String userName) {
-
-    }
-
-
-    //6.3
-
-    public void updatePlayerDetails(String userName) {
-
-    }
-
-
-    public void updateCoachDetails(String userName) {
-
-    }
-
-
-    public void updateManagerDetails(String userName) {
+    //UC6.7 - manage finance
+    public void manageFinance(){
 
     }
 
