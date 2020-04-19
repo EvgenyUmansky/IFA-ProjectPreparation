@@ -157,7 +157,6 @@ public class Controller {
     // ====================================================================
 
     // UC 3.2 - add fan to subscription list of the personal page
-
     public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
         page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
     }
@@ -172,19 +171,20 @@ public class Controller {
         ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
     }
 
-    // 3.5 - get history of fans searches
+    // UC 3.5 - get history of fans searches
     // mock
-    public ArrayList<String> getFanHistory(String username) {
+    public String[] getFanHistory(String username) {
         //TODO - get from data base
-        return new ArrayList<>();
+        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getSearchHistory();
     }
 
     // UC 3.6 - get and set fan info
+    // get info
     public String getFanProfileDetails(String username) {
         return User.getUserByID(username).getProfileDetails();
     }
 
-    // for now it's only mail - iteration 2
+    // set info
     public void setFanProfileDetails(String username, String newPassword, String newName, String newMail) {
         User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
     }
@@ -193,11 +193,12 @@ public class Controller {
     // ====================================================================
 
     // UC 10.1 - get and set referee info (fields)
+    // get info
     public String getRefereeDetails(String username) {
         return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
     }
 
-    // Envelope function for setProfileDetails
+    // set info
     public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
         ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
     }
@@ -212,18 +213,36 @@ public class Controller {
     public void addGameEventToGame(String username, Game game, GameEvent gameEvent) throws Exception {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
         if(Game.getGamesByReferee(ref).contains(game)){
-            game.addEvent(gameEvent);
-        }else {
+            try {
+                game.addEvent(gameEvent);
+            }
+            catch (Exception e){
+                e.printStackTrace(); // not valid date exception
+                // TODO: logger
+            }
+        }
+        else {
             throw new Exception("This referee doesn't judge in this game");
         }
     }
 
-    //TODO: we may implement UC 10.4 within UC 10.3 - For Evegeny
-
-/*    // UC 10.4 - update/change game events by main referee
-    public boolean changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) {
-        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).changeGameEvent(game, gameEvent, dateTimeStr, gameMinutes, eventName, subscription);
-    }*/
+    // UC 10.4 - update/change game events by main referee
+    // TODO: check the referee is MAIN in UI
+    public void changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) throws Exception {
+        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        if(Game.getGamesByReferee(ref).contains(game)) {
+            try {
+                game.changeEvent(gameEvent, dateTimeStr, gameMinutes, eventName,  subscription);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                // TODO: logger
+            }
+        }
+        else {
+            throw new Exception("This referee doesn't judge in this game");
+        }
+    }
 
 
     // =================== Association Agent functions ====================
@@ -243,9 +262,10 @@ public class Controller {
     // UC 9.3
     public void addNewReferee(String username, String password, String name, String mail) throws Exception {
         this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
+        // TODO: Send invitation to referee
     }
 
-    // 9.3
+    // UC 9.3
     public void removeReferee(String username) {
         User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
@@ -271,7 +291,7 @@ public class Controller {
 
     // UC 9.7
     // Click this button after you have all the teams in league, Automatic scheduling
-    public void sceduleGamesInLeagues(League league) {
+    public void scheduleGamesInLeagues(League league) {
         Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
         league.getSchedulingMethod().scheduleGamePolicy(league, teams);
     }
@@ -352,7 +372,6 @@ public class Controller {
     //responsible of Team Owner!
     public void setPermissionsToManager() {
 
-    }
 
 
     // =================== System Manager functions ====================
@@ -393,9 +412,9 @@ public class Controller {
 
     }
 
-    // ====================================================================
+        // ====================================================================
 
-    public Team getTeamByName(String teamName) {
+        public Team getTeamByName(String teamName) {
         return Team.getTeamByName(teamName);
     }
 

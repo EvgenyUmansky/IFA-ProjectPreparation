@@ -20,6 +20,8 @@ class AlertTest {
         fans = new ArrayList<>();
         fans.add(new Fan("Evgeny", "euguman@gmail.com"));
         fans.add(new Fan("Alina", ""));
+        fans.get(0).setMail(true);
+        fans.get(1).setMail(false);
 
         alert = new Alert();
     }
@@ -40,6 +42,20 @@ class AlertTest {
     }
 
     @Test
+    void addToMailSet() {
+        assertEquals(0, alert.getMailAlertList().size());
+        alert.addToMailSet(fans.get(0));
+        assertEquals(1, alert.getMailAlertList().size());
+    }
+
+    @Test
+    void addToSystemSet() {
+        assertEquals(0, alert.getInSystemAlertList().size());
+        alert.addToSystemSet(fans.get(1));
+        assertEquals(1, alert.getInSystemAlertList().size());
+    }
+
+    @Test
     void removeSubscriber(){
         assertEquals(0, alert.getMailAlertList().size());
         assertEquals(0, alert.getInSystemAlertList().size());
@@ -52,20 +68,6 @@ class AlertTest {
         assertEquals(0, alert.getMailAlertList().size());
         alert.removeSubscriber(fans.get(1));
         assertEquals(0, alert.getInSystemAlertList().size());
-    }
-
-    @Test
-    void addToMailSet() {
-        assertEquals(0, alert.getMailAlertList().size());
-        alert.addToMailSet(fans.get(0));
-        assertEquals(1, alert.getMailAlertList().size());
-    }
-
-    @Test
-    void addToSystemSet() {
-        assertEquals(0, alert.getInSystemAlertList().size());
-        alert.addToSystemSet(fans.get(1));
-        assertEquals(1, alert.getInSystemAlertList().size());
     }
 
     @Test
@@ -90,6 +92,37 @@ class AlertTest {
     }
 
     @Test
+    void clearSubscribers(){
+        alert.addSubscriber(fans.get(0));
+        assertEquals(1, alert.getMailAlertList().size());
+        alert.addSubscriber(fans.get(1));
+        assertEquals(1, alert.getInSystemAlertList().size());
+
+        alert.clearSubscribers();
+        assertEquals(0, alert.getMailAlertList().size());
+        assertEquals(0, alert.getInSystemAlertList().size());
+
+    }
+
+    @Test
+    void clearMailList(){
+        alert.addToMailSet(fans.get(0));
+        assertEquals(1, alert.getMailAlertList().size());
+
+        alert.clearMailList();
+        assertEquals(0, alert.getMailAlertList().size());
+    }
+
+    @Test
+    void clearInSystemList(){
+        alert.addToSystemSet(fans.get(1));
+        assertEquals(1, alert.getInSystemAlertList().size());
+
+        alert.clearInSystemList();
+        assertEquals(0, alert.getInSystemAlertList().size());
+    }
+
+    @Test
     void sendAlert() {
         alert.addToMailSet(fans.get(0));
         alert.addToSystemSet(fans.get(1));
@@ -97,6 +130,14 @@ class AlertTest {
 
         for(String user : isSentMap.keySet()){
             assertTrue(isSentMap.get(user));
+        }
+
+        alert.clearSubscribers();
+        fans.get(0).setMail("");
+        alert.addToMailSet(fans.get(0));
+        isSentMap = alert.sendAlert(new AlertNotification("Title", "Text"));
+        for(String user : isSentMap.keySet()){
+            assertFalse(isSentMap.get(user));
         }
     }
 
