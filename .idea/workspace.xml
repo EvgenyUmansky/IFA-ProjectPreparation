@@ -4,38 +4,9 @@
     <list default="true" id="fcaed18e-6703-4f63-a78e-8d855ec6bbff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Budget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Budget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Fan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Fan.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Referee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Referee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Team.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/AlertTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/AlertTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/FanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/FanTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeaguePerSeasonTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeagueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/LeagueTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/OneGameSchedulingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/OneGameSchedulingMethodTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/RefereeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/RefereeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TwoGameSchedulingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TwoGameSchedulingMethodTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/League.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,6 +47,7 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectId" id="1aineGhpi0mkhiS5FwHyvXsYnUu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -93,6 +65,18 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -114,30 +98,19 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="" />
+      <changelist id="fcaed18e-6703-4f63-a78e-8d855ec6bbff" name="Default Changelist" comment="" />
       <created>1587130436310</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1587130436310</updated>
       <workItem from="1587130437898" duration="4960000" />
       <workItem from="1587207212430" duration="10728000" />
+      <workItem from="1587227376945" duration="2176000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -160,6 +133,17 @@
         <option value="3" />
         <option value="1" />
       </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
