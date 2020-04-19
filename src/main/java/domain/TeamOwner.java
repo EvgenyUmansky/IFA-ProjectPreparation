@@ -45,13 +45,6 @@ public class TeamOwner extends  Subscriber {
 
     // =================== Functionality ====================
 
-    // Add property use case
-
-    public boolean addProperty(Object property){
-        team.addProperty(property);
-        return true;
-    }
-
     //add Team Owner
     public void addToOwnerAppointments(TeamOwner owner) {
         this.ownerAppointments.add(owner);
