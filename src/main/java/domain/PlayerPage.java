@@ -54,4 +54,6 @@ public class PlayerPage extends PersonalPage {
     public Team getCurrentTeam() {
         return currentTeam;
     }
+
+
 }

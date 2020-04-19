@@ -60,6 +60,10 @@ public class League {
     public static League getLeagueByName(String leagueName){
         return new League(leagueName); // TODO: Replace with DB call
     }
+    public static ArrayList<League> getAllLeaguesPerSeason(int season){
+        ArrayList<League> leaguesPerSeason = new ArrayList<>();
+        return leaguesPerSeason; // TODO: Replace with DB call
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -89,6 +93,7 @@ public class League {
         Team [] teamArray = new Team[this.teamsTable.size()];
         for(Team team : this.teamsTable.keySet()){
             teamArray[i] = team;
+            i++;
         }
         this.games.addAll(this.schedulingMethod.scheduleGamePolicy(this, teamArray));
         return true;
@@ -110,7 +115,7 @@ public class League {
                 homeTeam = team;
             }
             if (team.equals(awayGameTeam)){
-                awayTeamScore = game.getHostTeamScore();
+                awayTeamScore = game.getGuestTeamScore();
                 awayTeam = team;
             }
         }

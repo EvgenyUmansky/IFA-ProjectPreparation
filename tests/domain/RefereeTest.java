@@ -53,11 +53,20 @@ class RefereeTest {
         games.add(new Game(null, null, null, null, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>()));
 
         referee = new Referee("Evgeny", "euguman@gmail.com");
+        referee.setQualification(4);
+        referee.setRefereeType(RefereeType.MAIN);
     }
 
     @AfterEach
     public void delete(){
         referee = null;
+        referees = null;
+        gameEvents = null;
+        leaguePerSeasons = null;
+        hostTeams = null;
+        guestTeams = null;
+        fields = null;
+        games = null;
     }
 
     @Test
@@ -73,20 +82,27 @@ class RefereeTest {
     }
 
     @Test
-    void getRefereeGames() {
-        //assertEquals(0, referee.getRefereeGames(games).size());
-        games.get(0).addRefereeToGame(referee);
-        //assertEquals(1, referee.getRefereeGames(games).size());
+    void getRefereeDetails(){
+        assertEquals("User name: Evgeny\nMail: euguman@gmail.com\nQualification: 4\nType: MAIN", referee.getRefereeDetails());
     }
 
     @Test
-    void addGameEventToGame() {
-        games.get(0).addRefereeToGame(referee);
-        assertEquals(0, games.get(0).getGameEvents().size());
-        //referee.addGameEventToGame(games.get(0), gameEvents.get(0));
-        assertEquals(1, games.get(0).getGameEvents().size());
+    void setRefereeDetails(){
+        referee.setRefereeDetails("newmail@mail.com", 2, RefereeType.ASSISTANT);
+        assertEquals("newmail@mail.com", referee.getMail());
+        assertEquals(2, referee.getQualification());
+        assertEquals(RefereeType.ASSISTANT.toString(), referee.getRefereeType().toString());
+
+        referee.setRefereeDetails("newmail@mail.com", 6, null);
+        assertEquals("newmail@mail.com", referee.getMail());
+        assertEquals(2, referee.getQualification());
+        assertEquals(RefereeType.ASSISTANT.toString(), referee.getRefereeType().toString());
+
+        referee.setRefereeDetails("newmail@mail.com", 0, null);
+        assertEquals(2, referee.getQualification());
     }
 
+    /*
     @Test
     void changeGameEvent() {
         String eventTimePlus6 = LocalDateTime.now().plusHours(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -114,6 +130,7 @@ class RefereeTest {
         games.get(0).setGameDate("2019-01-01 11:11");
         //assertFalse(referee.changeGameEvent(games.get(0), gameEvents.get(0), eventTimePlus6, 29, GameAlert.GOAL, "desc"));
     }
+     */
 
     @Test
     void getQualification() {
@@ -123,6 +140,12 @@ class RefereeTest {
     @Test
     void setQualification() {
         referee.setQualification(5);
+        assertEquals(5, referee.getQualification());
+
+        referee.setQualification(0);
+        assertEquals(5, referee.getQualification());
+
+        referee.setQualification(6);
         assertEquals(5, referee.getQualification());
     }
 
@@ -134,6 +157,9 @@ class RefereeTest {
     @Test
     void setRefereeType() {
         referee.setRefereeType(RefereeType.ASSISTANT);
+        assertEquals(RefereeType.ASSISTANT.toString(), referee.getRefereeType().toString());
+
+        referee.setRefereeType(null);
         assertEquals(RefereeType.ASSISTANT.toString(), referee.getRefereeType().toString());
     }
 }

@@ -11,6 +11,7 @@ public class User {
     private String name;
     private HashMap<Role, Subscriber> roles;
     private String mail;
+    private boolean isClosed;
 
     // ========================= Constructor ==========================
 
@@ -21,9 +22,15 @@ public class User {
         this.mail = mail;
         this.roles = new HashMap<>();
         addRoleToUser(Role.FAN);
+        isClosed = false;
     }
 
     // ========================= Getters ==========================
+
+
+    public boolean isClosed() {
+        return isClosed;
+    }
 
     public String getMail() {
         return this.mail;
@@ -55,6 +62,11 @@ public class User {
     }
 
     // ========================= Setters ==========================
+
+
+    public void setClosed(boolean closed) {
+        isClosed = closed;
+    }
 
     public User setPassword(String password) {
         if (password != null)
@@ -192,4 +204,16 @@ public class User {
     }
 
 
+    public boolean closeUser() {
+        if(this.getRoles().containsKey(Role.SYSTEM_ADMIN) && User.getUsersByRole(Role.SYSTEM_ADMIN).size() == 1){
+          //  alert.sendAlert(new AlertNotification("Cant remove System Administer Account","System needs at least one system administer"));
+            return false;
+        }
+        else if (!this.isClosed()) {
+            this.setClosed(true);
+//            alert.sendAlert(new AlertNotification("close user permanently", "you user close permanently"));
+            return true;
+        }
+        return false;
+    }
 }
