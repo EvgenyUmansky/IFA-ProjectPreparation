@@ -281,7 +281,9 @@ public class Controller {
 
     // UC 9.5
     public void setRankingMethod(int winP, int loseP, int drawP, League league) {
-        league.getRankingMethod().setWinPoints(winP).setLoosPoints(loseP).setDrawPoints(drawP);
+        league.getRankingMethod().setWinPoints(winP);
+        league.getRankingMethod().setWinPoints(loseP);
+        league.getRankingMethod().setWinPoints(drawP);
     }
 
     // UC 9.6
@@ -378,15 +380,15 @@ public class Controller {
     // ====================================================================
 
 
-    //UC8.1 - close team
+    //UC8.1 - close team --- UC 6.6A
     public void closeTeam(Team team) {
-
+        //DONE -> look at UC 6.6A
     }
 
 
     //UC8.2 - remove user from System
-    public void removeUserFromSystem(User user) {
-
+    public void removeUserFromSystem(String userName) {
+        User.getUserByID(userName).closeUser();
     }
 
 
