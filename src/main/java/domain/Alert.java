@@ -26,6 +26,14 @@ public class Alert {
         }
     }
 
+    public void addToMailSet(Subscriber user){
+        this.mailAlertList.add(user);
+    }
+
+    public void addToSystemSet(Subscriber user){
+        this.inSystemAlertList.add(user);
+    }
+
     public void removeSubscriber(Subscriber user){
         if(user.isMail()){
             this.mailAlertList.remove(user);
@@ -35,20 +43,27 @@ public class Alert {
         }
     }
 
-    public void addToMailSet(Subscriber user){
-        this.mailAlertList.add(user);
-    }
-
-    public void addToSystemSet(Subscriber user){
-        this.inSystemAlertList.add(user);
-    }
-
     public void removeFromMailSet(Subscriber user){
         this.mailAlertList.remove(user);
     }
 
     public void removeFromSystemSet(Subscriber user){
         this.inSystemAlertList.remove(user);
+    }
+
+
+    public void clearSubscribers(){
+        this.mailAlertList = new HashSet<>();
+        this.inSystemAlertList = new HashSet<>();
+    }
+
+
+    public void clearMailList(){
+        this.mailAlertList = new HashSet<>();
+    }
+
+    public void clearInSystemList(){
+        this.inSystemAlertList = new HashSet<>();
     }
 
     /**

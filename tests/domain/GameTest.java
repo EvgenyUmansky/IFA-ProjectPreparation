@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,21 +23,32 @@ class GameTest {
     ArrayList<Field> fields;
 
     Game game;
+    Game gameCE;
 
     @BeforeEach
     public void insert() {
         fans = new ArrayList<>();
         fans.add(new Fan("Messi", "euguman@gmail.com"));
+        fans.get(0).setMail(true);
         fans.add(new Fan("unMessi", ""));
 
         referees = new ArrayList<>();
         referees.add(new Referee("Evgeny", ""));
+        referees.get(0).setMail(false);
+        referees.get(0).setQualification(4);
+        referees.get(0).setRefereeType(RefereeType.MAIN);
         referees.add(new Referee("Messi", "euguman@gmail.com"));
+        referees.get(1).setMail(true);
+        referees.get(1).setQualification(4);
+        referees.get(1).setRefereeType(RefereeType.ASSISTANT);
         referees.add(new Referee("unMessi", ""));
+        referees.get(2).setMail(false);
 
         gameEvents = new ArrayList<>();
         gameEvents.add(new GameEvent("2019-02-02 22:30", 30, GameAlert.GOAL, "desc"));
         gameEvents.add(new GameEvent("2019-02-02 21:30", 30, GameAlert.GOAL, "desc"));
+        gameEvents.add(new GameEvent(LocalDateTime.now().plusMinutes(15).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), 30, GameAlert.GOAL, "desc"));
+        gameEvents.add(new GameEvent("2020-01-02 12:29", 30, GameAlert.GOAL, "desc"));
 
         leaguePerSeasons = new ArrayList<>();
         leaguePerSeasons.add(new League(2020, new TwoGameSchedulingMethod(), new RankingMethod(), "Prime"));
@@ -53,6 +66,7 @@ class GameTest {
         fields.add(new Field("1eg0", 400));
 
         game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), "2019-02-02 22:00", new ArrayList<>());
+        gameCE = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>());
     }
 
     @AfterEach
@@ -65,6 +79,25 @@ class GameTest {
         guestTeams = null;
         fields = null;
         game = null;
+        gameCE = null;
+    }
+
+    @Test
+    void addRefereeToGame(){
+        game.addRefereeToGame(referees.get(0));
+        assertEquals(1, game.getReferees().size());
+        assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
+    }
+
+    @Test
+    void removeRefereeFromGame(){
+        game.addRefereeToGame(referees.get(0));
+        assertEquals(1, game.getReferees().size());
+        assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
+
+        game.removeRefereeFromGame(referees.get(0));
+        assertEquals(0, game.getReferees().size());
+        assertEquals(0, game.getAlertReferees().getInSystemAlertList().size());
     }
 
     @Test
@@ -77,27 +110,19 @@ class GameTest {
     }
 
     @Test
-    void removeFanToAlerts(){
+    void removeFanFromAlerts(){
         game.addFanToAlerts(fans.get(0));
         game.addFanToAlerts(fans.get(1));
 
         assertEquals(1, game.getAlertFans().getMailAlertList().size());
         assertEquals(1, game.getAlertFans().getInSystemAlertList().size());
 
-        game.removeFanToAlerts((Fan) game.getAlertFans().getMailAlertList().toArray()[0]);
-        game.removeFanToAlerts((Fan) game.getAlertFans().getInSystemAlertList().toArray()[0]);
+        game.removeFanFromAlerts((Fan) game.getAlertFans().getMailAlertList().toArray()[0]);
+        game.removeFanFromAlerts((Fan) game.getAlertFans().getInSystemAlertList().toArray()[0]);
 
         assertEquals(0, game.getAlertFans().getMailAlertList().size());
         assertEquals(0, game.getAlertFans().getInSystemAlertList().size());
     }
-
-    @Test
-    void addRefereeToGame(){
-        game.addRefereeToGame(referees.get(0));
-        assertEquals(1, game.getReferees().size());
-        assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
-    }
-
 
     @Test
     void addRefereeToAlerts() {
@@ -109,29 +134,32 @@ class GameTest {
 
         game.addRefereeToAlerts(referees.get(2));
         assertEquals(2, game.getAlertReferees().getInSystemAlertList().size());
-
     }
 
     @Test
-    void removeRefereeToAlerts(){
-        game.addFanToAlerts(fans.get(0));
-        game.addFanToAlerts(fans.get(1));
-
+    void deleteRefereeFromAlerts(){
         game.addRefereeToAlerts(referees.get(0));
         game.addRefereeToAlerts(referees.get(1));
-
         assertEquals(1, game.getAlertReferees().getMailAlertList().size());
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
-
         game.addRefereeToAlerts(referees.get(2));
         assertEquals(2, game.getAlertReferees().getInSystemAlertList().size());
 
-        game.removeRefereeToGame((Referee) game.getAlertReferees().getMailAlertList().toArray()[0]);
-        game.removeRefereeToGame((Referee) game.getAlertReferees().getInSystemAlertList().toArray()[0]);
-
+        game.deleteRefereeFromAlerts(referees.get(0));
+        assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
+        game.deleteRefereeFromAlerts(referees.get(1));
         assertEquals(0, game.getAlertReferees().getMailAlertList().size());
+        game.deleteRefereeFromAlerts(referees.get(2));
+        assertEquals(0, game.getAlertReferees().getInSystemAlertList().size());
+    }
+
+    @Test
+    void addRefereesOfGameToAlerts(){
+        game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), "2019-02-02 22:00", new ArrayList<Referee>(){{add(referees.get(0));}});
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
     }
+
+
 
     @Test
     void sendAlertScoreToFan() {
@@ -156,11 +184,52 @@ class GameTest {
     }
 
     @Test
-    void addGameEvent() {
-        assertTrue(game.addEvent(gameEvents.get(0)));
-        assertFalse(game.addEvent(gameEvents.get(1)));
+    void addEvent() throws Exception {
+
+        game.addEvent(gameEvents.get(0));
 
         assertEquals(1, game.getGameEvents().size());
+
+        try {
+            game.addEvent(gameEvents.get(1));
+        } catch (Exception e) {
+            assertEquals("java.lang.Exception: The date of the game is invalid", e.toString());
+        }
+    }
+
+    @Test
+    void changeGameEvent() throws Exception {
+        String eventTimePlus6 = LocalDateTime.now().plusHours(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String eventTimePlus05 = LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+
+        gameCE.addEvent(gameEvents.get(2));
+
+        // Not event of this game
+        try {
+            gameCE.changeEvent(gameEvents.get(3), "2020-01-02 12:00", 29, GameAlert.GOAL, "desc");
+        } catch (Exception e) {
+            assertEquals("java.lang.Exception: Not event of this game", e.toString());
+        }
+
+        gameCE.changeEvent(gameCE.getGameEvents().get(0), eventTimePlus05, 60, GameAlert.INJURY, "Test");
+
+        assertEquals(LocalDateTime.now().plusHours(1).withSecond(0).withNano(0).toString(), gameCE.getGameEvents().get(0).getDateTime().toString());
+        assertEquals(60, gameCE.getGameEvents().get(0).getGameMinutes());
+        assertEquals(GameAlert.INJURY.toString(), gameCE.getGameEvents().get(0).getEventName().toString());
+        assertEquals("Test", gameCE.getGameEvents().get(0).getDescription());
+
+        // Not allowed to change the game events: out of time
+        gameCE.setGameDate("2019-01-01 11:11");
+        try {
+            gameCE.changeEvent(gameCE.getGameEvents().get(0), eventTimePlus6, 29, GameAlert.GOAL, "desc");
+        } catch (Exception e) {
+            assertEquals("java.lang.Exception: Not allowed to change the game events: out of time", e.toString());
+        }
+    }
+
+    @Test
+    void getGamesByReferee(){
+
     }
 
     @Test
@@ -215,7 +284,7 @@ class GameTest {
     }
 
     @Test
-    void getGameEvents() {
+    void getGameEvents() throws Exception {
         assertEquals(0, game.getGameEvents().size());
         game.addEvent(gameEvents.get(0));
         assertEquals(1, game.getGameEvents().size());

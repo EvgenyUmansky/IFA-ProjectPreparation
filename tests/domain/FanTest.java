@@ -40,4 +40,9 @@ class FanTest {
             assertTrue(isSentMap.get(user));
         }
     }
+
+    @Test
+    void getSearchHistory(){
+        assertArrayEquals(new String[]{"A", "B", "C", "D"}, fan.getSearchHistory());
+    }
 }
