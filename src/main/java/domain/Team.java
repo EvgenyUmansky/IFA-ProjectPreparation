@@ -36,7 +36,7 @@ public class Team {
 
 
     // Constructor
-    public Team(String name, Field stadium) {
+   /* public Team(String name, Field stadium) {
         this.teamName = name;
         this.stadium = stadium;
         this.fields = new HashSet<>();
@@ -47,7 +47,7 @@ public class Team {
         alert = new Alert();
         this.fields.add(stadium);
         this.teamStatus = TeamStatus.Open;
-    }
+    }*/
 
 
 
