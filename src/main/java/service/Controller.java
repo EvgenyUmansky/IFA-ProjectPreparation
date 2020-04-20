@@ -196,11 +196,12 @@ public class Controller {
     // UC 10.1 - get and set referee info (fields)
     // get info
     public String getRefereeDetails(String username) {
-        return ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
+        return User.getUserByID(username).getProfileDetails() + "\n" + ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
     }
 
     // set info
-    public void setRefereeProfileDetails(String username, String newMail, int qualification, RefereeType refereeType) {
+    public void setRefereeProfileDetails(String username, String newPassword, String newName, String newMail, int qualification, RefereeType refereeType) {
+        User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
         ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
     }
 

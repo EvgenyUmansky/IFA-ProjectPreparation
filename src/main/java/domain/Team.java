@@ -35,6 +35,21 @@ public class Team {
     }
 
 
+    // Constructor
+    public Team(String name, Field stadium) {
+        this.teamName = name;
+        this.stadium = stadium;
+        this.fields = new HashSet<>();
+        this.owners = new HashMap<>();
+        this.managers = new HashMap<>();
+        this.coaches = new HashMap<>();
+        this.players = new HashMap<>();
+        alert = new Alert();
+        this.fields.add(stadium);
+        this.teamStatus = TeamStatus.Open;
+    }
+
+
 
     public HashMap<String, TeamPlayer> getPlayers() {
         return players;
@@ -215,9 +230,7 @@ public class Team {
         removeSubscriber(manager);
     }
 
-
-
-
+//    //UC 6.4
 //    public Team addTeamManager(User user) {
 //        user.addRoleToUser(Role.TEAM_MANAGER);
 //        this.managers.put(user.getUserName(), (TeamManager) user.getRoles().get(Role.TEAM_MANAGER));
