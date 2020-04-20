@@ -35,6 +35,10 @@ public class GameEvent {
         this.dateTime = LocalDateTime.parse(dateTimeStr, formatter);
     }
 
+    public void setGameDate(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
     public int getGameMinutes() {
         return gameMinutes;
     }

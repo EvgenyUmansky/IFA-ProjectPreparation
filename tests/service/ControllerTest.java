@@ -6,12 +6,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Ref;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,6 +34,11 @@ class ControllerTest {
     Referee refereeMail;
     Referee refereeNotMail;
 
+    // T10.3
+    GameEvent gameEvent;
+    GameEvent gameEventBeforeGame;
+
+
     @BeforeEach
     public void insert() {
         controller = new Controller();
@@ -47,15 +49,15 @@ class ControllerTest {
         fanNotMail = new Fan("FanNameNotMail", "");
         fanNotMail.setMail(false);
 
-        // T 3.2
+        // T3.2
         teamPage = new TeamPage(new Team("unReal Hadera", new Field("Dinamo", 500), new TeamOwner("Owner", "")));
         coachPage = new CoachPage(new TeamCoach("CoachName", ""), "My best page coach");
         playerPage = new PlayerPage(new TeamPlayer("PlayerName", ""), "My best page player");
 
-        // T 3.3
+        // T3.3, 10.3, 10.4
         game = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), "2019-11-11 12:00", new ArrayList<>());
 
-        // T 3.4
+        // T3.4
         sysAdmins = new ArrayList<>();
         sysAdmins.add(new SystemAdministrator("Test sysAdmin mail", "euguman@gmail.com"));
         sysAdmins.get(0).setMail(true);
@@ -70,6 +72,10 @@ class ControllerTest {
         refereeNotMail = new Referee("testRefereeNotMail", "");
         refereeNotMail.setQualification(5);
         refereeNotMail.setRefereeType(RefereeType.ASSISTANT);
+
+        // T10.3, 10.4
+        gameEvent = new GameEvent("2019-11-11 12:30", 30, GameAlert.INJURY, "Test description 1");
+        gameEventBeforeGame = new GameEvent("2019-11-11 11:30", 30, GameAlert.INJURY, "Test description 2");
     }
 
     @AfterEach
@@ -91,6 +97,9 @@ class ControllerTest {
         // ========================= Referee Tests ========================
         refereeMail = null;
         refereeNotMail = null;
+
+        // T10.3, 10.4
+        gameEvent = null;
 
     }
 
@@ -265,7 +274,7 @@ class ControllerTest {
     @Test
     void setRefereeProfileDetails() {
         // TODO: complete complex tests with DB
-        controller.setRefereeProfileDetails(refereeMail.getUserName(), "TestPassword", "TestName", "TestMail", 1, RefereeType.ASSISTANT);
+        controller.setRefereeProfileDetails(refereeMail.getUserName(), "TestPassword", "TestName", "TestMail", 1, RefereeType.MAIN);
         assertEquals("User Name: testRefereeMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: null\n" + "Qualification: 0\n" + "Type: null", controller.getRefereeDetails(refereeMail.getUserName()));
     }
 
@@ -285,12 +294,60 @@ class ControllerTest {
         }
     }
 
+    // T10.3
     @Test
-    void addGameEventToGame() {
+    void addGameEventToGame() throws Exception {
+        // TODO: with DB get true games of referee and start the tests
+//        game.addRefereeToGame(refereeMail);
+//
+//        try {
+//            controller.addGameEventToGame(refereeNotMail.getUserName(), game, gameEvent);
+//        }
+//        catch (Exception e){
+//            assertEquals("java.lang.Exception: This referee doesn't judge in this game", e.toString());
+//        }
+//
+//        assertEquals(0, game.getGameEvents().size());
+        controller.addGameEventToGame(refereeMail.getUserName(), game, gameEvent);
+        assertEquals("Test description 1", game.getGameEvents().get(0).getDescription());
+
+        controller.addGameEventToGame(refereeMail.getUserName(), game, gameEventBeforeGame);
     }
 
     @Test
-    void changeGameEvent() {
+    void changeGameEvent() throws Exception {
+        // TODO: with DB get true games of referee and start the tests
+//        game.addRefereeToGame(refereeMail);
+//
+//        try {
+//            controller.addGameEventToGame(refereeNotMail.getUserName(), game, gameEvent);
+//        }
+//        catch (Exception e){
+//            assertEquals("java.lang.Exception: This referee doesn't judge in this game", e.toString());
+//        }
+//
+//        assertEquals(0, game.getGameEvents().size());
+
+        game.setGameDate(LocalDateTime.now().withNano(0).withSecond(0));
+        gameEvent.setGameDate(LocalDateTime.now().withNano(0).withSecond(0).plusMinutes(30));
+        game.addEvent(gameEvent);
+        game.addRefereeToGame(refereeMail);
+        // new GameEvent("2019-11-11 12:30", 30, GameAlert.INJURY, "Test description 1");
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, LocalDateTime.now().plusMinutes(45).withNano(0).withSecond(0).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), -1, null, null);
+        assertEquals(LocalDateTime.now().plusMinutes(45).withNano(0).withSecond(0).toString(), game.getGameEvents().get(0).getDateTime().toString());
+        assertEquals(30, game.getGameEvents().get(0).getGameMinutes());
+        assertEquals(GameAlert.INJURY.toString(), game.getGameEvents().get(0).getEventName().toString());
+        assertEquals("Test description 1", game.getGameEvents().get(0).getDescription());
+
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, null, 45, null, null);
+        assertEquals(LocalDateTime.now().plusMinutes(45).withNano(0).withSecond(0).toString(), game.getGameEvents().get(0).getDateTime().toString());
+        assertEquals(45, game.getGameEvents().get(0).getGameMinutes());
+
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, null, -1, GameAlert.GOAL, null);
+        assertEquals(GameAlert.GOAL.toString(), game.getGameEvents().get(0).getEventName().toString());
+
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, null, -1, null, "Changed");
+        assertEquals("Changed", game.getGameEvents().get(0).getDescription());
     }
 
     // =================== Association Agent Tests ====================

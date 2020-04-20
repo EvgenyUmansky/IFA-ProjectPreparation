@@ -214,7 +214,9 @@ public class Controller {
     // UC 10.3 - create new game event and add it to list of game events of the game
     public void addGameEventToGame(String username, Game game, GameEvent gameEvent) throws Exception {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        if(Game.getGamesByReferee(ref).contains(game)){
+
+        // TODO: compare with id from DB
+        if(isEqualGameInList(Game.getGamesByReferee(ref), game)){
             try {
                 game.addEvent(gameEvent);
             }
@@ -232,7 +234,8 @@ public class Controller {
     // TODO: check the referee is MAIN in UI
     public void changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription) throws Exception {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        if(Game.getGamesByReferee(ref).contains(game)) {
+        // TODO: compare with id from DB
+        if(isEqualGameInList(Game.getGamesByReferee(ref), game)) {
             try {
                 game.changeEvent(gameEvent, dateTimeStr, gameMinutes, eventName,  subscription);
             }
@@ -244,6 +247,18 @@ public class Controller {
         else {
             throw new Exception("This referee doesn't judge in this game");
         }
+    }
+
+    // TODO: change this function to ids from DB
+    // Check if game in ArrayList of games
+    private boolean isEqualGameInList(ArrayList<Game> games, Game game){
+        for(Game refGame : games){
+            if(game.isEqualGame(refGame)){
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

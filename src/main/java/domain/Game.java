@@ -44,6 +44,25 @@ public class Game {
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
     }
 
+    public Game(League league, Team hostTeam, Team guestTeam, Field field, LocalDateTime gameDate, ArrayList<Referee> referees) {
+        this.league = league;
+        this.hostTeam = hostTeam;
+        this.guestTeam = guestTeam;
+        this.field = field;
+        this.referees = referees;
+        this.gameEvents = new ArrayList<>();
+        this.hostTeamScore = 0;
+        this.guestTeamScore = 0;
+        this.gameMinutes = 0;
+        this.alertFans = new Alert();
+        this.alertReferees = new Alert();
+
+        // referees of the game automatically receives alerts
+        addRefereesOfGameToAlerts();
+
+        this.gameDate = gameDate;
+    }
+
 
 /////////// Functionality ///////////
     public void addRefereeToGame(Referee referee){
@@ -205,11 +224,17 @@ public class Game {
         }
     }
 
+    public boolean isEqualGame(Game game){
+        return this.getHostTeam().getTeamName().equals(game.getHostTeam().getTeamName())
+                && this.getGuestTeam().getTeamName().equals(game.getGuestTeam().getTeamName())
+                && this.getGameDate().compareTo(game.getGameDate()) == 0;
+    }
+
     // UC 10.2 - get all games the referee judge
     public static ArrayList<Game> getGamesByReferee(Referee referee){
         //TODO: Get data from DB (like SELECT * FROM GAMES WHERE Referee=username)
         return new ArrayList<Game>() {{
-            add(new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), "2019-11-11 12:00", new ArrayList<Referee>() {{
+            add(new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), LocalDateTime.now().withNano(0).withSecond(0), new ArrayList<Referee>() {{
                 add(referee);
             }}));
         }};
@@ -312,4 +337,10 @@ public class Game {
         this.gameDate = LocalDateTime.parse(gameDateStr, formatter);
         return sendAlertChangeDateGame();
     }
+
+    public Map<String, Boolean> setGameDate(LocalDateTime gameDate)  {
+        this.gameDate = gameDate;
+        return sendAlertChangeDateGame();
+    }
+
 }
