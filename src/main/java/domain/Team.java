@@ -86,11 +86,13 @@ public class Team {
     public void addPlayer(TeamPlayer player){
         player.setCurrentTeam(this);
         this.players.put(player.getUserName(), player);
+        addSubscriber(player);
     }
 
     public void addCoach(TeamCoach coach){
         coach.setCurrentTeam(this);
         this.coaches.put(coach.getUserName(), coach);
+        addSubscriber(coach);
     }
 
     public void addField(Field field){
@@ -101,11 +103,13 @@ public class Team {
     public void removePlayer(TeamPlayer player){
         player.setCurrentTeam(null);
         this.players.remove(player.getUserName());
+        removeSubscriber(player);
     }
 
     public void removeCoach(TeamCoach coach){
         coach.setCurrentTeam(null);
         this.coaches.remove(coach.getUserName());
+        removeSubscriber(coach);
     }
 
     public void removeField(Field field){
@@ -115,14 +119,16 @@ public class Team {
 
     public void closeTeam(User user) {
         // TODO: 18/04/2020 add relevant subscribers to mailSet
-        if (teamStatus == TeamStatus.Open) {
-            if(user.getRoles().containsKey(Role.SYSTEM_ADMIN)){
+        if (teamStatus == TeamStatus.Open || teamStatus == TeamStatus.TempClose) {
+            if (user.getRoles().containsKey(Role.SYSTEM_ADMIN)) {
                 teamStatus = TeamStatus.PermanentlyClose;
-                alert.sendAlert(new AlertNotification("close team permanently","you team close permanently"));
+                alert.sendAlert(new AlertNotification("close team permanently", "you team close permanently"));
             }
-            else if(user.getRoles().containsKey(Role.TEAM_OWNER)){
+        }
+        if(teamStatus == TeamStatus.Open) {
+            if (user.getRoles().containsKey(Role.TEAM_OWNER)) {
                 teamStatus = TeamStatus.TempClose;
-                alert.sendAlert(new AlertNotification("close team temporary","you team close temporary"));
+                alert.sendAlert(new AlertNotification("close team temporary", "you team close temporary"));
             }
         }
         else{
@@ -187,7 +193,7 @@ public class Team {
    //UC 6.4
    public void addManager(User currentOwner, User newManager) {
        if (this.owners.containsKey(currentOwner.getUserName())) {
-           TeamManager newTeamManager = (TeamManager)User.getUserByID(newManager.getUserName()).getRoles().get(Role.TEAM_MANAGER);
+           TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
            newTeamManager.setCurrentTeam(this);
            this.managers.put(newTeamManager.getUserName(), newTeamManager);
            addSubscriber(newTeamManager);
@@ -270,4 +276,11 @@ public class Team {
         return this.teamStatus;
     }
 
+    public void setBudget(Budget budget){
+        this.budget = budget;
+    }
+
+    public Alert getAlert() {
+        return alert;
+    }
 }
