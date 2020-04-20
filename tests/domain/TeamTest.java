@@ -17,6 +17,7 @@ class TeamTest {
     TeamManager manager;
     TeamCoach coach;
 
+
     @BeforeEach
     public void init(){
         field = new Field("test",100);
@@ -55,11 +56,17 @@ class TeamTest {
 
     @Test
     void removeOwnerPositiveCase() {
-        TeamOwner ownerTest2 = new TeamOwner("ownerUse2r","owner2@gmail.com");
+        User ownerUser = new User("ownerUser","123","shak","s@mail.com");
+        User ownerUser2 = new User("ownerUser2","123","shak","s@mail.com");
+        TeamOwner ownerTest2 = new TeamOwner("ownerUser2","s@mail.com");
+        owner.setTeam(team);
+        ownerUser.addRoleToUser(Role.TEAM_OWNER,owner);
+        ownerUser2.addRoleToUser(Role.TEAM_OWNER,ownerTest2);
+
         assertEquals(1,team.getOwners().size());
-        team.addOwner(ownerTest2);
+        team.addOwner(ownerUser,ownerUser2);
         assertEquals(2,team.getOwners().size());
-        //assertTrue(team.removeOwner(ownerTest2));
+        team.removeOwner(ownerUser2);
         assertEquals(1,team.getOwners().size());
     }
 
@@ -72,10 +79,14 @@ class TeamTest {
 
     @Test
     void addManager(){
+        User ownerUser = new User("ownerUser","123","shak","s@mail.com");
+        User managerUser = new User("managerUser","144","on","o@gmail.com");
+        ownerUser.addRoleToUser(Role.TEAM_OWNER,owner);
+        managerUser.addRoleToUser(Role.TEAM_MANAGER,manager);
         assertEquals(0,team.getManagers().size());
         assertFalse(team.getManagers().containsKey(manager.getUserName()));
 
-        team.addManager(manager);
+        team.addManager(ownerUser,managerUser);
         assertEquals(1,team.getManagers().size());
         assertTrue(team.getManagers().containsKey(manager.getUserName()));
     }
@@ -83,11 +94,15 @@ class TeamTest {
 
     @Test
     void removeManager(){
-        team.addManager(manager);
+        User ownerUser = new User("ownerUser","123","shak","s@mail.com");
+        User managerUser = new User("managerUser","144","on","o@gmail.com");
+        ownerUser.addRoleToUser(Role.TEAM_OWNER,owner);
+        managerUser.addRoleToUser(Role.TEAM_MANAGER,manager);
+        team.addManager(ownerUser,managerUser);
         assertEquals(1,team.getManagers().size());
         assertTrue(team.getManagers().containsKey(manager.getUserName()));
 
-        team.removeManager(manager);
+        team.removeManager(managerUser);
         assertEquals(0,team.getManagers().size());
         assertFalse(team.getManagers().containsKey(manager.getUserName()));
     }
@@ -156,6 +171,114 @@ class TeamTest {
     }
 
 
+    @Test
+    public void getPlayers() {
+        assertTrue(team.getPlayers().size() == 0);
+        team.addPlayer(player);
+        assertTrue(team.getPlayers().size() == 1);
+
+    }
+
+    @Test
+    public void SetTeamEmail() {
+        team.setTeamEmail("avbbb@jovani.cool");
+        assertEquals("avbbb@jovani.cool",team.getTeamEmail());
+    }
 
 
+    @Test
+    public void closeTeam() {
+        User ownerUser = new User("ownerUser2","123","shak","s@mail.com");
+        TeamOwner ownerTest2 = new TeamOwner("ownerUser2","owner2@gmail.com");
+        ownerUser.addRoleToUser(Role.TEAM_OWNER,ownerTest2);
+        assertEquals(1,team.getOwners().size());
+        team.addOwner(ownerTest2);
+        team.closeTeam(ownerUser);
+        assertFalse( team.getTeamStatus().compareTo(TeamStatus.Open )==0);
+        team.openTeam();
+        assertTrue(0 == team.getTeamStatus().compareTo(TeamStatus.Open));
+    }
+
+    @Test
+    public void openTeam() {
+        User ownerUser = new User("ownerUser2","123","shak","s@mail.com");
+        TeamOwner ownerTest2 = new TeamOwner("ownerUser2","owner2@gmail.com");
+        ownerUser.addRoleToUser(Role.TEAM_OWNER,ownerTest2);
+        assertEquals(1,team.getOwners().size());
+        team.addOwner(ownerTest2);
+        team.closeTeam(ownerUser);
+        assertFalse( team.getTeamStatus().compareTo(TeamStatus.Open )==0);
+        team.openTeam();
+        assertTrue(0 == team.getTeamStatus().compareTo(TeamStatus.Open));
+
+    }
+
+    @Test
+    public void getPlayer() {
+        team.addPlayer(player);
+        assertTrue(player == team.getPlayer(player.getUserName()));
+        assertTrue(team.getPlayers().containsKey(player.getUserName()));
+    }
+
+    @Test
+    public void getCoach() {
+        team.addCoach(coach);
+        assertTrue(coach == team.getCoach(coach.getUserName()));
+        assertTrue(team.getCoaches().containsKey(coach.getUserName()));
+    }
+
+    @Test
+    public void getFields() {
+        assertTrue(team.getFields().size() == 1);
+        Field field2 = new Field("field2",100);
+        team.addField(field2);
+        assertTrue(team.getFields().size() == 2);
+        assertTrue(team.getFields().contains(field));
+        assertTrue(team.getFields().contains(field2));
+    }
+
+    @Test
+    public void getOwners() {
+        assertTrue(team.getOwners().size() == 1);
+        assertTrue(team.getOwners().containsKey(owner.getUserName()));
+    }
+
+    @Test
+    public void getBudget() {
+        Budget budget = new Budget();
+        team.setBudget(budget);
+        assertTrue(budget == team.getBudget());
+    }
+
+    @Test
+    public void addSubscriber() {
+        assertEquals(0,team.getAlert().getInSystemAlertList().size());
+        team.addSubscriber(owner);
+        assertEquals(1,team.getAlert().getInSystemAlertList().size());
+
+    }
+
+    @Test
+    public void removeSubscriber() {
+        assertEquals(0,team.getAlert().getInSystemAlertList().size());
+        team.addSubscriber(owner);
+        assertEquals(1,team.getAlert().getInSystemAlertList().size());
+        team.removeSubscriber(owner);
+        assertEquals(0,team.getAlert().getInSystemAlertList().size());
+
+    }
+
+    @Test
+    public void getTeamStatus() {
+
+    }
+
+    @Test
+    public void setBudget() {
+        Budget budget = new Budget();
+        budget.setBudget(500000);
+        team.setBudget(budget);
+        assertEquals(500000,team.getBudget().getBudget());
+
+    }
 }
