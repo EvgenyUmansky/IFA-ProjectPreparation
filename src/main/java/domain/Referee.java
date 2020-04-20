@@ -29,9 +29,7 @@ public class Referee extends Subscriber {
 
     // UC 10.1 - get and set referee details
     public String getRefereeDetails() {
-        return "User name: " + getUserName() + "\n" +
-                "Mail: " + getMail() + "\n" +
-                "Qualification: " + getQualification() + "\n" +
+        return  "Qualification: " + getQualification() + "\n" +
                 "Type: " + getRefereeType();
     }
 

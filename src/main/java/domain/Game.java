@@ -209,7 +209,7 @@ public class Game {
     public static ArrayList<Game> getGamesByReferee(Referee referee){
         //TODO: Get data from DB (like SELECT * FROM GAMES WHERE Referee=username)
         return new ArrayList<Game>() {{
-            add(new Game(null, null, null, null, null, new ArrayList<Referee>() {{
+            add(new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), "2019-11-11 12:00", new ArrayList<Referee>() {{
                 add(referee);
             }}));
         }};

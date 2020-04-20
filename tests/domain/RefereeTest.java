@@ -83,7 +83,7 @@ class RefereeTest {
 
     @Test
     void getRefereeDetails(){
-        assertEquals("User name: Evgeny\nMail: euguman@gmail.com\nQualification: 4\nType: MAIN", referee.getRefereeDetails());
+        assertEquals("Qualification: 4\nType: MAIN", referee.getRefereeDetails());
     }
 
     @Test
