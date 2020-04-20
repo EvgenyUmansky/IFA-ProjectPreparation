@@ -282,7 +282,7 @@ public class Team {
 
     public static Team getTeamByName(String teamName) {
         //TODO: change the mock to DB
-        return new Team(teamName, null, null);
+        return new Team(teamName, null, new TeamOwner("userName", "mail"));
     }
 
 

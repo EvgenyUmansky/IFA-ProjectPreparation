@@ -70,6 +70,6 @@ public class TeamPlayer extends TeamMember {
 
     public static TeamPlayer getPlayerByName (String playerName){
         //TODO: working with DB
-        return new TeamPlayer(null,null);
+        return new TeamPlayer("userName",null);
     }
 }
