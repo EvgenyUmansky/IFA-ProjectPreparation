@@ -49,4 +49,9 @@ public class Field {
         return true;
     }
 
+    public static Field getFieldByName(String fieldName){
+        //TODO - change this to a query for DB
+        return new Field(fieldName,0);
+    }
+
 }

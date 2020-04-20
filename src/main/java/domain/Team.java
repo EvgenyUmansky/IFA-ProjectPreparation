@@ -36,7 +36,7 @@ public class Team {
 
 
     // Constructor
-    public Team(String name, Field stadium) {
+   /* public Team(String name, Field stadium) {
         this.teamName = name;
         this.stadium = stadium;
         this.fields = new HashSet<>();
@@ -47,7 +47,7 @@ public class Team {
         alert = new Alert();
         this.fields.add(stadium);
         this.teamStatus = TeamStatus.Open;
-    }
+    }*/
 
 
 
@@ -83,50 +83,33 @@ public class Team {
         return teamName;
     }
 
-
-    public void addProperty(Object property) {
-        if(teamStatus != TeamStatus.Open){
-            return;
-        }
-        if (property instanceof Field) {
-            this.fields.add((Field) property);
-        }
-
-        if (property instanceof TeamPlayer) {
-            ((TeamPlayer) property).setCurrentTeam(this);
-            this.players.put(((TeamPlayer) property).getUserName(), (TeamPlayer) property);
-        }
-
-        if (property instanceof TeamCoach) {
-            ((TeamCoach) property).setCurrentTeam(this);
-            this.coaches.put(((TeamCoach) property).getUserName(), (TeamCoach) property);
-        }
-
-        if (property instanceof TeamManager) {
-            ((TeamManager) property).setCurrentTeam(this);
-            this.managers.put(((TeamManager) property).getUserName(), (TeamManager) property);
-        }
+    public void addPlayer(TeamPlayer player){
+        player.setCurrentTeam(this);
+        this.players.put(player.getUserName(), player);
     }
 
-    public void removeProperty(Object property) {
-        if(teamStatus != TeamStatus.Open){
-            return;
-        }
-        if (property instanceof Field) {
-            this.fields.remove(property);
-        }
+    public void addCoach(TeamCoach coach){
+        coach.setCurrentTeam(this);
+        this.coaches.put(coach.getUserName(), coach);
+    }
 
-        if (property instanceof TeamPlayer) {
-            this.players.remove(((TeamPlayer) property).getUserName());
-        }
+    public void addField(Field field){
+        this.fields.add(field);
+    }
 
-        if (property instanceof TeamCoach) {
-            this.coaches.remove(((TeamCoach) property).getUserName());
-        }
 
-        if (property instanceof TeamManager) {
-            this.managers.remove(((TeamManager) property).getUserName());
-        }
+    public void removePlayer(TeamPlayer player){
+        player.setCurrentTeam(null);
+        this.players.remove(player.getUserName());
+    }
+
+    public void removeCoach(TeamCoach coach){
+        coach.setCurrentTeam(null);
+        this.coaches.remove(coach.getUserName());
+    }
+
+    public void removeField(Field field){
+        this.fields.remove(field);
     }
 
 
@@ -182,16 +165,12 @@ public class Team {
 
     //UC 6.3
     public void removeOwner(User user) {
-        if(teamStatus != TeamStatus.Open){
-            throw new Error("The team is closed - cannot execute the operation");
-        }
         //Impossible to leave the Team without an Owner
         if (this.owners.size() <= 1) {
            throw new Error("The team cannot be left without an owner");
         } else {
             TeamOwner owner = (TeamOwner)user.getRoles().get(Role.TEAM_OWNER);
             this.owners.remove(user.getUserName());
-            user.removeRoleFromUser(Role.TEAM_OWNER);
             removeSubscriber(owner);
             HashSet<TeamOwner> ownerAppointments = owner.getOwnerAppointments();
             HashSet<TeamManager> managerAppointments = owner.getManagerAppointments();
@@ -207,9 +186,6 @@ public class Team {
 
    //UC 6.4
    public void addManager(User currentOwner, User newManager) {
-       if(teamStatus != TeamStatus.Open){
-           return;
-       }
        if (this.owners.containsKey(currentOwner.getUserName())) {
            TeamManager newTeamManager = (TeamManager)User.getUserByID(newManager.getUserName()).getRoles().get(Role.TEAM_MANAGER);
            newTeamManager.setCurrentTeam(this);
@@ -221,12 +197,8 @@ public class Team {
 
    //UC 6.5
     public void removeManager(User managerUser){
-        if(teamStatus != TeamStatus.Open){
-           throw new Error("The team is closed - cannot execute the operation");
-        }
         TeamManager manager = (TeamManager)managerUser.getRoles().get(Role.TEAM_MANAGER);
         this.managers.remove(managerUser.getUserName());
-        managerUser.removeRoleFromUser(Role.TEAM_MANAGER);
         removeSubscriber(manager);
     }
 
