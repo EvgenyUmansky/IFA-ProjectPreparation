@@ -315,17 +315,74 @@ public class Controller {
     // =============================================================
 
 
-    //6.1A - add property
-    public void addProperty(Team team,Object property) {
-        team.addProperty(property);
+    //6.1A - add properties
+
+    public void addPlayer(Team team, String userName){
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
+        TeamPlayer player = (TeamPlayer)(User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
+        if(player == null){
+            throw new Error("This user is not a player");
+        }
+        team.addPlayer(player);
     }
 
 
-    //6.1B - remove property
-
-    public void removeProperty(Team team,Object property) {
-        team.removeProperty(property);
+    public void addCoach(Team team, String userName){
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
+        TeamCoach coach = (TeamCoach)(User.getUserByID(userName).getRoles().get(Role.COACH));
+        if(coach == null){
+            throw new Error("This user is not a coach");
+        }
+        team.addCoach(coach);
     }
+
+
+    public void addField(Team team, String fieldName){
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
+        team.addField(Field.getFieldByName(fieldName));
+    }
+
+
+    //6.1B - remove properties
+
+    public void removePlayer(Team team, String userName){
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
+        TeamPlayer player = (TeamPlayer)(User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
+        if(player == null){
+            throw new Error("This user is not a player");
+        }
+        team.removePlayer(player);
+    }
+
+    public void removeCoach(Team team, String userName){
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
+        TeamCoach coach = (TeamCoach)(User.getUserByID(userName).getRoles().get(Role.COACH));
+        if(coach == null){
+            throw new Error("This user is not a coach");
+        }
+        team.removeCoach(coach);
+    }
+
+
+    public void removeField(Team team, String fieldName){
+        if(team.getTeamStatus() != TeamStatus.Open){
+            throw new Error("This team is currently closed");
+        }
+        team.removeField(Field.getFieldByName(fieldName));
+    }
+
+
+
 
     //6.2 - add owner to team and new owner to listAppointments
     public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){

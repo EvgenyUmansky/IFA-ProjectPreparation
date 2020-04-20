@@ -83,50 +83,33 @@ public class Team {
         return teamName;
     }
 
-
-    public void addProperty(Object property) {
-        if(teamStatus != TeamStatus.Open){
-            return;
-        }
-        if (property instanceof Field) {
-            this.fields.add((Field) property);
-        }
-
-        if (property instanceof TeamPlayer) {
-            ((TeamPlayer) property).setCurrentTeam(this);
-            this.players.put(((TeamPlayer) property).getUserName(), (TeamPlayer) property);
-        }
-
-        if (property instanceof TeamCoach) {
-            ((TeamCoach) property).setCurrentTeam(this);
-            this.coaches.put(((TeamCoach) property).getUserName(), (TeamCoach) property);
-        }
-
-        if (property instanceof TeamManager) {
-            ((TeamManager) property).setCurrentTeam(this);
-            this.managers.put(((TeamManager) property).getUserName(), (TeamManager) property);
-        }
+    public void addPlayer(TeamPlayer player){
+        player.setCurrentTeam(this);
+        this.players.put(player.getUserName(), player);
     }
 
-    public void removeProperty(Object property) {
-        if(teamStatus != TeamStatus.Open){
-            return;
-        }
-        if (property instanceof Field) {
-            this.fields.remove(property);
-        }
+    public void addCoach(TeamCoach coach){
+        coach.setCurrentTeam(this);
+        this.coaches.put(coach.getUserName(), coach);
+    }
 
-        if (property instanceof TeamPlayer) {
-            this.players.remove(((TeamPlayer) property).getUserName());
-        }
+    public void addField(Field field){
+        this.fields.add(field);
+    }
 
-        if (property instanceof TeamCoach) {
-            this.coaches.remove(((TeamCoach) property).getUserName());
-        }
 
-        if (property instanceof TeamManager) {
-            this.managers.remove(((TeamManager) property).getUserName());
-        }
+    public void removePlayer(TeamPlayer player){
+        player.setCurrentTeam(null);
+        this.players.remove(player.getUserName());
+    }
+
+    public void removeCoach(TeamCoach coach){
+        coach.setCurrentTeam(null);
+        this.coaches.remove(coach.getUserName());
+    }
+
+    public void removeField(Field field){
+        this.fields.remove(field);
     }
 
 
