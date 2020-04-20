@@ -373,7 +373,7 @@ public class Controller {
     //UC7.1 - set permissions to team manager
     //responsible of Team Owner!
     public void setPermissionsToManager() {
-
+    }
 
 
     // =================== System Manager functions ====================
