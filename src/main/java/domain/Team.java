@@ -17,6 +17,7 @@ public class Team {
     private Budget budget;
     private PersonalPage teamPage;
     private TeamStatus teamStatus;
+    private Alert alert;
 
     // Constructor
     public Team(String name, Field stadium, TeamOwner owner) {
@@ -27,9 +28,25 @@ public class Team {
         this.managers = new HashMap<>();
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
+        alert = new Alert();
         this.fields.add(stadium);
-        this.teamStatus =TeamStatus.Open;
+        this.teamStatus = TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
+    }
+
+
+    // Constructor
+    public Team(String name, Field stadium) {
+        this.teamName = name;
+        this.stadium = stadium;
+        this.fields = new HashSet<>();
+        this.owners = new HashMap<>();
+        this.managers = new HashMap<>();
+        this.coaches = new HashMap<>();
+        this.players = new HashMap<>();
+        alert = new Alert();
+        this.fields.add(stadium);
+        this.teamStatus = TeamStatus.Open;
     }
 
 
@@ -115,42 +132,40 @@ public class Team {
 
     public void closeTeam(User user) {
         // TODO: 18/04/2020 add relevant subscribers to mailSet
-        Alert alert = new Alert();
-        //alert.addToMailSet();
         if (teamStatus == TeamStatus.Open) {
             if(user.getRoles().containsKey(Role.SYSTEM_ADMIN)){
                 teamStatus = TeamStatus.PermanentlyClose;
                 alert.sendAlert(new AlertNotification("close team permanently","you team close permanently"));
-
             }
             else if(user.getRoles().containsKey(Role.TEAM_OWNER)){
                 teamStatus = TeamStatus.TempClose;
                 alert.sendAlert(new AlertNotification("close team temporary","you team close temporary"));
             }
         }
+        else{
+            throw new Error("This team is already closed");
+        }
     }
 
     public void openTeam() {
         // TODO: 18/04/2020 add relevant subscribers to mailSet
-        Alert alert = new Alert();
-        //alert.addToMailSet();
         if(teamStatus == TeamStatus.TempClose){
             teamStatus = TeamStatus.Open;
             alert.sendAlert(new AlertNotification("open your team","your team open again"));
+        }
+        else{
+            throw new Error("This team can't be reopened");
         }
     }
 
 
     //UC 6.2
     public void addOwner(TeamOwner owner) {
-        if(teamStatus != TeamStatus.Open){
-            return;
-        }
         if (owner.getTeam() == null) {
             owner.setTeam(this);
         }
-
         this.owners.put(owner.getUserName(), owner);
+        addSubscriber(owner);
     }
 
     //UC 6.2
@@ -159,8 +174,7 @@ public class Team {
             return;
         }
         if (this.owners.containsKey(currentOwner.getUserName())) {
-            TeamOwner newTeamOwner = new TeamOwner(newOwner.getUserName(), newOwner.getMail());
-            newOwner.addRoleToUser(Role.TEAM_OWNER, newTeamOwner);
+            TeamOwner newTeamOwner = (TeamOwner)User.getUserByID(newOwner.getUserName()).getRoles().get(Role.TEAM_OWNER);
             this.addOwner(newTeamOwner);
         }
     }
@@ -169,15 +183,51 @@ public class Team {
     //UC 6.3
     public void removeOwner(User user) {
         if(teamStatus != TeamStatus.Open){
-            return;
+            throw new Error("The team is closed - cannot execute the operation");
         }
         //Impossible to leave the Team without an Owner
         if (this.owners.size() <= 1) {
-           throw new Error("Team cannot be without owner");
+           throw new Error("The team cannot be left without an owner");
         } else {
+            TeamOwner owner = (TeamOwner)user.getRoles().get(Role.TEAM_OWNER);
             this.owners.remove(user.getUserName());
             user.removeRoleFromUser(Role.TEAM_OWNER);
+            removeSubscriber(owner);
+            HashSet<TeamOwner> ownerAppointments = owner.getOwnerAppointments();
+            HashSet<TeamManager> managerAppointments = owner.getManagerAppointments();
+            for(TeamOwner appointment: ownerAppointments){
+                removeOwner(User.getUserByID(appointment.getUserName()));
+            }
+            for(TeamManager appointment : managerAppointments){
+                removeManager(User.getUserByID(appointment.getUserName()));
+            }
         }
+    }
+
+
+   //UC 6.4
+   public void addManager(User currentOwner, User newManager) {
+       if(teamStatus != TeamStatus.Open){
+           return;
+       }
+       if (this.owners.containsKey(currentOwner.getUserName())) {
+           TeamManager newTeamManager = (TeamManager)User.getUserByID(newManager.getUserName()).getRoles().get(Role.TEAM_MANAGER);
+           newTeamManager.setCurrentTeam(this);
+           this.managers.put(newTeamManager.getUserName(), newTeamManager);
+           addSubscriber(newTeamManager);
+       }
+   }
+
+
+   //UC 6.5
+    public void removeManager(User managerUser){
+        if(teamStatus != TeamStatus.Open){
+           throw new Error("The team is closed - cannot execute the operation");
+        }
+        TeamManager manager = (TeamManager)managerUser.getRoles().get(Role.TEAM_MANAGER);
+        this.managers.remove(managerUser.getUserName());
+        managerUser.removeRoleFromUser(Role.TEAM_MANAGER);
+        removeSubscriber(manager);
     }
 
 //    //UC 6.4
@@ -234,4 +284,18 @@ public class Team {
         //TODO: change the mock to DB
         return new Team(teamName, null, null);
     }
+
+
+    public void addSubscriber(Subscriber user){
+        alert.addSubscriber(user);
+    }
+
+    public void removeSubscriber(Subscriber user){
+        alert.removeSubscriber(user);
+    }
+
+    public TeamStatus getTeamStatus(){
+        return this.teamStatus;
+    }
+
 }

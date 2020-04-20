@@ -12,16 +12,17 @@ public class TeamOwner extends  Subscriber {
 
     // =================== Constructors ====================
 
-
     public TeamOwner(String userName, String mail, Team team, HashSet<TeamManager> managerAppointments) {
         super(userName, mail);
         this.team = team;
         this.managerAppointments = managerAppointments;
+        this.ownerAppointments = new HashSet<>();
     }
 
     public TeamOwner(String userName, String mail) {
         super(userName, mail);
         this.managerAppointments = new HashSet<>();
+        this.ownerAppointments = new HashSet<>();
     }
 
 
@@ -39,12 +40,14 @@ public class TeamOwner extends  Subscriber {
         return managerAppointments;
     }
 
+    public HashSet<TeamOwner> getOwnerAppointments() {return ownerAppointments;}
+
 
     // =================== Functionality ====================
 
     //add Team Owner
-    public void addToOwnerAppointments(TeamOwner Owner) {
-        this.ownerAppointments.add(Owner);
+    public void addToOwnerAppointments(TeamOwner owner) {
+        this.ownerAppointments.add(owner);
     }
 
     //add Manager Owner
@@ -52,8 +55,8 @@ public class TeamOwner extends  Subscriber {
         this.managerAppointments.add(teamManager);
     }
     //remove Team Owner
-    public void removeFromOwnerAppointments(TeamOwner OwnerToRemove) {
-        this.ownerAppointments.remove(OwnerToRemove);
+    public void removeFromOwnerAppointments(TeamOwner ownerToRemove) {
+        this.ownerAppointments.remove(ownerToRemove);
     }
 
     //remove Manager Owner
@@ -63,4 +66,31 @@ public class TeamOwner extends  Subscriber {
 
 
 
+    // Remove property use case
+
+    public boolean removeProperty(Object property){
+        if(property instanceof TeamManager){
+            if(!(managerAppointments.contains((TeamManager)property))){
+                return false;
+            }
+        }
+
+        team.removeProperty(property);
+        return true;
+    }
+
+
+    // Update details use case
+
+    public boolean updatePlayerDetails(String userName, String squadNumber, Date birthDate, String position){
+        TeamPlayer player = this.team.getPlayer(userName);
+        player.updateDetails(birthDate,position,squadNumber);
+        return true;
+    }
+
+    public boolean updateCoachDetails(String userName,  String validation, String role){
+        TeamCoach coach = this.team.getCoach(userName);
+        coach.updateDetails(validation,role);
+        return true;
+    }
 }
