@@ -406,6 +406,7 @@ public class Controller {
         TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER), removedOwner = (TeamOwner)removedOwnerUser.getRoles().get(Role.TEAM_OWNER);
         owner.removeFromOwnerAppointments(removedOwner);
         team.removeOwner(removedOwnerUser);
+        removedOwnerUser.removeRoleFromUser(Role.TEAM_OWNER);
     }
 
     //6.4 - add team Manager
@@ -430,6 +431,7 @@ public class Controller {
         TeamManager manager = (TeamManager)removedManagerUser.getRoles().get(Role.TEAM_MANAGER);
         owner.removeFromManagerAppointments(manager);
         team.removeManager(removedManagerUser);
+        removedManagerUser.removeRoleFromUser(Role.TEAM_MANAGER);
     }
 
 
