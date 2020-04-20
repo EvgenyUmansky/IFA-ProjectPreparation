@@ -15,6 +15,7 @@ public abstract class PersonalPage {
         this.alert = new Alert();
         this.name = name;
         this.mail = mail;
+        pageOwners = new HashMap<>();
     }
 
     public static PersonalPage getPage(String pageName) {
@@ -47,6 +48,21 @@ public abstract class PersonalPage {
         return info;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public Alert getAlert() {
+        return alert;
+    }
+
+    public HashMap<String, Subscriber> getPageOwners() {
+        return pageOwners;
+    }
     /////////// Functionality ///////////
 
     // UC 3.2

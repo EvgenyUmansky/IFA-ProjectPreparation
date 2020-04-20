@@ -14,17 +14,17 @@ public class TeamCoach extends TeamMember {
 
     //U.C 5.1
     public void updateDetails(String newQualification, String newRole){
-        //update new details also in coach's page
+        //TODO: update new details also in player's page
         String coachName = User.getUserByID(this.getUserName()).getName();
-        CoachPage coachPage = (CoachPage)PersonalPage.getPage(coachName);
+  //      CoachPage coachPage = (CoachPage)PersonalPage.getPage(coachName);
 
         if(newQualification != null) {
             setQualification(newQualification);
-            coachPage.setQualification(newQualification);
+//            coachPage.setQualification(newQualification);
         }
         if(newRole != null) {
             setRole(newRole);
-            coachPage.setRole(newRole);
+  //          coachPage.setRole(newRole);
         }
 
     }
