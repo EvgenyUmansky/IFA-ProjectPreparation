@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="add team owner tests">
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Team.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamCoachTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamCoachTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamPlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamPlayerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/service/ControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/service/ControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/service/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,8 +97,8 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.addOwner">
-    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ControllerTest.addManager">
+    <configuration name="ControllerTest.addManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
@@ -110,22 +108,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="service" />
       <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.addOwner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="IFA-ProjectPreparation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
-      <option name="METHOD_NAME" value="addOwner" />
+      <option name="METHOD_NAME" value="addManager" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -142,6 +125,22 @@
       <option name="PACKAGE_NAME" value="service" />
       <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
       <option name="METHOD_NAME" value="removeField" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest.removeOwner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
+      <option name="METHOD_NAME" value="removeOwner" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -180,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ControllerTest.addOwner" />
-        <item itemvalue="JUnit.ControllerTest.removeField" />
-        <item itemvalue="JUnit.TeamTest" />
+        <item itemvalue="JUnit.ControllerTest.addManager" />
+        <item itemvalue="JUnit.ControllerTest.removeOwner" />
         <item itemvalue="JUnit.TeamTest.removeField" />
-        <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.TeamTest" />
+        <item itemvalue="JUnit.ControllerTest.removeField" />
       </list>
     </recent_temporary>
   </component>
@@ -282,10 +281,10 @@
   <component name="WindowStateProjectService">
     <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587466893469" />
     <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1587466893469" />
-    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1587480013301">
+    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1587498274874">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587480013301" />
+    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587498274874" />
     <state width="453" height="466" key="DebuggerActiveHint" timestamp="1587478714558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -295,22 +294,22 @@
     </state>
     <state x="74" y="73" width="1389" height="679" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1587466893470" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587479984855" />
-    <state width="1877" height="234" key="GridCell.Tab.0.bottom" timestamp="1587478823954">
+    <state width="1877" height="234" key="GridCell.Tab.0.bottom" timestamp="1587496819409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="234" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587478823954" />
-    <state width="1877" height="234" key="GridCell.Tab.0.center" timestamp="1587478823954">
+    <state width="1877" height="234" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587496819409" />
+    <state width="1877" height="234" key="GridCell.Tab.0.center" timestamp="1587496819409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="234" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587478823954" />
-    <state width="1877" height="234" key="GridCell.Tab.0.left" timestamp="1587478823954">
+    <state width="1877" height="234" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587496819409" />
+    <state width="1877" height="234" key="GridCell.Tab.0.left" timestamp="1587496819409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="234" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587478823954" />
-    <state width="1877" height="234" key="GridCell.Tab.0.right" timestamp="1587478823954">
+    <state width="1877" height="234" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587496819409" />
+    <state width="1877" height="234" key="GridCell.Tab.0.right" timestamp="1587496819409">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="234" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587478823954" />
+    <state width="1877" height="234" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587496819409" />
     <state x="0" y="0" key="MergeDialog" timestamp="1587466893470" />
     <state x="0" y="0" key="MergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587466893470" />
     <state x="481" y="129" key="MultipleFileMergeDialog" timestamp="1587466893470" />
@@ -320,11 +319,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587471257147" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1587480018507">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1587480260250">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587466893470" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587480018507" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587480260250" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1587479984855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

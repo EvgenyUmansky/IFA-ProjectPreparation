@@ -711,10 +711,47 @@ class ControllerTest {
 
     // T6.3
     @Test
-    void addManager() {
+    void removeOwner() throws Exception {
+        // TODO: check OwnerAppointments (in TeamOwner) with DB
+        TeamOwner ownerTest = (TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER);
+        assertEquals(0, ownerTest.getOwnerAppointments().size());
+        assertEquals(1, team.getOwners().size());
+        controller.addOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+        //assertEquals(1, ownerTest.getOwnerAppointments().size());
+        assertEquals(2, team.getOwners().size());
+        //assertEquals("", ownerTest.getOwnerAppointments().iterator().next().getUserName());
+        assertEquals("Main TO", team.getOwners().keySet().toArray()[1]);
+
+        controller.removeOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+        //assertEquals(0, ownerTest.getOwnerAppointments().size());
+        assertEquals(1, team.getOwners().size());
+        //assertEquals("0", ownerTest.getOwnerAppointments().iterator().next().getUserName());
+
         team.closeTeam(teamOwnerUser);
         try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
+            controller.removeOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.4
+    @Test
+    void addManager() throws Exception {
+        // TODO: check ManagerAppointments (in TeamOwner) with DB
+        assertEquals(0, ((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getManagerAppointments().size());
+
+        controller.addManager(team, teamManager.getUserName(), teamOwnerUser.getUserName());
+
+        //assertEquals(1, ((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getManagerAppointments().size()));
+        assertEquals(1, team.getManagers().size());
+        //assertEquals("", ((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getManagerAppointments().iterator().next().getUserName());
+        assertEquals("Test TO manager", team.getManagers().keySet().toArray()[0]);
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addManager(team, teamManager.getUserName(), teamOwnerUser.getUserName());
         }
         catch (Exception e){
             assertEquals("java.lang.Exception: This team is currently closed", e.toString());
