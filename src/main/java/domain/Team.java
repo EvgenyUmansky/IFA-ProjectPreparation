@@ -123,6 +123,7 @@ public class Team {
             if (user.getRoles().containsKey(Role.SYSTEM_ADMIN)) {
                 teamStatus = TeamStatus.PermanentlyClose;
                 alert.sendAlert(new AlertNotification("close team permanently", "you team close permanently"));
+                return;
             }
         }
         if(teamStatus == TeamStatus.Open) {

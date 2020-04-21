@@ -18,17 +18,35 @@ class ControllerTest {
     Fan fanMail;
     Fan fanNotMail;
 
-    // T 3.2
+    // T3.2
     TeamPage teamPage;
     CoachPage coachPage;
     PlayerPage playerPage;
 
-    // T 3.3
+    // T3.3
     Game game;
 
-    // T 3.4
+    // T3.4
     ArrayList<SystemAdministrator> sysAdmins;
     AlertNotification complaintToSysAdmin;
+
+    // =================== Team Owner functions ====================
+    Team team;
+    User teamOwnerUser;
+
+    // T6.1A1, T6.1B1
+    TeamPlayer player;
+    // T6.1A2, T6.1B2
+    TeamCoach coach;
+    // T6.1A3, T6.1B3
+    Field field;
+
+    // T6.2, T6.3
+    TeamOwner teamOwnerMain;
+    TeamOwner teamOwnerSub;
+
+    // T6.4, T6.5
+    TeamManager teamManager;
 
     // ========================= Referee Tests ========================
     Referee refereeMail;
@@ -54,7 +72,7 @@ class ControllerTest {
         coachPage = new CoachPage(new TeamCoach("CoachName", ""), "My best page coach");
         playerPage = new PlayerPage(new TeamPlayer("PlayerName", ""), "My best page player");
 
-        // T3.3, 10.3, 10.4
+        // T3.3, T10.3, T10.4
         game = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), "2019-11-11 12:00", new ArrayList<>());
 
         // T3.4
@@ -65,6 +83,25 @@ class ControllerTest {
         sysAdmins.get(1).setMail(false);
         complaintToSysAdmin = new AlertNotification("Complaint title", "Complaint text");
 
+        // =================== Team Owner functions ====================
+        teamOwnerUser = new User("TeamOwnerUser", "123", "Evgeny", "");
+        teamOwnerUser.addRoleToUser(Role.TEAM_OWNER);
+        team = new Team("Test TO team", null, (TeamOwner)teamOwnerUser.getRoles().get(Role.TEAM_OWNER));
+
+        // T6.1A1, T6.1B1
+        player = new TeamPlayer("Test TO player", "");
+        // T6.1A2, T6.1B2
+        coach = new TeamCoach("Test TO coach", "");
+        // T6.1A3, T6.1B3
+        field = new Field("Test TO field", 500);
+
+        // T6.2, T6.3
+        teamOwnerMain = new TeamOwner("Main TO", "");
+        teamOwnerSub = new TeamOwner("Sub TO", "");
+
+        // T6.4, T6.5
+        teamManager = new TeamManager("Test TO manager", "");
+
         // ========================= Referee Tests ========================
         refereeMail = new Referee("testRefereeMail", "euguman@gmail.com");
         refereeMail.setQualification(4);
@@ -73,7 +110,7 @@ class ControllerTest {
         refereeNotMail.setQualification(5);
         refereeNotMail.setRefereeType(RefereeType.ASSISTANT);
 
-        // T10.3, 10.4
+        // T10.3, T10.4
         gameEvent = new GameEvent("2019-11-11 12:30", 30, GameAlert.INJURY, "Test description 1");
         gameEventBeforeGame = new GameEvent("2019-11-11 11:30", 30, GameAlert.INJURY, "Test description 2");
     }
@@ -93,6 +130,24 @@ class ControllerTest {
         // T 3.4
         sysAdmins = null;
         complaintToSysAdmin = null;
+
+        // =================== Team Owner functions ====================
+        teamOwnerUser = null;
+        team = null;
+
+        // T6.1A1, T6.1B1
+        player = null;
+        // T6.1A2, T6.1B2
+        coach = null;
+        // T6.1A3, T6.1B3
+        field = null;
+
+        // T6.2, T6.3
+        teamOwnerMain = null;
+        teamOwnerSub = null;
+
+        // T6.4, T6.5
+        teamManager = null;
 
         // ========================= Referee Tests ========================
         refereeMail = null;
@@ -409,36 +464,110 @@ class ControllerTest {
     void setTeamBudget() {
     }
 
-    @Test
-    void addField() {
-    }
 
+    // =================== Team Owner tests ========================
+    // =============================================================
+
+    // T6.1A
+
+    // T6.1A1
     @Test
-    void addPlayer() {
+    void addPlayer() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addPlayer(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getPlayers().size());
+        controller.addPlayer(team, player.getUserName());
+        assertEquals(player.getUserName(), team.getPlayers().get(player.getUserName()).getUserName());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void addCoach() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    @Test
+    void addField() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void addManager() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void removeField() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void removePlayer() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void removeCoach() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void removeManager() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test

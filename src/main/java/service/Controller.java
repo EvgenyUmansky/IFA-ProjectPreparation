@@ -282,7 +282,7 @@ public class Controller {
         // TODO: Send invitation to referee
     }
 
-    // 9.3
+    // UC 9.3
     public void removeReferee(String username) {
         User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
@@ -329,68 +329,68 @@ public class Controller {
     // =============================================================
 
 
-    //6.1A - add properties
-
-    public void addPlayer(Team team, String userName){
+    // UC 6.1A - add properties
+    // 6.1A1
+    public void addPlayer(Team team, String userName) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         TeamPlayer player = (TeamPlayer)(User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
         if(player == null){
-            throw new Error("This user is not a player");
+            throw new Exception("This user is not a player");
         }
         team.addPlayer(player);
     }
 
-
-    public void addCoach(Team team, String userName){
+    // 6.1A2
+    public void addCoach(Team team, String userName) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         TeamCoach coach = (TeamCoach)(User.getUserByID(userName).getRoles().get(Role.COACH));
         if(coach == null){
-            throw new Error("This user is not a coach");
+            throw new Exception("This user is not a coach");
         }
         team.addCoach(coach);
     }
 
-
-    public void addField(Team team, String fieldName){
+    // 6.1A3
+    public void addField(Team team, String fieldName) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         team.addField(Field.getFieldByName(fieldName));
     }
 
 
-    //6.1B - remove properties
-
-    public void removePlayer(Team team, String userName){
+    // UC 6.1B - remove properties
+    // 6.1B1
+    public void removePlayer(Team team, String userName) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         TeamPlayer player = (TeamPlayer)(User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
         if(player == null){
-            throw new Error("This user is not a player");
+            throw new Exception("This user is not a player");
         }
         team.removePlayer(player);
     }
-
-    public void removeCoach(Team team, String userName){
+    // 6.1B2
+    public void removeCoach(Team team, String userName) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         TeamCoach coach = (TeamCoach)(User.getUserByID(userName).getRoles().get(Role.COACH));
         if(coach == null){
-            throw new Error("This user is not a coach");
+            throw new Exception("This user is not a coach");
         }
         team.removeCoach(coach);
     }
 
-
-    public void removeField(Team team, String fieldName){
+    // 6.1B3
+    public void removeField(Team team, String fieldName) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         team.removeField(Field.getFieldByName(fieldName));
     }
@@ -398,10 +398,10 @@ public class Controller {
 
 
 
-    //6.2 - add owner to team and new owner to listAppointments
-    public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner){
+    // UC 6.2 - add owner to team and new owner to listAppointments
+    public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         User ownerUser = User.getUserByID(userNameTeamOwner), newOwnerUser = User.getUserByID(userNameNewTeamOwner);
         TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
@@ -411,10 +411,10 @@ public class Controller {
     }
 
 
-    //6.3 - remove owner by owner
-    public void removeOwner(Team team, String userNameTeamOwner, String userNameRemovedTeamOwner){
+    // UC 6.3 - remove owner by owner
+    public void removeOwner(Team team, String userNameTeamOwner, String userNameRemovedTeamOwner) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         User ownerUser = User.getUserByID(userNameTeamOwner), removedOwnerUser = User.getUserByID(userNameRemovedTeamOwner);
         TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER), removedOwner = (TeamOwner)removedOwnerUser.getRoles().get(Role.TEAM_OWNER);
@@ -423,10 +423,10 @@ public class Controller {
         removedOwnerUser.removeRoleFromUser(Role.TEAM_OWNER);
     }
 
-    //6.4 - add team Manager
-    public void addManager(Team team, String userNameNewTeamManager, String userNameTeamOwner){
+    // UC 6.4 - add team Manager
+    public void addManager(Team team, String userNameNewTeamManager, String userNameTeamOwner) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         User ownerUser = User.getUserByID(userNameTeamOwner), newManagerUser = User.getUserByID(userNameNewTeamManager);
         TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
@@ -435,10 +435,10 @@ public class Controller {
         team.addManager(ownerUser,newManagerUser);
     }
 
-    //6.5 - remove manager by owner
-    public void removeManager(Team team, String userNameRemovedTeamManager, String userNameTeamOwner){
+    // UC 6.5 - remove manager by owner
+    public void removeManager(Team team, String userNameRemovedTeamManager, String userNameTeamOwner) throws Exception {
         if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Error("This team is currently closed");
+            throw new Exception("This team is currently closed");
         }
         User ownerUser = User.getUserByID(userNameTeamOwner), removedManagerUser = User.getUserByID(userNameRemovedTeamManager);
         TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER);
@@ -449,18 +449,18 @@ public class Controller {
     }
 
 
-    //UC6.6A - close team
+    // UC 6.6A - close team
     public void closeTeam(String userName, Team team) {
         team.closeTeam(User.getUserByID(userName));
     }
 
-    //UC6.6B - open team
+    // UC 6.6B - open team
     public void openTeam(Team team) {
         team.openTeam();
     }
 
 
-    //UC6.7 - manage finance
+    // UC 6.7 - manage finance
     public void manageFinance(){
 
     }
@@ -469,7 +469,7 @@ public class Controller {
     // =================== Team Manager functions ====================
     // ====================================================================
 
-    //UC7.1 - set permissions to team manager
+    // UC 7.1 - set permissions to team manager
     //responsible of Team Owner!
     public void setPermissionsToManager() {
 
@@ -480,36 +480,36 @@ public class Controller {
     // ====================================================================
 
 
-    //UC8.1 - close team --- UC 6.6A
+    // UC 8.1 - close team --- UC 6.6A
     public void closeTeam(Team team) {
         //DONE -> look at UC 6.6A
     }
 
 
-    //UC8.2 - remove user from System
+    // UC 8.2 - remove user from System
     public void removeUserFromSystem(String userName) {
         User.getUserByID(userName).closeUser();
     }
 
 
-    //UC8.3A - show Complaint
+    // UC 8.3A - show Complaint
     public void showComplain() {
 
     }
 
 
-    //UC8.3B - add comment to complaint
+    // UC 8.3B - add comment to complaint
     public void commentToComplaint() {
 
     }
 
-    //UC8.4 - show log document
+    // UC 8.4 - show log document
     public void showLogDocument() {
 
     }
 
 
-    //UC8.5 - start model of recommendation Systems
+    // UC 8.5 - start model of recommendation Systems
     public void startModelRecommendationSystem() {
 
     }
