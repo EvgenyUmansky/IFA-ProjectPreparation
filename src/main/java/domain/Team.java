@@ -8,7 +8,7 @@ public class Team {
 
     private String teamName;
     private Field stadium; //The team's main stadium, where they play official matches
-    private HashSet<Field> fields; //All the team's fields, including the stadium and training fields
+    private HashMap<String,Field> fields; //All the team's fields, including the stadium and training fields
     private HashMap<String, TeamPlayer> players;
     private HashMap<String, TeamCoach> coaches;
     private HashMap<String, TeamManager> managers;
@@ -23,13 +23,13 @@ public class Team {
     public Team(String name, Field stadium, TeamOwner owner) {
         this.teamName = name;
         this.stadium = stadium;
-        this.fields = new HashSet<>();
+        this.fields = new HashMap<>();
         this.owners = new HashMap<>();
         this.managers = new HashMap<>();
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
         alert = new Alert();
-        this.fields.add(stadium);
+        this.fields.put(stadium.getFieldName(), stadium);
         this.teamStatus = TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
     }
@@ -96,7 +96,7 @@ public class Team {
     }
 
     public void addField(Field field){
-        this.fields.add(field);
+        this.fields.put(field.getFieldName(), field);
     }
 
 
@@ -113,7 +113,7 @@ public class Team {
     }
 
     public void removeField(Field field){
-        this.fields.remove(field);
+        this.fields.remove(field.getFieldName());
     }
 
 
@@ -243,7 +243,7 @@ public class Team {
         return coaches.get(userName);
     }
 
-    public HashSet<Field> getFields() {
+    public HashMap<String,Field> getFields() {
         return fields;
     }
 

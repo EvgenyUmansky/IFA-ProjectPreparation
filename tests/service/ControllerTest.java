@@ -90,7 +90,7 @@ class ControllerTest {
         // =================== Team Owner functions ====================
         teamOwnerUser = new User("TeamOwnerUser", "123", "Evgeny", "");
         teamOwnerUser.addRoleToUser(Role.TEAM_OWNER);
-        team = new Team("Test TO team", null, (TeamOwner)teamOwnerUser.getRoles().get(Role.TEAM_OWNER));
+        team = new Team("Test TO team", new Field("Test field 0", 200), (TeamOwner)teamOwnerUser.getRoles().get(Role.TEAM_OWNER));
 
         // T6.1A1, T6.1B1
         player = new TeamPlayer("Test TO player", "");
@@ -455,7 +455,7 @@ class ControllerTest {
         } catch (Exception e) {
 
         }
-        assertEquals(true, User.getUserByID("newRef").getRoles().containsKey(Role.REFEREE));
+        assertTrue(User.getUserByID("newRef").getRoles().containsKey(Role.REFEREE));
     }
 
 
@@ -569,63 +569,149 @@ class ControllerTest {
         }
     }
 
+    // T6.1A2
     @Test
-    void addCoach() {
+    void addCoach() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addCoach(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getCoaches().size());
+        controller.addCoach(team, coach.getUserName());
+        assertEquals(coach.getUserName(), team.getCoaches().get(coach.getUserName()).getUserName());
+
+
         team.closeTeam(teamOwnerUser);
         try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
+            controller.addCoach(team, teamOwnerUser.getUserName());
         }
         catch (Exception e){
             assertEquals("java.lang.Exception: This team is currently closed", e.toString());
         }
     }
 
+    // T6.1A3
     @Test
-    void addField() {
+    void addField() throws Exception {
+        assertEquals(1, team.getFields().size()); // null field in team constructor
+        controller.addField(team, field.getFieldName());
+        assertEquals(field.getFieldName(), ((Field) team.getFields().keySet().toArray()[1]).getFieldName());
+        assertEquals(2, team.getFields().size());
+
         team.closeTeam(teamOwnerUser);
         try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
+            controller.addField(team, field.getFieldName());
         }
         catch (Exception e){
             assertEquals("java.lang.Exception: This team is currently closed", e.toString());
         }
     }
 
+    // T6.1B
+    // T6.1B1
+    @Test
+    void removePlayer() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addPlayer(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getPlayers().size());
+        controller.addPlayer(team, player.getUserName());
+        assertEquals(player.getUserName(), team.getPlayers().get(player.getUserName()).getUserName());
+        assertEquals(1, team.getPlayers().size());
+
+        controller.removePlayer(team, player.getUserName());
+        assertEquals(0, team.getPlayers().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.removePlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.1B2
+    @Test
+    void removeCoach() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addPlayer(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getCoaches().size());
+        controller.addCoach(team, coach.getUserName());
+        assertEquals(coach.getUserName(), team.getCoaches().get(coach.getUserName()).getUserName());
+        assertEquals(1, team.getCoaches().size());
+
+        controller.removeCoach(team, coach.getUserName());
+        assertEquals(0, team.getCoaches().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.removeCoach(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.1B3
+    @Test
+    void removeField() throws Exception {
+        assertEquals(1, team.getFields().size()); // null field in team constructor
+        controller.addField(team, field.getFieldName());
+        assertEquals(field.getFieldName(), team.getFields().keySet().toArray()[1]);
+        assertEquals(2, team.getFields().size());
+
+        controller.removeField(team, field.getFieldName());
+        assertEquals(1, team.getFields().keySet().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.removeField(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.2
+    @Test
+    void addOwner() throws Exception {
+        // TODO: check OwnerAppointments (in TeamOwner) with DB
+        TeamOwner ownerTest = (TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER);
+        assertEquals(0, ownerTest.getOwnerAppointments().size());
+        assertEquals(1, team.getOwners().size());
+
+        controller.addOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+
+        //assertEquals(1, ownerTest.getOwnerAppointments().size());
+        assertEquals(2, team.getOwners().size());
+        //assertEquals("0", ownerTest.getOwnerAppointments().iterator().next().getUserName());
+        assertEquals("Main TO", team.getOwners().keySet().toArray()[1]);
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.3
     @Test
     void addManager() {
-        team.closeTeam(teamOwnerUser);
-        try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
-        }
-        catch (Exception e){
-            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
-        }
-    }
-
-    @Test
-    void removeField() {
-        team.closeTeam(teamOwnerUser);
-        try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
-        }
-        catch (Exception e){
-            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
-        }
-    }
-
-    @Test
-    void removePlayer() {
-        team.closeTeam(teamOwnerUser);
-        try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
-        }
-        catch (Exception e){
-            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
-        }
-    }
-
-    @Test
-    void removeCoach() {
         team.closeTeam(teamOwnerUser);
         try {
             controller.addPlayer(team, teamOwnerUser.getUserName());

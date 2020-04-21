@@ -1,6 +1,5 @@
 package domain;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -160,22 +159,22 @@ class TeamTest {
 
     @Test
     void removeField(){
-        Field field1 = new Field("test",1000);
+        Field field1 = new Field("test 1",1000);
         team.addField(field1);
-        assertEquals(2,team.getFields().size());
-        assertTrue(team.getFields().contains(field1));
+        assertEquals(2, team.getFields().size());
+        assertTrue(team.getFields().containsKey(field1.getFieldName()));
 
         team.removeField(field1);
         assertEquals(1,team.getFields().size());
-        assertFalse(team.getFields().contains(field1));
+        assertFalse(team.getFields().containsKey(field1.getFieldName()));
     }
 
 
     @Test
     public void getPlayers() {
-        assertTrue(team.getPlayers().size() == 0);
+        assertEquals(0, team.getPlayers().size());
         team.addPlayer(player);
-        assertTrue(team.getPlayers().size() == 1);
+        assertEquals(1, team.getPlayers().size());
 
     }
 
@@ -194,9 +193,9 @@ class TeamTest {
         assertEquals(1,team.getOwners().size());
         team.addOwner(ownerTest2);
         team.closeTeam(ownerUser);
-        assertFalse( team.getTeamStatus().compareTo(TeamStatus.Open )==0);
+        assertNotEquals(0, team.getTeamStatus().compareTo(TeamStatus.Open));
         team.openTeam();
-        assertTrue(0 == team.getTeamStatus().compareTo(TeamStatus.Open));
+        assertEquals(0, team.getTeamStatus().compareTo(TeamStatus.Open));
     }
 
 
@@ -208,38 +207,38 @@ class TeamTest {
         assertEquals(1,team.getOwners().size());
         team.addOwner(ownerTest2);
         team.closeTeam(ownerUser);
-        assertFalse( team.getTeamStatus().compareTo(TeamStatus.Open )==0);
+        assertNotEquals(0, team.getTeamStatus().compareTo(TeamStatus.Open));
         team.openTeam();
-        assertTrue(0 == team.getTeamStatus().compareTo(TeamStatus.Open));
+        assertEquals(0, team.getTeamStatus().compareTo(TeamStatus.Open));
     }
 
     @Test
     public void getPlayer() {
         team.addPlayer(player);
-        assertTrue(player == team.getPlayer(player.getUserName()));
+        assertSame(player, team.getPlayer(player.getUserName()));
         assertTrue(team.getPlayers().containsKey(player.getUserName()));
     }
 
     @Test
     public void getCoach() {
         team.addCoach(coach);
-        assertTrue(coach == team.getCoach(coach.getUserName()));
+        assertSame(coach, team.getCoach(coach.getUserName()));
         assertTrue(team.getCoaches().containsKey(coach.getUserName()));
     }
 
     @Test
     public void getFields() {
-        assertTrue(team.getFields().size() == 1);
+        assertEquals(1, team.getFields().size());
         Field field2 = new Field("field2",100);
         team.addField(field2);
-        assertTrue(team.getFields().size() == 2);
-        assertTrue(team.getFields().contains(field));
-        assertTrue(team.getFields().contains(field2));
+        assertEquals(2, team.getFields().size());
+        assertTrue(team.getFields().containsKey(field.getFieldName()));
+        assertTrue(team.getFields().containsKey(field2.getFieldName()));
     }
 
     @Test
     public void getOwners() {
-        assertTrue(team.getOwners().size() == 1);
+        assertEquals(1, team.getOwners().size());
         assertTrue(team.getOwners().containsKey(owner.getUserName()));
     }
 
@@ -247,7 +246,7 @@ class TeamTest {
     public void getBudget() {
         Budget budget = new Budget();
         team.setBudget(budget);
-        assertTrue(budget == team.getBudget());
+        assertSame(budget, team.getBudget());
     }
 
     @Test
