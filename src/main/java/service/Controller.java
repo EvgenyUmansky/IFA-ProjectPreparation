@@ -94,12 +94,12 @@ public class Controller {
 
 
     // UC 4.1 - update player's details
-    public PlayerPage updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
+    public void updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
         User playerUser = User.getUserByID(username);
         if(playerName!=null){
             playerUser.setName(playerName);
         }
-        return ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
+        ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
 
     }
 
@@ -108,12 +108,12 @@ public class Controller {
     // ====================================================================
 
     // UC 5.1 - update coach's details
-    public CoachPage updateCoachDetails(String username, String coachName, String qualification, String role) {
+    public void updateCoachDetails(String username, String coachName, String qualification, String role) {
         User coachUser = User.getUserByID(username);
         if(coachName!=null){
             coachUser.setName(coachName);
         }
-        return ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
+        ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
     }
 
 
