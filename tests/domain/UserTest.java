@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.*;
 
 public class UserTest {
@@ -58,5 +60,39 @@ public class UserTest {
         assertTrue(User.isValidUserName("username"));
         assertFalse(User.isValidUserName("!23456"));
         assertFalse(User.isValidUserName("123"));
+    }
+
+    @Test
+    public void isConnected(){
+        user.connect();
+        assertTrue(user.isConnected());
+        user.disconnect();
+        assertTrue(!user.isConnected());
+    }
+
+    @Test
+    public void setRoles(){
+        HashMap<Role,Subscriber> roles = new HashMap<>();
+        roles.put(Role.FAN,new Fan("fantastic","a@gmail.com"));
+        user.setRoles(roles);
+
+        assertTrue(roles == user.getRoles());
+    }
+
+    @Test
+    public void setClosed(){
+        assertTrue(!user.isClosed());
+        user.setClosed(true);
+        assertTrue(user.isClosed());
+        user.setClosed(false);
+        assertTrue(!user.isClosed());
+    }
+
+    @Test
+    public void closeUser(){
+        assertTrue(user.closeUser());
+        user.setClosed(false);
+        user.addRoleToUser(Role.SYSTEM_ADMIN,new SystemAdministrator(user.getUserName(),"admin@mail.com"));
+        assertFalse(user.closeUser());
     }
 }
