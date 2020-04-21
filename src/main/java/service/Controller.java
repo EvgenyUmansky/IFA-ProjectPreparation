@@ -262,8 +262,8 @@ public class Controller {
     }
 
     // UC 9.3
-    public void addNewReferee(String username, String password, String name, String mail) throws Exception {
-        User.getUserByID(username).addRoleToUser(Role.REFEREE);
+    public void createReferee(String username, String password, String name, String mail) throws Exception {
+        this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
         // TODO: Send invitation to referee
     }
 

@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/League.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/service/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ControllerTest.java" afterDir="false" />
     </list>
@@ -133,6 +126,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ControllerTest.createReferee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
+      <option name="METHOD_NAME" value="createReferee" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerTest.scheduleGamesInLeagues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
@@ -144,22 +153,6 @@
       <option name="PACKAGE_NAME" value="service" />
       <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
       <option name="METHOD_NAME" value="scheduleGamesInLeagues" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerTest.setRankingMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="IFA-ProjectPreparation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
-      <option name="METHOD_NAME" value="setRankingMethod" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -184,10 +177,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.ControllerTest.createReferee" />
         <item itemvalue="JUnit.ControllerTest.addNewReferee" />
         <item itemvalue="JUnit.ControllerTest.scheduleGamesInLeagues" />
         <item itemvalue="JUnit.ControllerTest.setSchedulingMethod" />
-        <item itemvalue="JUnit.ControllerTest.setRankingMethod" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +199,7 @@
       <workItem from="1587287111047" duration="5553000" />
       <workItem from="1587299009997" duration="1339000" />
       <workItem from="1587394335027" duration="5336000" />
-      <workItem from="1587449337418" duration="7835000" />
+      <workItem from="1587449337418" duration="9147000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -229,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587450202855</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="UPDATED controllerTests">
+      <created>1587464396458</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587464396458</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +262,8 @@
     <MESSAGE value="After merge with Dev" />
     <MESSAGE value="fixed referee and game" />
     <MESSAGE value="tests in ControllerTest (PlayerPage + TeamPlayer + User) + UPDATED: (RankingMethod + Ranking MethodTest)" />
-    <option name="LAST_COMMIT_MESSAGE" value="tests in ControllerTest (PlayerPage + TeamPlayer + User) + UPDATED: (RankingMethod + Ranking MethodTest)" />
+    <MESSAGE value="UPDATED controllerTests" />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATED controllerTests" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -338,7 +339,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
-          <line>346</line>
+          <line>352</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>

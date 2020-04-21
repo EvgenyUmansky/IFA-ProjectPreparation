@@ -334,8 +334,14 @@ class ControllerTest {
 
     // T 9.3
     @Test
-    void addNewReferee() {
-        assertEquals(true, User.getUserByID("CoachName").getRoles().containsKey(Role.REFEREE));
+    void createReferee()
+    {
+        try {
+            controller.createReferee("newRef", "abcd", "ref", "abc@gmail.com");
+        } catch (Exception e) {
+
+        }
+        assertEquals(true, User.getUserByID("newRef").getRoles().containsKey(Role.REFEREE));
     }
 
 
