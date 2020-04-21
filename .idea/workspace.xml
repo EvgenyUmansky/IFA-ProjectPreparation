@@ -2,17 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="add team owner tests">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Fan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Fan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Game$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/OneGameSchedulingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/OneGameSchedulingMethod.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/domain/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Team.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TwoGameSchedulingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TwoGameSchedulingMethod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/GameTest$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/GameTest$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/GameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/GameTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamCoachTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamCoachTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamPlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamPlayerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/service/ControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/service/ControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/service/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ControllerTest.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +113,19 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ControllerTest.addOwner">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.ControllerTest.updatePlayerDetails">
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
@@ -131,6 +157,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ControllerTest.getTeamDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
+      <option name="METHOD_NAME" value="getTeamDetails" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ControllerTest.removeField" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
@@ -147,32 +189,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TeamTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.updatePlayerDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="domain.*" />
+          <option name="PATTERN" value="service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.TeamTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TeamTest.removeField" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="IFA-ProjectPreparation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.TeamTest" />
-      <option name="METHOD_NAME" value="removeField" />
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
+      <option name="METHOD_NAME" value="updatePlayerDetails" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -180,11 +207,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ControllerTest.updatePlayerDetails" />
+        <item itemvalue="JUnit.ControllerTest" />
+        <item itemvalue="JUnit.ControllerTest.getTeamDetails" />
         <item itemvalue="JUnit.ControllerTest.addOwner" />
         <item itemvalue="JUnit.ControllerTest.removeField" />
-        <item itemvalue="JUnit.TeamTest" />
-        <item itemvalue="JUnit.TeamTest.removeField" />
-        <item itemvalue="JUnit.ControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -207,6 +234,7 @@
       <workItem from="1587407882995" duration="10237000" />
       <workItem from="1587469784589" duration="1472000" />
       <workItem from="1587471397570" duration="6701000" />
+      <workItem from="1587481392659" duration="715000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -353,6 +381,11 @@
           <line>166</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/Team.java</url>
+          <line>263</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
@@ -360,25 +393,26 @@
         <watch expression="((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER))" language="JAVA" />
         <watch expression="(TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)" language="JAVA" />
         <watch expression="((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getOwnerAppointments()" language="JAVA" />
+        <watch expression="controller.getTeamDetails(&quot;team&quot;).getTeamName()" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__2_.ic" NAME="All in IFA-ProjectPreparation (2) Coverage Results" MODIFIED="1587416024389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation.ic" NAME="All in IFA-ProjectPreparation Coverage Results" MODIFIED="1587471450728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$domain_in_IFA_ProjectPreparation.ic" NAME="domain in IFA-ProjectPreparation Coverage Results" MODIFIED="1587416795673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamOwnerTest.ic" NAME="TeamOwnerTest Coverage Results" MODIFIED="1587331721268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__3_.ic" NAME="All in IFA-ProjectPreparation (3) Coverage Results" MODIFIED="1587415489923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$SystemEventTest.ic" NAME="SystemEventTest Coverage Results" MODIFIED="1587416941972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation.ic" NAME="All in IFA-ProjectPreparation Coverage Results" MODIFIED="1587471450728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamTest.ic" NAME="TeamTest Coverage Results" MODIFIED="1587415072452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__3_.ic" NAME="All in IFA-ProjectPreparation (3) Coverage Results" MODIFIED="1587415489923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__1_.ic" NAME="All in IFA-ProjectPreparation (1) Coverage Results" MODIFIED="1587415882402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__2_.ic" NAME="All in IFA-ProjectPreparation (2) Coverage Results" MODIFIED="1587416024389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
