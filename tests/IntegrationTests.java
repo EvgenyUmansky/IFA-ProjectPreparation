@@ -54,7 +54,7 @@ class IntegrationTests {
 
         // coachPage
         coachPage = new CoachPage(new TeamCoach("CoachName", ""), "My best page coach");
-        teamCoach = new Team("Test Coach Team", new Field("Test field", 200));
+        teamCoach = new Team("Test Coach Team", new Field("Test field", 200), new TeamOwner("test name", ""));
 
         // playersPage
         playerPage = new PlayerPage(new TeamPlayer("PlayerName", ""), "My best page player");

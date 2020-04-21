@@ -1,42 +1,65 @@
 package service;
 
 import domain.*;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Ref;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
     Controller controller = new Controller();
+    League leaguePerSeason;
+
     // ========================= Fan Tests ============================
     Fan fanMail;
     Fan fanNotMail;
 
-    // T 3.2
+    // T3.2
     TeamPage teamPage;
     CoachPage coachPage;
     PlayerPage playerPage;
 
-    // T 3.3
+    // T3.3
     Game game;
 
-    // T 3.4
+    // T3.4
     ArrayList<SystemAdministrator> sysAdmins;
     AlertNotification complaintToSysAdmin;
+
+    // =================== Team Owner functions ====================
+    Team team;
+    User teamOwnerUser;
+
+    // T6.1A1, T6.1B1
+    TeamPlayer player;
+    // T6.1A2, T6.1B2
+    TeamCoach coach;
+    // T6.1A3, T6.1B3
+    Field field;
+
+    // T6.2, T6.3
+    TeamOwner teamOwnerMain;
+    TeamOwner teamOwnerSub;
+
+    // T6.4, T6.5
+    TeamManager teamManager;
 
     // ========================= Referee Tests ========================
     Referee refereeMail;
     Referee refereeNotMail;
 
+    // T10.3
+    GameEvent gameEvent;
+    GameEvent gameEventBeforeGame;
 
 
-    League leaguePerSeason;
     @BeforeEach
     public void insert() {
         controller = new Controller();
@@ -48,21 +71,40 @@ class ControllerTest {
         fanNotMail = new Fan("FanNameNotMail", "");
         fanNotMail.setMail(false);
 
-        // T 3.2
+        // T3.2
         teamPage = new TeamPage(new Team("unReal Hadera", new Field("Dinamo", 500), new TeamOwner("Owner", "")));
         coachPage = new CoachPage(new TeamCoach("CoachName", ""), "My best page coach");
         playerPage = new PlayerPage(new TeamPlayer("PlayerName", ""), "My best page player");
 
-        // T 3.3
+        // T3.3, T10.3, T10.4
         game = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), "2019-11-11 12:00", new ArrayList<>());
 
-        // T 3.4
+        // T3.4
         sysAdmins = new ArrayList<>();
         sysAdmins.add(new SystemAdministrator("Test sysAdmin mail", "euguman@gmail.com"));
         sysAdmins.get(0).setMail(true);
         sysAdmins.add(new SystemAdministrator("Test sysAdmin notMail", ""));
         sysAdmins.get(1).setMail(false);
         complaintToSysAdmin = new AlertNotification("Complaint title", "Complaint text");
+
+        // =================== Team Owner functions ====================
+        teamOwnerUser = new User("TeamOwnerUser", "123", "Evgeny", "");
+        teamOwnerUser.addRoleToUser(Role.TEAM_OWNER);
+        team = new Team("Test TO team", new Field("Test field 0", 200), (TeamOwner)teamOwnerUser.getRoles().get(Role.TEAM_OWNER));
+
+        // T6.1A1, T6.1B1
+        player = new TeamPlayer("Test TO player", "");
+        // T6.1A2, T6.1B2
+        coach = new TeamCoach("Test TO coach", "");
+        // T6.1A3, T6.1B3
+        field = new Field("Test TO field", 500);
+
+        // T6.2, T6.3
+        teamOwnerMain = new TeamOwner("Main TO", "");
+        teamOwnerSub = new TeamOwner("Sub TO", "");
+
+        // T6.4, T6.5
+        teamManager = new TeamManager("Test TO manager", "");
 
         // ========================= Referee Tests ========================
         refereeMail = new Referee("testRefereeMail", "euguman@gmail.com");
@@ -71,6 +113,10 @@ class ControllerTest {
         refereeNotMail = new Referee("testRefereeNotMail", "");
         refereeNotMail.setQualification(5);
         refereeNotMail.setRefereeType(RefereeType.ASSISTANT);
+
+        // T10.3, T10.4
+        gameEvent = new GameEvent("2019-11-11 12:30", 30, GameAlert.INJURY, "Test description 1");
+        gameEventBeforeGame = new GameEvent("2019-11-11 11:30", 30, GameAlert.INJURY, "Test description 2");
     }
 
     @AfterEach
@@ -90,9 +136,30 @@ class ControllerTest {
         sysAdmins = null;
         complaintToSysAdmin = null;
 
+        // =================== Team Owner functions ====================
+        teamOwnerUser = null;
+        team = null;
+
+        // T6.1A1, T6.1B1
+        player = null;
+        // T6.1A2, T6.1B2
+        coach = null;
+        // T6.1A3, T6.1B3
+        field = null;
+
+        // T6.2, T6.3
+        teamOwnerMain = null;
+        teamOwnerSub = null;
+
+        // T6.4, T6.5
+        teamManager = null;
+
         // ========================= Referee Tests ========================
         refereeMail = null;
         refereeNotMail = null;
+
+        // T10.3, 10.4
+        gameEvent = null;
 
     }
 
@@ -134,7 +201,6 @@ class ControllerTest {
     void updateInfo() {
         PersonalPage myPage = controller.updateInfo(playerPage, "newInfo");
         assertEquals("My best page player", myPage.getName());
-
     }
 
     // =================== Team Player functions ====================
@@ -144,11 +210,10 @@ class ControllerTest {
     @Test
     void updatePlayerDetails() {
         Date date = new Date(2014, 02, 11);
-        PlayerPage myPage = controller.updatePlayerDetails("userName", "playerName", date, "Attacker", "10");
-        assertEquals("Attacker", myPage.getPosition());
-        assertEquals("10", myPage.getSquadNumber());
-        assertEquals(date, myPage.getBirthDate());
-
+//        PlayerPage myPage = controller.updatePlayerDetails("userName", "playerName", date, "Attacker", "10");
+//        assertEquals("Attacker", myPage.getPosition());
+//        assertEquals("10", myPage.getSquadNumber());
+//        assertEquals(date, myPage.getBirthDate());
     }
 
     // ======================= Coach Tests ============================
@@ -284,7 +349,7 @@ class ControllerTest {
     @Test
     void setRefereeProfileDetails() {
         // TODO: complete complex tests with DB
-        controller.setRefereeProfileDetails(refereeMail.getUserName(), "TestPassword", "TestName", "TestMail", 1, RefereeType.ASSISTANT);
+        controller.setRefereeProfileDetails(refereeMail.getUserName(), "TestPassword", "TestName", "TestMail", 1, RefereeType.MAIN);
         assertEquals("User Name: testRefereeMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: null\n" + "Qualification: 0\n" + "Type: null", controller.getRefereeDetails(refereeMail.getUserName()));
     }
 
@@ -304,12 +369,61 @@ class ControllerTest {
         }
     }
 
+    // T10.3
     @Test
-    void addGameEventToGame() {
+    void addGameEventToGame() throws Exception {
+        // TODO: with DB get true games of referee and start the tests
+//        game.addRefereeToGame(refereeMail);
+//
+//        try {
+//            controller.addGameEventToGame(refereeNotMail.getUserName(), game, gameEvent);
+//        }
+//        catch (Exception e){
+//            assertEquals("java.lang.Exception: This referee doesn't judge in this game", e.toString());
+//        }
+//
+//        assertEquals(0, game.getGameEvents().size());
+        controller.addGameEventToGame(refereeMail.getUserName(), game, gameEvent);
+        assertEquals("Test description 1", game.getGameEvents().get(0).getDescription());
+
+        controller.addGameEventToGame(refereeMail.getUserName(), game, gameEventBeforeGame);
     }
 
+    // T10.4
     @Test
-    void changeGameEvent() {
+    void changeGameEvent() throws Exception {
+        // TODO: with DB get true games of referee and start the tests
+//        game.addRefereeToGame(refereeMail);
+//
+//        try {
+//            controller.addGameEventToGame(refereeNotMail.getUserName(), game, gameEvent);
+//        }
+//        catch (Exception e){
+//            assertEquals("java.lang.Exception: This referee doesn't judge in this game", e.toString());
+//        }
+//
+//        assertEquals(0, game.getGameEvents().size());
+
+        game.setGameDate(LocalDateTime.now().withNano(0).withSecond(0));
+        gameEvent.setGameDate(LocalDateTime.now().withNano(0).withSecond(0).plusMinutes(30));
+        game.addEvent(gameEvent);
+        game.addRefereeToGame(refereeMail);
+        // new GameEvent("2019-11-11 12:30", 30, GameAlert.INJURY, "Test description 1");
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, LocalDateTime.now().plusMinutes(45).withNano(0).withSecond(0).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), -1, null, null);
+        assertEquals(LocalDateTime.now().plusMinutes(45).withNano(0).withSecond(0).toString(), game.getGameEvents().get(0).getDateTime().toString());
+        assertEquals(30, game.getGameEvents().get(0).getGameMinutes());
+        assertEquals(GameAlert.INJURY.toString(), game.getGameEvents().get(0).getEventName().toString());
+        assertEquals("Test description 1", game.getGameEvents().get(0).getDescription());
+
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, null, 45, null, null);
+        assertEquals(LocalDateTime.now().plusMinutes(45).withNano(0).withSecond(0).toString(), game.getGameEvents().get(0).getDateTime().toString());
+        assertEquals(45, game.getGameEvents().get(0).getGameMinutes());
+
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, null, -1, GameAlert.GOAL, null);
+        assertEquals(GameAlert.GOAL.toString(), game.getGameEvents().get(0).getEventName().toString());
+
+        controller.changeGameEvent(refereeMail.getUserName(), game, gameEvent, null, -1, null, "Changed");
+        assertEquals("Changed", game.getGameEvents().get(0).getDescription());
     }
 
     // =================== Association Agent Tests ====================
@@ -341,7 +455,7 @@ class ControllerTest {
         } catch (Exception e) {
 
         }
-        assertEquals(true, User.getUserByID("newRef").getRoles().containsKey(Role.REFEREE));
+        assertTrue(User.getUserByID("newRef").getRoles().containsKey(Role.REFEREE));
     }
 
 
@@ -378,14 +492,12 @@ class ControllerTest {
     // T 9.5
     @Test
     void setRankingMethod() {
-
         controller.setRankingMethod(5,4,3,leaguePerSeason);
         assertEquals(3, leaguePerSeason.getRankingMethod().getWinPoints());
         controller.setRankingMethod(5,3,4,leaguePerSeason);
         assertEquals(5, leaguePerSeason.getRankingMethod().getWinPoints());
         assertEquals(4, leaguePerSeason.getRankingMethod().getDrawPoints());
         assertEquals(3, leaguePerSeason.getRankingMethod().getLoosPoints());
-
     }
 
 
@@ -398,8 +510,7 @@ class ControllerTest {
         if(leaguePerSeason.getSchedulingMethod() instanceof TwoGameSchedulingMethod){
             ans = true;
         }
-        assertEquals(true, ans);
-
+        assertTrue(ans);
     }
 
 
@@ -430,40 +541,195 @@ class ControllerTest {
     }
 
 
-    //
-    // =================== Team Owner Tests ====================
+    // =================== Team Owner Tests ========================
     // =============================================================
 
+    // T6.1A
+
+    // T6.1A1
     @Test
-    void addField() {
+    void addPlayer() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addPlayer(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getPlayers().size());
+        controller.addPlayer(team, player.getUserName());
+        assertEquals(player.getUserName(), team.getPlayers().get(player.getUserName()).getUserName());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
+    // T6.1A2
     @Test
-    void addPlayer() {
+    void addCoach() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addCoach(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getCoaches().size());
+        controller.addCoach(team, coach.getUserName());
+        assertEquals(coach.getUserName(), team.getCoaches().get(coach.getUserName()).getUserName());
+
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addCoach(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
+    // T6.1A3
     @Test
-    void addCoach() {
+    void addField() throws Exception {
+        assertEquals(1, team.getFields().size()); // null field in team constructor
+        controller.addField(team, field.getFieldName());
+        assertEquals(field.getFieldName(), ((Field) team.getFields().keySet().toArray()[1]).getFieldName());
+        assertEquals(2, team.getFields().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addField(team, field.getFieldName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
+    // T6.1B
+    // T6.1B1
+    @Test
+    void removePlayer() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addPlayer(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getPlayers().size());
+        controller.addPlayer(team, player.getUserName());
+        assertEquals(player.getUserName(), team.getPlayers().get(player.getUserName()).getUserName());
+        assertEquals(1, team.getPlayers().size());
+
+        controller.removePlayer(team, player.getUserName());
+        assertEquals(0, team.getPlayers().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.removePlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.1B2
+    @Test
+    void removeCoach() throws Exception {
+        // TODO: check null player when DB
+//        try {
+//            controller.addPlayer(team, null);
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: This user is not a player", e.toString());
+//        }
+
+        assertEquals(0, team.getCoaches().size());
+        controller.addCoach(team, coach.getUserName());
+        assertEquals(coach.getUserName(), team.getCoaches().get(coach.getUserName()).getUserName());
+        assertEquals(1, team.getCoaches().size());
+
+        controller.removeCoach(team, coach.getUserName());
+        assertEquals(0, team.getCoaches().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.removeCoach(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.1B3
+    @Test
+    void removeField() throws Exception {
+        assertEquals(1, team.getFields().size()); // null field in team constructor
+        controller.addField(team, field.getFieldName());
+        assertEquals(field.getFieldName(), team.getFields().keySet().toArray()[1]);
+        assertEquals(2, team.getFields().size());
+
+        controller.removeField(team, field.getFieldName());
+        assertEquals(1, team.getFields().keySet().size());
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.removeField(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.2
+    @Test
+    void addOwner() throws Exception {
+        // TODO: check OwnerAppointments (in TeamOwner) with DB
+        TeamOwner ownerTest = (TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER);
+        assertEquals(0, ownerTest.getOwnerAppointments().size());
+        assertEquals(1, team.getOwners().size());
+
+        controller.addOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+
+        //assertEquals(1, ownerTest.getOwnerAppointments().size());
+        assertEquals(2, team.getOwners().size());
+        //assertEquals("0", ownerTest.getOwnerAppointments().iterator().next().getUserName());
+        assertEquals("Main TO", team.getOwners().keySet().toArray()[1]);
+
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addOwner(team, teamOwnerMain.getUserName(), teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
+    }
+
+    // T6.3
     @Test
     void addManager() {
-    }
-
-    @Test
-    void removeField() {
-    }
-
-    @Test
-    void removePlayer() {
-    }
-
-    @Test
-    void removeCoach() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
     void removeManager() {
+        team.closeTeam(teamOwnerUser);
+        try {
+            controller.addPlayer(team, teamOwnerUser.getUserName());
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: This team is currently closed", e.toString());
+        }
     }
 
     @Test
