@@ -24,7 +24,7 @@ public class TeamPlayer extends TeamMember {
 
 
     // U.C 4.1
-    public void updateDetails(Date newBirthDate, String newPosition, String newQuadNumber){
+    public PlayerPage updateDetails(Date newBirthDate, String newPosition, String newQuadNumber){
         //update new details also in player's page
         String playerName = User.getUserByID(this.getUserName()).getName();
         PlayerPage playerPage = (PlayerPage)PersonalPage.getPage(playerName);
@@ -41,6 +41,7 @@ public class TeamPlayer extends TeamMember {
             setSquadNumber(newQuadNumber);
             playerPage.setSquadNumber(newQuadNumber);
         }
+        return playerPage;
 
     }
 

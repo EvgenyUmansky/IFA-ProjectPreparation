@@ -120,12 +120,16 @@ class ControllerTest {
     void register() {
     }
 
-    
+
     // =================== User functions ===========================
     // ==============================================================
 
     @Test
     void getPagesByUsername() {
+        ArrayList<PersonalPage> personalPages = controller.getPagesByUsername("playerPage");
+        for(int i = 0; i < personalPages.size(); i++){
+            assertEquals("playerPage", personalPages.get(i).getName());
+        }
     }
 
 
@@ -135,6 +139,9 @@ class ControllerTest {
     //T4.2, T5.2
     @Test
     void updateInfo() {
+        PersonalPage myPage = controller.updateInfo(playerPage, "newInfo");
+        assertEquals("My best page player", myPage.getName());
+
     }
 
     // =================== Team Player functions ====================
@@ -143,6 +150,15 @@ class ControllerTest {
     //T4.1
     @Test
     void updatePlayerDetails() {
+        Date date = new Date(2014, 02, 11);
+//        PlayerPage myPage = controller.updatePlayerDetails("userName", "playerName", date, "Attacker", "10");
+//        assertEquals("playerName", myPage.getName());
+//        assertEquals("Attacker", myPage.getPosition());
+//        assertEquals("10r", myPage.getSquadNumber());
+//        assertEquals(date, myPage.getBirthDate());
+       // assertEquals("My best page player", myPage.g());// userName???
+
+
     }
 
     // ======================= Coach Tests ============================
