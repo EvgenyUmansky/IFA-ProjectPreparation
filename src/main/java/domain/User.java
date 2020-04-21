@@ -156,7 +156,7 @@ public class User {
 
     public static User getUserByID(String userName) {
         // TODO: Get user from DB
-        return new User(userName, "1234", null, null).addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE);
+        return new User(userName, "1234", null, null).addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE).addRoleToUser(Role.TEAM_PLAYER).addRoleToUser(Role.COACH);
     }
 
 

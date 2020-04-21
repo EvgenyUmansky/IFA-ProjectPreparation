@@ -3,26 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/RankingMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/RankingMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/League.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/CoachPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/CoachPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Referee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Referee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Team.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Team.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/RankingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/RankingMethodTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/service/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,6 +77,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587221572477" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="D:/test" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -111,7 +101,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RankingMethodTest">
+  <component name="RunManager" selected="JUnit.ControllerTest">
     <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
@@ -127,7 +117,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ControllerTest.updatePlayerDetails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.addNewReferee" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
@@ -137,54 +127,55 @@
       </extension>
       <option name="PACKAGE_NAME" value="service" />
       <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
-      <option name="METHOD_NAME" value="updatePlayerDetails" />
+      <option name="METHOD_NAME" value="addNewReferee" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RankingMethodTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.scheduleGamesInLeagues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="domain.*" />
+          <option name="PATTERN" value="service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.RankingMethodTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
+      <option name="METHOD_NAME" value="scheduleGamesInLeagues" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RankingMethodTest.setRankingMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.setRankingMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="domain.*" />
+          <option name="PATTERN" value="service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.RankingMethodTest" />
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
       <option name="METHOD_NAME" value="setRankingMethod" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RankingMethodTest.setWinPoints" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ControllerTest.setSchedulingMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="domain.*" />
+          <option name="PATTERN" value="service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="domain" />
-      <option name="MAIN_CLASS_NAME" value="domain.RankingMethodTest" />
-      <option name="METHOD_NAME" value="setWinPoints" />
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ControllerTest" />
+      <option name="METHOD_NAME" value="setSchedulingMethod" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -192,11 +183,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RankingMethodTest" />
         <item itemvalue="JUnit.ControllerTest" />
-        <item itemvalue="JUnit.RankingMethodTest.setRankingMethod" />
-        <item itemvalue="JUnit.RankingMethodTest.setWinPoints" />
-        <item itemvalue="JUnit.ControllerTest.updatePlayerDetails" />
+        <item itemvalue="JUnit.ControllerTest.addNewReferee" />
+        <item itemvalue="JUnit.ControllerTest.scheduleGamesInLeagues" />
+        <item itemvalue="JUnit.ControllerTest.setSchedulingMethod" />
+        <item itemvalue="JUnit.ControllerTest.setRankingMethod" />
       </list>
     </recent_temporary>
   </component>
@@ -215,7 +206,7 @@
       <workItem from="1587287111047" duration="5553000" />
       <workItem from="1587299009997" duration="1339000" />
       <workItem from="1587394335027" duration="5336000" />
-      <workItem from="1587449337418" duration="552000" />
+      <workItem from="1587449337418" duration="7835000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -231,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587220158870</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="tests in ControllerTest (PlayerPage + TeamPlayer + User) + UPDATED: (RankingMethod + Ranking MethodTest)">
+      <created>1587450202855</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587450202855</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +261,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="After merge with Dev" />
     <MESSAGE value="fixed referee and game" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed referee and game" />
+    <MESSAGE value="tests in ControllerTest (PlayerPage + TeamPlayer + User) + UPDATED: (RankingMethod + Ranking MethodTest)" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests in ControllerTest (PlayerPage + TeamPlayer + User) + UPDATED: (RankingMethod + Ranking MethodTest)" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -294,7 +293,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
-          <line>119</line>
+          <line>121</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -303,22 +302,58 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/domain/User.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/domain/User.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/domain/RankingMethodTest.java</url>
           <line>29</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
+          <line>145</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/service/Controller.java</url>
+          <line>101</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/TeamCoach.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/Alert.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/RankingMethod.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/League.java</url>
+          <line>97</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
+          <line>346</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER))" />
+        <watch expression="(TeamPlayer)User.getUserByID(username).getRoles()" />
+        <watch expression="User.getUserByID(username).getRoles()" />
+        <watch expression="getUserName()" />
+        <watch expression="User.getUserByID(this.getUserName())" />
+        <watch expression="User.getUserByID(userName).getRoles()" />
+        <watch expression="winPoints &gt; drawPoints &amp;&amp; winPoints &gt; loosPoints &amp;&amp; drawPoints &gt; loosPoints" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamOwnerTest.ic" NAME="TeamOwnerTest Coverage Results" MODIFIED="1587331721268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

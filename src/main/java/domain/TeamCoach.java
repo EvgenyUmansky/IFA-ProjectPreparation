@@ -13,7 +13,7 @@ public class TeamCoach extends TeamMember {
 
 
     //U.C 5.1
-    public void updateDetails(String newQualification, String newRole){
+    public CoachPage updateDetails(String newQualification, String newRole){
         //update new details also in coach's page
         String coachName = User.getUserByID(this.getUserName()).getName();
         CoachPage coachPage = (CoachPage)PersonalPage.getPage(coachName);
@@ -26,6 +26,8 @@ public class TeamCoach extends TeamMember {
             setRole(newRole);
             coachPage.setRole(newRole);
         }
+
+        return coachPage;
 
     }
 

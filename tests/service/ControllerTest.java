@@ -8,10 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Ref;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,9 +34,13 @@ class ControllerTest {
     Referee refereeMail;
     Referee refereeNotMail;
 
+
+
+    League leaguePerSeason;
     @BeforeEach
     public void insert() {
         controller = new Controller();
+        leaguePerSeason = new League(1998, new OneGameSchedulingMethod(), new RankingMethod(), "bet");
 
         // ========================= Fan Tests ========================
         fanMail = new Fan("FanNameMail", "euguman@gmail.com");
@@ -75,6 +76,7 @@ class ControllerTest {
     @AfterEach
     public void delete(){
         controller = null;
+        leaguePerSeason = null;
         // ========================= Fan Tests ============================
         fanMail = null;
         fanNotMail = null;
@@ -142,13 +144,10 @@ class ControllerTest {
     @Test
     void updatePlayerDetails() {
         Date date = new Date(2014, 02, 11);
-//        PlayerPage myPage = controller.updatePlayerDetails("userName", "playerName", date, "Attacker", "10");
-//        assertEquals("playerName", myPage.getName());
-//        assertEquals("Attacker", myPage.getPosition());
-//        assertEquals("10r", myPage.getSquadNumber());
-//        assertEquals(date, myPage.getBirthDate());
-       // assertEquals("My best page player", myPage.g());// userName???
-
+        PlayerPage myPage = controller.updatePlayerDetails("userName", "playerName", date, "Attacker", "10");
+        assertEquals("Attacker", myPage.getPosition());
+        assertEquals("10", myPage.getSquadNumber());
+        assertEquals(date, myPage.getBirthDate());
 
     }
 
@@ -158,6 +157,10 @@ class ControllerTest {
     //T5.1
     @Test
     void updateCoachDetails() {
+        //TODO: open when working with DB
+//        CoachPage myPage = controller.updateCoachDetails("userName", "CoachName", "5", "main");
+//        assertEquals("5", myPage.getQualification());
+//        assertEquals("main", myPage.getRole());
     }
 
     // ========================= Guest Tests ============================
@@ -312,45 +315,118 @@ class ControllerTest {
     // =================== Association Agent Tests ====================
     // ====================================================================
 
+    // T 9.1
     @Test
     void setLeague() {
+        assertEquals("bet", controller.setLeague("bet").getLeagueName());
+
     }
 
+
+    // T 9.2
     @Test
     void updateSeasonForLeague() {
+        League upLeague = controller.updateSeasonForLeague("bet", 1998);
+        assertEquals(1998, upLeague.getSeason());
+        assertEquals("bet", upLeague.getLeagueName());
     }
 
+
+    // T 9.3
     @Test
     void addNewReferee() {
+        assertEquals(true, User.getUserByID("CoachName").getRoles().containsKey(Role.REFEREE));
     }
 
+
+    // T 9.3
     @Test
     void removeReferee() {
+        //TODO:
+
+        boolean thrown = false;
+
+        try {
+            controller.removeReferee("CoachName");
+            thrown = true;
+        } catch (IndexOutOfBoundsException e) {
+
+        }
+
+        assertTrue(thrown);
     }
 
+
+    // T 9.4
     @Test
     void addRefereeToLeaguePerSeason() {
+
+        controller.addRefereeToLeaguePerSeason(leaguePerSeason, "testRefereeMail");
+
+        controller.addRefereeToLeaguePerSeason(leaguePerSeason, "testRefereeNotMail");
+
+        assertEquals(2 , leaguePerSeason.getReferees().size());
     }
 
+
+    // T 9.5
     @Test
     void setRankingMethod() {
+
+        controller.setRankingMethod(5,4,3,leaguePerSeason);
+        assertEquals(3, leaguePerSeason.getRankingMethod().getWinPoints());
+        controller.setRankingMethod(5,3,4,leaguePerSeason);
+        assertEquals(5, leaguePerSeason.getRankingMethod().getWinPoints());
+        assertEquals(4, leaguePerSeason.getRankingMethod().getDrawPoints());
+        assertEquals(3, leaguePerSeason.getRankingMethod().getLoosPoints());
+
     }
 
+
+    // T 9.6
     @Test
     void setSchedulingMethod() {
+        SchedulingMethod twoSchedule = new TwoGameSchedulingMethod();
+        controller.setSchedulingMethod(leaguePerSeason,twoSchedule);
+        boolean ans = false;
+        if(leaguePerSeason.getSchedulingMethod() instanceof TwoGameSchedulingMethod){
+            ans = true;
+        }
+        assertEquals(true, ans);
+
     }
 
+
+    // T 9.7
     @Test
     void scheduleGamesInLeagues() {
+//        SchedulingMethod twoSchedule = new TwoGameSchedulingMethod();
+        Team[] leagueTeams = new Team[3];
+        leagueTeams[0] = new Team("FCB", new Field("Barca-Field", 5000), new TeamOwner("abc", "aa"));
+        leagueTeams[1] = new Team("Real", new Field("Real-Field", 5000), new TeamOwner("def", "bb"));
+        leagueTeams[2] = new Team("Kissra", new Field("Kissra-Field", 5000), new TeamOwner("ghk", "cc"));
+        leaguePerSeason.initTeams(new HashSet<>(Arrays.asList(leagueTeams)));
+        controller.scheduleGamesInLeagues(leaguePerSeason);
+
+        assertEquals(3, leaguePerSeason.getGames().size());
     }
 
+
+    // T 9.8
     @Test
     void setRulesForBudgetControl() {
     }
 
+
+    // T 9.9
     @Test
     void setTeamBudget() {
     }
+
+
+    //
+    // =================== Team Owner Tests ====================
+    // =============================================================
 
     @Test
     void addField() {
