@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="" />
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in IFA-ProjectPreparation" />
+        <item itemvalue="JUnit.ControllerTest.setRefereeProfileDetails" />
+        <item itemvalue="JUnit.ControllerTest.getRefereeGames" />
         <item itemvalue="JUnit.ControllerTest.changeGameEvent" />
         <item itemvalue="JUnit.ControllerTest.addGameEventToGame" />
-        <item itemvalue="JUnit.ControllerTest.getRefereeGames" />
-        <item itemvalue="JUnit.ControllerTest.setRefereeProfileDetails" />
+        <item itemvalue="JUnit.All in IFA-ProjectPreparation" />
       </list>
     </recent_temporary>
   </component>
@@ -193,6 +195,7 @@
       <workItem from="1587336892248" duration="1622000" />
       <workItem from="1587373597823" duration="28698000" />
       <workItem from="1587420194372" duration="393000" />
+      <workItem from="1587420679313" duration="668000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -335,10 +338,10 @@
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587420303533" />
     <state x="249" y="0" key="SettingsEditor/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1587400291733" />
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1587420554803">
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2" timestamp="1587420688833">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587420554803" />
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587420688833" />
     <state x="2362" y="200" key="Vcs.Push.Dialog.v2/1920.0.1536.824/0.0.1536.824@1920.0.1536.824" timestamp="1587405884507" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1587336997205" />
     <state x="74" y="73" width="1389" height="679" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1587400934887">
@@ -404,6 +407,6 @@
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamOwnerTest.ic" NAME="TeamOwnerTest Coverage Results" MODIFIED="1587331721268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation.ic" NAME="All in IFA-ProjectPreparation Coverage Results" MODIFIED="1587420374915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation.ic" NAME="All in IFA-ProjectPreparation Coverage Results" MODIFIED="1587420713269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
