@@ -465,7 +465,7 @@ public class Controller {
 
 
     // =================== Team Manager functions ====================
-    // ====================================================================
+    // ===============================================================
 
     // UC 7.1 - set permissions to team manager
     //responsible of Team Owner!
@@ -474,7 +474,7 @@ public class Controller {
 
 
     // =================== System Manager functions ====================
-    // ====================================================================
+    // =================================================================
 
 
     // UC 8.1 - close team --- UC 6.6A
@@ -513,7 +513,7 @@ public class Controller {
 
         // ====================================================================
 
-        public Team getTeamByName(String teamName) {
+    public Team getTeamByName(String teamName) {
         return Team.getTeamByName(teamName);
     }
 

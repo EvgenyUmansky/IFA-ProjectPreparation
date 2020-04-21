@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.Format;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
@@ -77,7 +78,7 @@ class ControllerTest {
         playerPage = new PlayerPage(new TeamPlayer("PlayerName", ""), "My best page player");
 
         // T3.3, T10.3, T10.4
-        game = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), "2019-11-11 12:00", new ArrayList<>());
+        game = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), LocalDateTime.now().withNano(0).withSecond(0), new ArrayList<>());
 
         // T3.4
         sysAdmins = new ArrayList<>();
@@ -115,8 +116,8 @@ class ControllerTest {
         refereeNotMail.setRefereeType(RefereeType.ASSISTANT);
 
         // T10.3, T10.4
-        gameEvent = new GameEvent("2019-11-11 12:30", 30, GameAlert.INJURY, "Test description 1");
-        gameEventBeforeGame = new GameEvent("2019-11-11 11:30", 30, GameAlert.INJURY, "Test description 2");
+        gameEvent = new GameEvent(LocalDateTime.now().withNano(0).withSecond(0).plusMinutes(30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), 30, GameAlert.INJURY, "Test description 1");
+        gameEventBeforeGame = new GameEvent(LocalDateTime.now().withNano(0).withSecond(0).minusMinutes(30).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), 30, GameAlert.INJURY, "Test description 2");
     }
 
     @AfterEach
@@ -165,19 +166,44 @@ class ControllerTest {
 
     @Test
     void connectToExternalSystems() {
+        //TODO: create test when the function will be finushed
     }
 
     @Test
-    void login() {
+    void login() throws Exception {
+        // TODO: finish with DB
+//        try {
+//            controller.login("null", "qwe");
+//        } catch (Exception e) {
+//            assertEquals("java.lang.Exception: User not found!", e.toString());
+//        }
+
+        try {
+            controller.login("user", "qwe");
+        }
+        catch (Exception e){
+            assertEquals("java.lang.Exception: Wrong password!", e.toString());
+        }
+
+        User user = controller.login("user", "1234");
+        assertTrue(user.isConnected());
+        assertEquals("user", user.getUserName());
     }
 
     // T3.1
     @Test
     void logout() {
+        teamOwnerUser.connect();
+        assertTrue(teamOwnerUser.isConnected());
+        controller.logout(teamOwnerUser.getUserName());
+
+        // TODO: finish with DB
+        // assertFalse(teamOwnerUser.isConnected());
     }
 
     @Test
     void register() {
+        // TODO: create with DB
     }
 
 
@@ -268,7 +294,7 @@ class ControllerTest {
     //T2.5
     @Test
     void searchByKeyWord() {
-        //TODO: next iteration
+        // TODO: create test when the UC will be finished
     }
 
 
@@ -374,7 +400,8 @@ class ControllerTest {
     @Test
     void addGameEventToGame() throws Exception {
         // TODO: with DB get true games of referee and start the tests
-//        game.addRefereeToGame(refereeMail);
+        game.addRefereeToGame(refereeMail);
+        game.setGameDate(LocalDateTime.now().withSecond(0).withNano(0));
 //
 //        try {
 //            controller.addGameEventToGame(refereeNotMail.getUserName(), game, gameEvent);
@@ -533,12 +560,14 @@ class ControllerTest {
     // T 9.8
     @Test
     void setRulesForBudgetControl() {
+        // TODO: create test when the UC will be finished
     }
 
 
     // T 9.9
     @Test
     void setTeamBudget() {
+        // TODO: create test when the UC will be finished
     }
 
 
@@ -599,7 +628,7 @@ class ControllerTest {
     void addField() throws Exception {
         assertEquals(1, team.getFields().size()); // null field in team constructor
         controller.addField(team, field.getFieldName());
-        assertEquals(field.getFieldName(), ((Field) team.getFields().keySet().toArray()[1]).getFieldName());
+        assertEquals(field.getFieldName(), team.getFields().keySet().toArray()[1]);
         assertEquals(2, team.getFields().size());
 
         team.closeTeam(teamOwnerUser);
@@ -759,63 +788,119 @@ class ControllerTest {
         }
     }
 
+    // T6.4
     @Test
-    void removeManager() {
+    void removeManager() throws Exception {
+        // TODO: check ManagerAppointments (in TeamOwner) with DB
+        assertEquals(0, ((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getManagerAppointments().size());
+
+        controller.addManager(team, teamManager.getUserName(), teamOwnerUser.getUserName());
+
+        //assertEquals(1, ((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getManagerAppointments().size()));
+        assertEquals(1, team.getManagers().size());
+        //assertEquals("", ((TeamOwner) teamOwnerUser.getRoles().get(Role.TEAM_OWNER)).getManagerAppointments().iterator().next().getUserName());
+        assertEquals("Test TO manager", team.getManagers().keySet().toArray()[0]);
+
+        controller.removeManager(team, teamManager.getUserName(), teamOwnerUser.getUserName());
+        //assertEquals(0, ownerTest.getOwnerAppointments().size());
+        assertEquals(0, team.getManagers().size());
+        //assertEquals("0", ownerTest.getOwnerAppointments().iterator().next().getUserName());
+
+
         team.closeTeam(teamOwnerUser);
         try {
-            controller.addPlayer(team, teamOwnerUser.getUserName());
+            controller.removeManager(team, teamManager.getUserName(), teamOwnerUser.getUserName());
         }
         catch (Exception e){
             assertEquals("java.lang.Exception: This team is currently closed", e.toString());
         }
     }
 
-    @Test
-    void testUpdatePlayerDetails() {
-    }
-
-    @Test
-    void testUpdateCoachDetails() {
-    }
-
-    @Test
-    void updateManagerDetails() {
-    }
-
-    @Test
-    void setPermissionsToManager() {
-    }
-
+    // T6.6A
     @Test
     void closeTeam() {
+        assertEquals(TeamStatus.Open.toString(), team.getTeamStatus().toString());
+        controller.closeTeam(teamOwnerUser.getUserName(), team);
+        assertEquals(TeamStatus.TempClose.toString(), team.getTeamStatus().toString());
     }
 
+    // T6.6B
+    @Test
+    void testUpdatePlayerDetails() {
+        assertEquals(TeamStatus.Open.toString(), team.getTeamStatus().toString());
+        team.closeTeam(teamOwnerUser);
+        assertEquals(TeamStatus.TempClose.toString(), team.getTeamStatus().toString());
+        controller.openTeam(team);
+        assertEquals(TeamStatus.Open.toString(), team.getTeamStatus().toString());
+    }
+
+    // T6.7
+    void manageFinance(){
+        // TODO: create test when the UC will be finished
+    }
+
+    // =================== Team Manager tests ====================
+    // ===========================================================
+
+    // T7.1
+    @Test
+    void setPermissionsToManager() {
+        // TODO: create test when the UC will be finished
+    }
+
+    // =================== System Manager tests ====================
+    // =================================================================
+
+    // T8.1 -> T6.6A
+//    @Test
+//    void closeTeam() {
+//    }
+
+    // T8.2
     @Test
     void removeUserFromSystem() {
+        assertFalse(teamOwnerUser.isClosed());
+        controller.removeUserFromSystem(teamOwnerUser.getUserName());
+
+        // TODO: check with DB
+        // assertTrue(teamOwnerUser.isClosed());
     }
 
+    // T8.3A
     @Test
     void showComplain() {
+        // TODO: create test when the UC will be finished
     }
 
+    // T8.3B
     @Test
     void commentToComplaint() {
+        // TODO: create test when the UC will be finished
     }
 
+    // T8.4
     @Test
     void showLogDocument() {
+        // TODO: create test when the UC will be finished
     }
 
+    // T8.5
     @Test
     void startModelRecommendationSystem() {
+        // TODO: create test when the UC will be finished
     }
 
+
+
+    // ====================================================================
     @Test
     void getTeamByName() {
+        assertEquals(team.getTeamName(), controller.getTeamByName(team.getTeamName()).getTeamName());
     }
 
     @Test
     void getUserRoles() {
+        // TODO: finish the test with DB
     }
 
     @Test
