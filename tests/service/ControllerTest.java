@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
     Controller controller = new Controller();
+    League leaguePerSeason;
+
     // ========================= Fan Tests ============================
     Fan fanMail;
     Fan fanNotMail;
@@ -57,10 +59,6 @@ class ControllerTest {
     GameEvent gameEvent;
     GameEvent gameEventBeforeGame;
 
-
-
-
-    League leaguePerSeason;
 
     @BeforeEach
     public void insert() {
@@ -203,7 +201,6 @@ class ControllerTest {
     void updateInfo() {
         PersonalPage myPage = controller.updateInfo(playerPage, "newInfo");
         assertEquals("My best page player", myPage.getName());
-
     }
 
     // =================== Team Player functions ====================
@@ -217,7 +214,6 @@ class ControllerTest {
         assertEquals("Attacker", myPage.getPosition());
         assertEquals("10", myPage.getSquadNumber());
         assertEquals(date, myPage.getBirthDate());
-
     }
 
     // ======================= Coach Tests ============================
@@ -496,14 +492,12 @@ class ControllerTest {
     // T 9.5
     @Test
     void setRankingMethod() {
-
         controller.setRankingMethod(5,4,3,leaguePerSeason);
         assertEquals(3, leaguePerSeason.getRankingMethod().getWinPoints());
         controller.setRankingMethod(5,3,4,leaguePerSeason);
         assertEquals(5, leaguePerSeason.getRankingMethod().getWinPoints());
         assertEquals(4, leaguePerSeason.getRankingMethod().getDrawPoints());
         assertEquals(3, leaguePerSeason.getRankingMethod().getLoosPoints());
-
     }
 
 
@@ -516,8 +510,7 @@ class ControllerTest {
         if(leaguePerSeason.getSchedulingMethod() instanceof TwoGameSchedulingMethod){
             ans = true;
         }
-        assertEquals(true, ans);
-
+        assertTrue(ans);
     }
 
 

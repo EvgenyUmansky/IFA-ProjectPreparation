@@ -24,23 +24,24 @@ public class TeamPlayer extends TeamMember {
 
 
     // U.C 4.1
-    public void updateDetails(Date newBirthDate, String newPosition, String newQuadNumber){
-        //TODO: update new details also in player's page
+    public PlayerPage updateDetails(Date newBirthDate, String newPosition, String newQuadNumber){
+        //update new details also in player's page
         String playerName = User.getUserByID(this.getUserName()).getName();
-  //      PlayerPage playerPage = (PlayerPage)PersonalPage.getPage(playerName);
+        PlayerPage playerPage = (PlayerPage)PersonalPage.getPage(playerName);
 
         if(newBirthDate != null) {
             setBirthDate(newBirthDate);
-  //          playerPage.setBirthDate(newBirthDate);
+            playerPage.setBirthDate(newBirthDate);
         }
         if(newPosition != null) {
             setPosition(newPosition);
- //           playerPage.setPosition(newPosition);
+            playerPage.setPosition(newPosition);
         }
         if(newQuadNumber != null) {
             setSquadNumber(newQuadNumber);
-//            playerPage.setSquadNumber(newQuadNumber);
+            playerPage.setSquadNumber(newQuadNumber);
         }
+        return playerPage;
 
     }
 
