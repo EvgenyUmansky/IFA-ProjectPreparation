@@ -108,12 +108,12 @@ public class Controller {
     // ====================================================================
 
     // UC 5.1 - update coach's details
-    public void updateCoachDetails(String username, String coachName, String qualification, String role) {
+    public CoachPage updateCoachDetails(String username, String coachName, String qualification, String role) {
         User coachUser = User.getUserByID(username);
         if(coachName!=null){
             coachUser.setName(coachName);
         }
-        ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
+        return ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
     }
 
 
@@ -277,7 +277,7 @@ public class Controller {
     }
 
     // UC 9.3
-    public void addNewReferee(String username, String password, String name, String mail) throws Exception {
+    public void createReferee(String username, String password, String name, String mail) throws Exception {
         this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
         // TODO: Send invitation to referee
     }
@@ -297,7 +297,7 @@ public class Controller {
     }
 
     // UC 9.5
-    public void setRankingMethod(int winP, int loseP, int drawP, League league) {
+    public void setRankingMethod(int winP,int drawP,  int loseP, League league) {
         league.getRankingMethod().setRankingMethod(winP, loseP, drawP);
     }
 
@@ -309,8 +309,7 @@ public class Controller {
     // UC 9.7
     // Click this button after you have all the teams in league, Automatic scheduling
     public void scheduleGamesInLeagues(League league) {
-        Team[] teams = league.getTeamsInLeaguePerSeason().keySet().toArray(new Team[league.getTeamsInLeaguePerSeason().size()]);
-        league.getSchedulingMethod().scheduleGamePolicy(league, teams);
+        league.scheduledGames();
     }
 
     // UC 9.8

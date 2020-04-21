@@ -224,4 +224,8 @@ public class League {
     public String getLeagueName() {
         return leagueName;
     }
+
+    public HashSet<Referee> getReferees() {
+        return referees;
+    }
 }
