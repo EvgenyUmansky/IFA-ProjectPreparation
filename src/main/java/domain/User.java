@@ -165,11 +165,18 @@ public class User {
         if (userNameLength < 2 || userNameLength > 10)
             return false;
 
+        boolean containsLetter = false;
+
         for (int i = 0; i < userNameLength; i++) {
             char currentLetter = userName.charAt(i);
-            if (!Character.isLetter(currentLetter))
+            if (!Character.isLetter(currentLetter) && !Character.isDigit(currentLetter))
                 return false;
+            if(Character.isLetter(currentLetter))
+                containsLetter = true;
         }
+
+        if(!containsLetter)
+            return false;
 
         return true;
     }
@@ -177,7 +184,7 @@ public class User {
 
     public static boolean isValidPassword(String password) {
         int passwordLength = password.length();
-        if (passwordLength < 6 || passwordLength > 15) {
+        if (passwordLength < 4 || passwordLength > 15) {
             return false;
         }
 

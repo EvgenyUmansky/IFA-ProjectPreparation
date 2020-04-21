@@ -199,6 +199,7 @@ class TeamTest {
         assertTrue(0 == team.getTeamStatus().compareTo(TeamStatus.Open));
     }
 
+
     @Test
     public void openTeam() {
         User ownerUser = new User("ownerUser2","123","shak","s@mail.com");
@@ -210,7 +211,6 @@ class TeamTest {
         assertFalse( team.getTeamStatus().compareTo(TeamStatus.Open )==0);
         team.openTeam();
         assertTrue(0 == team.getTeamStatus().compareTo(TeamStatus.Open));
-
     }
 
     @Test
