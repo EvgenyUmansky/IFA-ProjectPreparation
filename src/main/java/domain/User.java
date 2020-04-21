@@ -57,7 +57,7 @@ public class User {
         String mail = this.getMail();
         // TODO: Get pages from DB (all pages that the user had permission to edit them)
         return new ArrayList<PersonalPage>() {{
-            add(new PlayerPage(new TeamPlayer(username, mail), null));
+            add(new PlayerPage(new TeamPlayer(username, mail), "playerPage"));
         }};
     }
 

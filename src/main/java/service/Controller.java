@@ -94,12 +94,12 @@ public class Controller {
 
 
     // UC 4.1 - update player's details
-    public void updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
+    public PlayerPage updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
         User playerUser = User.getUserByID(username);
         if(playerName!=null){
             playerUser.setName(playerName);
         }
-        ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
+        return ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
 
     }
 
@@ -283,9 +283,7 @@ public class Controller {
 
     // UC 9.5
     public void setRankingMethod(int winP, int loseP, int drawP, League league) {
-        league.getRankingMethod().setWinPoints(winP);
-        league.getRankingMethod().setWinPoints(loseP);
-        league.getRankingMethod().setWinPoints(drawP);
+        league.getRankingMethod().setRankingMethod(winP, loseP, drawP);
     }
 
     // UC 9.6
