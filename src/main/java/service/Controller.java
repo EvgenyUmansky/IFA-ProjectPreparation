@@ -157,7 +157,6 @@ public class Controller {
     // ====================================================================
 
     // UC 3.2 - add fan to subscription list of the personal page
-
     public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
         page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
     }
@@ -172,7 +171,7 @@ public class Controller {
         ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
     }
 
-    // 3.5 - get history of fans searches
+    // UC 3.5 - get history of fans searches
     // mock
     public String[] getFanHistory(String username) {
         //TODO - get from data base
@@ -471,7 +470,6 @@ public class Controller {
     // UC 7.1 - set permissions to team manager
     //responsible of Team Owner!
     public void setPermissionsToManager() {
-
     }
 
 
@@ -513,9 +511,9 @@ public class Controller {
 
     }
 
-    // ====================================================================
+        // ====================================================================
 
-    public Team getTeamByName(String teamName) {
+        public Team getTeamByName(String teamName) {
         return Team.getTeamByName(teamName);
     }
 

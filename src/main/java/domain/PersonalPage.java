@@ -44,10 +44,6 @@ public abstract class PersonalPage {
 
     public PersonalPage setMail(String mail) {
         this.mail = mail;
-
-        // UC 3.2
-        alert.sendAlert(new AlertNotification("Mail of the page " + this.name + "  has changed", "The new mail is " + mail));
-
         return this;
     }
 
@@ -68,6 +64,10 @@ public abstract class PersonalPage {
         return mail;
     }
 
+
+    public HashMap<String, Subscriber> getPageOwners() {
+        return pageOwners;
+    }
     /////////// Functionality ///////////
 
     // UC 3.2

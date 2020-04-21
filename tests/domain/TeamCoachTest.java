@@ -24,7 +24,7 @@ class TeamCoachTest {
     void updateDetails() {
         assertNull(coach.getRole());
         assertNull(coach.getQualification());
-       // assertTrue(coach.updateDetails("qua","role"));
+        coach.updateDetails("qua","role");
         assertNotNull(coach.getRole());
         assertNotNull(coach.getQualification());
     }
