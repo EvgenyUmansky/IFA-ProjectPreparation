@@ -1,102 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="add team owner tests">
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Alert.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/AssociationAgent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Budget.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/DBAccess.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Fan.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Field.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Game$1$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Game$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Game.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/GameAlert.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/League.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/OneGameSchedulingMethod.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Referee.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/SchedulingMethod.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Subscriber.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/SystemAdministrator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/SystemEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/Team.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/TeamMember.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/TeamStatus.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/TwoGameSchedulingMethod.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/User$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/domain/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/service/Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/IntegrationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/AlertNotificationTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/AlertTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/BudgetTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/FanTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/FieldTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/GameEventTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/GameTest$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/GameTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/LeagueTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/OneGameSchedulingMethodTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/RankingMethodTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/RefereeTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/SystemEventTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamCoachTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamMemberTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamOwnerTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamPageTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamPlayerTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TeamTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/domain/TwoGameSchedulingMethodTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/service/ControllerTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/IntegrationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/domain/CoachPageTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/domain/PersonalPageTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/domain/PlayerPageTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/domain/UserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Alert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Alert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/CoachPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/CoachPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/GameEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/GameEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/League.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/PersonalPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/PersonalPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/RankingMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/RankingMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Referee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Referee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Subscriber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/CoachPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/CoachPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/User$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/BudgetTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/BudgetTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/FieldTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/FieldTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/GameEventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/GameEventTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/LeagueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/LeagueTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/RankingMethodTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/RankingMethodTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/RefereeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/RefereeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamCoachTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamOwnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamOwnerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamPlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/TeamTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/service/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -308,7 +214,7 @@
       <workItem from="1587407882995" duration="10237000" />
       <workItem from="1587469784589" duration="1472000" />
       <workItem from="1587471397570" duration="6701000" />
-      <workItem from="1587481201810" duration="21932000" />
+      <workItem from="1587481201810" duration="22592000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -331,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587332110187</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="all tests are done!">
+      <created>1587516899459</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587516899459</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,7 +291,8 @@
     <MESSAGE value="After merge with Dev" />
     <MESSAGE value="fixed referee and game" />
     <MESSAGE value="add team owner tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="add team owner tests" />
+    <MESSAGE value="all tests are done!" />
+    <option name="LAST_COMMIT_MESSAGE" value="all tests are done!" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
