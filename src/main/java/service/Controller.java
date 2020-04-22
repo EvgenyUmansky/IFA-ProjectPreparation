@@ -17,13 +17,14 @@ public class Controller {
 
     //UC 1.1.1
     public void connectToExternalSystems() {
-        //TODO: Connect to external system. if fails throws Exception
+        // TODO: Connect to external system. if fails throws Exception
     }
 
 
     // ========================= System functions =========================
     // ====================================================================
 
+    // UC 2.3
     /**
      * @param userName
      * @param password
@@ -44,11 +45,13 @@ public class Controller {
         return user;
     }
 
+    // UC 3.1
     public void logout(String userName) {
         User user = User.getUserByID(userName);
         user.disconnect();
     }
 
+    // UC 2.2
     // the idea is that in the UI part where will be two text boxes - one for username and one for password.
     // when the user presses 'register', the functions isValidUserName and isValidPassword are activated and if they both returned true
     // then register function is activated
@@ -562,8 +565,9 @@ public class Controller {
 //        }
     }
 
+    // T1.1
     public void init() throws Exception {
-        // Create DB if not exist -> Later
+        // TODO: Create DB if not exist -> Later
         this.connectToExternalSystems();
         HashMap<String, User> admin = User.getUsersByRole(Role.SYSTEM_ADMIN);
         if (admin == null) {

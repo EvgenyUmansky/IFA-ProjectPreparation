@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.text.Format;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
@@ -15,8 +14,9 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
-    Controller controller = new Controller();
+    Controller controller;
     League leaguePerSeason;
+    User teamOwnerUser;
 
     // ========================= Fan Tests ============================
     Fan fanMail;
@@ -36,7 +36,6 @@ class ControllerTest {
 
     // =================== Team Owner functions ====================
     Team team;
-    User teamOwnerUser;
 
     // T6.1A1, T6.1B1
     TeamPlayer player;
@@ -65,6 +64,8 @@ class ControllerTest {
     public void insert() {
         controller = new Controller();
         leaguePerSeason = new League(1998, new OneGameSchedulingMethod(), new RankingMethod(), "bet");
+        teamOwnerUser = new User("TeamOwnerUser", "123", "Evgeny", "");
+        teamOwnerUser.addRoleToUser(Role.TEAM_OWNER);
 
         // ========================= Fan Tests ========================
         fanMail = new Fan("FanNameMail", "euguman@gmail.com");
@@ -89,8 +90,6 @@ class ControllerTest {
         complaintToSysAdmin = new AlertNotification("Complaint title", "Complaint text");
 
         // =================== Team Owner functions ====================
-        teamOwnerUser = new User("TeamOwnerUser", "123", "Evgeny", "");
-        teamOwnerUser.addRoleToUser(Role.TEAM_OWNER);
         team = new Team("Test TO team", new Field("Test field 0", 200), (TeamOwner)teamOwnerUser.getRoles().get(Role.TEAM_OWNER));
 
         // T6.1A1, T6.1B1
@@ -124,6 +123,7 @@ class ControllerTest {
     public void delete(){
         controller = null;
         leaguePerSeason = null;
+        teamOwnerUser = null;
         // ========================= Fan Tests ============================
         fanMail = null;
         fanNotMail = null;
@@ -138,7 +138,6 @@ class ControllerTest {
         complaintToSysAdmin = null;
 
         // =================== Team Owner functions ====================
-        teamOwnerUser = null;
         team = null;
 
         // T6.1A1, T6.1B1
@@ -161,17 +160,18 @@ class ControllerTest {
 
         // T10.3, 10.4
         gameEvent = null;
-
     }
 
+    // T1.1.1
     @Test
     void connectToExternalSystems() {
         //TODO: create test when the function will be finushed
     }
 
+    // T2.3
     @Test
     void login() throws Exception {
-        // TODO: finish with DB
+        // TODO: finish the test with DB
 //        try {
 //            controller.login("null", "qwe");
 //        } catch (Exception e) {
@@ -197,13 +197,14 @@ class ControllerTest {
         assertTrue(teamOwnerUser.isConnected());
         controller.logout(teamOwnerUser.getUserName());
 
-        // TODO: finish with DB
+        // TODO: finish the test with DB
         // assertFalse(teamOwnerUser.isConnected());
     }
 
+    // T2.2
     @Test
     void register() {
-        // TODO: create with DB
+        // TODO: create the test with DB
     }
 
 
@@ -286,7 +287,7 @@ class ControllerTest {
     //T2.4E
     @Test
     void getSeasonDetails() {
-        //TODO: change test accordingly
+        //TODO: change the test accordingly
         assertEquals(0 , controller.getSeasonDetails(1998).size());
     }
 
@@ -294,7 +295,7 @@ class ControllerTest {
     //T2.5
     @Test
     void searchByKeyWord() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
 
@@ -489,8 +490,6 @@ class ControllerTest {
     // T 9.3
     @Test
     void removeReferee() {
-        //TODO:
-
         boolean thrown = false;
 
         try {
@@ -559,14 +558,14 @@ class ControllerTest {
     // T 9.8
     @Test
     void setRulesForBudgetControl() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
 
     // T 9.9
     @Test
     void setTeamBudget() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
 
@@ -697,7 +696,7 @@ class ControllerTest {
     // T6.1B3
     @Test
     void removeField() throws Exception {
-        assertEquals(1, team.getFields().size()); // null field in team constructor
+        assertEquals(1, team.getFields().size());
         controller.addField(team, field.getFieldName());
         assertEquals(field.getFieldName(), team.getFields().keySet().toArray()[1]);
         assertEquals(2, team.getFields().size());
@@ -787,7 +786,7 @@ class ControllerTest {
         }
     }
 
-    // T6.4
+    // T6.5
     @Test
     void removeManager() throws Exception {
         // TODO: check ManagerAppointments (in TeamOwner) with DB
@@ -825,7 +824,7 @@ class ControllerTest {
 
     // T6.6B
     @Test
-    void testUpdatePlayerDetails() {
+    void openTeam() {
         assertEquals(TeamStatus.Open.toString(), team.getTeamStatus().toString());
         team.closeTeam(teamOwnerUser);
         assertEquals(TeamStatus.TempClose.toString(), team.getTeamStatus().toString());
@@ -835,7 +834,7 @@ class ControllerTest {
 
     // T6.7
     void manageFinance(){
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
     // =================== Team Manager tests ====================
@@ -844,7 +843,7 @@ class ControllerTest {
     // T7.1
     @Test
     void setPermissionsToManager() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
     // =================== System Manager tests ====================
@@ -868,25 +867,25 @@ class ControllerTest {
     // T8.3A
     @Test
     void showComplain() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
     // T8.3B
     @Test
     void commentToComplaint() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
     // T8.4
     @Test
     void showLogDocument() {
-        // TODO: create test when the UC will be finished
+        // TODO: create tht test when the UC will be finished
     }
 
     // T8.5
     @Test
     void startModelRecommendationSystem() {
-        // TODO: create test when the UC will be finished
+        // TODO: create the test when the UC will be finished
     }
 
 
