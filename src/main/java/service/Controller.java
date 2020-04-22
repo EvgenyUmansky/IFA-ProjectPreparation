@@ -166,7 +166,7 @@ public class Controller {
 
     // UC 3.3 - add fan to subscription list of the game
     public void addFanSubscriptionToGame(Game game, String username) {
-        game.addFanToAlerts(User.getUserByID(username).getRoles().get(Role.FAN));
+        game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
     }
 
     // UC 3.4 - send complaint (by fan) to System Administrator
