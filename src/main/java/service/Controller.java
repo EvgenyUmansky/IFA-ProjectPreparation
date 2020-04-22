@@ -516,7 +516,7 @@ public class Controller {
 
         // ====================================================================
 
-        public Team getTeamByName(String teamName) {
+    public Team getTeamByName(String teamName) {
         return Team.getTeamByName(teamName);
     }
 
