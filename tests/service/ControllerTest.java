@@ -414,7 +414,6 @@ class ControllerTest {
         controller.addGameEventToGame(refereeMail.getUserName(), game, gameEvent);
         assertEquals("Test description 1", game.getGameEvents().get(0).getDescription());
 
-        controller.addGameEventToGame(refereeMail.getUserName(), game, gameEventBeforeGame);
     }
 
     // T10.4
