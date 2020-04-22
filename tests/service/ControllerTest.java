@@ -350,7 +350,7 @@ class ControllerTest {
     @Test
     void getFanProfileDetails() {
         // TODO: complete complex tests with DB
-        assertEquals("User Name: FanNameMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: null", controller.getFanProfileDetails(fanMail.getUserName()));
+        assertEquals("User Name: FanNameMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: abc@gmail.com", controller.getFanProfileDetails(fanMail.getUserName()));
     }
 
     //T3.6B
@@ -358,7 +358,7 @@ class ControllerTest {
     void setFanProfileDetails() {
         // TODO: complete complex tests with DB
         controller.setFanProfileDetails("User name test profile details", "TestPassword 321", "Test name", "Test mail");
-        assertEquals("User Name: FanNameMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: null", controller.getFanProfileDetails(fanMail.getUserName()));
+        assertEquals("User Name: FanNameMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: abc@gmail.com", controller.getFanProfileDetails(fanMail.getUserName()));
     }
 
 
@@ -369,7 +369,7 @@ class ControllerTest {
     @Test
     void getRefereeDetails() {
         // TODO: complete complex tests with DB
-        assertEquals("User Name: testRefereeMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: null\n" + "Qualification: 0\n" + "Type: null", controller.getRefereeDetails(refereeMail.getUserName()));
+        assertEquals("User Name: testRefereeMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: abc@gmail.com\n" + "Qualification: 0\n" + "Type: null", controller.getRefereeDetails(refereeMail.getUserName()));
     }
 
     // T10.1B
@@ -377,7 +377,7 @@ class ControllerTest {
     void setRefereeProfileDetails() {
         // TODO: complete complex tests with DB
         controller.setRefereeProfileDetails(refereeMail.getUserName(), "TestPassword", "TestName", "TestMail", 1, RefereeType.MAIN);
-        assertEquals("User Name: testRefereeMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: null\n" + "Qualification: 0\n" + "Type: null", controller.getRefereeDetails(refereeMail.getUserName()));
+        assertEquals("User Name: testRefereeMail\n" + "Password: 1234\n" + "Name: null\n" + "Mail: abc@gmail.com\n" + "Qualification: 0\n" + "Type: null", controller.getRefereeDetails(refereeMail.getUserName()));
     }
 
     // T10.2
