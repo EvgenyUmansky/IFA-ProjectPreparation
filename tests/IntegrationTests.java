@@ -30,7 +30,7 @@ class IntegrationTests {
     @BeforeEach
     public void insert() {
 
-        // ========================= Fan receive Alerts from Personal Page Tests ============================
+        // ========================= Fans receive Alerts from Personal Page Tests ============================
         fanMail = new Fan("FanNameMail", "euguman@gmail.com");
         fanMail.setMail(true);
         fanNotMail = new Fan("FanNameNotMail", "");
@@ -64,7 +64,7 @@ class IntegrationTests {
 
     @AfterEach
     public void delete(){
-        // ========================= Fan receive Alerts from Personal Page Tests ============================
+        // ========================= Fans receive Alerts from Personal Page Tests ============================
         fanMail = null;
         playerPage = null;
         coachPage = null;
@@ -77,10 +77,9 @@ class IntegrationTests {
 
     }
 
-
+    // ========================= Fans receive Alerts from Personal Page Tests ============================
     @Test
-
-    void fanReceiveAlertsFromPersonalPage() {
+    void fansReceiveAlertsFromPersonalPage() {
         // TODO: check received mails in DB
 
         assertEquals(0, fanNotMail.getAlertsMessages().size());
@@ -136,4 +135,21 @@ class IntegrationTests {
 
     }
 
+    // ========================= Fans receive Alerts from Game Tests ============================
+    @Test
+    void fansReceiveAlertsFromGame() {
+
+    }
+
+    // ========================= Referees receive Alerts from Game Tests ========================
+    @Test
+    void refereesReceiveAlertsFromGame() {
+
+    }
+
+    // ========================= Sys Admins receive Alerts (complaints) from Fans Tests ======================
+    @Test
+    void sysAdminsReceiveAlertsFromFans() {
+
+    }
 }
