@@ -14,12 +14,15 @@ class TeamPageTest {
     TeamOwner owner;
     Team team;
 
+
     @BeforeEach
     public void init(){
         field = new Field("test",100);
         owner = new TeamOwner("ownerUser","owner@gmail.com");
         team = new Team("test",field,owner);
+        team.addManager(new User("aba","saba","bob","baba@gmail.com"),new User("bab","saba","bob","baba@gmail.com"));
         teamPage = new TeamPage(team);
+
     }
 
     @Test
@@ -49,6 +52,33 @@ class TeamPageTest {
         teamPage.setCoaches(coachs);
         assertEquals(coachs,teamPage.getCoaches());
     }
+
+    @Test
+    void constructor(){
+        User ownerUser = new User("ownerUser","123","shak","s@mail.com");
+        User ownerUser2 = new User("ownerUser2","123","shak","s@mail.com");
+        TeamOwner ownerTest2 = new TeamOwner("ownerUser2","s@mail.com");
+
+        TeamManager teamManagerMacabi = new TeamManager("Mdego","Mm@gmail.com");
+        TeamManager teamManagerView = new TeamManager("Macker","Mvh@gmail.com");
+        TeamManager teamManagerTam = new TeamManager("Mshoko","Mt@gmail.com");
+        ownerUser.addRoleToUser(Role.TEAM_MANAGER,teamManagerMacabi);
+        owner.setTeam(team);
+        ownerUser.addRoleToUser(Role.TEAM_OWNER,owner);
+        ownerUser2.addRoleToUser(Role.TEAM_OWNER,ownerTest2);
+        team.addManager(ownerUser2,ownerUser);
+       team.addOwner(owner);
+        HashMap <String,TeamManager> teamManagerHashMap = new HashMap<>();
+        teamManagerHashMap.put("Mdego",teamManagerMacabi);
+        teamManagerHashMap.put("Macker",teamManagerView);
+        teamManagerHashMap.put("Mshoko",teamManagerTam);
+        teamPage.setManagers(teamManagerHashMap);
+        team.addManager(ownerUser,ownerUser);
+        teamPage = new TeamPage(team);
+
+
+    }
+
 
     @Test
     void setManagers() {

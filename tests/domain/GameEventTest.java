@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,6 +31,15 @@ class GameEventTest {
     void setGameDate() {
         gameEvent.setGameDate("2012-11-11 12:12");
         assertEquals("2012-11-11T12:12", gameEvent.getDateTime().toString());
+    }
+
+
+    @Test
+    void setGameDate2() {
+        LocalDateTime localDateTime= LocalDateTime.now();
+        gameEvent.setGameDate( localDateTime);
+        assertEquals( localDateTime, gameEvent.getDateTime());
+
     }
 
     @Test

@@ -93,6 +93,14 @@ public class TeamOwnerTest {
     }
 
     @Test
+    public void teamConst(){
+        TeamOwner teamOwner = new TeamOwner("Guy","guyzamos@gmail.com",teamTam,managerAppointments);
+        assertNotNull(teamOwner);
+    }
+
+
+
+    @Test
     public void getManagerAppointments() {
         assertEquals(0,teamOwnerHapoel.getManagerAppointments().size());
         teamOwnerHapoel.addToManagerAppointments(teamManagerHapoel);

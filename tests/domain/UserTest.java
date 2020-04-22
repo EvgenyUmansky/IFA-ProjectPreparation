@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -26,7 +27,8 @@ public class UserTest {
     public void addRoleToUser(){
         assertTrue(user.getRoles().size() == 1);
         user.addRoleToUser(Role.REFEREE);
-        assertTrue(user.getRoles().size() == 2);
+        user.addRoleToUser(Role.TEAM_MANAGER);
+        assertEquals(3,user.getRoles().size());
     }
 
     @Test
@@ -60,6 +62,8 @@ public class UserTest {
         assertTrue(User.isValidUserName("username"));
         assertFalse(User.isValidUserName("!23456"));
         assertFalse(User.isValidUserName("123"));
+        assertFalse(User.isValidUserName("1"));
+
     }
 
     @Test
@@ -95,4 +99,30 @@ public class UserTest {
         user.addRoleToUser(Role.SYSTEM_ADMIN,new SystemAdministrator(user.getUserName(),"admin@mail.com"));
         assertFalse(user.closeUser());
     }
+
+    @Test
+    public void closeUser2(){
+        assertTrue(user.closeUser());
+        user.setClosed(true);
+        user.addRoleToUser(Role.TEAM_OWNER,new TeamOwner(user.getUserName(),"admin@mail.com"));
+        assertFalse(user.closeUser());
+        assertFalse(user.closeUser());
+    }
+
+    @Test
+    public void getPages(){
+        ArrayList<PersonalPage> personalPages = user.getPages();
+        assertNotNull(personalPages);
+
+    }
+
+
+    @Test
+    public void getProfileDetails(){
+        String profD = user.getProfileDetails();
+        assertNotNull(profD);
+    }
+
+
+
 }
