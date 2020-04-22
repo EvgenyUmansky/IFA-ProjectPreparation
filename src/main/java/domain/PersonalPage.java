@@ -15,6 +15,7 @@ public abstract class PersonalPage {
         this.alert = new Alert();
         this.name = name;
         this.mail = mail;
+        pageOwners = new HashMap<>();
     }
 
     public static PersonalPage getPage(String pageName) {
@@ -23,13 +24,21 @@ public abstract class PersonalPage {
 
     //-----Getters and Setters--------
 
-    public PersonalPage setName(String name, String user) {
+    public PersonalPage setName(String name) {
         this.name = name;
+
+        // UC 3.2
+        alert.sendAlert(new AlertNotification("Name of the page " + this.name + " has changed", "The new name is " + name));
+
         return this;
     }
 
     public PersonalPage setInfo(String info) {
         this.info = info;
+
+        // UC 3.2
+        alert.sendAlert(new AlertNotification("Info of the page " + this.name + "  has changed", "The new info is " + info));
+
         return this;
     }
 
@@ -47,15 +56,23 @@ public abstract class PersonalPage {
         return info;
     }
 
+    public Alert getAlert() {
+        return alert;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+
+    public HashMap<String, Subscriber> getPageOwners() {
+        return pageOwners;
+    }
     /////////// Functionality ///////////
 
     // UC 3.2
     public void addSubscriber(Fan fan) {
-        if (fan.isMail()) {
-            this.alert.addToMailSet(fan);
-        } else {
-            this.alert.addToSystemSet(fan);
-        }
+        alert.addSubscriber(fan);
     }
 
     public void addPermissions(Subscriber owner) {

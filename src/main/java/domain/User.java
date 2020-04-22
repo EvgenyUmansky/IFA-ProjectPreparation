@@ -57,7 +57,7 @@ public class User {
         String mail = this.getMail();
         // TODO: Get pages from DB (all pages that the user had permission to edit them)
         return new ArrayList<PersonalPage>() {{
-            add(new PlayerPage(new TeamPlayer(username, mail), null));
+            add(new PlayerPage(new TeamPlayer(username, mail), "playerPage"));
         }};
     }
 
@@ -156,7 +156,7 @@ public class User {
 
     public static User getUserByID(String userName) {
         // TODO: Get user from DB
-        return new User(userName, "1234", null, null).addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT);
+        return new User(userName, "1234", null, null).addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE).addRoleToUser(Role.TEAM_PLAYER).addRoleToUser(Role.COACH);
     }
 
 
@@ -165,11 +165,18 @@ public class User {
         if (userNameLength < 2 || userNameLength > 10)
             return false;
 
+        boolean containsLetter = false;
+
         for (int i = 0; i < userNameLength; i++) {
             char currentLetter = userName.charAt(i);
-            if (!Character.isLetter(currentLetter))
+            if (!Character.isLetter(currentLetter) && !Character.isDigit(currentLetter))
                 return false;
+            if(Character.isLetter(currentLetter))
+                containsLetter = true;
         }
+
+        if(!containsLetter)
+            return false;
 
         return true;
     }
@@ -177,7 +184,7 @@ public class User {
 
     public static boolean isValidPassword(String password) {
         int passwordLength = password.length();
-        if (passwordLength < 6 || passwordLength > 15) {
+        if (passwordLength < 4 || passwordLength > 15) {
             return false;
         }
 

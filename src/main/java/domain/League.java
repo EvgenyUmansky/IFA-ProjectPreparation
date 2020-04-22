@@ -220,4 +220,12 @@ public class League {
     public List<Game> getGames() {
         return games;
     }
+
+    public String getLeagueName() {
+        return leagueName;
+    }
+
+    public HashSet<Referee> getReferees() {
+        return referees;
+    }
 }

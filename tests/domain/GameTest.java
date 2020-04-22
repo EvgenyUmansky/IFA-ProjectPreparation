@@ -24,6 +24,7 @@ class GameTest {
 
     Game game;
     Game gameCE;
+    Game secConstructor;
 
     @BeforeEach
     public void insert() {
@@ -87,6 +88,15 @@ class GameTest {
         game.addRefereeToGame(referees.get(0));
         assertEquals(1, game.getReferees().size());
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
+    }
+
+    @Test
+    void addRefereeToGame2(){
+        game.addRefereeToGame(referees.get(0));
+        assertEquals(1, game.getReferees().size());
+        assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
+        secConstructor = new Game(leaguePerSeasons.get(0),hostTeams.get(0),guestTeams.get(0),hostTeams.get(0).getMyField(),LocalDateTime.now(), new ArrayList<>());
+        assertNotNull(secConstructor);
     }
 
     @Test
@@ -163,10 +173,25 @@ class GameTest {
 
     @Test
     void sendAlertScoreToFan() {
+        Map<String, Boolean> map = game.sendAlertScoreToFan();
+        assertNotNull(map);
+        assertEquals(0,map.size());
     }
+
+
+
+    @Test
+    void isEqualGame() {
+        secConstructor = new Game(leaguePerSeasons.get(0),hostTeams.get(0),guestTeams.get(0),hostTeams.get(0).getMyField(),LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>());
+        assertTrue(gameCE.isEqualGame(secConstructor));
+    }
+
 
     @Test
     void sendAlertCloseGame() {
+        Map<String, Boolean> map = game.sendAlertCloseGame();
+        assertNotNull(map);
+        assertEquals(0,map.size());
     }
 
     @Test
@@ -229,7 +254,8 @@ class GameTest {
 
     @Test
     void getGamesByReferee(){
-
+        ArrayList<Game> games = Game.getGamesByReferee(referees.get(0));
+        assertEquals(1,games.size());
     }
 
     @Test
@@ -337,6 +363,14 @@ class GameTest {
     void getGameDate()  {
         game.setGameDate("2020-12-12 13:00");
         assertEquals("2020-12-12T13:00", game.getGameDate().toString());
+    }
+
+
+    @Test
+    void getGameDate2()  {
+        LocalDateTime localDateTime= LocalDateTime.now();
+        game.setGameDate(localDateTime);
+        assertEquals(localDateTime, game.getGameDate());
     }
 
     @Test

@@ -68,23 +68,23 @@ class BudgetTest {
 //
 //    }
 //
-//    @Test
-//    void getTotalProfit() {
-//        assertEquals(0,budgetQ1.getTotalProfit());
-//
-//    }
-//
-//    @Test
-//    void getTotalLoss() {
-//        assertEquals(0,budgetQ1.getTotalLoss());
-//
-//    }
-//
-//    @Test
-//    void getQuarterOfYear() {
-//        assertEquals(1,budgetQ1.getQuarterOfYear());
-//
-//    }
+    @Test
+    void getTotalProfit() {
+        assertEquals(0,budgetQ1.getTotalProfit(),0);
+
+    }
+
+    @Test
+    void getTotalLoss() {
+        assertEquals(0,budgetQ1.getTotalLoss(),0);
+
+    }
+
+    @Test
+    void getQuarterOfYear() {
+        assertEquals(1,budgetQ1.getQuarterOfYear(),0);
+
+    }
 //
 //    @Test
 //    void getBudget() {

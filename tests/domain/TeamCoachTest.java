@@ -4,6 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TeamCoachTest {
@@ -24,10 +26,19 @@ class TeamCoachTest {
     void updateDetails() {
         assertNull(coach.getRole());
         assertNull(coach.getQualification());
-       // assertTrue(coach.updateDetails("qua","role"));
+        coach.updateDetails("qua","role");
         assertNotNull(coach.getRole());
         assertNotNull(coach.getQualification());
     }
+
+    @Test
+    void getCoachByName(){
+
+        TeamCoach teamCoach = TeamCoach.getCoachByName("coachUser");
+        assertNotNull(teamCoach);
+
+    }
+
 
     @Test
     void setRole() {
@@ -35,6 +46,16 @@ class TeamCoachTest {
         coach.setRole("role");
         assertEquals("role",coach.getRole());
     }
+
+
+    @Test
+    void getAlertsMessages() {
+        ArrayList<AlertNotification> alertNotifications = coach.getAlertsMessages();
+        assertNotNull(alertNotifications);
+    }
+
+
+
 
     @Test
     void setQualification() {

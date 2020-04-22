@@ -22,6 +22,7 @@ public abstract class Subscriber {
         this.userName = userName;
         this.alertsMessages = new ArrayList<>();
         this.mail = mail;
+        this.isMail = false;
     }
     // when the function activated - send message to screen
     public AlertNotification addAlertMessage(AlertNotification message){

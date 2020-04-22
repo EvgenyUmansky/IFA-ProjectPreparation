@@ -50,4 +50,10 @@ class FieldTest {
         assertTrue(field1.setPropertyCost(111));
         assertFalse(field1.setPropertyCost(-1));
     }
+
+    @Test
+    void getFieldByName() {
+        assertTrue(field1.getFieldByName("Metallurg").getFieldName().equals("Metallurg"));
+    }
+
 }

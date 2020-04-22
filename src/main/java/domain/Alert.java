@@ -71,7 +71,9 @@ public class Alert {
      * @param alertNotification
      */
     public Map<String, Boolean> sendAlert(AlertNotification alertNotification)  {
+        // TODO: save this map in DB
         Map isSentMap = new HashMap<>();
+
         for(Subscriber user : this.mailAlertList){
             boolean isSent = sendMailAlert(user.getMail(), alertNotification);
             isSentMap.put(user.getUserName(), isSent);
