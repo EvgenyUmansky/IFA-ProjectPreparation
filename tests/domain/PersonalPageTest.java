@@ -51,4 +51,11 @@ class PersonalPageTest {
         assertEquals(2,page.getPageOwners().size());
 
     }
+
+
+    @Test
+    void getPage(){
+      PersonalPage personalPage = PersonalPage.getPage("pageTestName");
+      personalPage.getName().equals("pageTestName");
+    }
 }
