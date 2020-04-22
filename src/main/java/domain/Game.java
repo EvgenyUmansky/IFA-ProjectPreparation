@@ -83,35 +83,20 @@ public class Game {
      * Add fan to list of subscribers on a game
      * @param fan - want to get news about a game
      */
-    public void addFanToAlerts(Subscriber fan){
-        if(fan.isMail()) {
-            this.alertFans.addToMailSet(fan);
-        }
-        else{
-            this.alertFans.addToSystemSet(fan);
-        }
+    public void addFanToAlerts(Fan fan){
+        alertFans.addSubscriber(fan);
     }
 
-    public void removeFanFromAlerts(Subscriber fan){
-        if(fan.isMail()) {
-            this.alertFans.removeFromMailSet(fan);
-        }
-        else{
-            this.alertFans.removeFromSystemSet(fan);
-        }
+    public void removeFanFromAlerts(Fan fan){
+        alertFans.removeSubscriber(fan);
     }
 
     /**
      * Add referee to list of subscribers on a game
      * @param referee - want to get news about a game
      */
-    public void addRefereeToAlerts(Subscriber referee){
-        if(referee.isMail()) {
-            this.alertReferees.addToMailSet(referee);
-        }
-        else{
-            this.alertReferees.addToSystemSet(referee);
-        }
+    public void addRefereeToAlerts(Referee referee){
+        alertReferees.addSubscriber(referee);
     }
 
     public void deleteRefereeFromAlerts(Referee referee){
@@ -119,7 +104,7 @@ public class Game {
     }
 
     private void addRefereesOfGameToAlerts(){
-        for(Subscriber user : this.referees){
+        for(Referee user : this.referees){
             addRefereeToAlerts(user);
         }
     }
@@ -133,7 +118,7 @@ public class Game {
         //TODO some logic with observer: when the game ends
 
         String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName();
-        String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "is " + getGameScore();
+        String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + getGameScore();
         AlertNotification alertNotification = new AlertNotification(title, message);
 
         return alertFans.sendAlert(alertNotification);
@@ -149,7 +134,7 @@ public class Game {
         //TODO some logic with observer: when remains one day
 
         String title =  "It's close! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
-        String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + "remains " + "one day!";
+        String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " remains " + "one day!";
         AlertNotification alertNotification = new AlertNotification(title, message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
@@ -166,7 +151,7 @@ public class Game {
      */
     public Map<String, Boolean> sendAlertChangeDateGame() {
         String title =  "The date has changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
-        String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.toString();
+        String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.withNano(0).withSecond(0).toString();
         AlertNotification alertNotification = new AlertNotification(title, message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
@@ -190,12 +175,17 @@ public class Game {
         }
 
         this.gameEvents.add(event);
+
+        // send alerts
+        AlertNotification alertNotification = new AlertNotification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        alertFans.sendAlert(alertNotification);
+        alertReferees.sendAlert(alertNotification);
     }
 
     // UC 10.4 - update/change game events by main referee
-    public void changeEvent(GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String description) throws Exception {
+    public void changeEvent(GameEvent event, String dateTimeStr, int gameMinutes, GameAlert eventName, String description) throws Exception {
 
-        if (!this.getGameEvents().contains(gameEvent)) {
+        if (!this.getGameEvents().contains(event)) {
             throw new Exception("Not event of this game");
         }
 
@@ -206,23 +196,28 @@ public class Game {
 
         // dateTimeStr == null - the dateTimeStr UI field is not filled
         if (dateTimeStr != null) {
-            gameEvent.setGameDate(dateTimeStr);
+            event.setGameDate(dateTimeStr);
         }
 
         // gameMinutes == -1 - the gameMinutes UI field is not filled
         if (gameMinutes > -1) {
-            gameEvent.setGameMinutes(gameMinutes);
+            event.setGameMinutes(gameMinutes);
         }
 
         // eventName == null - the eventName UI field is not filled
         if (eventName != null) {
-            gameEvent.setEventName(eventName);
+            event.setEventName(eventName);
         }
 
         // description == null - the description UI field is not filled
         if (description != null) {
-            gameEvent.setDescription(description);
+            event.setDescription(description);
         }
+
+        // send alerts
+        AlertNotification alertNotification = new AlertNotification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        alertFans.sendAlert(alertNotification);
+        alertReferees.sendAlert(alertNotification);
     }
 
     public boolean isEqualGame(Game game){

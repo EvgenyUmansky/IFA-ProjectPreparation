@@ -28,7 +28,8 @@ public class Team {
         this.managers = new HashMap<>();
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
-        alert = new Alert();
+        this.alert = new Alert();
+        this.alert.addSubscriber(owner);
         this.fields.put(stadium.getFieldName(), stadium);
         this.teamStatus = TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
