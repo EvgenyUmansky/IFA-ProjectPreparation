@@ -233,7 +233,7 @@ class LeagueTest {
     //// static functions
     @Test
     void getLeaguePerSeason() {
-        assertNotNull(League.getLeauePerSeason(2020,"alef"));
+        assertNotNull(League.getLeaguePerSeason(2020,"alef"));
     }
 
     @Test

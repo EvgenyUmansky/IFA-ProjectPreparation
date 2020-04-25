@@ -4,11 +4,18 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+/**
+ * This class represents a notifications system.
+ */
 public class Alert {
+
     private Set<Subscriber> mailAlertList;
     private Set<Subscriber> inSystemAlertList;
 
-/////////// Constructor ///////////
+
+    /**
+     * Constructor
+     */
     public Alert() {
         this.mailAlertList = new HashSet<>();
         this.inSystemAlertList = new HashSet<>();
@@ -17,6 +24,10 @@ public class Alert {
 
 /////////// Functionality ///////////
 
+    /**
+     * Adds a given Subscriber to a Subscribers list according to his preference in the way of receiving notifications
+     * @param user the given Subscriber
+     */
     public void addSubscriber(Subscriber user) {
         if(user.isMail()){
             this.mailAlertList.add(user);
@@ -26,14 +37,26 @@ public class Alert {
         }
     }
 
+    /**
+     * Adds a Subscriber to the list of in-mail notifications recipients
+     * @param user the given Subscriber
+     */
     public void addToMailSet(Subscriber user){
         this.mailAlertList.add(user);
     }
 
+    /**
+     * Adds a Subscriber to the list of in-system notifications recipients
+     * @param user the given Subscriber
+     */
     public void addToSystemSet(Subscriber user){
         this.inSystemAlertList.add(user);
     }
 
+    /**
+     * Removes a given Subscriber from the Subscribers list he is in
+     * @param user the given Subscriber
+     */
     public void removeSubscriber(Subscriber user){
         if(user.isMail()){
             this.mailAlertList.remove(user);
@@ -43,32 +66,49 @@ public class Alert {
         }
     }
 
+    /**
+     * Removes a given Subscriber from the list of in-mail notifications recipients
+     * @param user the given Subscriber
+     */
     public void removeFromMailSet(Subscriber user){
         this.mailAlertList.remove(user);
     }
 
+    /**
+     * Removes a given Subscriber from the list of in-system notifications recipients
+     * @param user the given Subscriber
+     */
     public void removeFromSystemSet(Subscriber user){
         this.inSystemAlertList.remove(user);
     }
 
 
+    /**
+     * Removes all the Subscribers in both lists
+     */
     public void clearSubscribers(){
         this.mailAlertList = new HashSet<>();
         this.inSystemAlertList = new HashSet<>();
     }
 
-
+    /**
+     * Removes all the Subscribers from the in-mail notification recipients list
+     */
     public void clearMailList(){
         this.mailAlertList = new HashSet<>();
     }
 
+    /**
+     * Removes all the Subscribers from the in-system notification recipients list
+     */
     public void clearInSystemList(){
         this.inSystemAlertList = new HashSet<>();
     }
 
     /**
-     * public function to send alert to user. Chooses from list where to send the alert: mail or system
-     * @param alertNotification
+     * Sends a notification to all of the Subscribers in each list. Each Subscriber would receive the notification in a platform according to the list he's in.
+     * @param alertNotification the notification sent to each Subscriber
+     * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the message or false otherwise
      */
     public Map<String, Boolean> sendAlert(AlertNotification alertNotification)  {
         // TODO: save this map in DB
@@ -89,10 +129,10 @@ public class Alert {
     }
 
     /**
-     * send alert to mail
-     * @param to
-     * @param alertNotification
-     * @return
+     * Sends a notification by mail
+     * @param to the mail address of the recipient
+     * @param alertNotification the notification
+     * @return true if the recipient has received the mail, false otherwise
      */
     private boolean sendMailAlert(String to, AlertNotification alertNotification) {
 
@@ -117,7 +157,6 @@ public class Alert {
             // -- Create a new message --
             Message msg = new MimeMessage(session);
 
-
             // -- Set the FROM and TO fields --
             msg.setFrom(new InternetAddress(username));
             msg.setRecipients(Message.RecipientType.TO,
@@ -137,9 +176,9 @@ public class Alert {
     }
 
     /**
-     * Send alert to user in system
-     * @param user
-     * @param alertNotification
+     * Sends a notification by the system's notifications system
+     * @param user the recipient
+     * @param alertNotification the notification
      */
     private void sendInSystemAlert(Subscriber user, AlertNotification alertNotification){
         user.addAlertMessage(alertNotification);
@@ -147,10 +186,19 @@ public class Alert {
 
 
 /////////// Getters and Setters ///////////
+
+    /**
+     * Returns the list of mail notification recipients
+     * @return the list of mail notification recipients
+     */
     public Set<Subscriber> getMailAlertList() {
         return mailAlertList;
     }
 
+    /**
+     * Returns the list of in-system notification recipients
+     * @return the list of in-system notification recipients
+     */
     public Set<Subscriber> getInSystemAlertList() {
         return inSystemAlertList;
     }
