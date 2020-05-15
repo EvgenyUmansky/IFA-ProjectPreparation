@@ -1,29 +1,44 @@
 package service;
 
 import domain.*;
+import domain.controllers.*;
 
+import java.text.ParseException;
 import java.util.*;
 
 /**
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
 public class Controller {
-
-    private LinkedList<SystemEvent> systemEvents;
-    private HashSet<League> leagues;
-
+    AssociationAgentController associationAgentController;
+    CoachController coachController;
+    FanController fanController;
+    GuestController guestController;
+    ManagerController managerController;
+    OwnerController ownerController;
+    PersonalPageController personalPageController;
+    PlayerController playerController;
+    RefereeController refereeController;
+    StartController startController;
 
     // ========================= Constructor =========================
 
     /**
      * Constructor
      */
-    public Controller() {
-        systemEvents = new LinkedList<>();
+    public Controller(AssociationAgentController associationAgentController, CoachController coachController, FanController fanController, GuestController guestController, ManagerController managerController, OwnerController ownerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController) {
+        this.associationAgentController = associationAgentController;
+        this.coachController = coachController;
+        this.fanController = fanController;
+        this.guestController = guestController;
+        this.managerController = managerController;
+        this.ownerController = ownerController;
+        this.personalPageController = personalPageController;
+        this.playerController = playerController;
+        this.refereeController = refereeController;
+        this.startController = startController;
     }
-
-
-     // ========================= System functions =========================
+    // ========================= System functions =========================
     // ====================================================================
 
     /**
@@ -31,7 +46,7 @@ public class Controller {
      * Connects to external systems
      */
     public void connectToExternalSystems() {
-        // TODO: Connect to external system. if fails throws Exception
+        startController.connectToExternalSystems();
     }
 
 
@@ -44,18 +59,7 @@ public class Controller {
      */
     // Should be bound to AuthController
     public User login(String userName, String password) throws Exception {
-        User user = User.getUserByID(userName);
-
-        if (user == null) {
-            throw new Exception("User not found!");
-        }
-
-        if (!user.getPassword().equals(password)) {
-            throw new Exception("Wrong password!");
-        }
-
-        user.connect();
-        return user;
+        return startController.login(userName, password);
     }
 
     /**
@@ -65,8 +69,7 @@ public class Controller {
      */
     // Should be bound to AuthController
     public void logout(String userName) {
-        User user = User.getUserByID(userName);
-        user.disconnect();
+        startController.logout(userName);
     }
 
     /**
@@ -81,22 +84,7 @@ public class Controller {
      */
     // Should be bound to AuthController
     public User register(String userName, String password, String name, String mail) throws Exception {
-        User user = User.getUserByID(userName);
-        if (user != null) {
-            throw new Exception("User already exist");
-        }
-
-        if (!User.isValidUserName(userName)) {
-            throw new Exception("Username is not valid");
-        }
-        if (!User.isValidPassword(password)) {
-            throw new Exception("Password is not valid");
-        }
-
-        User newUser = new User(userName, password, name, mail);
-        newUser.addRoleToUser(Role.FAN, new Fan(newUser.getUserName(), newUser.getMail()));
-
-        return newUser;
+        return startController.register(userName, password, name, mail);
     }
 
 
@@ -110,7 +98,7 @@ public class Controller {
      */
     // Should be bound to PagerController
     public ArrayList<PersonalPage> getPagesByUsername(String username) {
-        return User.getUserByID(username).getPages();
+        return personalPageController.getPagesByUsername(username);
     }
 
 
@@ -121,7 +109,7 @@ public class Controller {
     /**
      * UC 4.2, 5.2
      * Updates the info in the profile page
-     * @param page the profile page
+     * @param pageName the profile page
      * @param info the updated info
      * @return the updated page
      */
@@ -169,11 +157,7 @@ public class Controller {
      */
     // Should be bound to PagerController
     public void updateCoachDetails(String username, String coachName, String qualification, String role) {
-        User coachUser = User.getUserByID(username);
-        if(coachName!=null){
-            coachUser.setName(coachName);
-        }
-        ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
+        coachController.updateCoachDetails(username, coachName, qualification, role);
     }
 
 
@@ -189,7 +173,7 @@ public class Controller {
      */
     // Should be bound to TeamsController
     public Team getTeamDetails(String teamName) {
-        return Team.getTeamByName(teamName);
+        return guestController.getTeamDetails(teamName);
     }
 
 
@@ -200,7 +184,7 @@ public class Controller {
      */
     // Should be bound to PlayerController
     public TeamPlayer getPlayersDetails(String playerName) {
-        return TeamPlayer.getPlayerByName(playerName);
+        return guestController.getPlayersDetails(playerName);
     }
 
 
@@ -211,7 +195,7 @@ public class Controller {
      */
     // Should be bound to Coach..?Controlller
     public TeamCoach getCoachDetails(String coachName) {
-        return TeamCoach.getCoachByName(coachName);
+        return guestController.getCoachDetails(coachName);
     }
 
 
@@ -222,7 +206,7 @@ public class Controller {
      */
     // Should be bound to LeagueControlller
     public League getLeagueDetails(String leagueName) {
-        return League.getLeagueByName(leagueName);
+        return guestController.getLeagueDetails(leagueName);
     }
 
 
@@ -233,7 +217,7 @@ public class Controller {
      */
     // Should be bound to SeasonControlller
     public ArrayList<League> getSeasonDetails(int year) {
-        return League.getAllLeaguesPerSeason(year);
+        return guestController.getSeasonDetails(year);
     }
 
 
@@ -243,7 +227,7 @@ public class Controller {
      * @param words
      */
     public void searchByKeyWord(String words) {
-
+        guestController.searchByKeyWord(words);
     }
 
 
@@ -254,7 +238,7 @@ public class Controller {
     /**
      * UC 3.2
      * Adds a fan as a subscriber to the page
-     * @param page the profile page
+     * @param pageName the profile page
      * @param username the fan's username
      */
     // Should be bound to PagerControlller as Update
@@ -283,7 +267,8 @@ public class Controller {
      * @param message the complaint
      */
     public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, AlertNotification message) {
-        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
+        // TODO: Strings in signature
+        //((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
     }
 
     // UC 3.5 - get history of fans searches
@@ -296,7 +281,7 @@ public class Controller {
      */
     public String[] getFanHistory(String username) {
         //TODO - get from data base
-        return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getSearchHistory();
+        return fanController.getFanHistory(username);
     }
 
     /**
@@ -306,7 +291,7 @@ public class Controller {
      * @return the fan's info
      */
     public String getFanProfileDetails(String username) {
-        return User.getUserByID(username).getProfileDetails();
+        return fanController.getFanProfileDetails(username);
     }
 
     /**
@@ -318,7 +303,7 @@ public class Controller {
      * @param newMail the new mail
      */
     public void setFanProfileDetails(String username, String newPassword, String newName, String newMail) {
-        User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
+        fanController.setFanProfileDetails(username, newPassword, newName, newMail);
     }
 
     // ========================= Referee functions ============================
@@ -332,7 +317,7 @@ public class Controller {
      * @return the info about the referee
      */
     public String getRefereeDetails(String username) {
-        return User.getUserByID(username).getProfileDetails() + "\n" + ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
+        return refereeController.getRefereeDetails(username);
     }
 
     /**
@@ -345,9 +330,8 @@ public class Controller {
      * @param qualification the updated qualification
      * @param refereeType the updated type
      */
-    public void setRefereeProfileDetails(String username, String newPassword, String newName, String newMail, int qualification, RefereeType refereeType) {
-        User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
-        ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, qualification, refereeType);
+    public void setRefereeProfileDetails(String username, String newPassword, String newName, String newMail, String qualification, String refereeType) {
+        refereeController.setRefereeProfileDetails(username, newPassword, newName, newMail, qualification, refereeType);
     }
 
 
@@ -358,8 +342,7 @@ public class Controller {
      * @return the list of games that the referee referees at
      */
     public ArrayList<Game> getRefereeGames(String username) {
-        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        return Game.getGamesByReferee(ref);
+        return refereeController.getRefereeGames(username);
     }
 
 
@@ -371,22 +354,9 @@ public class Controller {
      * @param gameEvent the event
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String username, Game game, GameEvent gameEvent) throws Exception {
-        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+    public void addGameEventToGame(String username, String game, String gameEvent) throws Exception {
+        refereeController.addGameEventToGame(username, game, gameEvent);
 
-        // TODO: compare with id from DB
-        if(isEqualGameInList(Game.getGamesByReferee(ref), game)){
-            try {
-                game.addEvent(gameEvent);
-            }
-            catch (Exception e){
-                e.printStackTrace(); // not valid date exception
-                // TODO: logger
-            }
-        }
-        else {
-            throw new Exception("This referee doesn't judge in this game");
-        }
     }
 
 
@@ -402,39 +372,9 @@ public class Controller {
      * @param description the description of the event
      * @throws Exception in case the update was unsuccessful
      */
-    public void changeGameEvent(String username, Game game, GameEvent gameEvent, String dateTimeStr, int gameMinutes, GameAlert eventName, String description) throws Exception {
+    public void changeGameEvent(String username, String game, String gameEvent, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
         // TODO: check the referee is MAIN in UI
-        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        // TODO: compare with id from DB
-        if(isEqualGameInList(Game.getGamesByReferee(ref), game)) {
-            try {
-                game.changeEvent(gameEvent, dateTimeStr, gameMinutes, eventName,  description);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                // TODO: logger
-            }
-        }
-        else {
-            throw new Exception("This referee doesn't judge in this game");
-        }
-    }
-
-    /**
-     * Checks if a game already exists in the referee's games list
-     * @param games the list of games
-     * @param game the checked game
-     * @return true if the list contains the game, false if not
-     */
-    private boolean isEqualGameInList(ArrayList<Game> games, Game game){
-    // TODO: change this function to ids from DB
-    // Check if game in ArrayList of games
-        for(Game refGame : games){
-            if(game.isEqualGame(refGame)){
-                return true;
-            }
-        }
-        return false;
+        refereeController.changeGameEvent(username, game, gameEvent, dateTimeStr, gameMinutes, eventName, description);
     }
 
 
@@ -449,7 +389,7 @@ public class Controller {
      * @return an instance of the new league
      */
     public League setLeague(String leagueName) {
-        return new League(leagueName);
+        return associationAgentController.setLeague(leagueName);
     }
 
 
@@ -460,8 +400,8 @@ public class Controller {
      * @param season the season
      * @return the updated league
      */
-    public League updateSeasonForLeague(String leagueName, int season) {
-        return League.getLeagueByName(leagueName).setSeason(season);
+    public League updateSeasonForLeague(String leagueName, String season) {
+        return associationAgentController.updateSeasonForLeague(leagueName, season);
     }
 
 
@@ -475,7 +415,7 @@ public class Controller {
      * @throws Exception if the creation was unsuccessful
      */
     public void createReferee(String username, String password, String name, String mail) throws Exception {
-        this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
+        associationAgentController.createReferee(username, password, name, mail);
         // TODO: Send invitation to referee
     }
 
@@ -485,7 +425,7 @@ public class Controller {
      * @param username the referee's username
      */
     public void removeReferee(String username) {
-        User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
+        associationAgentController.removeReferee(username);
     }
 
     /**
@@ -855,15 +795,6 @@ public class Controller {
         return user.getRoles();
     }
 
-
-    public static void main(String[] args) {
-        Controller c = new Controller();
-        try {
-            c.init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     /**
