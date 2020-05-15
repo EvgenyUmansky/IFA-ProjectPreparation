@@ -42,6 +42,7 @@ public class Controller {
      * @param password the user's password
      * @return the user's instance
      */
+    // Should be bound to AuthController
     public User login(String userName, String password) throws Exception {
         User user = User.getUserByID(userName);
 
@@ -62,6 +63,7 @@ public class Controller {
      * Disconnects a user from the system
      * @param userName the user's username
      */
+    // Should be bound to AuthController
     public void logout(String userName) {
         User user = User.getUserByID(userName);
         user.disconnect();
@@ -77,6 +79,7 @@ public class Controller {
      * @return the new user instance
      * @throws Exception if the registration was unsuccessful
      */
+    // Should be bound to AuthController
     public User register(String userName, String password, String name, String mail) throws Exception {
         User user = User.getUserByID(userName);
         if (user != null) {
@@ -105,6 +108,7 @@ public class Controller {
      * @param username the user's username
      * @return the list of pages he has permissions to
      */
+    // Should be bound to PagerController
     public ArrayList<PersonalPage> getPagesByUsername(String username) {
         return User.getUserByID(username).getPages();
     }
@@ -121,6 +125,7 @@ public class Controller {
      * @param info the updated info
      * @return the updated page
      */
+    // Should be bound to PagerController
     public PersonalPage updateInfo(PersonalPage page, String info){
         return page.setInfo(info);
     }
@@ -139,6 +144,7 @@ public class Controller {
      * @param position the player's position
      * @param squadNumber the player's shirt number
      */
+    // Should be bound to PagerController
     public void updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
         User playerUser = User.getUserByID(username);
         if(playerName!=null){
@@ -161,6 +167,7 @@ public class Controller {
      * @param qualification the coach's qualification
      * @param role the coach's role
      */
+    // Should be bound to PagerController
     public void updateCoachDetails(String username, String coachName, String qualification, String role) {
         User coachUser = User.getUserByID(username);
         if(coachName!=null){
@@ -180,6 +187,7 @@ public class Controller {
      * @param teamName the team's name
      * @return the team instance by the team's name
      */
+    // Should be bound to TeamsController
     public Team getTeamDetails(String teamName) {
         return Team.getTeamByName(teamName);
     }
@@ -190,6 +198,7 @@ public class Controller {
      * @param playerName the player's name
      * @return the player instance by his name
      */
+    // Should be bound to PlayerController
     public TeamPlayer getPlayersDetails(String playerName) {
         return TeamPlayer.getPlayerByName(playerName);
     }
@@ -200,6 +209,7 @@ public class Controller {
      * @param coachName the player's name
      * @return the coach instance by his name
      */
+    // Should be bound to Coach..?Controlller
     public TeamCoach getCoachDetails(String coachName) {
         return TeamCoach.getCoachByName(coachName);
     }
@@ -210,6 +220,7 @@ public class Controller {
      * @param leagueName the league name
      * @return the league instance that matches the league name
      */
+    // Should be bound to LeagueControlller
     public League getLeagueDetails(String leagueName) {
         return League.getLeagueByName(leagueName);
     }
@@ -220,6 +231,7 @@ public class Controller {
      * @param year the season
      * @return the leagues instances from the season
      */
+    // Should be bound to SeasonControlller
     public ArrayList<League> getSeasonDetails(int year) {
         return League.getAllLeaguesPerSeason(year);
     }
@@ -245,6 +257,7 @@ public class Controller {
      * @param page the profile page
      * @param username the fan's username
      */
+    // Should be bound to PagerControlller as Update
     public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
         page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
     }
@@ -256,6 +269,7 @@ public class Controller {
      * @param game the game
      * @param username the fan's username
      */
+    // Should be bound to PagerControlller as Update
     public void addFanSubscriptionToGame(Game game, String username) {
         game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
     }
