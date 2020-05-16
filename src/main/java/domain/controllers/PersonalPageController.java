@@ -6,7 +6,23 @@ import domain.User;
 import java.util.ArrayList;
 
 public class PersonalPageController {
-    // =================== Page functions ===========================
+    // =================== Fan functions =================
+    // ===================================================
+    /**
+     * UC 3.2
+     * Adds a fan as a subscriber to the page
+     * @param page the profile page
+     * @param username the fan's username
+     */
+    public void addFanSubscriptionToPersonalPage(String page, String username) {
+        // TODO: get from DB
+        // PersonalPage page = DB pageName
+        // page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
+    }
+
+
+
+    // =================== Personal Pages functions =================
     // ==============================================================
 
     /**
@@ -17,10 +33,6 @@ public class PersonalPageController {
     public ArrayList<PersonalPage> getPagesByUsername(String username) {
         return User.getUserByID(username).getPages();
     }
-
-
-    // =================== Personal Pages functions =================
-    // ==============================================================
 
 
     /**
@@ -36,4 +48,6 @@ public class PersonalPageController {
         //return page.setInfo(info);
         return null;
     }
+
+
 }

@@ -2,11 +2,37 @@ package domain.controllers;
 
 import domain.*;
 
-public class AssociationAgentController {
+import java.util.ArrayList;
+
+public class LeagueController {
+
+    // =================== Guest functions ====================
+    // ========================================================
+
+    /**
+     * UC 2.4
+     * Returns the league instance that matches the league name
+     * @param leagueName the league name
+     * @return the league instance that matches the league name
+     */
+    public League getLeagueDetails(String leagueName) {
+        return League.getLeagueByName(leagueName);
+    }
+
+    /**
+     * UC 2.4
+     * Returns the leagues instances from a certain season
+     * @param year the season
+     * @return the leagues instances from the season
+     */
+    public ArrayList<League> getSeasonDetails(int year) {
+        return League.getAllLeaguesPerSeason(year);
+    }
+
+
 
     // =================== Association Agent functions ====================
     // ====================================================================
-
 
     /**
      * UC 9.1
@@ -28,30 +54,6 @@ public class AssociationAgentController {
      */
     public League updateSeasonForLeague(String leagueName, String season) {
         return League.getLeagueByName(leagueName).setSeason(Integer.parseInt(season));
-    }
-
-
-    /**
-     * UC 9.3
-     * Registers a new referee in the system
-     * @param username the referee's username
-     * @param password the referee's password
-     * @param name the referee's name
-     * @param mail the referee's mail
-     * @throws Exception if the creation was unsuccessful
-     */
-    public void createReferee(String username, String password, String name, String mail) throws Exception {
-        // this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
-        // TODO: Send invitation to referee
-    }
-
-    /**
-     * UC 9.3
-     * Removes the referee role from a referee
-     * @param username the referee's username
-     */
-    public void removeReferee(String username) {
-        User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
 
     /**
@@ -99,19 +101,5 @@ public class AssociationAgentController {
     public void scheduleGamesInLeagues(League league) {
         // Click this button after you have all the teams in league, Automatic scheduling
         league.scheduledGames();
-    }
-
-    /**
-     * UC 9.8
-     *
-     */
-    public void setRulesForBudgetControl() {
-    }
-
-    /**
-     * UC 9.9
-     *
-     */
-    public void setTeamBudget() {
     }
 }

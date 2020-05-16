@@ -23,7 +23,7 @@ public class StartController {
     }
 
 
-     // ========================= System functions =========================
+     // ========================= System functions ========================
     // ====================================================================
 
     /**
@@ -98,14 +98,6 @@ public class StartController {
 
     // =================================== General =======================================
 
-    /**
-     * Returns a team instance by its name
-     * @param teamName the team's name
-     * @return the team instance that matches the name
-     */
-    public Team getTeamByName(String teamName) {
-        return Team.getTeamByName(teamName);
-    }
 
     /**
      * Returns the list of roles of a certain user

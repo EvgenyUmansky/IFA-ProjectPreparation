@@ -10,33 +10,35 @@ import java.util.*;
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
 public class Controller {
-    AssociationAgentController associationAgentController;
     CoachController coachController;
     FanController fanController;
     GuestController guestController;
-    ManagerController managerController;
-    OwnerController ownerController;
+    SystemManagerController managerController;
     PersonalPageController personalPageController;
     PlayerController playerController;
     RefereeController refereeController;
     StartController startController;
+    private TeamController teamController;
+    private LeagueController leagueController;
+    private GameController gameController;
 
     // ========================= Constructor =========================
 
     /**
      * Constructor
      */
-    public Controller(AssociationAgentController associationAgentController, CoachController coachController, FanController fanController, GuestController guestController, ManagerController managerController, OwnerController ownerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController) {
-        this.associationAgentController = associationAgentController;
+    public Controller(CoachController coachController, FanController fanController, GuestController guestController, SystemManagerController managerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController, TeamController teamController, LeagueController leagueController, GameController gameController) {
         this.coachController = coachController;
         this.fanController = fanController;
         this.guestController = guestController;
         this.managerController = managerController;
-        this.ownerController = ownerController;
         this.personalPageController = personalPageController;
         this.playerController = playerController;
         this.refereeController = refereeController;
         this.startController = startController;
+        this.teamController = teamController;
+        this.leagueController = leagueController;
+        this.gameController = gameController;
     }
     // ========================= System functions =========================
     // ====================================================================
@@ -149,7 +151,7 @@ public class Controller {
     }
 
 
-    // ========================= Guest functions ============================
+    // ========================= Guest functions ==========================
     // ====================================================================
 
 
@@ -160,7 +162,7 @@ public class Controller {
      * @return the team instance by the team's name
      */
     public Team getTeamDetails(String teamName) {
-        return guestController.getTeamDetails(teamName);
+        return teamController.getTeamDetails(teamName);
     }
 
 
@@ -170,7 +172,7 @@ public class Controller {
      * @return the player instance by his name
      */
     public TeamPlayer getPlayersDetails(String playerName) {
-        return guestController.getPlayersDetails(playerName);
+        return playerController.getPlayersDetails(playerName);
     }
 
 
@@ -180,7 +182,7 @@ public class Controller {
      * @return the coach instance by his name
      */
     public TeamCoach getCoachDetails(String coachName) {
-        return guestController.getCoachDetails(coachName);
+        return coachController.getCoachDetails(coachName);
     }
 
 
@@ -190,7 +192,7 @@ public class Controller {
      * @return the league instance that matches the league name
      */
     public League getLeagueDetails(String leagueName) {
-        return guestController.getLeagueDetails(leagueName);
+        return leagueController.getLeagueDetails(leagueName);
     }
 
 
@@ -200,7 +202,7 @@ public class Controller {
      * @return the leagues instances from the season
      */
     public ArrayList<League> getSeasonDetails(int year) {
-        return guestController.getSeasonDetails(year);
+        return leagueController.getSeasonDetails(year);
     }
 
 
@@ -225,7 +227,7 @@ public class Controller {
      * @param username the fan's username
      */
     public void addFanSubscriptionToPersonalPage(String pageName, String username) {
-        fanController.addFanSubscriptionToPersonalPage(pageName, username);
+        personalPageController.addFanSubscriptionToPersonalPage(pageName, username);
     }
 
 
@@ -236,7 +238,7 @@ public class Controller {
      * @param username the fan's username
      */
     public void addFanSubscriptionToGame(String game, String username) {
-        fanController.addFanSubscriptionToGame(game, username);
+        gameController.addFanSubscriptionToGame(game, username);
     }
 
 
@@ -287,7 +289,7 @@ public class Controller {
         fanController.setFanProfileDetails(username, newPassword, newName, newMail);
     }
 
-    // ========================= Referee functions ============================
+    // ========================= Referee functions ========================
     // ====================================================================
 
 
@@ -323,7 +325,7 @@ public class Controller {
      * @return the list of games that the referee referees at
      */
     public ArrayList<Game> getRefereeGames(String username) {
-        return refereeController.getRefereeGames(username);
+        return gameController.getRefereeGames(username);
     }
 
 
@@ -336,8 +338,7 @@ public class Controller {
      * @throws Exception in case the addition was unsuccessful
      */
     public void addGameEventToGame(String username, String game, String gameEvent) throws Exception {
-        refereeController.addGameEventToGame(username, game, gameEvent);
-
+        gameController.addGameEventToGame(username, game, gameEvent);
     }
 
 
@@ -355,7 +356,7 @@ public class Controller {
      */
     public void changeGameEvent(String username, String game, String gameEvent, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
         // TODO: check the referee is MAIN in UI
-        refereeController.changeGameEvent(username, game, gameEvent, dateTimeStr, gameMinutes, eventName, description);
+        gameController.changeGameEvent(username, game, gameEvent, dateTimeStr, gameMinutes, eventName, description);
     }
 
 
@@ -370,7 +371,7 @@ public class Controller {
      * @return an instance of the new league
      */
     public League setLeague(String leagueName) {
-        return associationAgentController.setLeague(leagueName);
+        return leagueController.setLeague(leagueName);
     }
 
 
@@ -382,7 +383,7 @@ public class Controller {
      * @return the updated league
      */
     public League updateSeasonForLeague(String leagueName, String season) {
-        return associationAgentController.updateSeasonForLeague(leagueName, season);
+        return leagueController.updateSeasonForLeague(leagueName, season);
     }
 
 
@@ -396,7 +397,7 @@ public class Controller {
      * @throws Exception if the creation was unsuccessful
      */
     public void createReferee(String username, String password, String name, String mail) throws Exception {
-        associationAgentController.createReferee(username, password, name, mail);
+        refereeController.createReferee(username, password, name, mail);
         // TODO: Send invitation to referee
     }
 
@@ -406,7 +407,7 @@ public class Controller {
      * @param username the referee's username
      */
     public void removeReferee(String username) {
-        associationAgentController.removeReferee(username);
+        refereeController.removeReferee(username);
     }
 
     /**
@@ -759,7 +760,7 @@ public class Controller {
      * @return the team instance that matches the name
      */
     public Team getTeamByName(String teamName) {
-        return Team.getTeamByName(teamName);
+        return teamController.getTeamByName(teamName);
     }
 
     /**

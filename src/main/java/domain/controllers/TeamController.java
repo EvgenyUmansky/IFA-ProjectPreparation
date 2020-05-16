@@ -4,10 +4,23 @@ import domain.*;
 
 import java.util.HashSet;
 
-public class OwnerController {
+public class TeamController {
+    // ========================= Guest functions ============================
+    // ====================================================================
+
+    /**
+     * UC 2.4
+     * Returns the team instance by the team's name
+     * @param teamName the team's name
+     * @return the team instance by the team's name
+     */
+    public Team getTeamDetails(String teamName) {
+        return Team.getTeamByName(teamName);
+    }
+
+
     // =================== Team Owner functions ====================
     // =============================================================
-
 
     /**
      * UC 6.1
@@ -59,7 +72,6 @@ public class OwnerController {
         team.addField(Field.getFieldByName(fieldName));
     }
 
-
     /**
      * UC 6.1
      * Removes a player from the team
@@ -77,7 +89,6 @@ public class OwnerController {
         }
         team.removePlayer(player);
     }
-
 
     /**
      * UC 6.1
@@ -111,7 +122,6 @@ public class OwnerController {
         team.removeField(Field.getFieldByName(fieldName));
     }
 
-
     /**
      * UC 6.2
      * Adds a new owner to a team
@@ -130,7 +140,6 @@ public class OwnerController {
         owner.addToOwnerAppointments((TeamOwner) newOwnerUser.getRoles().get(Role.TEAM_OWNER));
         team.addOwner(ownerUser,newOwnerUser);
     }
-
 
     /**
      * UC 6.3
@@ -151,7 +160,6 @@ public class OwnerController {
         team.removeOwner(removedOwnerUser);
         removedOwnerUser.removeRoleFromUser(Role.TEAM_OWNER);
     }
-
 
     /**
      * UC 6.4
@@ -193,7 +201,6 @@ public class OwnerController {
         removedManagerUser.removeRoleFromUser(Role.TEAM_MANAGER);
     }
 
-
     /**
      * UC 6.6, 8.1
      * Closes a team
@@ -219,5 +226,47 @@ public class OwnerController {
      *
      */
     public void manageFinance(){
+    }
+
+    // =================== Team Manager functions ====================
+    // ===============================================================
+
+    /**
+     * UC 7.1
+     *
+     */
+    public void setPermissionsToManager() {
+        // UC 7.1 - set permissions to team manager
+        //responsible of Team Owner!
+    }
+
+    // =================== Association Agent functions ====================
+    // ====================================================================
+
+    /**
+     * UC 9.8
+     *
+     */
+    public void setRulesForBudgetControl() {
+    }
+
+    /**
+     * UC 9.9
+     *
+     */
+    public void setTeamBudget() {
+    }
+
+
+
+    // =================================== General =======================================
+
+    /**
+     * Returns a team instance by its name
+     * @param teamName the team's name
+     * @return the team instance that matches the name
+     */
+    public Team getTeamByName(String teamName) {
+        return Team.getTeamByName(teamName);
     }
 }
