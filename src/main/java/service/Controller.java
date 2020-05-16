@@ -10,17 +10,17 @@ import java.util.*;
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
 public class Controller {
-    CoachController coachController;
-    FanController fanController;
-    GuestController guestController;
-    SystemManagerController systemManagerController;
-    PersonalPageController personalPageController;
-    PlayerController playerController;
-    RefereeController refereeController;
-    StartController startController;
-    private TeamController teamController;
-    private LeagueController leagueController;
-    private GameController gameController;
+    private final CoachController coachController;
+    private final FanController fanController;
+    private final GuestController guestController;
+    private final SystemManagerController systemManagerController;
+    private final PersonalPageController personalPageController;
+    private final PlayerController playerController;
+    private final RefereeController refereeController;
+    private final StartController startController;
+    private final TeamController teamController;
+    private final LeagueController leagueController;
+    private final GameController gameController;
 
     // ========================= Constructor =========================
 
