@@ -10,32 +10,6 @@ public class FanController {
 
 
     /**
-     * UC 3.2
-     * Adds a fan as a subscriber to the page
-     * @param page the profile page
-     * @param username the fan's username
-     */
-    public void addFanSubscriptionToPersonalPage(String page, String username) {
-        // TODO: get from DB
-        // PersonalPage page = DB pageName
-        // page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
-    }
-
-
-    /**
-     * UC 3.3
-     * Adds a fan as a subscriber to a game
-     * @param game the game
-     * @param username the fan's username
-     */
-    public void addFanSubscriptionToGame(String game, String username) {
-        // TODO: get from DB
-        // Game game = DB game
-        // game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
-    }
-
-
-    /**
      * UC 3.4
      * Sends a complaint to the system administrators
      * @param username the user's username
