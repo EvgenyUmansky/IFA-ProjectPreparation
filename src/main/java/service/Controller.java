@@ -1,6 +1,7 @@
 package service;
 
 import domain.*;
+import domain.controllers.AuthController;
 
 import java.text.ParseException;
 import java.util.*;
@@ -16,7 +17,7 @@ public class Controller {
     private final domain.controllers.PersonalPageController personalPageController;
     private final domain.controllers.PlayerController playerController;
     private final domain.controllers.RefereeController refereeController;
-    private final domain.controllers.StartController startController;
+    private final AuthController startController;
     private final domain.controllers.TeamController teamController;
     private final domain.controllers.LeagueController leagueController;
     private final domain.controllers.GameController gameController;
@@ -34,7 +35,7 @@ public class Controller {
         this.personalPageController = new domain.controllers.PersonalPageController();
         this.playerController = new domain.controllers.PlayerController();
         this.refereeController = new domain.controllers.RefereeController();
-        this.startController = new domain.controllers.StartController();
+        this.startController = new AuthController();
         this.teamController = new domain.controllers.TeamController();
         this.leagueController = new domain.controllers.LeagueController();
         this.gameController = new domain.controllers.GameController();

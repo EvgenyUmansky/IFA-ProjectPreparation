@@ -12,19 +12,19 @@ public class PlayerController {
         controller = new domain.controllers.PlayerController();
     }
 
-    @GetMapping("/players")
+    @GetMapping("/users")
     public ArrayList<TeamPlayer> getPlayers(){
         return controller.getPlayers();
     }
 
-    // This will get pages by user in the following way: /players?username=<username>
-    @GetMapping("/players")
+    // This will get players by user in the following way: /players?username=<username>
+    @GetMapping("/users")
     public TeamPlayer getPlayersDetails(@RequestParam("username") String userName){
         return controller.getPlayersDetails(userName);
     }
 
-    // this will update (PUT request) the page who named <pageName> with the following info in body
-    @PutMapping("/players/{pageName}")
+    // this will update (PUT request) the players who named <playerName> with the following info in body
+    @PutMapping("/users/{userName}")
     public void updatePlayerDetails(@PathVariable String username, @RequestParam String playerName, @RequestParam String birthDate, @RequestParam String position, @RequestParam String squadNumber) throws ParseException {
         controller.updatePlayerDetails(username, playerName, birthDate, position, squadNumber);
     }

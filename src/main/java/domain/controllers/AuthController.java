@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
-public class StartController {
+public class AuthController {
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
@@ -18,7 +18,7 @@ public class StartController {
     /**
      * Constructor
      */
-    public StartController() {
+    public AuthController() {
         systemEvents = new LinkedList<>();
     }
 
@@ -115,7 +115,7 @@ public class StartController {
 
 
     public static void main(String[] args) {
-        StartController c = new StartController();
+        AuthController c = new AuthController();
         try {
             c.init();
         } catch (Exception e) {

@@ -20,7 +20,6 @@ public class TeamController {
     }
 
     @GetMapping("/teams")
-    // Get all teams by user -> should Add user validation
     public ArrayList<Team> getTeams(){
         return controller.getTeams();
     }

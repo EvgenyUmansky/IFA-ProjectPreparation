@@ -15,13 +15,12 @@ public class GameController {
     }
 
     @GetMapping("/games")
-    // This will get pages by referee user in the following way: /games?username=<username>
     public ArrayList<Game> getGames(){
         return controller.getGames();
     }
 
     @GetMapping("/games")
-    // This will get pages by referee user in the following way: /games?username=<username>
+    // This will get games by referee user in the following way: /games?username=<username>
     public ArrayList<Game> getRefereeGames(@RequestParam("username") String userName){
 
         return controller.getRefereeGames(userName);
@@ -58,13 +57,13 @@ public class GameController {
 //        );
     }
 
-    @PostMapping("/games/{gameId}/")
+    @PostMapping("/games/{gameId}")
     public void addFanSubscriptionToGame(String username, @PathVariable String gameId, @RequestParam String dateTimeStr, @RequestParam String gameMinutes, @RequestParam String eventName, @RequestParam String description) throws Exception {
         controller.addGameEventToGame(username, gameId, dateTimeStr, gameMinutes, eventName, description);
     }
 
-    // This will put event by referee user in the following way: /games/{gameId}?eventId=<eventId>
-    @PutMapping("/games/{gameId}/")
+    // This will update event by referee user in the following way: /games/{gameId}?eventId=<eventId>
+    @PutMapping("/games/{gameId}")
     public void changeGameEvent(String username, @PathVariable String gameId, @RequestParam("eventId") String eventId, @RequestParam String dateTimeStr, @RequestParam String gameMinutes, @RequestParam String eventName, @RequestParam String description) throws Exception {
         controller.changeGameEvent(username, gameId, eventId,  dateTimeStr, gameMinutes, eventName, description);
     }

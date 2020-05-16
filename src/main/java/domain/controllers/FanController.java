@@ -13,11 +13,12 @@ public class FanController {
      * UC 3.4
      * Sends a complaint to the system administrators
      * @param username the user's username
-     * @param sysAdmins the list of system administrators
+     * @param sysAdmin the list of system administrators
      * @param message the complaint
      */
-    public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, AlertNotification message) {
-        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
+    public void sendComplaintToSysAdmin(String username, String sysAdmin, String title, String message) {
+        SystemAdministrator admin = (SystemAdministrator) User.getUserByID(sysAdmin).getRoles().get(Role.SYSTEM_ADMIN);
+        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(new ArrayList<SystemAdministrator>(){{add(admin);}}, new AlertNotification(title, message));
     }
 
     // UC 3.5 - get history of fans searches
