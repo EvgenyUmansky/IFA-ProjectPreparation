@@ -13,7 +13,7 @@ public class Controller {
     CoachController coachController;
     FanController fanController;
     GuestController guestController;
-    SystemManagerController managerController;
+    SystemManagerController systemManagerController;
     PersonalPageController personalPageController;
     PlayerController playerController;
     RefereeController refereeController;
@@ -31,7 +31,7 @@ public class Controller {
         this.coachController = coachController;
         this.fanController = fanController;
         this.guestController = guestController;
-        this.managerController = managerController;
+        this.systemManagerController = managerController;
         this.personalPageController = personalPageController;
         this.playerController = playerController;
         this.refereeController = refereeController;
@@ -201,7 +201,7 @@ public class Controller {
      * @param year the season
      * @return the leagues instances from the season
      */
-    public ArrayList<League> getSeasonDetails(int year) {
+    public ArrayList<League> getSeasonDetails(String year) {
         return leagueController.getSeasonDetails(year);
     }
 
@@ -413,16 +413,11 @@ public class Controller {
     /**
      * UC 9.4
      * Adds a referee to a league in a specific season
-     * @param league the league
+     * @param leagueName the league
      * @param userName the referee's username
      */
-    public void addRefereeToLeaguePerSeason(League league, String userName) {
-        //This method will be shown after the user chose a referee from the list (using getReferees() method)
-
-        league.addReferee((Referee) User.getUserByID(userName).getRoles().get(Role.REFEREE));
-        Alert alert = new Alert();
-        alert.addToMailSet(User.getUserByID(userName).getRoles().get(Role.REFEREE));
-        alert.sendAlert(new AlertNotification("Invitation","MAZAL TOV! you are a referee!!"));
+    public void addRefereeToLeaguePerSeason(String leagueName, String userName) {
+        leagueController.addRefereeToLeaguePerSeason(leagueName, userName);
     }
 
     /**
@@ -431,30 +426,30 @@ public class Controller {
      * @param winP amount of points given for a win
      * @param drawP amount of points given for a draw
      * @param loseP amount of points given for a loss
-     * @param league the league
+     * @param leagueName the league
      */
-    public void setRankingMethod(int winP,int drawP,  int loseP, League league) {
-        league.getRankingMethod().setRankingMethod(winP, loseP, drawP);
+    public void setRankingMethod(String winP, String drawP, String loseP, String leagueName) {
+       leagueController.setRankingMethod(winP, drawP, loseP, leagueName);
     }
 
     /**
      * UC 9.6
      * Sets the scheduling method of teams into games in the league
-     * @param league the league
-     * @param schedulingMethod the scheduling method
+     * @param leagueName the league
+     * @param schedulingMethodName the scheduling method
      */
-    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod) {
-        league.setSchedulingMethod(schedulingMethod);
+    public void setSchedulingMethod(String leagueName, String schedulingMethodName) {
+        leagueController.setSchedulingMethod(leagueName, schedulingMethodName);
     }
 
     /**
      * UC 9.7
      * schedules teams into games in a league
-     * @param league the league
+     * @param leagueName the league
      */
-    public void scheduleGamesInLeagues(League league) {
+    public void scheduleGamesInLeagues(String leagueName) {
     // Click this button after you have all the teams in league, Automatic scheduling
-        league.scheduledGames();
+        leagueController.scheduleGamesInLeagues(leagueName);
     }
 
     /**
@@ -462,6 +457,7 @@ public class Controller {
      *
      */
     public void setRulesForBudgetControl() {
+        teamController.setRulesForBudgetControl();
     }
 
     /**
@@ -469,6 +465,7 @@ public class Controller {
      *
      */
     public void setTeamBudget() {
+        teamController.setTeamBudget();
     }
 
     //
@@ -479,123 +476,82 @@ public class Controller {
     /**
      * UC 6.1
      * Adds a player to a team
-     * @param team the team
+     * @param teamName the team
      * @param userName the player's username
      * @throws Exception if the addition was unsuccessful
      */
-    public void addPlayer(Team team, String userName) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        TeamPlayer player = (TeamPlayer)(User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
-        if(player == null){
-            throw new Exception("This user is not a player");
-        }
-        team.addPlayer(player);
+    public void addPlayer(String teamName, String userName) throws Exception {
+        teamController.addPlayer(teamName, userName);
     }
 
     /**
      * UC 6.1
      * Adds a coach to a team
-     * @param team the team
+     * @param teamName the team
      * @param userName the coach's username
      * @throws Exception if the addition was unsuccessful
      */
-    public void addCoach(Team team, String userName) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        TeamCoach coach = (TeamCoach)(User.getUserByID(userName).getRoles().get(Role.COACH));
-        if(coach == null){
-            throw new Exception("This user is not a coach");
-        }
-        team.addCoach(coach);
+    public void addCoach(String teamName, String userName) throws Exception {
+        teamController.addCoach(teamName, userName);
     }
 
     /**
      * UC 6.1
      * Adds a field to a team
-     * @param team the team
+     * @param teamName the team
      * @param fieldName the field's name
      * @throws Exception if the addition was unsuccessful
      */
-    public void addField(Team team, String fieldName) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        team.addField(Field.getFieldByName(fieldName));
+    public void addField(String teamName, String fieldName) throws Exception {
+        teamController.addField(teamName, fieldName);
     }
 
 
     /**
      * UC 6.1
      * Removes a player from the team
-     * @param team the team
+     * @param teamName the team
      * @param userName the player's username
      * @throws Exception if the removal was unsuccessful
      */
-    public void removePlayer(Team team, String userName) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        TeamPlayer player = (TeamPlayer)(User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
-        if(player == null){
-            throw new Exception("This user is not a player");
-        }
-        team.removePlayer(player);
+    public void removePlayer(String teamName, String userName) throws Exception {
+        teamController.removePlayer(teamName, userName);
     }
 
 
     /**
      * UC 6.1
      * Removes a coach from the team
-     * @param team the team
+     * @param teamName the team
      * @param userName the coach's username
      * @throws Exception if the removal was unsuccessful
      */
-    public void removeCoach(Team team, String userName) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        TeamCoach coach = (TeamCoach)(User.getUserByID(userName).getRoles().get(Role.COACH));
-        if(coach == null){
-            throw new Exception("This user is not a coach");
-        }
-        team.removeCoach(coach);
+    public void removeCoach(String teamName, String userName) throws Exception {
+        teamController.removeCoach(teamName, userName);
     }
 
     /**
      * UC 6.1
      * Removes a field from the team
-     * @param team the team
+     * @param teamName the team
      * @param fieldName the field's name
      * @throws Exception if the removal was unsuccessful
      */
-    public void removeField(Team team, String fieldName) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        team.removeField(Field.getFieldByName(fieldName));
+    public void removeField(String teamName, String fieldName) throws Exception {
+        teamController.removeField(teamName, fieldName);
     }
 
 
     /**
      * UC 6.2
      * Adds a new owner to a team
-     * @param team the team
+     * @param teamName the team
      * @param userNameNewTeamOwner the username of the new owner
      * @param userNameTeamOwner the username of the owner that appoints the new one
      * @throws Exception if the appointment was unsuccessful
      */
-    public void addOwner(Team team, String userNameNewTeamOwner, String userNameTeamOwner) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        User ownerUser = User.getUserByID(userNameTeamOwner), newOwnerUser = User.getUserByID(userNameNewTeamOwner);
-        TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
-        newOwnerUser.getRoles().put(Role.TEAM_OWNER, new TeamOwner(userNameNewTeamOwner, newOwnerUser.getMail(), team, new HashSet<>()));
-        owner.addToOwnerAppointments((TeamOwner) newOwnerUser.getRoles().get(Role.TEAM_OWNER));
-        team.addOwner(ownerUser,newOwnerUser);
+    public void addOwner(String teamName, String userNameNewTeamOwner, String userNameTeamOwner) throws Exception {
+        teamController.addOwner(teamName, userNameNewTeamOwner, userNameTeamOwner);
     }
 
 
@@ -603,61 +559,39 @@ public class Controller {
      * UC 6.3
      * Removes an owner from the team.
      * This operation is possible only if the removed owner was appointed by the removing owner
-     * @param team the team
+     * @param teamName the team
      * @param userNameTeamOwner the owner that removes
      * @param userNameRemovedTeamOwner the owner that is being removed
      * @throws Exception if the removal was unsuccessful
      */
-    public void removeOwner(Team team, String userNameTeamOwner, String userNameRemovedTeamOwner) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        User ownerUser = User.getUserByID(userNameTeamOwner), removedOwnerUser = User.getUserByID(userNameRemovedTeamOwner);
-        TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER), removedOwner = (TeamOwner)removedOwnerUser.getRoles().get(Role.TEAM_OWNER);
-        owner.removeFromOwnerAppointments(removedOwner);
-        team.removeOwner(removedOwnerUser);
-        removedOwnerUser.removeRoleFromUser(Role.TEAM_OWNER);
+    public void removeOwner(String teamName, String userNameTeamOwner, String userNameRemovedTeamOwner) throws Exception {
+        teamController.removeOwner(teamName, userNameTeamOwner, userNameRemovedTeamOwner);
     }
 
 
     /**
      * UC 6.4
      * Adds a team manager to the team
-     * @param team the team
+     * @param teamName the team
      * @param userNameNewTeamManager the new manager
      * @param userNameTeamOwner the owner
      * @throws Exception if the addition was unsuccessful
      */
-    public void addManager(Team team, String userNameNewTeamManager, String userNameTeamOwner) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        User ownerUser = User.getUserByID(userNameTeamOwner), newManagerUser = User.getUserByID(userNameNewTeamManager);
-        TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
-        newManagerUser.getRoles().put(Role.TEAM_MANAGER,new TeamManager(userNameNewTeamManager, newManagerUser.getMail()));
-        owner.addToManagerAppointments((TeamManager) newManagerUser.getRoles().get(Role.TEAM_MANAGER));
-        team.addManager(ownerUser,newManagerUser);
+    public void addManager(String teamName, String userNameNewTeamManager, String userNameTeamOwner) throws Exception {
+        teamController.addManager(teamName, userNameTeamOwner, userNameTeamOwner);
     }
 
     /**
      * UC 6.5
      * Removes a manager from the team.
      * This operation is possible only if the removed manager was appointed by the removing owner
-     * @param team the team
+     * @param teamName the team
      * @param userNameTeamOwner the owner that removes
      * @param userNameRemovedTeamManager the manager that is being removed
      * @throws Exception if the removal was unsuccessful
      */
-    public void removeManager(Team team, String userNameRemovedTeamManager, String userNameTeamOwner) throws Exception {
-        if(team.getTeamStatus() != TeamStatus.Open){
-            throw new Exception("This team is currently closed");
-        }
-        User ownerUser = User.getUserByID(userNameTeamOwner), removedManagerUser = User.getUserByID(userNameRemovedTeamManager);
-        TeamOwner owner = (TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER);
-        TeamManager manager = (TeamManager)removedManagerUser.getRoles().get(Role.TEAM_MANAGER);
-        owner.removeFromManagerAppointments(manager);
-        team.removeManager(removedManagerUser);
-        removedManagerUser.removeRoleFromUser(Role.TEAM_MANAGER);
+    public void removeManager(String teamName, String userNameRemovedTeamManager, String userNameTeamOwner) throws Exception {
+        teamController.removeManager(teamName, userNameTeamOwner, userNameTeamOwner);
     }
 
 
@@ -665,19 +599,19 @@ public class Controller {
      * UC 6.6, 8.1
      * Closes a team
      * @param userName the username of the user that closes the team
-     * @param team the team
+     * @param teamName the team
      */
-    public void closeTeam(String userName, Team team) {
-        team.closeTeam(User.getUserByID(userName));
+    public void closeTeam(String userName, String teamName) {
+        teamController.closeTeam(userName, teamName);
     }
 
     /**
      * UC 6.6
      * Reopens a team
-     * @param team the team
+     * @param teamName the team
      */
-    public void openTeam(Team team) {
-        team.openTeam();
+    public void openTeam(String teamName) {
+        teamController.openTeam(teamName);
     }
 
 
@@ -712,7 +646,7 @@ public class Controller {
      * @param userName the removed user's username
      */
     public void removeUserFromSystem(String userName) {
-        User.getUserByID(userName).closeUser();
+        systemManagerController.removeUserFromSystem(userName);
     }
 
 
@@ -722,6 +656,7 @@ public class Controller {
      */
     public void showComplain() {
         // UC 8.3A - show Complaint
+        systemManagerController.showComplain();
     }
 
 
@@ -731,6 +666,7 @@ public class Controller {
      */
     public void commentToComplaint() {
         // UC 8.3B - add comment to complaint
+        systemManagerController.commentToComplaint();
     }
 
 
@@ -740,6 +676,7 @@ public class Controller {
      */
     public void showLogDocument() {
         // UC 8.4 - show log document
+        systemManagerController.showLogDocument();
     }
 
 
@@ -749,6 +686,7 @@ public class Controller {
      */
     public void startModelRecommendationSystem() {
         // UC 8.5 - start model of recommendation Systems
+        systemManagerController.startModelRecommendationSystem();
     }
 
 
@@ -770,11 +708,7 @@ public class Controller {
      * @throws Exception if the user doesn't exist
      */
     public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
-        User user = User.getUserByID(userName);
-        if (user == null) {
-            throw new Exception("User does not exist");
-        }
-        return user.getRoles();
+        return startController.getUserRoles(userName);
     }
 
 
@@ -783,13 +717,7 @@ public class Controller {
      * TEST function - SHOULD BE IMPLEMENTED IN UI
      */
     public User showLoginPanel() throws Exception {
-        Scanner getInput = new Scanner(System.in);
-        System.out.println("Please Login to system");
-        System.out.println("Username: ");
-        String userName = getInput.nextLine();
-        System.out.println("Password: ");
-        String password = getInput.nextLine();
-        return this.login(userName, password);
+        return startController.showLoginPanel();
     }
 
 
@@ -798,18 +726,7 @@ public class Controller {
      */
     public void runSystem() throws Exception {
         // Load test Data (Use mock)
-        User connectedUser = showLoginPanel();
-//        while (connectedUser.isConnected()) {
-//            System.out.println("Please choose the role you wanna use now:");
-//            HashMap<Role, Subscriber> roles = connectedUser.getRoles();
-//            for(int i = 1; i <= roles.keySet().size(); i++){
-//                System.out.println("[" + i + "] " + roles.keySet().toArray()[i-1]);
-//            }
-//
-//            Role role = (Role) roles.keySet().toArray()[getInput.nextInt() - 1];
-//            Subscriber sub = roles.get(role);
-//
-//        }
+        startController.runSystem();
     }
 
 
@@ -820,11 +737,6 @@ public class Controller {
      */
     public void init() throws Exception {
         // TODO: Create DB if not exist -> Later
-        this.connectToExternalSystems();
-        HashMap<String, User> admin = User.getUsersByRole(Role.SYSTEM_ADMIN);
-        if (admin == null) {
-            User newUser = this.register("admin", "admin1234", "admin", "admin@ifa.com");
-            newUser.addRoleToUser(Role.SYSTEM_ADMIN, new SystemAdministrator(newUser.getUserName(), newUser.getMail()));
-        }
+        startController.init();
     }
 }

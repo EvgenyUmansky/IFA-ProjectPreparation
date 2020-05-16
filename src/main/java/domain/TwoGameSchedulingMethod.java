@@ -7,6 +7,7 @@ import java.util.List;
  * Represents a matches scheduling method by playing each team twice in a season against any of the other teams in the league
  */
 public class TwoGameSchedulingMethod implements SchedulingMethod{
+    String schedulingMethodName = "TwoGameSchedulingMethod";
 
     /**
      * leagueTeams[i] = first Team |  leagueTeams[j] = second Team
@@ -30,5 +31,9 @@ public class TwoGameSchedulingMethod implements SchedulingMethod{
             }
         }
         return gamesList;
+    }
+
+    public String getSchedulingMethodName() {
+        return schedulingMethodName;
     }
 }

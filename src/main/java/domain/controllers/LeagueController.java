@@ -25,8 +25,8 @@ public class LeagueController {
      * @param year the season
      * @return the leagues instances from the season
      */
-    public ArrayList<League> getSeasonDetails(int year) {
-        return League.getAllLeaguesPerSeason(year);
+    public ArrayList<League> getSeasonDetails(String year) {
+        return League.getAllLeaguesPerSeason(Integer.parseInt(year));
     }
 
 
@@ -59,16 +59,19 @@ public class LeagueController {
     /**
      * UC 9.4
      * Adds a referee to a league in a specific season
-     * @param league the league
+     * @param leagueName the league
      * @param userName the referee's username
      */
-    public void addRefereeToLeaguePerSeason(League league, String userName) {
+    public void addRefereeToLeaguePerSeason(String leagueName, String userName) {
         //This method will be shown after the user chose a referee from the list (using getReferees() method)
 
-        league.addReferee((Referee) User.getUserByID(userName).getRoles().get(Role.REFEREE));
-        Alert alert = new Alert();
-        alert.addToMailSet(User.getUserByID(userName).getRoles().get(Role.REFEREE));
-        alert.sendAlert(new AlertNotification("Invitation","MAZAL TOV! you are a referee!!"));
+        // TODO: get league
+        // League league = get from DB by leagueName
+        // league.addReferee((Referee) User.getUserByID(userName).getRoles().get(Role.REFEREE));
+
+//        Alert alert = new Alert();
+//        alert.addToMailSet(User.getUserByID(userName).getRoles().get(Role.REFEREE));
+//        alert.sendAlert(new AlertNotification("Invitation","MAZAL TOV! you are a referee!!"));
     }
 
     /**
@@ -79,27 +82,41 @@ public class LeagueController {
      * @param loseP amount of points given for a loss
      * @param league the league
      */
-    public void setRankingMethod(int winP,int drawP,  int loseP, League league) {
-        league.getRankingMethod().setRankingMethod(winP, loseP, drawP);
+    public void setRankingMethod(String winP, String drawP, String loseP, String league) {
+        // TODO: get league
+        // League league = get from DB by leagueName
+        // league.getRankingMethod().setRankingMethod(Integer.parseInt(winP), Integer.parseInt(loseP), Integer.parseInt(drawP));
     }
 
     /**
      * UC 9.6
      * Sets the scheduling method of teams into games in the league
      * @param league the league
-     * @param schedulingMethod the scheduling method
+     * @param schedulingMethodName the scheduling method
      */
-    public void setSchedulingMethod(League league, SchedulingMethod schedulingMethod) {
-        league.setSchedulingMethod(schedulingMethod);
+    public void setSchedulingMethod(String league, String schedulingMethodName) {
+        SchedulingMethod schedulingMethod;
+        switch(schedulingMethodName) {
+            case "OneGameSchedulingMethod":
+                 schedulingMethod = new OneGameSchedulingMethod();
+            case "TwoGameSchedulingMethod":
+                schedulingMethod = new TwoGameSchedulingMethod();
+            default:
+                return;
+        }
+        // TODO: get league
+        // League league = get from DB by leagueName
+        // league.setSchedulingMethod(schedulingMethod);
     }
 
     /**
      * UC 9.7
      * schedules teams into games in a league
-     * @param league the league
+     * @param leagueName the league
      */
-    public void scheduleGamesInLeagues(League league) {
+    public void scheduleGamesInLeagues(String leagueName) {
         // Click this button after you have all the teams in league, Automatic scheduling
-        league.scheduledGames();
+        // League league = get from DB by leagueName
+        // league.scheduledGames();
     }
 }
