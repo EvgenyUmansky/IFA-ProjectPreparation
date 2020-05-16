@@ -2,18 +2,7 @@ package domain.controllers;
 
 import domain.User;
 
-public class ManagerController {
-    // =================== Team Manager functions ====================
-    // ===============================================================
-
-    /**
-     * UC 7.1
-     *
-     */
-    public void setPermissionsToManager() {
-        // UC 7.1 - set permissions to team manager
-        //responsible of Team Owner!
-    }
+public class SystemManagerController {
 
 
     // =================== System Manager functions ====================

@@ -5,9 +5,22 @@ import domain.TeamCoach;
 import domain.User;
 
 public class CoachController {
-    // ======================= Coach functions ============================
-    // ====================================================================
+    // ========================= Guest functions ========================
+    // ==================================================================
 
+    /**
+     * UC 2.4
+     * Returns the coach instance by his name
+     * @param coachName the player's name
+     * @return the coach instance by his name
+     */
+    public TeamCoach getCoachDetails(String coachName) {
+        return TeamCoach.getCoachByName(coachName);
+    }
+
+
+    // ========================= Coach functions ========================
+    // ==================================================================
 
     /**
      * UC 5.1

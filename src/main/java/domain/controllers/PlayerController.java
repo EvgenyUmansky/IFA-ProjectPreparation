@@ -9,6 +9,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PlayerController {
+    // ========================= Guest functions ==========================
+    // ====================================================================
+
+    /**
+     * UC 2.4
+     * Returns the player instance by his name
+     * @param playerName the player's name
+     * @return the player instance by his name
+     */
+    public TeamPlayer getPlayersDetails(String playerName) {
+        return TeamPlayer.getPlayerByName(playerName);
+    }
+
+
+
     // =================== Team Player functions ====================
     // ==============================================================
 
