@@ -2,6 +2,7 @@ package service;
 
 import domain.*;
 import domain.controllers.*;
+import domain.controllers.GameController;
 
 import java.text.ParseException;
 import java.util.*;
@@ -10,28 +11,28 @@ import java.util.*;
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
 public class Controller {
-    private final CoachController coachController;
-    private final FanController fanController;
-    private final GuestController guestController;
-    private final SystemManagerController systemManagerController;
-    private final PersonalPageController personalPageController;
-    private final PlayerController playerController;
-    private final RefereeController refereeController;
-    private final StartController startController;
-    private final TeamController teamController;
-    private final LeagueController leagueController;
-    private final GameController gameController;
+    private final domain.controllers.CoachController coachController;
+    private final domain.controllers.FanController fanController;
+    private final domain.controllers.GuestController guestController;
+    private final domain.controllers.SystemManagerController systemManagerController;
+    private final domain.controllers.PersonalPageController personalPageController;
+    private final domain.controllers.PlayerController playerController;
+    private final domain.controllers.RefereeController refereeController;
+    private final domain.controllers.StartController startController;
+    private final domain.controllers.TeamController teamController;
+    private final domain.controllers.LeagueController leagueController;
+    private final domain.controllers.GameController gameController;
 
     // ========================= Constructor =========================
 
     /**
      * Constructor
      */
-    public Controller(CoachController coachController, FanController fanController, GuestController guestController, SystemManagerController managerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController, TeamController teamController, LeagueController leagueController, GameController gameController) {
+    public Controller(CoachController coachController, FanController fanController, GuestController guestController, SystemManagerController systemManagerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController, TeamController teamController, LeagueController leagueController, GameController gameController) {
         this.coachController = coachController;
         this.fanController = fanController;
         this.guestController = guestController;
-        this.systemManagerController = managerController;
+        this.systemManagerController = systemManagerController;
         this.personalPageController = personalPageController;
         this.playerController = playerController;
         this.refereeController = refereeController;
@@ -59,7 +60,6 @@ public class Controller {
      * @param password the user's password
      * @return the user's instance
      */
-    // Should be bound to AuthController
     public User login(String userName, String password) throws Exception {
         return startController.login(userName, password);
     }
@@ -69,7 +69,6 @@ public class Controller {
      * Disconnects a user from the system
      * @param userName the user's username
      */
-    // Should be bound to AuthController
     public void logout(String userName) {
         startController.logout(userName);
     }
@@ -84,7 +83,6 @@ public class Controller {
      * @return the new user instance
      * @throws Exception if the registration was unsuccessful
      */
-    // Should be bound to AuthController
     public User register(String userName, String password, String name, String mail) throws Exception {
         return startController.register(userName, password, name, mail);
     }
@@ -98,7 +96,6 @@ public class Controller {
      * @param username the user's username
      * @return the list of pages he has permissions to
      */
-    // Should be bound to PagerController
     public ArrayList<PersonalPage> getPagesByUsername(String username) {
         return personalPageController.getPagesByUsername(username);
     }
@@ -115,9 +112,8 @@ public class Controller {
      * @param info the updated info
      * @return the updated page
      */
-    // Should be bound to PagerController
-    public PersonalPage updateInfo(PersonalPage page, String info){
-        return page.setInfo(info);
+    public PersonalPage updateInfo(String pageName, String info){
+        return personalPageController.updateInfo(pageName, info);
     }
 
 
@@ -134,14 +130,8 @@ public class Controller {
      * @param position the player's position
      * @param squadNumber the player's shirt number
      */
-    // Should be bound to PagerController
-    public void updatePlayerDetails(String username, String playerName, Date birthDate, String position, String squadNumber) {
-        User playerUser = User.getUserByID(username);
-        if(playerName!=null){
-            playerUser.setName(playerName);
-        }
-        ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(birthDate,position,squadNumber);
-
+    public void updatePlayerDetails(String username, String playerName, String birthDate, String position, String squadNumber) throws ParseException {
+        playerController.updatePlayerDetails(username, playerName, birthDate, position, squadNumber);
     }
 
 
@@ -157,7 +147,6 @@ public class Controller {
      * @param qualification the coach's qualification
      * @param role the coach's role
      */
-    // Should be bound to PagerController
     public void updateCoachDetails(String username, String coachName, String qualification, String role) {
         coachController.updateCoachDetails(username, coachName, qualification, role);
     }
@@ -173,7 +162,6 @@ public class Controller {
      * @param teamName the team's name
      * @return the team instance by the team's name
      */
-    // Should be bound to TeamsController
     public Team getTeamDetails(String teamName) {
         return teamController.getTeamDetails(teamName);
     }
@@ -184,7 +172,6 @@ public class Controller {
      * @param playerName the player's name
      * @return the player instance by his name
      */
-    // Should be bound to PlayerController
     public TeamPlayer getPlayersDetails(String playerName) {
         return playerController.getPlayersDetails(playerName);
     }
@@ -195,7 +182,6 @@ public class Controller {
      * @param coachName the player's name
      * @return the coach instance by his name
      */
-    // Should be bound to Coach..?Controlller
     public TeamCoach getCoachDetails(String coachName) {
         return coachController.getCoachDetails(coachName);
     }
@@ -206,7 +192,6 @@ public class Controller {
      * @param leagueName the league name
      * @return the league instance that matches the league name
      */
-    // Should be bound to LeagueControlller
     public League getLeagueDetails(String leagueName) {
         return leagueController.getLeagueDetails(leagueName);
     }
@@ -217,9 +202,8 @@ public class Controller {
      * @param year the season
      * @return the leagues instances from the season
      */
-    // Should be bound to SeasonControlller
-    public ArrayList<League> getSeasonDetails(int year) {
-        return guestController.getSeasonDetails(year);
+    public ArrayList<League> getSeasonDetails(String year) {
+        return leagueController.getSeasonDetails(year);
     }
 
 
@@ -243,9 +227,8 @@ public class Controller {
      * @param pageName the profile page
      * @param username the fan's username
      */
-    // Should be bound to PagerControlller as Update
-    public void addFanSubscriptionToPersonalPage(PersonalPage page, String username) {
-        page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
+    public void addFanSubscriptionToPersonalPage(String pageName, String username) {
+        personalPageController.addFanSubscriptionToPersonalPage(pageName, username);
     }
 
 
@@ -255,9 +238,8 @@ public class Controller {
      * @param game the game
      * @param username the fan's username
      */
-    // Should be bound to PagerControlller as Update
-    public void addFanSubscriptionToGame(Game game, String username) {
-        game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
+    public void addFanSubscriptionToGame(String game, String username) {
+        gameController.addFanSubscriptionToGame(game, username);
     }
 
 
@@ -448,7 +430,7 @@ public class Controller {
      * @param leagueName the league
      */
     public void setRankingMethod(String winP, String drawP, String loseP, String leagueName) {
-       leagueController.setRankingMethod(winP, drawP, loseP, leagueName);
+        leagueController.setRankingMethod(winP, drawP, loseP, leagueName);
     }
 
     /**
@@ -467,7 +449,7 @@ public class Controller {
      * @param leagueName the league
      */
     public void scheduleGamesInLeagues(String leagueName) {
-    // Click this button after you have all the teams in league, Automatic scheduling
+        // Click this button after you have all the teams in league, Automatic scheduling
         leagueController.scheduleGamesInLeagues(leagueName);
     }
 
