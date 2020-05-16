@@ -6,6 +6,12 @@ import domain.User;
 import java.util.ArrayList;
 
 public class PersonalPageController {
+
+    public ArrayList<PersonalPage> getPages() {
+        // TODO: all personal pages
+        return null;
+    }
+
     // =================== Fan functions =================
     // ===================================================
     /**
@@ -42,12 +48,11 @@ public class PersonalPageController {
      * @param info the updated info
      * @return the updated page
      */
-    public PersonalPage updateInfo(String pageName, String info){
+    public PersonalPage updatePageInfo(String pageName, String info){
         // TODO: get from DB
         //PersonalPage page = get from DB
         //return page.setInfo(info);
         return null;
     }
-
 
 }

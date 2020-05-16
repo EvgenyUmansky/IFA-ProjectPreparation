@@ -1,8 +1,6 @@
 package service;
 
 import domain.*;
-import domain.controllers.*;
-import domain.controllers.GameController;
 
 import java.text.ParseException;
 import java.util.*;
@@ -28,18 +26,18 @@ public class Controller {
     /**
      * Constructor
      */
-    public Controller(CoachController coachController, FanController fanController, GuestController guestController, SystemManagerController systemManagerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController, TeamController teamController, LeagueController leagueController, GameController gameController) {
-        this.coachController = coachController;
-        this.fanController = fanController;
-        this.guestController = guestController;
-        this.systemManagerController = systemManagerController;
-        this.personalPageController = personalPageController;
-        this.playerController = playerController;
-        this.refereeController = refereeController;
-        this.startController = startController;
-        this.teamController = teamController;
-        this.leagueController = leagueController;
-        this.gameController = gameController;
+    public Controller() {
+        this.coachController = new domain.controllers.CoachController();
+        this.fanController = new domain.controllers.FanController();
+        this.guestController = new domain.controllers.GuestController();
+        this.systemManagerController = new domain.controllers.SystemManagerController();
+        this.personalPageController = new domain.controllers.PersonalPageController();
+        this.playerController = new domain.controllers.PlayerController();
+        this.refereeController = new domain.controllers.RefereeController();
+        this.startController = new domain.controllers.StartController();
+        this.teamController = new domain.controllers.TeamController();
+        this.leagueController = new domain.controllers.LeagueController();
+        this.gameController = new domain.controllers.GameController();
     }
     // ========================= System functions =========================
     // ====================================================================
@@ -113,7 +111,7 @@ public class Controller {
      * @return the updated page
      */
     public PersonalPage updateInfo(String pageName, String info){
-        return personalPageController.updateInfo(pageName, info);
+        return personalPageController.updatePageInfo(pageName, info);
     }
 
 
@@ -334,12 +332,12 @@ public class Controller {
      * UC 10.3
      * Adds an event that took place during a game to its events list
      * @param username the referee's username
-     * @param game the match
-     * @param gameEvent the event
+     * @param gameId the match
+     *
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String username, String game, String gameEvent) throws Exception {
-        gameController.addGameEventToGame(username, game, gameEvent);
+    public void addGameEventToGame(String username, String gameId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
+        gameController.addGameEventToGame(username, gameId, dateTimeStr, gameMinutes, eventName, description);
     }
 
 
