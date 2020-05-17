@@ -1,9 +1,6 @@
 package service;
 
-import domain.PersonalPage;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 public class RefereeController {
     private final domain.controllers.RefereeController controller;

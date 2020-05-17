@@ -1,10 +1,7 @@
 package service;
 
-import domain.League;
 import domain.TeamCoach;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 public class CoachController {
     private final domain.controllers.CoachController controller;
