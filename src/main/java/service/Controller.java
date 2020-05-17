@@ -2,6 +2,7 @@ package service;
 
 import domain.*;
 import domain.controllers.AuthController;
+import domain.controllers.SystemAdministratorController;
 
 import java.text.ParseException;
 import java.util.*;
@@ -13,7 +14,7 @@ public class Controller {
     private final domain.controllers.CoachController coachController;
     private final domain.controllers.FanController fanController;
     private final domain.controllers.GuestController guestController;
-    private final domain.controllers.SystemManagerController systemManagerController;
+    private final SystemAdministratorController systemManagerController;
     private final domain.controllers.PersonalPageController personalPageController;
     private final domain.controllers.PlayerController playerController;
     private final domain.controllers.RefereeController refereeController;
@@ -31,7 +32,7 @@ public class Controller {
         this.coachController = new domain.controllers.CoachController();
         this.fanController = new domain.controllers.FanController();
         this.guestController = new domain.controllers.GuestController();
-        this.systemManagerController = new domain.controllers.SystemManagerController();
+        this.systemManagerController = new SystemAdministratorController();
         this.personalPageController = new domain.controllers.PersonalPageController();
         this.playerController = new domain.controllers.PlayerController();
         this.refereeController = new domain.controllers.RefereeController();
@@ -212,7 +213,7 @@ public class Controller {
      * @param words
      */
     public void searchByKeyWord(String words) {
-        guestController.searchByKeyWord(words);
+        guestController.searchByKeyTerm(words);
     }
 
 
