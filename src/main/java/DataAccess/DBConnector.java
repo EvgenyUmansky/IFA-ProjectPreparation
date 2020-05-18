@@ -29,14 +29,10 @@ public class DBConnector {
     public static Connection getConnection() {
         try {
             Class.forName(className);
-            Connection conn = DriverManager.getConnection(URL, USER, PASS);
-
-            return conn;
-        } catch (SQLException ex) {
-            throw new RuntimeException("Error connecting to the database FootBallDB", ex);
+            return DriverManager.getConnection(URL, USER, PASS);
         }
-        catch (ClassNotFoundException a){
-            throw new RuntimeException("Error connecting to the database FootBallDB", a);
+        catch (SQLException | ClassNotFoundException ex) {
+            throw new RuntimeException("Error connecting to the database FootBallDB", ex);
         }
     }
 }

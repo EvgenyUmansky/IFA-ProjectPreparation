@@ -1,31 +1,32 @@
 package domain;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
 
     User user;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         user = new User("username","1234","user","user@gmail.com");
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() {
         user = null;
     }
 
     @Test
     public void addRoleToUser(){
-        assertTrue(user.getRoles().size() == 1);
+        assertEquals(1, user.getRoles().size());
         user.addRoleToUser(Role.REFEREE);
         user.addRoleToUser(Role.TEAM_MANAGER);
         assertEquals(3,user.getRoles().size());
@@ -34,10 +35,10 @@ public class UserTest {
     @Test
     public void removeRoleFromUser(){
         user.addRoleToUser(Role.REFEREE);
-        assertTrue(user.getRoles().size() == 2);
+        assertEquals(2, user.getRoles().size());
 
         user.removeRoleFromUser(Role.REFEREE);
-        assertTrue(user.getRoles().size() == 1);
+        assertEquals(1, user.getRoles().size());
         assertFalse(user.getRoles().containsKey(Role.REFEREE));
     }
 
@@ -71,7 +72,7 @@ public class UserTest {
         user.connect();
         assertTrue(user.isConnected());
         user.disconnect();
-        assertTrue(!user.isConnected());
+        assertFalse(user.isConnected());
     }
 
     @Test
@@ -80,16 +81,16 @@ public class UserTest {
         roles.put(Role.FAN,new Fan("fantastic","a@gmail.com"));
         user.setRoles(roles);
 
-        assertTrue(roles == user.getRoles());
+        assertSame(roles, user.getRoles());
     }
 
     @Test
     public void setClosed(){
-        assertTrue(!user.isClosed());
+        assertFalse(user.isClosed());
         user.setClosed(true);
         assertTrue(user.isClosed());
         user.setClosed(false);
-        assertTrue(!user.isClosed());
+        assertFalse(user.isClosed());
     }
 
     @Test

@@ -1,20 +1,20 @@
 package domain;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class SystemEventTest {
     SystemEvent systemEvent;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         systemEvent = new SystemEvent("hi system");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         systemEvent = null;
     }

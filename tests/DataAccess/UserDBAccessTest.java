@@ -1,9 +1,9 @@
 package DataAccess;
 
 import domain.User;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UserDBAccessTest {
     User user;
@@ -22,8 +22,6 @@ public class UserDBAccessTest {
 
     @Test
     public void save() {
-        user = new User("UserName_1", "Name_1", "Password_1", "TestMail@gmail.com");
-        userDBAccess = UserDBAccess.getInstance();
         userDBAccess.save(user);
     }
 
