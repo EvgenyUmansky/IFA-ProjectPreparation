@@ -59,8 +59,13 @@ public class UserDBAccess implements DBAccess<User> {
 
     @Override
     public void update(User user) {
+        if(user == null){
+            System.out.println("Couldn't execute 'update(User user)' in UserDBAccess: the user is null");
+            return;
+        }
+
         String query = "update [User] " +
-                "set Name = ?, Password = ?, Email = ?, Activated = ?" +
+                "set Name = ?, Password = ?, Email = ?, Activated = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -94,6 +99,11 @@ public class UserDBAccess implements DBAccess<User> {
 
     @Override
     public void delete(User user) {
+        if(user == null){
+            System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess: the user is null");
+            return;
+        }
+
         String query = "delete from [User] where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
