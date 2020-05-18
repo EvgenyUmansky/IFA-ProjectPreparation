@@ -1,12 +1,7 @@
 package DataAccess;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import domain.Role;
-import domain.Subscriber;
 import domain.User;
 
 import java.sql.*;
-import java.util.HashSet;
 
 
 public class UserDBAccess implements DBAccess<User> {
@@ -22,15 +17,20 @@ public class UserDBAccess implements DBAccess<User> {
         return instance;
     }
 
-
     @Override
     public void save(User user) {
+        if(user == null){
+            System.out.println("Couldn't execute 'save(User user)' in UserDBAccess: the user is null");
+            return;
+        }
+
         Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
         String query = "insert into [User] values (?, ?, ?, ?, ?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,user.getUserName());
             statement.setString(2,user.getName());
             statement.setString(3,user.getPassword());
@@ -38,22 +38,35 @@ public class UserDBAccess implements DBAccess<User> {
             statement.setBoolean(5,user.isClosed());
 
             statement.executeUpdate();
+            connection.commit();
         }
         catch (SQLException | NullPointerException e){
-            System.out.println("Couldn't execute");
+            System.out.println("Couldn't execute 'save(User user)' in UserDBAccess for " + user.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'save(User user)' in UserDBAccess for " + user.getUserName());
+            }
         }
     }
 
 
     @Override
     public void update(User user) {
-        String query = "update User " +
+        String query = "update [User] " +
                 "set Name = ?, Password = ?, Email = ?, Activated = ?" +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
 
         try{
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,user.getName());
             statement.setString(2,user.getPassword());
             statement.setString(3,user.getMail());
@@ -61,24 +74,50 @@ public class UserDBAccess implements DBAccess<User> {
             statement.setString(5,user.getUserName());
 
             statement.executeUpdate();
+            connection.commit();
         }
         catch(SQLException e){
-
+            System.out.println("Couldn't execute 'update(User user)' in UserDBAccess for " + user.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'update(User user)' in UserDBAccess for " + user.getUserName());
+            }
         }
     }
 
     @Override
     public void delete(User user) {
-        String query = "delete from User where username = ?";
+        String query = "delete from [User] where username = ?";
         Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
 
         try{
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,user.getUserName());
+
             statement.executeUpdate();
+            connection.commit();
         }
         catch(SQLException e){
-
+            System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess for " + user.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
+            }
         }
     }
 
@@ -86,15 +125,17 @@ public class UserDBAccess implements DBAccess<User> {
     // the user really has according to the DB
     @Override
     public User select(String username) {
-        String query = "select * from User where username = ?";
+        String query = "select * from [User] where username = ?";
         Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedUser = null;
         User user = null;
 
         try{
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,username);
-            ResultSet retrievedUser = statement.executeQuery();
-
+            retrievedUser = statement.executeQuery();
+            
             if(retrievedUser.next()){
                 String name = retrievedUser.getString(2);
                 String password =  retrievedUser.getString(3);
@@ -104,7 +145,22 @@ public class UserDBAccess implements DBAccess<User> {
             }
         }
         catch (SQLException e){
-
+            assert false;
+            System.out.println("Couldn't execute 'select(User user)' in UserDBAccess for " + user.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedUser != null) {
+                    retrievedUser.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
+            }
         }
         return user;
     }

@@ -4,28 +4,28 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import java.sql.Connection;
+import java.sql.SQLException;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DBConnectorTest {
-    DBConnector dbConnector;
+    Connection connection;
 
     @BeforeEach
     public void insertBeforeTest() {
-        dbConnector = DBConnector.getInstance();
+        connection = null;
     }
 
-    @AfterEach
-    public void deleteAfterTest(){
-        dbConnector = null;
-    }
 
     @Test
     public void  getInstance(){
-        assertNotNull(dbConnector);
+        assertNotNull(DBConnector.getInstance());
     }
 
     @Test
-    public void getConnection() {
+    public void getConnection() throws SQLException {
+        connection = DBConnector.getConnection();
+        assertFalse(connection.isClosed());
     }
 }
