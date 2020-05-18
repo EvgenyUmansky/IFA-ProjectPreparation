@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TeamTest {
     Field field;
     TeamOwner owner;
+    TeamOwner subOwner;
     Team team;
     TeamPlayer player;
     TeamManager manager;
@@ -21,6 +22,7 @@ class TeamTest {
     public void init() {
         field = new Field("test", 100);
         owner = new TeamOwner("ownerUser", "owner@gmail.com");
+        subOwner = new TeamOwner("ownerUser", "owner@gmail.com");
         team = new Team("test", field, owner);
         player = new TeamPlayer("playeruser", "player@gmail.com", new Date(1998, 02, 02), "player", "5");
         manager = new TeamManager("managerUser", "manager@gmail.com");
@@ -32,6 +34,7 @@ class TeamTest {
     public void finish() {
         field = null;
         owner = null;
+        subOwner = null;
         team = null;
         player = null;
         manager = null;
@@ -72,7 +75,6 @@ class TeamTest {
     @Test
     void removeOwnerNegativeCase() {
         assertEquals(1, team.getOwners().size());
-        //assertFalse(team.removeOwner(owner));
         assertEquals(1, team.getOwners().size());
     }
 
@@ -265,19 +267,19 @@ class TeamTest {
 
     @Test
     public void addSubscriber() {
-        assertEquals(0, team.getAlert().getInSystemAlertList().size());
-        team.addSubscriber(owner);
         assertEquals(1, team.getAlert().getInSystemAlertList().size());
+        team.addSubscriber(subOwner);
+        assertEquals(2, team.getAlert().getInSystemAlertList().size());
 
     }
 
     @Test
     public void removeSubscriber() {
-        assertEquals(0, team.getAlert().getInSystemAlertList().size());
-        team.addSubscriber(owner);
         assertEquals(1, team.getAlert().getInSystemAlertList().size());
-        team.removeSubscriber(owner);
-        assertEquals(0, team.getAlert().getInSystemAlertList().size());
+        team.addSubscriber(subOwner);
+        assertEquals(2, team.getAlert().getInSystemAlertList().size());
+        team.removeSubscriber(subOwner);
+        assertEquals(1, team.getAlert().getInSystemAlertList().size());
 
     }
 

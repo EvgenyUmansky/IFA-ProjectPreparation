@@ -66,8 +66,8 @@ class GameTest {
         fields = new ArrayList<>();
         fields.add(new Field("1eg0", 400));
 
-        game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), "2019-02-02 22:00", new ArrayList<>());
-        gameCE = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>());
+        game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getStadium(), "2019-02-02 22:00", new ArrayList<>());
+        gameCE = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getStadium(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>());
     }
 
     @AfterEach
@@ -95,7 +95,7 @@ class GameTest {
         game.addRefereeToGame(referees.get(0));
         assertEquals(1, game.getReferees().size());
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
-        secConstructor = new Game(leaguePerSeasons.get(0),hostTeams.get(0),guestTeams.get(0),hostTeams.get(0).getMyField(),LocalDateTime.now(), new ArrayList<>());
+        secConstructor = new Game(leaguePerSeasons.get(0),hostTeams.get(0),guestTeams.get(0),hostTeams.get(0).getStadium(),LocalDateTime.now(), new ArrayList<>());
         assertNotNull(secConstructor);
     }
 
@@ -165,7 +165,7 @@ class GameTest {
 
     @Test
     void addRefereesOfGameToAlerts(){
-        game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), "2019-02-02 22:00", new ArrayList<Referee>(){{add(referees.get(0));}});
+        game = new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getStadium(), "2019-02-02 22:00", new ArrayList<Referee>(){{add(referees.get(0));}});
         assertEquals(1, game.getAlertReferees().getInSystemAlertList().size());
     }
 
@@ -182,7 +182,7 @@ class GameTest {
 
     @Test
     void isEqualGame() {
-        secConstructor = new Game(leaguePerSeasons.get(0),hostTeams.get(0),guestTeams.get(0),hostTeams.get(0).getMyField(),LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>());
+        secConstructor = new Game(leaguePerSeasons.get(0),hostTeams.get(0),guestTeams.get(0),hostTeams.get(0).getStadium(),LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>());
         assertTrue(gameCE.isEqualGame(secConstructor));
     }
 
