@@ -5,10 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,37 +31,54 @@ public class UserDBAccessTest {
         userDBAccess = null;
         connection.close();
         connection = null;
+        preparedStatement.close();
         preparedStatement = null;
-        resultSet = null;
+//        resultSet.close();
+//        resultSet = null;
     }
 
     @Test
-    public void save() throws SQLException {
-        // delete the user from DB if exists
-        preparedStatement = connection.prepareStatement("delete from [User] where username = ?");
-        preparedStatement.setString(1, user.getUserName());
+    public void save() throws SQLException, InterruptedException {
+//        // delete the user from DB if exists
+        preparedStatement = connection.prepareStatement("delete from [User] where username = 'UserName_1'");
+        //preparedStatement.setString(1, user.getUserName());
         preparedStatement.executeUpdate();
         connection.commit();
-
-        // check the user does not exist in DB
-        preparedStatement = connection.prepareStatement("select * from [User] where username = ?" );
-        preparedStatement.setString(1, user.getUserName());
-        resultSet = preparedStatement.executeQuery();
-        assertFalse(resultSet.next());
+        connection.close();
+        connection = null;
+        preparedStatement.close();
+        preparedStatement = null;
+//
+//        // check the user does not exist in DB
+        connection = DBConnector.getConnection();
+        preparedStatement = connection.prepareStatement("select * from [User] where username = 'UserName_1'" );
+        //preparedStatement.setString(1, user.getUserName());
+        assertFalse(preparedStatement.executeQuery().next());
+        connection.close();
+        preparedStatement.close();
+        preparedStatement = null;
 
         // save user to DB
         userDBAccess.save(user);
 
+        // User user1 = userDBAccess.select(user.getUserName());
+
         // check the user saved in the DB
-        resultSet = preparedStatement.executeQuery();
-        assertEquals(user.getUserName(), resultSet.getString(1));
+        connection = DBConnector.getConnection();
+        preparedStatement = connection.prepareStatement("select * from [User] where username = 'UserName_1'" );
+        //preparedStatement.setString(1, user.getUserName());
+        assertEquals(user.getUserName(), preparedStatement.executeQuery().getString(1));
+        connection.close();
+        preparedStatement.close();
+        preparedStatement = null;
+
 
         // delete the user from DB
-        preparedStatement = connection.prepareStatement("delete from [User] where username = " + user.getUserName());
+        connection = DBConnector.getConnection();
+        preparedStatement = connection.prepareStatement("delete from [User] where username = 'UserName_1'");
         preparedStatement.setString(1,user.getUserName());
         preparedStatement.executeUpdate();
         connection.commit();
-
     }
 
     @Test

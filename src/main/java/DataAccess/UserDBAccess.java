@@ -141,7 +141,7 @@ public class UserDBAccess implements DBAccess<User> {
                 String password =  retrievedUser.getString(3);
                 String mail =  retrievedUser.getString(4);
                 boolean isClosed = retrievedUser.getBoolean(5);
-                user = new User(username,password,name,mail,isClosed);
+                user = new User(username, password, name, mail, isClosed);
             }
         }
         catch (SQLException e){

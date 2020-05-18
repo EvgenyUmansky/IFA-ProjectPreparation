@@ -47,7 +47,7 @@ public class User {
      */
     public User(String userName, String password, String name, String mail, boolean isClosed){
         this.userName = userName;
-        this.password = hash(password);
+        this.password = password;
         this.name = name;
         this.mail = mail;
         this.isClosed = isClosed;
