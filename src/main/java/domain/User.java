@@ -28,12 +28,30 @@ public class User {
      */
     public User(String userName, String password, String name, String mail) {
         this.userName = userName;
-        this.password = password;
+        this.password = hash(password);
         this.name = name;
         this.mail = mail;
         this.roles = new HashMap<>();
         addRoleToUser(Role.FAN);
         isClosed = false;
+    }
+
+
+    /**
+     *
+     * @param userName
+     * @param password
+     * @param name
+     * @param mail
+     * @param isClosed
+     */
+    public User(String userName, String password, String name, String mail, boolean isClosed){
+        this.userName = userName;
+        this.password = hash(password);
+        this.name = name;
+        this.mail = mail;
+        this.isClosed = isClosed;
+        this.roles = new HashMap<>();
     }
 
     // ========================= Getters and Setters ==========================
@@ -347,6 +365,19 @@ public class User {
         }
 
         return true;
+    }
+
+    /**
+     * Encrypts the user's password
+     * @param password the original password
+     * @return
+     */
+    private String hash(String password) {
+        int hash = 7;
+        for (int i = 0; i < password.length(); i++) {
+            hash = hash * 31 + password.charAt(i);
+        }
+        return Integer.toString(hash);
     }
 
 }
