@@ -27,5 +27,5 @@ public interface DBAccess<T> {
      *
      * @param
      */
-    void select(String id);
+    T select(String id);
 }

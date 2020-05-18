@@ -1,5 +1,7 @@
 package domain.controllers;
 
+import DataAccess.DBAccess;
+import DataAccess.UserDBAccess;
 import domain.*;
 
 import java.util.*;
@@ -43,19 +45,22 @@ public class AuthController {
      * @return the user's instance
      */
     public User login(String userName, String password) throws Exception {
-        User user = User.getUserByID(userName);
+        UserDBAccess userDBAccess = UserDBAccess.getInstance();
+        User user = userDBAccess.select(userName);
 
         if (user == null) {
             throw new Exception("User not found!");
         }
 
-        if (!user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(hash(password))) {
             throw new Exception("Wrong password!");
         }
+
 
         user.connect();
         return user;
     }
+
 
     /**
      * UC 3.1
@@ -106,11 +111,8 @@ public class AuthController {
      * @throws Exception if the user doesn't exist
      */
     public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
-        User user = User.getUserByID(userName);
-        if (user == null) {
-            throw new Exception("User does not exist");
-        }
-        return user.getRoles();
+        //TODO: run over all the DBACCESS objects and activate the select function to get the user's roles
+        return null;
     }
 
 
@@ -171,5 +173,18 @@ public class AuthController {
             User newUser = this.register("admin", "admin1234", "admin", "admin@ifa.com");
             newUser.addRoleToUser(Role.SYSTEM_ADMIN, new SystemAdministrator(newUser.getUserName(), newUser.getMail()));
         }
+    }
+
+    /**
+     * Encrypts the user's password
+     * @param password the original password
+     * @return
+     */
+    private String hash(String password) {
+        int hash = 7;
+        for (int i = 0; i < password.length(); i++) {
+            hash = hash * 31 + password.charAt(i);
+        }
+        return Integer.toString(hash);
     }
 }
