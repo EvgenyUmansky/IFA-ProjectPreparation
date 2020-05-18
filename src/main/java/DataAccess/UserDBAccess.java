@@ -22,7 +22,7 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void save(User user) {
         Connection connection = DBConnector.getConnection();
-        String query = "insert into User values (?,?,?,?)";
+        String query = "insert into [User] values (?,?,?,?,?)";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -32,7 +32,10 @@ public class UserDBAccess implements DBAccess<User> {
             statement.setString(4,user.getMail());
             statement.setBoolean(5,user.isClosed());
 
+            statement.executeUpdate();
+            connection.commit();
 
+            statement.close();
         }
         catch (SQLException | NullPointerException e){
             System.out.println("Fuck You");
