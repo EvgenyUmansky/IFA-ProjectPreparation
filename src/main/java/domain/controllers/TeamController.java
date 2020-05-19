@@ -3,6 +3,7 @@ package domain.controllers;
 import domain.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class TeamController {
@@ -10,6 +11,11 @@ public class TeamController {
     public ArrayList<Team> getTeams() {
         // TODO: get all teams from DB
         return null;
+    }
+
+    public void updateTeam(String teamName, String stadium, HashMap<String,String> fields, HashMap<String, String> players, HashMap<String, String> coaches, HashMap<String, String> managers, HashMap<String, String> owners, String teamStatus){
+        Team team = Team.getTeamByName(teamName);
+        //update the team?
     }
 
     // ========================= Guest functions ============================
