@@ -49,7 +49,7 @@ class RefereeTest {
         fields.add(new Field("1eg0", 400));
 
         games = new ArrayList<>();
-        games.add(new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getMyField(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>()));
+        games.add(new Game(leaguePerSeasons.get(0), hostTeams.get(0), guestTeams.get(0), hostTeams.get(0).getStadium(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>()));
         games.add(new Game(null, null, null, null, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")), new ArrayList<>()));
 
         referee = new Referee("Evgeny", "euguman@gmail.com");
@@ -83,7 +83,7 @@ class RefereeTest {
 
     @Test
     void getRefereeDetails(){
-        assertEquals("User name: Evgeny\nMail: euguman@gmail.com\nQualification: 4\nType: MAIN", referee.getRefereeDetails());
+        assertEquals("Qualification: 4\nType: MAIN", referee.getRefereeDetails());
     }
 
     @Test

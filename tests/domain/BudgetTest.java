@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class BudgetTest {
     Budget budgetQ1;
@@ -68,23 +69,23 @@ class BudgetTest {
 //
 //    }
 //
-//    @Test
-//    void getTotalProfit() {
-//        assertEquals(0,budgetQ1.getTotalProfit());
-//
-//    }
-//
-//    @Test
-//    void getTotalLoss() {
-//        assertEquals(0,budgetQ1.getTotalLoss());
-//
-//    }
-//
-//    @Test
-//    void getQuarterOfYear() {
-//        assertEquals(1,budgetQ1.getQuarterOfYear());
-//
-//    }
+    @Test
+    void getTotalProfit() {
+        assertEquals(0,budgetQ1.getTotalProfit(),0);
+
+    }
+
+    @Test
+    void getTotalLoss() {
+        assertEquals(0,budgetQ1.getTotalLoss(),0);
+
+    }
+
+    @Test
+    void getQuarterOfYear() {
+        assertEquals(1,budgetQ1.getQuarterOfYear(),0);
+
+    }
 //
 //    @Test
 //    void getBudget() {

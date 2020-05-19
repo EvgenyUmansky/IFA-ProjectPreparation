@@ -3,6 +3,9 @@ package domain;
 
 import java.util.Date;
 
+/**
+ * Represents the log of events in the system - TODO: change this to logger class
+ */
 public class SystemEvent {
 
     private String description;

@@ -1,12 +1,12 @@
 package domain;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TeamOwnerTest {
 
@@ -32,27 +32,27 @@ public class TeamOwnerTest {
 
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         fieldHapoel = new Field("Tedi",10000.001);
         fieldMacabi = new Field("blomfild",100);
         fieldView = new Field("fieldView",102310);
         fieldTam = new Field("fieldTam",1054560);
-        teamHapoel = new Team("Hapoel",fieldHapoel);
-        teamMacabi = new Team("Macaci",fieldMacabi);
-        teamViewer = new Team("teamView",fieldView);
-        teamTam = new Team("teamTam",fieldTam);
-        teamOwnerHapoel = new TeamOwner("aboxis","h@gmail.com", teamHapoel, new HashSet<>());
-        teamOwnerMacabi = new TeamOwner("dego","m@gmail.com", teamMacabi, new HashSet<>());
-        teamOwnerView = new TeamOwner("acker","v@gmail.com", teamViewer, new HashSet<>());
-        teamOwnerTam = new TeamOwner("shoko","t@gmail.com", teamTam, new HashSet<>());
+        teamOwnerHapoel = new TeamOwner("aboxis","h@gmail.com");
+        teamOwnerMacabi = new TeamOwner("dego","m@gmail.com");
+        teamOwnerView = new TeamOwner("acker","v@gmail.com");
+        teamOwnerTam = new TeamOwner("shoko","t@gmail.com");
+        teamHapoel = new Team("Hapoel",fieldHapoel,teamOwnerHapoel);
+        teamMacabi = new Team("Macaci",fieldMacabi,teamOwnerMacabi);
+        teamViewer = new Team("teamView",fieldView,teamOwnerView);
+        teamTam = new Team("teamTam",fieldTam,teamOwnerTam);
         teamManagerHapoel = new TeamManager("Maboxis","Mh@gmail.com");
         teamManagerMacabi = new TeamManager("Mdego","Mm@gmail.com");
         teamManagerView = new TeamManager("Macker","Mvh@gmail.com");
         teamManagerTam = new TeamManager("Mshoko","Mt@gmail.com");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
           fieldHapoel = null;
           fieldMacabi= null;
@@ -77,7 +77,6 @@ public class TeamOwnerTest {
 
     @Test
     public void setTeam() {
-        assertTrue(teamOwnerHapoel.getTeam() == teamHapoel);
         teamOwnerHapoel.setTeam(teamMacabi);
         assertTrue(teamOwnerHapoel.getTeam() == teamMacabi);
 
@@ -87,10 +86,19 @@ public class TeamOwnerTest {
 
     @Test
     public void getTeam() {
+        teamOwnerHapoel.setTeam(teamHapoel);
         assertEquals(teamOwnerHapoel.getTeam().getTeamName(),"Hapoel");
         assertEquals(teamOwnerHapoel.getTeam().getStadium().getFieldName(),"Tedi");
-        assertTrue(teamOwnerHapoel.getTeam() == teamHapoel);
+        assertSame(teamOwnerHapoel.getTeam(), teamHapoel);
     }
+
+    @Test
+    public void teamConst(){
+        TeamOwner teamOwner = new TeamOwner("Guy","guyzamos@gmail.com",teamTam,managerAppointments);
+        assertNotNull(teamOwner);
+    }
+
+
 
     @Test
     public void getManagerAppointments() {
@@ -98,7 +106,6 @@ public class TeamOwnerTest {
         teamOwnerHapoel.addToManagerAppointments(teamManagerHapoel);
         assertEquals(1,teamOwnerHapoel.getManagerAppointments().size());
         assertTrue(teamOwnerHapoel.getManagerAppointments().contains(teamManagerHapoel));
-
     }
 
     @Test

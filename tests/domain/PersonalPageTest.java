@@ -1,8 +1,8 @@
 package domain;
 
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,5 +50,12 @@ class PersonalPageTest {
         page.addPermissions(secondPlayer);
         assertEquals(2,page.getPageOwners().size());
 
+    }
+
+
+    @Test
+    void getPage(){
+      PersonalPage personalPage = PersonalPage.getPage("pageTestName");
+      personalPage.getName().equals("pageTestName");
     }
 }

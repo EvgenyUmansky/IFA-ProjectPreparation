@@ -49,6 +49,14 @@ class TeamPlayerTest {
         assertNotNull(player.getPosition());
     }
 
+
+    @Test
+    void getPlayerByName () {
+
+       TeamPlayer teamPlayer = TeamPlayer.getPlayerByName("playeruser");
+        assertNotNull(teamPlayer);
+    }
+
     @Test
     void setSquadNumber() {
         assertNull(player.getSquadNumber());

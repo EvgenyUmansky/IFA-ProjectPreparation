@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * Represents the types of users that there are in the system
+ */
 public enum Role {
     SYSTEM_ADMIN,
     ASSOCIATION_AGENT,

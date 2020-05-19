@@ -1,6 +1,10 @@
 package domain;
 
+/**
+ * This class represents a ranking method of the teams in a league according to matches results
+ */
 public class RankingMethod  {
+
     private int winPoints;
     private int loosPoints;
     private int drawPoints;
@@ -8,6 +12,9 @@ public class RankingMethod  {
 
     // ========================= Constructor ==========================
 
+    /**
+     * Constructor
+     */
     public RankingMethod() {
         this.winPoints = 3;
         this.loosPoints = 0;
@@ -16,24 +23,17 @@ public class RankingMethod  {
 
     // ========================= Setters ==========================
 
-    public boolean setWinPoints(int winPoints) {
-        if(winPoints > this.drawPoints && winPoints > this.drawPoints){
+    /**
+     * Sets the amount of points each team receives according to the result of a match
+     * @param winPoints the amount of points given for a win
+     * @param drawPoints the amount of points given for a draw
+     * @param loosPoints the amount of points given for a loss
+     * @return true if the update was successful, false otherwise
+     */
+    public boolean setRankingMethod(int winPoints, int drawPoints, int loosPoints){
+        if(winPoints > drawPoints && winPoints > loosPoints && drawPoints > loosPoints){
             this.winPoints = winPoints;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setLoosPoints(int loosPoints) {
-        if(loosPoints < this.drawPoints && loosPoints < this.winPoints){
             this.loosPoints = loosPoints;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setDrawPoints(int drawPoints) {
-        if(drawPoints > this.loosPoints && drawPoints < this.winPoints){
             this.drawPoints = drawPoints;
             return true;
         }
@@ -42,14 +42,26 @@ public class RankingMethod  {
 
     // ========================= Getters ==========================
 
+    /**
+     * Returns the amount of points given for a win
+     * @return the amount of points given for a win
+     */
     public int getWinPoints() {
         return winPoints;
     }
 
+    /**
+     * Returns the amount of points given for a loss
+     * @return the amount of points given for a loss
+     */
     public int getLoosPoints() {
         return loosPoints;
     }
 
+    /**
+     * Returns the amount of points given for a draw
+     * @return the amount of points given for a draw
+     */
     public int getDrawPoints() {
         return drawPoints;
     }
