@@ -2,7 +2,7 @@ package domain.controllers;
 
 import domain.User;
 
-public class SystemManagerController {
+public class SystemAdministratorController {
 
 
     // =================== System Manager functions ====================

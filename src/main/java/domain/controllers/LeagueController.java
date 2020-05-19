@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 public class LeagueController {
 
+    public ArrayList<League> getLeagues(){
+        // TODO: get leagues from DB
+        return null;
+    }
+
     // =================== Guest functions ====================
     // ========================================================
 
@@ -77,12 +82,12 @@ public class LeagueController {
     /**
      * UC 9.5
      * Sets the ranking method in the league
+     * @param league the league
      * @param winP amount of points given for a win
      * @param drawP amount of points given for a draw
      * @param loseP amount of points given for a loss
-     * @param league the league
      */
-    public void setRankingMethod(String winP, String drawP, String loseP, String league) {
+    public void setRankingMethod(String league, String winP, String drawP, String loseP) {
         // TODO: get league
         // League league = get from DB by leagueName
         // league.getRankingMethod().setRankingMethod(Integer.parseInt(winP), Integer.parseInt(loseP), Integer.parseInt(drawP));

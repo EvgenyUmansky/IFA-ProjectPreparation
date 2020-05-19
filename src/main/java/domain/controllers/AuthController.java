@@ -1,5 +1,7 @@
 package domain.controllers;
 
+import DataAccess.DBAccess;
+import DataAccess.UserDBAccess;
 import domain.*;
 
 import java.util.*;
@@ -7,7 +9,7 @@ import java.util.*;
 /**
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
-public class StartController {
+public class AuthController {
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
@@ -18,7 +20,7 @@ public class StartController {
     /**
      * Constructor
      */
-    public StartController() {
+    public AuthController() {
         systemEvents = new LinkedList<>();
     }
 
@@ -43,19 +45,22 @@ public class StartController {
      * @return the user's instance
      */
     public User login(String userName, String password) throws Exception {
-        User user = User.getUserByID(userName);
+        UserDBAccess userDBAccess = UserDBAccess.getInstance();
+        User user = userDBAccess.select(userName);
 
         if (user == null) {
             throw new Exception("User not found!");
         }
 
-        if (!user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(hash(password))) {
             throw new Exception("Wrong password!");
         }
+
 
         user.connect();
         return user;
     }
+
 
     /**
      * UC 3.1
@@ -106,16 +111,13 @@ public class StartController {
      * @throws Exception if the user doesn't exist
      */
     public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
-        User user = User.getUserByID(userName);
-        if (user == null) {
-            throw new Exception("User does not exist");
-        }
-        return user.getRoles();
+        //TODO: run over all the DBACCESS objects and activate the select function to get the user's roles
+        return null;
     }
 
 
     public static void main(String[] args) {
-        StartController c = new StartController();
+        AuthController c = new AuthController();
         try {
             c.init();
         } catch (Exception e) {
@@ -171,5 +173,18 @@ public class StartController {
             User newUser = this.register("admin", "admin1234", "admin", "admin@ifa.com");
             newUser.addRoleToUser(Role.SYSTEM_ADMIN, new SystemAdministrator(newUser.getUserName(), newUser.getMail()));
         }
+    }
+
+    /**
+     * Encrypts the user's password
+     * @param password the original password
+     * @return
+     */
+    private String hash(String password) {
+        int hash = 7;
+        for (int i = 0; i < password.length(); i++) {
+            hash = hash * 31 + password.charAt(i);
+        }
+        return Integer.toString(hash);
     }
 }

@@ -15,9 +15,9 @@ public class GuestController {
     /**
      * UC 2.5
      *
-     * @param words
+     * @param term
      */
-    public void searchByKeyWord(String words) {
+    public void searchByKeyTerm(String term) {
 
     }
 }

@@ -1,8 +1,8 @@
 package service;
 
 import domain.*;
-import domain.controllers.*;
-import domain.controllers.GameController;
+import domain.controllers.AuthController;
+import domain.controllers.SystemAdministratorController;
 
 import java.text.ParseException;
 import java.util.*;
@@ -14,11 +14,11 @@ public class Controller {
     private final domain.controllers.CoachController coachController;
     private final domain.controllers.FanController fanController;
     private final domain.controllers.GuestController guestController;
-    private final domain.controllers.SystemManagerController systemManagerController;
+    private final SystemAdministratorController systemManagerController;
     private final domain.controllers.PersonalPageController personalPageController;
     private final domain.controllers.PlayerController playerController;
     private final domain.controllers.RefereeController refereeController;
-    private final domain.controllers.StartController startController;
+    private final AuthController startController;
     private final domain.controllers.TeamController teamController;
     private final domain.controllers.LeagueController leagueController;
     private final domain.controllers.GameController gameController;
@@ -28,18 +28,18 @@ public class Controller {
     /**
      * Constructor
      */
-    public Controller(CoachController coachController, FanController fanController, GuestController guestController, SystemManagerController systemManagerController, PersonalPageController personalPageController, PlayerController playerController, RefereeController refereeController, StartController startController, TeamController teamController, LeagueController leagueController, GameController gameController) {
-        this.coachController = coachController;
-        this.fanController = fanController;
-        this.guestController = guestController;
-        this.systemManagerController = systemManagerController;
-        this.personalPageController = personalPageController;
-        this.playerController = playerController;
-        this.refereeController = refereeController;
-        this.startController = startController;
-        this.teamController = teamController;
-        this.leagueController = leagueController;
-        this.gameController = gameController;
+    public Controller() {
+        this.coachController = new domain.controllers.CoachController();
+        this.fanController = new domain.controllers.FanController();
+        this.guestController = new domain.controllers.GuestController();
+        this.systemManagerController = new SystemAdministratorController();
+        this.personalPageController = new domain.controllers.PersonalPageController();
+        this.playerController = new domain.controllers.PlayerController();
+        this.refereeController = new domain.controllers.RefereeController();
+        this.startController = new AuthController();
+        this.teamController = new domain.controllers.TeamController();
+        this.leagueController = new domain.controllers.LeagueController();
+        this.gameController = new domain.controllers.GameController();
     }
     // ========================= System functions =========================
     // ====================================================================
@@ -113,7 +113,7 @@ public class Controller {
      * @return the updated page
      */
     public PersonalPage updateInfo(String pageName, String info){
-        return personalPageController.updateInfo(pageName, info);
+        return personalPageController.updatePageInfo(pageName, info);
     }
 
 
@@ -213,7 +213,7 @@ public class Controller {
      * @param words
      */
     public void searchByKeyWord(String words) {
-        guestController.searchByKeyWord(words);
+        guestController.searchByKeyTerm(words);
     }
 
 
@@ -334,12 +334,12 @@ public class Controller {
      * UC 10.3
      * Adds an event that took place during a game to its events list
      * @param username the referee's username
-     * @param game the match
-     * @param gameEvent the event
+     * @param gameId the match
+     *
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String username, String game, String gameEvent) throws Exception {
-        gameController.addGameEventToGame(username, game, gameEvent);
+    public void addGameEventToGame(String username, String gameId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
+        gameController.addGameEventToGame(username, gameId, dateTimeStr, gameMinutes, eventName, description);
     }
 
 

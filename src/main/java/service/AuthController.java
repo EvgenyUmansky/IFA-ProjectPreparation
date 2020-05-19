@@ -1,22 +1,47 @@
 package service;
 
+import domain.Role;
+import domain.Subscriber;
 import domain.User;
-import domain.controllers.StartController;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import service.pojos.LoginDTO;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+import java.util.HashMap;
+
 public class AuthController {
-    private StartController controller;
+    private final domain.controllers.AuthController controller;
 
     public AuthController(){
-        controller = new StartController();
+        controller = new domain.controllers.AuthController();
     }
 
-    @PostMapping("/login")
-    public User login(@RequestBody LoginDTO creds) throws Exception {
-        return controller.login(creds.getUsername(), creds.getPassword());
+    @PostMapping("/externalSystems")
+    public void connectToExternalSystems(){
+        controller.connectToExternalSystems();
+    }
+
+    @GetMapping("/login")
+    // This will log in a user
+    public User login(String userName, String password) throws Exception {
+        return controller.login(userName, password);
+    }
+
+    @GetMapping("/users")
+    // This will log out in the following way: /users?username=<username>
+    public void logout(@RequestParam("username") String userName) throws Exception {
+        controller.logout(userName);
+    }
+
+    @GetMapping("/registration")
+    // This will register a user
+    public User register(String userName, String password, String name, String mail) throws Exception {
+        return controller.register(userName, password, name, mail);
+    }
+
+    @GetMapping("/users")
+    // This will get roles of user in the following way: /users?username=<username>
+    public HashMap<Role, Subscriber> getUserRoles(@RequestParam("username") String userName) throws Exception {
+        return controller.getUserRoles(userName);
     }
 }

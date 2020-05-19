@@ -2,9 +2,16 @@ package domain.controllers;
 
 import domain.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class TeamController {
+
+    public ArrayList<Team> getTeams() {
+        // TODO: get all teams from DB
+        return null;
+    }
+
     // ========================= Guest functions ============================
     // ====================================================================
 
@@ -294,4 +301,6 @@ public class TeamController {
     public Team getTeamByName(String teamName) {
         return Team.getTeamByName(teamName);
     }
+
+
 }

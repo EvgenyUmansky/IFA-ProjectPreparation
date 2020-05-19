@@ -6,9 +6,16 @@ import domain.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PlayerController {
+
+    public ArrayList<TeamPlayer> getPlayers() {
+        // TODO: DB arraylist of all players
+        return null;
+    }
+
     // ========================= Guest functions ==========================
     // ====================================================================
 
@@ -43,4 +50,5 @@ public class PlayerController {
         }
         ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(new SimpleDateFormat("dd/MM/yyyy").parse(birthDate),position,squadNumber);
     }
+
 }
