@@ -1,11 +1,8 @@
 package DataAccess;
-
 import domain.Fan;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 
 public class FanDBAccess implements DBAccess<Fan> {
 
@@ -20,58 +17,79 @@ public class FanDBAccess implements DBAccess<Fan> {
         return instance;
     }
 
-
     @Override
     public void save(Fan fan) {
+        if(fan == null){
+            System.out.println("Couldn't execute 'save(Fan fan)' in FanDBAccess: the fan is null");
+            return;
+        }
+
         Connection connection = DBConnector.getConnection();
-        String query = "insert into Fan values (?,?)";
+        PreparedStatement statement = null;
+        String query = "insert into [Fan] values (?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,fan.getUserName());
-            statement.setBoolean(2,fan.isMail());
 
 
             statement.executeUpdate();
+            connection.commit();
         }
         catch (SQLException | NullPointerException e){
-            System.out.println("Couldn't execute");
+            System.out.println("Couldn't execute 'save(Fan fan)' in FanDBAccess for " + fan.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'save(Fan fan)' in UserDBAccess for " + fan.getUserName());
+            }
         }
     }
 
 
     @Override
     public void update(Fan fan) {
-        String query = "update Fan " +
-                "set Username = ?, IsMail = ?" +
-                "where Username = ?";
-        Connection connection = DBConnector.getConnection();
 
-        try{
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1,fan.getUserName());
-            statement.setBoolean(2,fan.isMail());
-
-            statement.executeUpdate();
-        }
-        catch(SQLException e){
-
-        }
     }
 
     @Override
     public void delete(Fan fan) {
-        String query = "delete from Fan where username = ?";
+        if(fan == null){
+            System.out.println("Couldn't execute 'delete(Fan fan)' in FanDBAccess: the fan is null");
+            return;
+        }
+
+        String query = "delete from [Fan] where username = ?";
         Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
 
         try{
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,fan.getUserName());
+
             statement.executeUpdate();
+            connection.commit();
         }
         catch(SQLException e){
-
+            System.out.println("Couldn't execute 'delete(Fan fan)' in FanDBAccess for " + fan.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'delete(Fan fan)' in FanDBAccess for " + fan.getUserName());
+            }
         }
     }
 
@@ -79,25 +97,41 @@ public class FanDBAccess implements DBAccess<Fan> {
     // the user really has according to the DB
     @Override
     public Fan select(String username) {
-        String query = "select * from Fan where username = ?";
+        String query = "select * from [Fan] where username = ?";
         Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedUser = null;
         Fan fan = null;
 
         try{
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,username);
-            ResultSet retrievedFan = statement.executeQuery();
+            retrievedUser = statement.executeQuery();
 
-            if(retrievedFan.next()){
-                boolean isMail = retrievedFan.getBoolean(2);
-                fan = new Fan(username,"sdl;");
+            if(retrievedUser.next()){
+
+
+                fan = new Fan(username, "");
             }
         }
         catch (SQLException e){
-
+            assert false;
+            System.out.println("Couldn't execute 'select(Fan fan)' in FanDBAccess for " + fan.getUserName());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedUser != null) {
+                    retrievedUser.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                System.out.println("Couldn't close 'delete(Fan fan)' in FanDBAccess for " + fan.getUserName());
+            }
         }
         return fan;
     }
-
-
 }

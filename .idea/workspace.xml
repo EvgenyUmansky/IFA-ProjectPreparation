@@ -1,118 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="service controllers for Spring: Fan, League, Coach">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/IFA-ProjectPreparation.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/CoachDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/DBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/DBConnector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/FanDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/OwnerDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/CoachController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/FanController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/GuestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/LeagueController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/PersonalPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/PlayerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/RefereeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/SystemAdministratorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/CoachController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/FanController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/GameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/GuestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/LeagueController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/PersonalPageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/PlayerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/RefereeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/SpringRestApiApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/SystemAdministratorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/RefereeDBAccess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/DataAccess/DBConnectorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/DataAccess/UserDBAccessTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/DBAccess.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/OneGameSchedulingMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/OneGameSchedulingMethod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TwoGameSchedulingMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TwoGameSchedulingMethod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/CoachDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/TeamCoachDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/DBConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/FanDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/FanDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/OwnerDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/OwnerDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Fan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Fan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/IFA-ProjectPreparation.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Alert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/AlertNotification.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/AssociationAgent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Budget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/CoachPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/DBAccess.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Fan.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Field.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/GameAlert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/GameEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/League.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/OneGameSchedulingMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PersonalPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/PlayerPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/RankingMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Referee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/RefereeType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/SchedulingMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Subscriber.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/SystemAdministrator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/SystemEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Team.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamCoach.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamMember.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamOwner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TeamStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/TwoGameSchedulingMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/service/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/IntegrationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/IFA-ProjectPreparation.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/AlertNotificationTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/AlertTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/BudgetTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/CoachPageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/FanTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/FieldTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/GameEventTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/GameTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/GameTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/LeagueTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/OneGameSchedulingMethodTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/PersonalPageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/PlayerPageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/RankingMethodTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/RefereeTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/SystemEventTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamCoachTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamMemberTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamOwnerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamPageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamPlayerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TeamTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/TwoGameSchedulingMethodTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/domain/UserTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/service/ControllerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/service/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/BudgetTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/BudgetTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/FieldTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/FieldTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/PersonalPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/PersonalPageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/SystemEventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/SystemEventTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/TeamOwnerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamOwnerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/UserTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -150,11 +58,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>getUserRoles</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -177,6 +80,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1589800043517" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="ignore.virus.scanning.warn.message" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -326,6 +230,9 @@
       <workItem from="1589634093518" duration="13115000" />
       <workItem from="1589702284247" duration="3283000" />
       <workItem from="1589800393920" duration="4497000" />
+      <workItem from="1589842478363" duration="3412000" />
+      <workItem from="1589901576945" duration="279000" />
+      <workItem from="1589901929639" duration="12287000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -404,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589661960113</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="db controllers Fan">
+      <created>1589842584587</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1589842584587</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +371,8 @@
     <MESSAGE value="Controller service: Objects to Strings" />
     <MESSAGE value="service controllers for Spring: Game, PersonalPage, Player, Team" />
     <MESSAGE value="service controllers for Spring: Fan, League, Coach" />
-    <option name="LAST_COMMIT_MESSAGE" value="service controllers for Spring: Fan, League, Coach" />
+    <MESSAGE value="db controllers Fan" />
+    <option name="LAST_COMMIT_MESSAGE" value="db controllers Fan" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">

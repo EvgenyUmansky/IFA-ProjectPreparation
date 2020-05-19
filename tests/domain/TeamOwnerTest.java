@@ -1,12 +1,12 @@
 package domain;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TeamOwnerTest {
 
@@ -32,7 +32,7 @@ public class TeamOwnerTest {
 
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         fieldHapoel = new Field("Tedi",10000.001);
         fieldMacabi = new Field("blomfild",100);
@@ -52,7 +52,7 @@ public class TeamOwnerTest {
         teamManagerTam = new TeamManager("Mshoko","Mt@gmail.com");
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
           fieldHapoel = null;
           fieldMacabi= null;
@@ -89,7 +89,7 @@ public class TeamOwnerTest {
         teamOwnerHapoel.setTeam(teamHapoel);
         assertEquals(teamOwnerHapoel.getTeam().getTeamName(),"Hapoel");
         assertEquals(teamOwnerHapoel.getTeam().getStadium().getFieldName(),"Tedi");
-        assertTrue(teamOwnerHapoel.getTeam() == teamHapoel);
+        assertSame(teamOwnerHapoel.getTeam(), teamHapoel);
     }
 
     @Test
