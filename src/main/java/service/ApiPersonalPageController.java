@@ -21,7 +21,7 @@ public class ApiPersonalPageController {
     }
 
     // This will get pages by user in the following way: /pages?username=<username>
-    @GetMapping("/pages")
+    @GetMapping("/pages/{pageName}")
     public ArrayList<PersonalPage> getPagesByUsername(@RequestParam("username") String userName){
         return controller.getPagesByUsername(userName);
     }
