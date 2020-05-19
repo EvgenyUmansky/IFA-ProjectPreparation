@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-public class LeagueController {
+public class ApiLeagueController {
     private final domain.controllers.LeagueController controller;
 
-    public LeagueController(){
+    public ApiLeagueController(){
         controller = new domain.controllers.LeagueController();
     }
 

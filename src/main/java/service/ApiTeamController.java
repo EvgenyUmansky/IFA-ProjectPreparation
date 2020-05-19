@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 
 @RestController
-public class TeamController {
+public class ApiTeamController {
 
     private final domain.controllers.TeamController controller;
-    public TeamController(){
+    public ApiTeamController(){
         controller = new domain.controllers.TeamController();
     }
 

@@ -11,10 +11,10 @@ import service.pojos.LoginDTO;
 
 import java.util.HashMap;
 
-public class AuthController {
+public class ApiAuthController {
     private final domain.controllers.AuthController controller;
 
-    public AuthController(){
+    public ApiAuthController(){
         controller = new domain.controllers.AuthController();
     }
 

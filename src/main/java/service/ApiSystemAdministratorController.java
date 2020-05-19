@@ -2,10 +2,10 @@ package service;
 
 import org.springframework.web.bind.annotation.*;
 
-public class SystemAdministratorController {
+public class ApiSystemAdministratorController {
     private final domain.controllers.SystemAdministratorController controller;
 
-    public SystemAdministratorController(){
+    public ApiSystemAdministratorController(){
         controller = new domain.controllers.SystemAdministratorController();
     }
 

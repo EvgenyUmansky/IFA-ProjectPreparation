@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-public class GameController {
+public class ApiGameController {
 
     private final domain.controllers.GameController controller;
 
-    public GameController(){
+    public ApiGameController(){
         controller = new domain.controllers.GameController();
     }
 

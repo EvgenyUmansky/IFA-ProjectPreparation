@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
-public class Controller {
+public class ApiController {
     private final domain.controllers.CoachController coachController;
     private final domain.controllers.FanController fanController;
     private final domain.controllers.GuestController guestController;
@@ -28,7 +28,7 @@ public class Controller {
     /**
      * Constructor
      */
-    public Controller() {
+    public ApiController() {
         this.coachController = new domain.controllers.CoachController();
         this.fanController = new domain.controllers.FanController();
         this.guestController = new domain.controllers.GuestController();

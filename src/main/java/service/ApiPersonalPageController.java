@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 
 @RestController
-public class PersonalPageController {
+public class ApiPersonalPageController {
 
     private final domain.controllers.PersonalPageController controller;
 
-    public PersonalPageController(){
+    public ApiPersonalPageController(){
         controller = new domain.controllers.PersonalPageController();
     }
 
