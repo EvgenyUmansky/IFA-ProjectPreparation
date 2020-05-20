@@ -23,7 +23,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
     @Override
     public void save(TeamManager teamManager) {
         if (teamManager == null) {
-            System.out.println("Couldn't execute 'save(TeamManager teamManager)' in UserDBAccess: the teamManager is null");
+            System.out.println("Couldn't execute 'save(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
             return;
         }
 
@@ -35,7 +35,12 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, teamManager.getUserName());
-            statement.setString(2, teamManager.getCurrentTeam().getTeamName());
+            if(teamManager.getCurrentTeam() != null) {
+                statement.setString(2, teamManager.getCurrentTeam().getTeamName());
+            }
+            else {
+                statement.setString(2, null);
+            }
 
 
             statement.executeUpdate();

@@ -56,7 +56,7 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
 
     @Override
     public void update(AssociationAgent associationAgent) {
-
+        // There is only Prime Key in the AssociationAgent table, forbidden to change
     }
 
     @Override
