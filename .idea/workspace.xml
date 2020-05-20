@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/AssAgentDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/SysAdminDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/TeamDBAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamStatus.java" afterDir="false" />
-    </list>
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +213,7 @@
       <workItem from="1589842478363" duration="3412000" />
       <workItem from="1589901576945" duration="279000" />
       <workItem from="1589901929639" duration="12949000" />
-      <workItem from="1589929213303" duration="3395000" />
+      <workItem from="1589929213303" duration="3493000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -314,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589918902238</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="creating DBAccess for fan coach referee manager owner player sysAdmin assAgent team">
+      <created>1589932892145</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1589932892145</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,7 +368,9 @@
     <MESSAGE value="service controllers for Spring: Fan, League, Coach" />
     <MESSAGE value="db controllers Fan" />
     <MESSAGE value="creating DBAccess for fan coach referee manager owner" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating DBAccess for fan coach referee manager owner" />
+    <MESSAGE value="creating DBAccess for fan coach referee manager owner player sysAdmin assAgent" />
+    <MESSAGE value="creating DBAccess for fan coach referee manager owner player sysAdmin assAgent team" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating DBAccess for fan coach referee manager owner player sysAdmin assAgent team" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
