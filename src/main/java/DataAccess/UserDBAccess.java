@@ -26,7 +26,7 @@ public class UserDBAccess implements DBAccess<User> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [User] values (?, ?, ?, ?, ?)";
+        String query = "insert into [User] values (?, ?, ?, ?, ?, ?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
@@ -36,6 +36,7 @@ public class UserDBAccess implements DBAccess<User> {
             statement.setString(3,user.getPassword());
             statement.setString(4,user.getMail());
             statement.setBoolean(5,user.isClosed());
+            statement.setBoolean(6,user.isMail());
 
             statement.executeUpdate();
             connection.commit();
@@ -65,7 +66,7 @@ public class UserDBAccess implements DBAccess<User> {
         }
 
         String query = "update [User] " +
-                "set Name = ?, Password = ?, Email = ?, Activated = ? " +
+                "set Name = ?, Password = ?, Email = ?, Activated = ?, IsMail = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -76,7 +77,9 @@ public class UserDBAccess implements DBAccess<User> {
             statement.setString(2,user.getPassword());
             statement.setString(3,user.getMail());
             statement.setBoolean(4,user.isClosed());
-            statement.setString(5,user.getUserName());
+            statement.setBoolean(5,user.isMail());
+            statement.setString(6,user.getUserName());
+
 
             statement.executeUpdate();
             connection.commit();
@@ -145,13 +148,15 @@ public class UserDBAccess implements DBAccess<User> {
             statement = connection.prepareStatement(query);
             statement.setString(1,username);
             retrievedUser = statement.executeQuery();
-            
+
             if(retrievedUser.next()){
                 String name = retrievedUser.getString(2);
                 String password =  retrievedUser.getString(3);
                 String mail =  retrievedUser.getString(4);
                 boolean isClosed = retrievedUser.getBoolean(5);
-                user = new User(username, password, name, mail, isClosed);
+                boolean isMail = retrievedUser.getBoolean(6);
+
+                user = new User(username, password, name, mail, isClosed, isMail);
             }
         }
         catch (SQLException e){
