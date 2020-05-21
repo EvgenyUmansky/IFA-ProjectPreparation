@@ -12,7 +12,7 @@ public class ApiPlayerController {
         controller = new domain.controllers.PlayerController();
     }
 
-    @GetMapping("/users")
+    @GetMapping("/players")
     public ArrayList<TeamPlayer> getPlayers(){
         return controller.getPlayers();
     }

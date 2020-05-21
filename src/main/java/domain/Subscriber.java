@@ -9,10 +9,11 @@ import java.util.ArrayList;
  */
 public abstract class Subscriber {
 
-    private final String userName;
+    private String name;
+    private String userName;
     private String mail;
     private boolean isMail;
-    private final ArrayList<AlertNotification> alertsMessages;
+    private ArrayList<AlertNotification> alertsMessages;
     public String getUserName() {
         return userName;
     }
@@ -32,6 +33,13 @@ public abstract class Subscriber {
         this.isMail = false;
     }
 
+    public Subscriber(String userName, String mail, String name){
+        this.userName = userName;
+        this.alertsMessages = new ArrayList<>();
+        this.mail = mail;
+        this.name = name;
+        this.isMail = false;
+    }
 
     /**
      * Adds a notification to the user's notifications box in the system

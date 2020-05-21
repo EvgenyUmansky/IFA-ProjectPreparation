@@ -5,14 +5,14 @@ import java.util.HashMap;
 public class TeamDTO {
     private String teamName;
     private String stadium; //The team's main stadium, where they play official matches
-    private HashMap<String,String> fields; //All the team's fields, including the stadium and training fields
-    private HashMap<String, String> players;
-    private HashMap<String, String> coaches;
-    private HashMap<String, String> managers;
-    private HashMap<String, String> owners;
+    private String[] fields; //All the team's fields, including the stadium and training fields
+    private String[] players;
+    private String[] coaches;
+    private String[] managers;
+    private String[] owners;
     private String teamStatus;
 
-    public TeamDTO(String teamName, String stadium, HashMap<String,String> fields, HashMap<String, String> players, HashMap<String, String> coaches, HashMap<String, String> managers, HashMap<String, String> owners, String teamStatus) {
+    public TeamDTO(String teamName, String stadium, String[] fields, String[] players, String[] coaches, String[] managers, String[] owners, String teamStatus) {
         this.teamName = teamName;
         this.stadium = stadium;
         this.fields = fields;
@@ -31,23 +31,23 @@ public class TeamDTO {
         return stadium;
     }
 
-    public HashMap<String, String> getFields() {
+    public String[] getFields() {
         return fields;
     }
 
-    public HashMap<String, String> getPlayers() {
+    public String[] getPlayers() {
         return players;
     }
 
-    public HashMap<String, String> getCoaches() {
+    public String[] getCoaches() {
         return coaches;
     }
 
-    public HashMap<String, String> getManagers() {
+    public String[] getManagers() {
         return managers;
     }
 
-    public HashMap<String, String> getOwners() {
+    public String[] getOwners() {
         return owners;
     }
 

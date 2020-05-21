@@ -27,6 +27,13 @@ public class Referee extends Subscriber {
         this.acceptedRequest = false;
     }
 
+    public Referee(String userName, String mail, String name) {
+        super(userName, mail, name);
+        this.qualification = 0;
+        this.refereeType = null;
+        this.acceptedRequest = false;
+    }
+
     //====================== Functionality ======================//
 
     /**
