@@ -37,7 +37,9 @@ public class TeamPlayer extends TeamMember {
     public TeamPlayer(String userName, String mail) {
         super(userName, mail);
     }
-
+    public TeamPlayer(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 
     // Functionality
 
