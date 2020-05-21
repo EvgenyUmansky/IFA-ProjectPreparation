@@ -46,6 +46,20 @@ public class Team {
         this.owners.put(owner.getUserName(), owner);
     }
 
+    public Team(String teamName, String mail, String fieldName, String status){
+        this.teamName = teamName;
+        this.teamEmail = mail;
+        setTeamStatus(status);
+
+        this.fields = new HashMap<>();
+        fields.put(fieldName,null);
+
+        this.owners = new HashMap<>();
+        this.managers = new HashMap<>();
+        this.coaches = new HashMap<>();
+        this.players = new HashMap<>();
+        this.alert = new Alert();
+    }
 
     //========================= Getters and Setters ========================//
 
@@ -164,6 +178,30 @@ public class Team {
      */
     public TeamStatus getTeamStatus(){
         return this.teamStatus;
+    }
+
+
+    public void setTeamStatus(String status){
+        switch (status){
+            case "Open":
+                setTeamStatus(TeamStatus.Open);
+                break;
+
+            case "Temporarily Closed":
+                setTeamStatus(TeamStatus.TempClose);
+                break;
+
+            case "Permanently Closed":
+                setTeamStatus(TeamStatus.PermanentlyClose);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void setTeamStatus(TeamStatus status){
+        this.teamStatus = status;
     }
 
     /**
@@ -323,7 +361,7 @@ public class Team {
     public void removeOwner(User user) {
         //Impossible to leave the Team without an Owner
         if (this.owners.size() <= 1) {
-           throw new Error("The team cannot be left without an owner");
+            throw new Error("The team cannot be left without an owner");
         } else {
             TeamOwner owner = (TeamOwner)user.getRoles().get(Role.TEAM_OWNER);
             this.owners.remove(user.getUserName());
@@ -346,14 +384,14 @@ public class Team {
      * @param currentOwner the owner that adds the new manager
      * @param newManager the new manager
      */
-   public void addManager(User currentOwner, User newManager) {
-       if (this.owners.containsKey(currentOwner.getUserName())) {
-           TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
-           newTeamManager.setCurrentTeam(this);
-           this.managers.put(newTeamManager.getUserName(), newTeamManager);
-           addSubscriber(newTeamManager);
-       }
-   }
+    public void addManager(User currentOwner, User newManager) {
+        if (this.owners.containsKey(currentOwner.getUserName())) {
+            TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
+            newTeamManager.setCurrentTeam(this);
+            this.managers.put(newTeamManager.getUserName(), newTeamManager);
+            addSubscriber(newTeamManager);
+        }
+    }
 
 
     /**
