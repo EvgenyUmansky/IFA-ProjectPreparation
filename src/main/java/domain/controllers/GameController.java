@@ -3,12 +3,18 @@ package domain.controllers;
 import domain.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameController {
 
     public ArrayList<Game> getGames() {
+        League mockLeage = new League("testLeage");
+        mockLeage.addReferee(new Referee("refereeTest", "ref@gmail.com"));
+        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
+        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
+        Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
         // TODO: return all games
-        return null;
+        return new ArrayList<Game>(Arrays.asList(mockGame));
     }
 
     public Game getGame(String gameId){
