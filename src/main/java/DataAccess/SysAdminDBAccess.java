@@ -26,7 +26,7 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [SysterAdministrator] values (?)";
+        String query = "insert into [SystemAdministrator] values (?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
@@ -56,7 +56,7 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
 
     @Override
     public void update(SystemAdministrator systemAdministrator) {
-
+        // There is only Prime Key in the SystemAdministrator table, forbidden to change
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
             return;
         }
 
-        String query = "delete from [SysterAdministrator] where username = ?";
+        String query = "delete from [SystemAdministrator] where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
 
@@ -97,7 +97,7 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
     // the user really has according to the DB
     @Override
     public SystemAdministrator select(String username) {
-        String query = "select * from [SysterAdministrator] where username = ?";
+        String query = "select * from [SystemAdministrator] where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUser = null;

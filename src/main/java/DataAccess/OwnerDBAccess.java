@@ -24,7 +24,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void save(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'save(TeamOwner teamOwner)' in UserDBAccess: the teamOwner is null");
+            System.out.println("Couldn't execute 'save(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
             return;
         }
 
@@ -36,7 +36,12 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, teamOwner.getUserName());
-            statement.setString(2, teamOwner.getTeam().getTeamName());
+            if(teamOwner.getTeam() != null) {
+                statement.setString(2, teamOwner.getTeam().getTeamName());
+            }
+            else {
+                statement.setString(2, null);
+            }
 
 
             statement.executeUpdate();
@@ -139,7 +144,6 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             retrievedUser = statement.executeQuery();
 
             if (retrievedUser.next()) {
-
                 teamOwner = new TeamOwner(username, "");
             }
         } catch (SQLException e) {

@@ -7,7 +7,7 @@ import java.sql.*;
 public class UserDBAccess implements DBAccess<User> {
 
     private static final UserDBAccess instance = new UserDBAccess();
-    /*  private DBConnector dbc = DBConnector.getInstance();*/
+  /*  private DBConnector dbc = DBConnector.getInstance();*/
 
     private UserDBAccess(){
 

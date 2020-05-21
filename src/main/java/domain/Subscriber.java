@@ -9,10 +9,10 @@ import java.util.ArrayList;
  */
 public abstract class Subscriber {
 
-    private String userName;
+    private final String userName;
     private String mail;
     private boolean isMail;
-    private ArrayList<AlertNotification> alertsMessages;
+    private final ArrayList<AlertNotification> alertsMessages;
     public String getUserName() {
         return userName;
     }

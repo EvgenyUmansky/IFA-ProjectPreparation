@@ -56,7 +56,7 @@ public class FanDBAccess implements DBAccess<Fan> {
 
     @Override
     public void update(Fan fan) {
-
+        // There is only Prime Key in the Fan table, forbidden to change
     }
 
     @Override

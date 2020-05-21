@@ -1,6 +1,7 @@
 package DataAccess;
 
 import domain.Referee;
+import domain.RefereeType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +37,12 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, referee.getUserName());
-            statement.setString(2, referee.getRefereeType().toString());
+            if(referee.getRefereeType() != null) {
+                statement.setString(2, referee.getRefereeType().toString());
+            }
+            else {
+                statement.setString(2, null);
+            }
             statement.setInt(3, referee.getQualification());
 
 
@@ -72,7 +78,12 @@ public class RefereeDBAccess implements DBAccess<Referee> {
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setString(1, referee.getRefereeType().toString());
+            if(referee.getRefereeType() != null) {
+                statement.setString(1, referee.getRefereeType().toString());
+            }
+            else{
+                statement.setString(1, null);
+            }
             statement.setInt(2, referee.getQualification());
             statement.setString(3, referee.getUserName());
 
@@ -140,9 +151,18 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             retrievedUser = statement.executeQuery();
 
             if (retrievedUser.next()) {
-
                 referee = new Referee(username, "");
+
+
+                String refType = retrievedUser.getString("Type");
+
+                if (refType != null) {
+                    referee.setRefereeType(RefereeType.valueOf(refType));
+                }
+
+                referee.setQualification(Integer.parseInt(retrievedUser.getString("Qualification")));
             }
+
         } catch (SQLException e) {
             assert false;
             System.out.println("Couldn't execute 'select(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
