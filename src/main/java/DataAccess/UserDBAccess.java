@@ -7,7 +7,7 @@ import java.sql.*;
 public class UserDBAccess implements DBAccess<User> {
 
     private static final UserDBAccess instance = new UserDBAccess();
-    /*  private DBConnector dbc = DBConnector.getInstance();*/
+  /*  private DBConnector dbc = DBConnector.getInstance();*/
 
     private UserDBAccess(){
 
@@ -79,6 +79,7 @@ public class UserDBAccess implements DBAccess<User> {
             statement.setBoolean(4,user.isClosed());
             statement.setBoolean(5,user.isMail());
             statement.setString(6,user.getUserName());
+
 
             statement.executeUpdate();
             connection.commit();
@@ -178,5 +179,9 @@ public class UserDBAccess implements DBAccess<User> {
         }
         return user;
     }
+
+
+
+
 
 }
