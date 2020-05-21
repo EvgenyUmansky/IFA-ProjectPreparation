@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class PlayerController {
+public class ApiPlayerController {
     private final domain.controllers.PlayerController controller;
 
-    public PlayerController(){
+    public ApiPlayerController(){
         controller = new domain.controllers.PlayerController();
     }
 
