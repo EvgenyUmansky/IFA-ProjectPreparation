@@ -7,24 +7,26 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class represents a football match
  */
 public class Game {
+    static AtomicInteger nextId = new AtomicInteger();
+    private final int id;
 
     private League league;
     private Team hostTeam;
     private Team guestTeam;
     private Field field;
     private LocalDateTime gameDate;
-    private ArrayList<Referee> referees;
-    private ArrayList<GameEvent> gameEvents;
+    private final ArrayList<Referee> referees;
+    private final HashMap<Integer, GameEvent> gameEvents;
     private int hostTeamScore;
     private int guestTeamScore;
-    private int gameMinutes;
-    private Alert alertFans;
-    private Alert alertReferees;
+    private final Alert alertFans;
+    private final Alert alertReferees;
 
 /////////// Constructors ///////////
 
@@ -38,15 +40,17 @@ public class Game {
      * @param referees a list of referees that referee the match
      */
     public Game(League league, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
+        // set id
+        this.id = nextId.incrementAndGet();
+
         this.league = league;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
         this.field = field;
         this.referees = referees;
-        this.gameEvents = new ArrayList<>();
+        this.gameEvents = new HashMap<>();
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
-        this.gameMinutes = 0;
         this.alertFans = new Alert();
         this.alertReferees = new Alert();
 
@@ -68,15 +72,17 @@ public class Game {
      * @param referees a list of referees that referee the match
      */
     public Game(League league, Team hostTeam, Team guestTeam, Field field, LocalDateTime gameDate, ArrayList<Referee> referees) {
+        // set id
+        this.id = nextId.incrementAndGet();
+
         this.league = league;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
         this.field = field;
         this.referees = referees;
-        this.gameEvents = new ArrayList<>();
+        this.gameEvents = new HashMap<>();
         this.hostTeamScore = 0;
         this.guestTeamScore = 0;
-        this.gameMinutes = 0;
         this.alertFans = new Alert();
         this.alertReferees = new Alert();
 
@@ -205,14 +211,9 @@ public class Game {
      * UC 10.3
      * Adds a game event to the list of game events in this match
      * @param event - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
-     * @return true if the addition was successful, false if not
      */
-    public void addEvent(GameEvent event) throws Exception {
-        // date time of event earlier than game
-        if(event.getDateTime().compareTo(this.gameDate) <= 0){
-            throw new Exception("The date of the game is invalid");
-        }
-        this.gameEvents.add(event);
+    public void addEvent(GameEvent event) {
+        this.gameEvents.put(event.getId(), event);
 
         // send alerts
         AlertNotification alertNotification = new AlertNotification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
@@ -225,48 +226,15 @@ public class Game {
      * UC 10.4
      * Updates a game event in this match - executed by the main referee
      * @param event the game event
-     * @param dateTimeStr the date of the match
-     * @param gameMinutes the minute in which the event took place
-     * @param eventName the name of the event
-     * @param description the description of the event
-     * @throws Exception
      */
-    public void changeEvent(GameEvent event, String dateTimeStr, int gameMinutes, GameAlert eventName, String description) throws Exception {
-        if (!this.getGameEvents().contains(event)) {
-            throw new Exception("Not event of this game");
-        }
-
-        long diffInHours = ChronoUnit.HOURS.between(this.getGameDate(), LocalDateTime.now());
-        if (diffInHours > 5) {
-            throw new Exception("Not allowed to change the game events: out of time");
-        }
-
-        // dateTimeStr == null - the dateTimeStr UI field is not filled
-        if (dateTimeStr != null) {
-            event.setGameDate(dateTimeStr);
-        }
-
-        // gameMinutes == -1 - the gameMinutes UI field is not filled
-        if (gameMinutes > -1) {
-            event.setGameMinutes(gameMinutes);
-        }
-
-        // eventName == null - the eventName UI field is not filled
-        if (eventName != null) {
-            event.setEventName(eventName);
-        }
-
-        // description == null - the description UI field is not filled
-        if (description != null) {
-            event.setDescription(description);
-        }
+    public void changeEvent(GameEvent event) {
+        this.gameEvents.put(event.getId(), event);
 
         // send alerts
         AlertNotification alertNotification = new AlertNotification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
         alertFans.sendAlert(alertNotification);
         alertReferees.sendAlert(alertNotification);
     }
-
 
     /**
      * Indicates if two games are the same
@@ -296,6 +264,15 @@ public class Game {
     }
 
 /////////// Getters and Setters ///////////
+
+    /**
+     * Returns the id of game
+     * @return the id of game
+     */
+    public int getId() {
+        return this.id;
+    }
+
 
     /**
      * Returns the league in which the match is played
@@ -373,7 +350,7 @@ public class Game {
      * Returns the list of game events that took place in this match
      * @return the list of game events that took place in this match
      */
-    public ArrayList<GameEvent> getGameEvents() {
+    public HashMap<Integer,GameEvent> getGameEvents() {
         return gameEvents;
     }
 
@@ -407,22 +384,6 @@ public class Game {
      */
     public void setGuestTeamScore(int guestTeamScore) {
         this.guestTeamScore = guestTeamScore;
-    }
-
-    /**
-     * Returns the current minute of the game
-     * @return the current minute of the game
-     */
-    public int getGameMinutes() {
-        return gameMinutes;
-    }
-
-    /**
-     * Updates the current minute of the game
-     * @param gameMinutes the new minute of the game
-     */
-    public void setGameMinutes(int gameMinutes) {
-        this.gameMinutes = gameMinutes;
     }
 
     /**

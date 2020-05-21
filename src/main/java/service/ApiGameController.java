@@ -26,14 +26,14 @@ public class ApiGameController {
     }
 
     @PostMapping("/games/{gameId}")
-    public void addFanSubscriptionToGame(String username, @PathVariable String gameId, @RequestParam String dateTimeStr, @RequestParam String gameMinutes, @RequestParam String eventName, @RequestParam String description) throws Exception {
-        controller.addGameEventToGame(username, gameId, dateTimeStr, gameMinutes, eventName, description);
+    public void addFanSubscriptionToGame(@PathVariable String gameId, @RequestParam String eventName, @RequestParam String description) throws Exception {
+        controller.addGameEventToGame(gameId, eventName, description);
     }
 
     // This will update event by referee user in the following way: /games/{gameId}?eventId=<eventId>
     @PutMapping("/games/{gameId}")
-    public void changeGameEvent(String username, @PathVariable String gameId, @RequestParam("eventId") String eventId, @RequestParam String dateTimeStr, @RequestParam String gameMinutes, @RequestParam String eventName, @RequestParam String description) throws Exception {
-        controller.changeGameEvent(username, gameId, eventId,  dateTimeStr, gameMinutes, eventName, description);
+    public void changeGameEvent(@PathVariable String gameId, @RequestParam("eventId") String eventId, @RequestParam String dateTimeStr, @RequestParam String gameMinutes, @RequestParam String eventName, @RequestParam String description) throws Exception {
+        controller.changeGameEvent(gameId, eventId,  dateTimeStr, gameMinutes, eventName, description);
     }
 
 

@@ -32,7 +32,12 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1,teamCoach.getUserName());
-            statement.setString(2,teamCoach.getCurrentTeam().getTeamName());
+            if(teamCoach.getCurrentTeam() != null) {
+                statement.setString(2, teamCoach.getCurrentTeam().getTeamName());
+            }
+            else{
+                statement.setString(2, null);
+            }
             statement.setString(3,teamCoach.getRole());
             statement.setString(4,teamCoach.getQualification());
 
@@ -60,7 +65,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
     @Override
     public void update(TeamCoach teamCoach) {
         if(teamCoach == null){
-            System.out.println("Couldn't execute 'update(TeamCoach teamCoach)' in TeamCoachDBAccess: the user is null");
+            System.out.println("Couldn't execute 'update(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
             return;
         }
 
