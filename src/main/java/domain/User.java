@@ -1,5 +1,6 @@
 package domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,6 +17,7 @@ public class User {
     private HashMap<Role, Subscriber> roles;
     private String mail;
     private boolean isClosed;
+    private boolean isMail;
 
     // ========================= Constructor ==========================
 
@@ -34,6 +36,7 @@ public class User {
         this.roles = new HashMap<>();
         addRoleToUser(Role.FAN);
         isClosed = false;
+        setMail(true);
     }
 
 
@@ -45,17 +48,31 @@ public class User {
      * @param mail
      * @param isClosed
      */
-    public User(String userName, String password, String name, String mail, boolean isClosed){
+    public User(String userName, String password, String name, String mail, boolean isClosed, boolean isMail){
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.mail = mail;
         this.isClosed = isClosed;
         this.roles = new HashMap<>();
+        setMail(isMail);
     }
 
     // ========================= Getters and Setters ==========================
 
+
+    public boolean isMail() {
+        return isMail;
+    }
+
+    public void setMail(boolean mail) {
+        isMail = mail;
+
+        ArrayList<Role> roleTypes = new ArrayList<>(roles.keySet());
+        for(Role role : roleTypes){
+            roles.get(role).setMail(isMail);
+        }
+    }
 
     /**
      * Identifies if the user is deactivated
