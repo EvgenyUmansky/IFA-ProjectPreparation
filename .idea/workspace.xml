@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,18 +79,6 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="JUnit.All in IFA-ProjectPreparation">
     <configuration name="All in IFA-ProjectPreparation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -213,7 +202,10 @@
       <workItem from="1589842478363" duration="3412000" />
       <workItem from="1589901576945" duration="279000" />
       <workItem from="1589901929639" duration="12949000" />
-      <workItem from="1589929213303" duration="3493000" />
+      <workItem from="1589929213303" duration="4107000" />
+      <workItem from="1590049297159" duration="339000" />
+      <workItem from="1590049993184" duration="371000" />
+      <workItem from="1590050379926" duration="479000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -313,11 +305,18 @@
       <option name="project" value="LOCAL" />
       <updated>1589932892145</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="creating DBAccess for fan coach referee manager owner player sysAdmin assAgent team">
+      <created>1589932935401</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1589932935402</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -334,9 +333,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -355,6 +352,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="After merge with Dev" />
@@ -444,23 +442,11 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamOwnerTest.ic" NAME="TeamOwnerTest Coverage Results" MODIFIED="1587331721268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>domain.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$service_in_IFA_ProjectPreparation.ic" NAME="service in IFA-ProjectPreparation Coverage Results" MODIFIED="1587580960541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__2_.ic" NAME="All in IFA-ProjectPreparation (2) Coverage Results" MODIFIED="1587416024389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__3_.ic" NAME="All in IFA-ProjectPreparation (3) Coverage Results" MODIFIED="1587415489923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$Controller.ic" NAME="Controller Coverage Results" MODIFIED="1587542717251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__1_.ic" NAME="All in IFA-ProjectPreparation (1) Coverage Results" MODIFIED="1587415882402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$domain_in_IFA_ProjectPreparation.ic" NAME="domain in IFA-ProjectPreparation Coverage Results" MODIFIED="1587578799435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>domain.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamTest.ic" NAME="TeamTest Coverage Results" MODIFIED="1587415072452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$Controller.ic" NAME="Controller Coverage Results" MODIFIED="1587542717251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$ControllerTest.ic" NAME="ControllerTest Coverage Results" MODIFIED="1587543119145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>service.*</FILTER>
@@ -469,6 +455,18 @@
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$SystemEventTest.ic" NAME="SystemEventTest Coverage Results" MODIFIED="1587416941972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$service_in_IFA_ProjectPreparation.ic" NAME="service in IFA-ProjectPreparation Coverage Results" MODIFIED="1587580960541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$domain_in_IFA_ProjectPreparation.ic" NAME="domain in IFA-ProjectPreparation Coverage Results" MODIFIED="1587578799435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamOwnerTest.ic" NAME="TeamOwnerTest Coverage Results" MODIFIED="1587331721268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__2_.ic" NAME="All in IFA-ProjectPreparation (2) Coverage Results" MODIFIED="1587416024389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__3_.ic" NAME="All in IFA-ProjectPreparation (3) Coverage Results" MODIFIED="1587415489923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__1_.ic" NAME="All in IFA-ProjectPreparation (1) Coverage Results" MODIFIED="1587415882402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="masterDetails">
     <states>
