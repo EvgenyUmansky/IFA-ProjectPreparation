@@ -39,7 +39,11 @@ public class TeamOwner extends  Subscriber {
         this.managerAppointments = new HashSet<>();
         this.ownerAppointments = new HashSet<>();
     }
-
+    public TeamOwner(String userName, String mail, String name) {
+        super(userName, mail, name);
+        this.managerAppointments = new HashSet<>();
+        this.ownerAppointments = new HashSet<>();
+    }
 
     // =================== Getters and Setters ====================
 

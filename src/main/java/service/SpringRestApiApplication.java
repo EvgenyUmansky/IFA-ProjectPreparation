@@ -13,4 +13,5 @@ public class SpringRestApiApplication {
         SpringApplication.run(SpringRestApiApplication.class, args);
     }
 
+    // For more reading on Spring params: https://www.baeldung.com/spring-request-param
 }

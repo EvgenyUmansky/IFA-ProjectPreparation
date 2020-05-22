@@ -2,10 +2,10 @@ package service;
 
 import org.springframework.web.bind.annotation.*;
 
-public class FanController {
+public class ApiFanController {
     private final domain.controllers.FanController controller;
 
-    public FanController(){
+    public ApiFanController(){
         controller = new domain.controllers.FanController();
     }
 

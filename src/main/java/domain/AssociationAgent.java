@@ -16,5 +16,7 @@ public class AssociationAgent extends Subscriber {
     public AssociationAgent(String userName, String mail) {
         super(userName, mail);
     }
-
+    public AssociationAgent(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 }

@@ -3,10 +3,10 @@ package service;
 import domain.TeamCoach;
 import org.springframework.web.bind.annotation.*;
 
-public class CoachController {
+public class ApiCoachController {
     private final domain.controllers.CoachController controller;
 
-    public CoachController(){
+    public ApiCoachController(){
         controller = new domain.controllers.CoachController();
     }
 

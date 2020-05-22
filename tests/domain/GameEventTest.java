@@ -14,7 +14,7 @@ class GameEventTest {
     GameEvent gameEvent;
     @BeforeEach
     public void insert() {
-        gameEvent = new GameEvent("2020-01-01 11:11", 29, GameAlert.INJURY, "Messi is wounded");
+       // gameEvent = new GameEvent("2020-01-01 11:11", 29, GameAlert.INJURY, "Messi is wounded");
     }
 
     @AfterEach

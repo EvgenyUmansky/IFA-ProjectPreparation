@@ -1,15 +1,52 @@
 package domain.controllers;
 
 import domain.*;
+import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class TeamController {
 
-    public ArrayList<Team> getTeams() {
+    public TeamDTO createTeam(String teamOwner, String name, String stadium){
+        User user = User.getUserByID(teamOwner);
+        Field field = Field.getFieldByName(stadium);
+        user.addRoleToUser(Role.TEAM_OWNER);
+        TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
+        Team newTeam = new Team(name, field, owner);
+        // TODO: Save new team to DB
+        return new TeamDTO(
+                newTeam.getTeamName(),
+                newTeam.getStadium().getFieldName(),
+                newTeam.getFields().keySet().toArray(new String[0]),
+                newTeam.getPlayers().keySet().toArray(new String[0]),
+                newTeam.getCoaches().keySet().toArray(new String[0]),
+                newTeam.getManagers().keySet().toArray(new String[0]),
+                newTeam.getOwners().keySet().toArray(new String[0]),
+                newTeam.getTeamStatus().name()
+        );
+
+    }
+
+    public ArrayList<TeamDTO> getTeams() {
         // TODO: get all teams from DB
-        return null;
+        ArrayList<Team> array = new ArrayList<>();
+        array.add(new Team("test", new Field("Test field", 1), new TeamOwner("user", "user@gmail.com")));
+        ArrayList<TeamDTO> response = new ArrayList<>();
+        for (Team team : array) {
+            response.add(new TeamDTO(
+                    team.getTeamName(),
+                    team.getStadium().getFieldName(),
+                    team.getFields().keySet().toArray(new String[0]),
+                    team.getPlayers().keySet().toArray(new String[0]),
+                    team.getCoaches().keySet().toArray(new String[0]),
+                    team.getManagers().keySet().toArray(new String[0]),
+                    team.getOwners().keySet().toArray(new String[0]),
+                    team.getTeamStatus().name()
+            ));
+        }
+        return response;
     }
 
     // ========================= Guest functions ============================

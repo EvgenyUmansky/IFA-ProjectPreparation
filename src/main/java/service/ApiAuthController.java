@@ -5,14 +5,16 @@ import domain.Subscriber;
 import domain.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import service.pojos.LoginDTO;
 
 import java.util.HashMap;
 
-public class AuthController {
+public class ApiAuthController {
     private final domain.controllers.AuthController controller;
 
-    public AuthController(){
+    public ApiAuthController(){
         controller = new domain.controllers.AuthController();
     }
 
@@ -23,8 +25,8 @@ public class AuthController {
 
     @GetMapping("/login")
     // This will log in a user
-    public User login(String userName, String password) throws Exception {
-        return controller.login(userName, password);
+    public User login(@RequestBody LoginDTO login) throws Exception {
+        return controller.login(login.getUsername(), login.getPassword());
     }
 
     @GetMapping("/users")

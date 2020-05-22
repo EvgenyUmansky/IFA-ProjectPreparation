@@ -2,11 +2,16 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents an event that takes place during a match
  */
 public class GameEvent {
+    // ID
+    static AtomicInteger nextId = new AtomicInteger();
+    private final int id;
+
 
     private LocalDateTime dateTime;
     private int gameMinutes;
@@ -17,16 +22,15 @@ public class GameEvent {
 
     /**
      * Constructor
-     * @param dateTimeStr the time the event took place
      * @param gameMinutes the minute of the game
      * @param eventName the type of the event
      * @param description the description of the event
      */
-    public GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String description) {
-        // Game date string format: "2016-11-09 11:44"
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+    public GameEvent(int gameMinutes, GameAlert eventName, String description) {
+        // set id
+        this.id = nextId.incrementAndGet();
 
+        this.dateTime = LocalDateTime.now();
         this.gameMinutes = gameMinutes;
         this.eventName = eventName;
         this.description = description;
@@ -34,6 +38,13 @@ public class GameEvent {
 
 
 /////////// Getters and Setters ///////////
+    /**
+     * Returns the id of event
+     * @return the id of event
+     */
+    public int getId() {
+        return this.id;
+    }
 
     /**
      * Returns the date and time the event took place
