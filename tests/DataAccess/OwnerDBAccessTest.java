@@ -105,7 +105,7 @@ class OwnerDBAccessTest {
         connection.commit();
 
         // save teamOwner to DB
-        teamOwner.setTeam(team);
+        teamOwner.setTeam(team.getTeamName());
         ownerDBAccess.save(teamOwner);
 
         // check the teamOwner saved in the DB
@@ -113,7 +113,7 @@ class OwnerDBAccessTest {
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
         assertEquals(teamOwner.getUserName(), resultSet.getString(1));
-        assertEquals(teamOwner.getTeam().getTeamName(), resultSet.getString(2));
+        assertEquals(teamOwner.getTeam(), resultSet.getString(2));
 
 
         // delete the teamOwner from DB
@@ -161,7 +161,7 @@ class OwnerDBAccessTest {
         assertEquals("UserName_1", resultSet.getString(1));
 
         // update teamOwner in DB
-        teamOwner.setTeam(team);
+        teamOwner.setTeam(team.getTeamName());
         ownerDBAccess.update(teamOwner);
 
         // check the teamOwner updated in the DB
@@ -169,7 +169,7 @@ class OwnerDBAccessTest {
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
         assertEquals(teamOwner.getUserName(), resultSet.getString(1));
-        assertEquals(teamOwner.getTeam().getTeamName(), resultSet.getString(2));
+        assertEquals(teamOwner.getTeam(), resultSet.getString(2));
 
 
         // delete the teamOwner from DB
