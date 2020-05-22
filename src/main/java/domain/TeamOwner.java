@@ -8,7 +8,7 @@ import java.util.HashSet;
  */
 public class TeamOwner extends  Subscriber {
 
-    private Team team;
+    private String currentTeam;
     private HashSet<TeamManager> managerAppointments;
     private HashSet<TeamOwner> ownerAppointments;
 
@@ -19,12 +19,12 @@ public class TeamOwner extends  Subscriber {
      * Constructor
      * @param userName the username of the team owner
      * @param mail the mail of the team owner
-     * @param team the team that the owner owns
+     * @param currentTeam the team that the owner owns
      * @param managerAppointments a list of managers that this owner has appointed as managers in the team he owns
      */
-    public TeamOwner(String userName, String mail, Team team, HashSet<TeamManager> managerAppointments) {
+    public TeamOwner(String userName, String mail, String currentTeam, HashSet<TeamManager> managerAppointments) {
         super(userName, mail);
-        this.team = team;
+        this.currentTeam = currentTeam;
         this.managerAppointments = managerAppointments;
         this.ownerAppointments = new HashSet<>();
     }
@@ -51,16 +51,16 @@ public class TeamOwner extends  Subscriber {
      * Updates the team this owner owns
      * @param team the team this owner owns
      */
-    public void setTeam(Team team){
-        this.team = team;
+    public void setTeam(String team){
+        this.currentTeam = team;
     }
 
     /**
      * Returns the team this owner owns
      * @return the team this owner owns
      */
-    public Team getTeam() {
-        return team;
+    public String getTeam() {
+        return currentTeam;
     }
 
     /**

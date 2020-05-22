@@ -38,7 +38,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             statement = connection.prepareStatement(query);
             statement.setString(1, teamOwner.getUserName());
             if(teamOwner.getTeam() != null) {
-                statement.setString(2, teamOwner.getTeam().getTeamName());
+                statement.setString(2, teamOwner.getTeam());
             }
             else {
                 statement.setString(2, null);
@@ -77,7 +77,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setString(1, teamOwner.getTeam().getTeamName());
+            statement.setString(1, teamOwner.getTeam());
             statement.setString(2, teamOwner.getUserName());
 
 

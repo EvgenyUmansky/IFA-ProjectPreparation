@@ -63,7 +63,7 @@ class TeamPageTest {
         TeamManager teamManagerView = new TeamManager("Macker","Mvh@gmail.com");
         TeamManager teamManagerTam = new TeamManager("Mshoko","Mt@gmail.com");
         ownerUser.addRoleToUser(Role.TEAM_MANAGER,teamManagerMacabi);
-        owner.setTeam(team);
+        owner.setTeam(team.getTeamName());
         ownerUser.addRoleToUser(Role.TEAM_OWNER,owner);
         ownerUser2.addRoleToUser(Role.TEAM_OWNER,ownerTest2);
         team.addManager(ownerUser2,ownerUser);
