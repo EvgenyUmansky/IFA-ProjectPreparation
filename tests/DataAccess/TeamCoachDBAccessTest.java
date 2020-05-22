@@ -114,7 +114,7 @@ class TeamCoachDBAccessTest {
         connection.commit();
 
         // save user to DB: team != null
-        teamCoach.setCurrentTeam(team);
+        teamCoach.setCurrentTeam(team.getTeamName());
         teamCoachDBAccess.save(teamCoach);
 
         // check the teamCoach saved in the DB
@@ -122,7 +122,7 @@ class TeamCoachDBAccessTest {
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
         assertEquals(teamCoach.getUserName(), resultSet.getString(1));
-        assertEquals(teamCoach.getCurrentTeam().getTeamName(), resultSet.getString(2));
+        assertEquals(teamCoach.getCurrentTeam(), resultSet.getString(2));
 
 
         // delete the teamCoach from DB
@@ -226,7 +226,7 @@ class TeamCoachDBAccessTest {
         // check select
         TeamCoach selectedCoach = teamCoachDBAccess.select("UserName_1");
         assertEquals("UserName_1", selectedCoach.getUserName());
-        assertEquals("Team_1", selectedCoach.getCurrentTeam().getTeamName());
+        assertEquals("Team_1", selectedCoach.getCurrentTeam());
         assertEquals("Role", selectedCoach.getRole());
         assertEquals("4", String.valueOf(selectedCoach.getQualification()));
         // delete the teamCoach from DB

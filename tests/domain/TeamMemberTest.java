@@ -32,7 +32,7 @@ class TeamMemberTest {
     @Test
     void setCurrentTeam() {
         assertNull(TM.getCurrentTeam());
-        TM.setCurrentTeam(team);
+        TM.setCurrentTeam(team.getTeamName());
         assertEquals(team, TM.getCurrentTeam());
     }
 

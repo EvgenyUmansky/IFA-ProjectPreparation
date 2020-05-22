@@ -229,7 +229,7 @@ public class Team {
      * @param player the new player
      */
     public void addPlayer(TeamPlayer player){
-        player.setCurrentTeam(this);
+        player.setCurrentTeam(teamName);
         this.players.put(player.getUserName(), player);
         addSubscriber(player);
     }
@@ -240,7 +240,7 @@ public class Team {
      * @param coach the new coach
      */
     public void addCoach(TeamCoach coach){
-        coach.setCurrentTeam(this);
+        coach.setCurrentTeam(teamName);
         this.coaches.put(coach.getUserName(), coach);
         addSubscriber(coach);
     }
@@ -387,12 +387,19 @@ public class Team {
     public void addManager(User currentOwner, User newManager) {
         if (this.owners.containsKey(currentOwner.getUserName())) {
             TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
-            newTeamManager.setCurrentTeam(this);
+            newTeamManager.setCurrentTeam(teamName);
             this.managers.put(newTeamManager.getUserName(), newTeamManager);
             addSubscriber(newTeamManager);
         }
     }
-
+    public void addManager(TeamOwner currentOwner, User newManager) {
+        if (this.owners.containsKey(currentOwner.getUserName())) {
+            TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
+            newTeamManager.setCurrentTeam(teamName);
+            this.managers.put(newTeamManager.getUserName(), newTeamManager);
+            addSubscriber(newTeamManager);
+        }
+    }
 
     /**
      * UC 6.5

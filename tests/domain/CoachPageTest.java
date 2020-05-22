@@ -29,7 +29,7 @@ class CoachPageTest {
         TeamOwner owner = new TeamOwner("ownerUser","owner@gmail.com");
         Team team = new Team("team",field,owner);
         assertNull(page.getCurrentTeam());
-        page.setCurrentTeam(team);
+        page.setCurrentTeam(team.getTeamName());
         assertEquals(team,page.getCurrentTeam());
     }
 }
