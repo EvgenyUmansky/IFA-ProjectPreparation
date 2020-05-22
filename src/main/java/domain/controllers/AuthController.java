@@ -3,6 +3,7 @@ package domain.controllers;
 import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
 import domain.*;
+import service.pojos.UserDTO;
 
 import java.util.*;
 
@@ -44,9 +45,10 @@ public class AuthController {
      * @param password the user's password
      * @return the user's instance
      */
-    public User login(String userName, String password) throws Exception {
-        UserDBAccess userDBAccess = UserDBAccess.getInstance();
-        User user = userDBAccess.select(userName);
+    public UserDTO login(String userName, String password) throws Exception {
+//        UserDBAccess userDBAccess = UserDBAccess.getInstance();
+//        User user = userDBAccess.select(userName);
+        User user = User.getUserByID(userName);
 
         if (user == null) {
             throw new Exception("User not found!");
@@ -58,7 +60,12 @@ public class AuthController {
 
 
         user.connect();
-        return user;
+        ArrayList<String> rolesAsSrings = new ArrayList<>();
+        Role[] roles = user.getRoles().keySet().toArray(new Role[0]);
+        for (Role role : roles) {
+            rolesAsSrings.add(role.name());
+        }
+        return new UserDTO(user.getUserName(), user.getName(), rolesAsSrings.toArray(new String[0]), user.getMail());
     }
 
 
@@ -129,15 +136,15 @@ public class AuthController {
     /**
      * TEST function - SHOULD BE IMPLEMENTED IN UI
      */
-    public User showLoginPanel() throws Exception {
-        Scanner getInput = new Scanner(System.in);
-        System.out.println("Please Login to system");
-        System.out.println("Username: ");
-        String userName = getInput.nextLine();
-        System.out.println("Password: ");
-        String password = getInput.nextLine();
-        return this.login(userName, password);
-    }
+//    public UserDTO showLoginPanel() throws Exception {
+//        Scanner getInput = new Scanner(System.in);
+//        System.out.println("Please Login to system");
+//        System.out.println("Username: ");
+//        String userName = getInput.nextLine();
+//        System.out.println("Password: ");
+//        String password = getInput.nextLine();
+//        return this.login(userName, password);
+//    }
 
 
     /**
@@ -145,7 +152,7 @@ public class AuthController {
      */
     public void runSystem() throws Exception {
         // Load test Data (Use mock)
-        User connectedUser = showLoginPanel();
+//        User connectedUser = showLoginPanel();
 //        while (connectedUser.isConnected()) {
 //            System.out.println("Please choose the role you wanna use now:");
 //            HashMap<Role, Subscriber> roles = connectedUser.getRoles();

@@ -3,6 +3,7 @@ package service;
 import domain.*;
 import domain.controllers.AuthController;
 import domain.controllers.SystemAdministratorController;
+import service.pojos.UserDTO;
 
 import java.text.ParseException;
 import java.util.*;
@@ -60,7 +61,7 @@ public class ApiController {
      * @param password the user's password
      * @return the user's instance
      */
-    public User login(String userName, String password) throws Exception {
+    public UserDTO login(String userName, String password) throws Exception {
         return startController.login(userName, password);
     }
 
@@ -711,16 +712,6 @@ public class ApiController {
     public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
         return startController.getUserRoles(userName);
     }
-
-
-
-    /**
-     * TEST function - SHOULD BE IMPLEMENTED IN UI
-     */
-    public User showLoginPanel() throws Exception {
-        return startController.showLoginPanel();
-    }
-
 
     /**
      *  TEST function - SHOULD BE IMPLEMENTED IN UI
