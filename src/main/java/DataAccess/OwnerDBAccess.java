@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class OwnerDBAccess implements DBAccess<TeamOwner> {
@@ -163,6 +164,11 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             }
         }
         return teamOwner;
+    }
+
+    @Override
+    public HashMap<String, TeamOwner> conditionedSelect(String[] conditions) {
+        return null;
     }
 
 

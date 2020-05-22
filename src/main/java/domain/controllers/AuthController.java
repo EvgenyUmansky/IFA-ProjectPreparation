@@ -13,7 +13,8 @@ public class AuthController {
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
-
+    private DBAccess<User> uda = UserDBAccess.getInstance();
+    //private DBAccess<HashMap<,>> uda = UserDBAccess.getInstance();
 
     // ========================= Constructor =========================
 
@@ -45,8 +46,7 @@ public class AuthController {
      * @return the user's instance
      */
     public User login(String userName, String password) throws Exception {
-        UserDBAccess userDBAccess = UserDBAccess.getInstance();
-        User user = userDBAccess.select(userName);
+        User user = uda.select(userName);
 
         if (user == null) {
             throw new Exception("User not found!");
@@ -55,6 +55,8 @@ public class AuthController {
         if (!user.getPassword().equals(hash(password))) {
             throw new Exception("Wrong password!");
         }
+
+
 
 
         user.connect();
