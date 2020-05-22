@@ -11,7 +11,7 @@ public class Team {
 
     private String teamName;
     private Field stadium; //The team's main stadium, where they play official matches
-    private HashMap<String,Field> fields; //All the team's fields, including the stadium and training fields
+    private HashMap<String, Field> fields; //All the team's fields, including the stadium and training fields
     private HashMap<String, TeamPlayer> players;
     private HashMap<String, TeamCoach> coaches;
     private HashMap<String, TeamManager> managers;
@@ -27,9 +27,10 @@ public class Team {
 
     /**
      * Constructor
-     * @param name the team's name
+     *
+     * @param name    the team's name
      * @param stadium the team's stadium
-     * @param owner the team's owner
+     * @param owner   the team's owner
      */
     public Team(String name, Field stadium, TeamOwner owner) {
         this.teamName = name;
@@ -44,15 +45,16 @@ public class Team {
         this.fields.put(stadium.getFieldName(), stadium);
         this.teamStatus = TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
+        owner.setTeam(this.teamName);
     }
 
-    public Team(String teamName, String mail, String fieldName, String status){
+    public Team(String teamName, String mail, String fieldName, String status) {
         this.teamName = teamName;
         this.teamEmail = mail;
         setTeamStatus(status);
 
         this.fields = new HashMap<>();
-        fields.put(fieldName,null);
+        fields.put(fieldName, null);
 
         this.owners = new HashMap<>();
         this.managers = new HashMap<>();
@@ -65,6 +67,7 @@ public class Team {
 
     /**
      * Returns a HashMap with the players in the team
+     *
      * @return a HashMap with the players in the team (Key - player's name, value - player object)
      */
     public HashMap<String, TeamPlayer> getPlayers() {
@@ -73,6 +76,7 @@ public class Team {
 
     /**
      * Returns a HashMap with the coaches in the team
+     *
      * @return a HashMap with the coaches in the team (Key - coach's name, value - coach object)
      */
     public HashMap<String, TeamCoach> getCoaches() {
@@ -81,6 +85,7 @@ public class Team {
 
     /**
      * Returns a HashMap with the managers in the team
+     *
      * @return a HashMap with the managers in the team (Key - managers's name, value - manager object)
      */
     public HashMap<String, TeamManager> getManagers() {
@@ -89,6 +94,7 @@ public class Team {
 
     /**
      * Returns the team's stadium
+     *
      * @return the team's stadium
      */
     public Field getStadium() {
@@ -97,6 +103,7 @@ public class Team {
 
     /**
      * Returns the team's mail
+     *
      * @return the team's mail
      */
     public String getTeamEmail() {
@@ -105,6 +112,7 @@ public class Team {
 
     /**
      * Updates the team's mail
+     *
      * @param teamEmail the new team's mail
      */
     public void setTeamEmail(String teamEmail) {
@@ -113,6 +121,7 @@ public class Team {
 
     /**
      * Returns the team's name
+     *
      * @return the team's name
      */
     public String getTeamName() {
@@ -121,6 +130,7 @@ public class Team {
 
     /**
      * Returns the player instance that matches the username
+     *
      * @param userName the player's username
      * @return the player instance that matches the username
      */
@@ -130,6 +140,7 @@ public class Team {
 
     /**
      * Returns the coach instance that matches the username
+     *
      * @param userName the player's username
      * @return the coach instance that matches the username
      */
@@ -140,15 +151,17 @@ public class Team {
     /**
      * Returns a HashMap with the fields of the team.
      * The key in the map is the field's name, and the field instance is the value
+     *
      * @return a HashMap with the fields of the team
      */
-    public HashMap<String,Field> getFields() {
+    public HashMap<String, Field> getFields() {
         return fields;
     }
 
     /**
      * Returns a HashMap with the owners of the team.
      * The key in the map is the owner's username, and the owner instance is the value
+     *
      * @return a HashMap with the owners of the team
      */
     public HashMap<String, TeamOwner> getOwners() {
@@ -157,6 +170,7 @@ public class Team {
 
     /**
      * Returns the budget of the team
+     *
      * @return the budget of the team
      */
     public Budget getBudget() {
@@ -165,6 +179,7 @@ public class Team {
 
     /**
      * Returns the team's profile page
+     *
      * @return the team's profile page
      */
     public PersonalPage getTeamPage() {
@@ -174,15 +189,16 @@ public class Team {
 
     /**
      * Returns the team's status (open, temporarily closed, permanently closed)
+     *
      * @return the team's status
      */
-    public TeamStatus getTeamStatus(){
+    public TeamStatus getTeamStatus() {
         return this.teamStatus;
     }
 
 
-    public void setTeamStatus(String status){
-        switch (status){
+    public void setTeamStatus(String status) {
+        switch (status) {
             case "Open":
                 setTeamStatus(TeamStatus.Open);
                 break;
@@ -200,20 +216,22 @@ public class Team {
         }
     }
 
-    public void setTeamStatus(TeamStatus status){
+    public void setTeamStatus(TeamStatus status) {
         this.teamStatus = status;
     }
 
     /**
      * Updates the team's budget
+     *
      * @param budget the team's budget
      */
-    public void setBudget(Budget budget){
+    public void setBudget(Budget budget) {
         this.budget = budget;
     }
 
     /**
      * Returns the notification system of the team
+     *
      * @return the notification system of the team
      */
     public Alert getAlert() {
@@ -226,9 +244,10 @@ public class Team {
     /**
      * UC 6.1
      * Adds a player to the team
+     *
      * @param player the new player
      */
-    public void addPlayer(TeamPlayer player){
+    public void addPlayer(TeamPlayer player) {
         player.setCurrentTeam(teamName);
         this.players.put(player.getUserName(), player);
         addSubscriber(player);
@@ -237,9 +256,10 @@ public class Team {
     /**
      * UC 6.1
      * Adds a coach to the team
+     *
      * @param coach the new coach
      */
-    public void addCoach(TeamCoach coach){
+    public void addCoach(TeamCoach coach) {
         coach.setCurrentTeam(teamName);
         this.coaches.put(coach.getUserName(), coach);
         addSubscriber(coach);
@@ -248,18 +268,20 @@ public class Team {
     /**
      * UC 6.1
      * Adds a field to the team
+     *
      * @param field the new field
      */
-    public void addField(Field field){
+    public void addField(Field field) {
         this.fields.put(field.getFieldName(), field);
     }
 
     /**
      * UC 6.1
      * Removes a player from the team
+     *
      * @param player the removed player
      */
-    public void removePlayer(TeamPlayer player){
+    public void removePlayer(TeamPlayer player) {
         player.setCurrentTeam(null);
         this.players.remove(player.getUserName());
         removeSubscriber(player);
@@ -268,9 +290,10 @@ public class Team {
     /**
      * UC 6.1
      * Removes a coach from the team
+     *
      * @param coach the removed coach
      */
-    public void removeCoach(TeamCoach coach){
+    public void removeCoach(TeamCoach coach) {
         coach.setCurrentTeam(null);
         this.coaches.remove(coach.getUserName());
         removeSubscriber(coach);
@@ -279,15 +302,17 @@ public class Team {
     /**
      * UC 6.1
      * Removes a field from the team
+     *
      * @param field the removed field
      */
-    public void removeField(Field field){
+    public void removeField(Field field) {
         this.fields.remove(field.getFieldName());
     }
 
     /**
      * UC 6.6
      * Closes a team temporarily or permanently, depends on the user
+     *
      * @param user the user that closed the team
      */
     public void closeTeam(User user) {
@@ -298,13 +323,12 @@ public class Team {
                 return;
             }
         }
-        if(teamStatus == TeamStatus.Open) {
+        if (teamStatus == TeamStatus.Open) {
             if (user.getRoles().containsKey(Role.TEAM_OWNER)) {
                 teamStatus = TeamStatus.TempClose;
                 alert.sendAlert(new AlertNotification("close team temporary", "you team close temporary"));
             }
-        }
-        else{
+        } else {
             throw new Error("This team is already closed");
         }
     }
@@ -314,11 +338,10 @@ public class Team {
      * Reopens a team that was closed
      */
     public void openTeam() {
-        if(teamStatus == TeamStatus.TempClose){
+        if (teamStatus == TeamStatus.TempClose) {
             teamStatus = TeamStatus.Open;
-            alert.sendAlert(new AlertNotification("open your team","your team open again"));
-        }
-        else{
+            alert.sendAlert(new AlertNotification("open your team", "your team open again"));
+        } else {
             throw new Error("This team can't be reopened");
         }
     }
@@ -327,11 +350,12 @@ public class Team {
     /**
      * UC 6.2
      * Adds an owner to the team
+     *
      * @param owner the new owner
      */
     protected void addOwner(TeamOwner owner) {
         if (owner.getTeam() == null) {
-            owner.setTeam(this);
+            owner.setTeam(teamName);
         }
         this.owners.put(owner.getUserName(), owner);
         addSubscriber(owner);
@@ -340,15 +364,16 @@ public class Team {
     /**
      * UC 6.2
      * Adds an owner to the team
+     *
      * @param currentOwner the owner that adds the new owner
-     * @param newOwner the new owner
+     * @param newOwner     the new owner
      */
     public void addOwner(User currentOwner, User newOwner) {
-        if(teamStatus != TeamStatus.Open){
+        if (teamStatus != TeamStatus.Open) {
             return;
         }
         if (this.owners.containsKey(currentOwner.getUserName())) {
-            TeamOwner newTeamOwner = (TeamOwner)User.getUserByID(newOwner.getUserName()).getRoles().get(Role.TEAM_OWNER);
+            TeamOwner newTeamOwner = (TeamOwner) User.getUserByID(newOwner.getUserName()).getRoles().get(Role.TEAM_OWNER);
             this.addOwner(newTeamOwner);
         }
     }
@@ -356,6 +381,7 @@ public class Team {
     /**
      * UC 6.3
      * Removes an owner from the team
+     *
      * @param user the removed owner
      */
     public void removeOwner(User user) {
@@ -363,15 +389,15 @@ public class Team {
         if (this.owners.size() <= 1) {
             throw new Error("The team cannot be left without an owner");
         } else {
-            TeamOwner owner = (TeamOwner)user.getRoles().get(Role.TEAM_OWNER);
+            TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
             this.owners.remove(user.getUserName());
             removeSubscriber(owner);
             HashSet<TeamOwner> ownerAppointments = owner.getOwnerAppointments();
             HashSet<TeamManager> managerAppointments = owner.getManagerAppointments();
-            for(TeamOwner appointment: ownerAppointments){
+            for (TeamOwner appointment : ownerAppointments) {
                 removeOwner(User.getUserByID(appointment.getUserName()));
             }
-            for(TeamManager appointment : managerAppointments){
+            for (TeamManager appointment : managerAppointments) {
                 removeManager(User.getUserByID(appointment.getUserName()));
             }
         }
@@ -381,43 +407,55 @@ public class Team {
     /**
      * UC 6.4
      * Adds a manager to the team
+     *
      * @param currentOwner the owner that adds the new manager
-     * @param newManager the new manager
+     * @param newManager   the new manager
      */
     public void addManager(User currentOwner, User newManager) {
         if (this.owners.containsKey(currentOwner.getUserName())) {
-            TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
+            TeamManager newTeamManager = (TeamManager) newManager.getRoles().get(Role.TEAM_MANAGER);
             newTeamManager.setCurrentTeam(teamName);
             this.managers.put(newTeamManager.getUserName(), newTeamManager);
             addSubscriber(newTeamManager);
         }
     }
 
+    /*/
+    This addManager function is for adding manager for mock UI tests
+     */
+    public void addManager(TeamManager newManager) {
+        newManager.setCurrentTeam(teamName);
+        this.managers.put(newManager.getUserName(), newManager);
+        addSubscriber(newManager);
+    }
 
     /**
      * UC 6.5
      * Removes a manager from the team
+     *
      * @param managerUser the removed manager
      */
-    public void removeManager(User managerUser){
-        TeamManager manager = (TeamManager)managerUser.getRoles().get(Role.TEAM_MANAGER);
+    public void removeManager(User managerUser) {
+        TeamManager manager = (TeamManager) managerUser.getRoles().get(Role.TEAM_MANAGER);
         this.managers.remove(managerUser.getUserName());
         removeSubscriber(manager);
     }
 
     /**
      * Adds a user to the team's subscribers list
+     *
      * @param user the new subscriber
      */
-    public void addSubscriber(Subscriber user){
+    public void addSubscriber(Subscriber user) {
         alert.addSubscriber(user);
     }
 
     /**
      * Removes a user from the team's subscribers list
+     *
      * @param user the removed subscriber
      */
-    public void removeSubscriber(Subscriber user){
+    public void removeSubscriber(Subscriber user) {
         alert.removeSubscriber(user);
     }
 
@@ -426,6 +464,7 @@ public class Team {
 
     /**
      * Returns a team object that matches the given team name from the DB
+     *
      * @param teamName the given team name
      * @return a team object that matches the given team name from the DB
      */
