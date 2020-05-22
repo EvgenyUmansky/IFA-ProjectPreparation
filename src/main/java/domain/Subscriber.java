@@ -30,6 +30,7 @@ public abstract class Subscriber {
         this.userName = userName;
         this.alertsMessages = new ArrayList<>();
         this.mail = mail;
+        this.name = null;
         this.isMail = false;
     }
 
@@ -92,4 +93,7 @@ public abstract class Subscriber {
         return alertsMessages;
     }
 
+    public String getName() {
+        return name;
+    }
 }

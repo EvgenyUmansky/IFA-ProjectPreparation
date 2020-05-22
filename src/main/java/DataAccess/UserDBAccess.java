@@ -1,7 +1,12 @@
 package DataAccess;
+
 import domain.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class UserDBAccess implements DBAccess<User> {
@@ -66,7 +71,7 @@ public class UserDBAccess implements DBAccess<User> {
         }
 
         String query = "update [User] " +
-                "set Name = ?, Password = ?, Email = ?, Activated = ?, IsMail = ? " +
+                "set Name = ?, Password = ?, Mail = ?, IsClosed = ?, IsMail = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -172,16 +177,72 @@ public class UserDBAccess implements DBAccess<User> {
                     retrievedUser.close();
                 }
                 connection.close();
-            }
-            catch (SQLException e3) {
+            } catch (SQLException e3) {
                 System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
             }
         }
         return user;
     }
 
+    @Override
+    public HashMap<String, User> conditionedSelect(String[] conditions) {
+        String query = "select * from [User] where";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedUsers = null;
+        HashMap<String, User> users = new HashMap<>();
+
+        for (int i = 0; i < conditions.length; i++) {
+            if (i % 2 == 0) {
+                query += " " + conditions[i];
+            } else {
+                query += " = ?";
+                if (i < conditions.length - 1)
+                    query += ",";
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+            int i = 0;
+            while (i < conditions.length) {
+                switch (conditions[i].toLowerCase()) {
+                    case "username":
+                    case "name":
+                    case "mail":
+                    case "password":
+                        statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                        break;
+
+                    case "ismail":
+                    case "isclosed":
+                        statement.setBoolean((int) (i / 2) + 1, conditions[i + 1].equals("true"));
+                        break;
+
+                    default:
+                        break;
+                }
+                i += 2;
+            }
+
+            retrievedUsers = statement.executeQuery();
 
 
+            while(retrievedUsers.next()){
+                String username = retrievedUsers.getString(1);
+                String name = retrievedUsers.getString(2);
+                String password =  retrievedUsers.getString(3);
+                String mail =  retrievedUsers.getString(4);
+                boolean isClosed = retrievedUsers.getBoolean(5);
+                boolean isMail = retrievedUsers.getBoolean(6);
+
+                users.put(username,new User(username, password, name, mail, isClosed, isMail));
+            }
+        } catch (SQLException e) {
+
+        }
+
+        return users;
+    }
 
 
 }

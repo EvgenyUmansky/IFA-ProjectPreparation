@@ -19,7 +19,9 @@ public class SystemAdministrator extends Subscriber {
     public SystemAdministrator(String userName, String mail) {
         super(userName, mail);
     }
-
+    public SystemAdministrator(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 
 
 

@@ -2,6 +2,7 @@ package DataAccess;
 import domain.TeamCoach;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
@@ -182,6 +183,11 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             }
         }
         return teamCoach;
+    }
+
+    @Override
+    public HashMap<String, TeamCoach> conditionedSelect(String[] conditions) {
+        return null;
     }
 
 }

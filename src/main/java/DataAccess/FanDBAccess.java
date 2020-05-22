@@ -2,6 +2,7 @@ package DataAccess;
 import domain.Fan;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class FanDBAccess implements DBAccess<Fan> {
@@ -133,5 +134,10 @@ public class FanDBAccess implements DBAccess<Fan> {
             }
         }
         return fan;
+    }
+
+    @Override
+    public HashMap<String, Fan> conditionedSelect(String[] conditions) {
+        return null;
     }
 }

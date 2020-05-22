@@ -2,6 +2,7 @@ package DataAccess;
 import domain.SystemAdministrator;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
@@ -133,5 +134,10 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
             }
         }
         return systemAdministrator;
+    }
+
+    @Override
+    public HashMap<String, SystemAdministrator> conditionedSelect(String[] conditions) {
+        return null;
     }
 }

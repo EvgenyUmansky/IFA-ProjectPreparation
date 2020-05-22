@@ -16,6 +16,9 @@ public abstract class TeamMember extends Subscriber {
     public TeamMember(String userName, String mail) {
         super(userName, mail);
     }
+    public TeamMember(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 
     /**
      * Returns the team the member belongs to
