@@ -13,6 +13,8 @@ public class TeamManager extends TeamMember {
     public TeamManager(String userName, String mail) {
         super(userName, mail);
     }
-
+    public TeamManager(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 
 }
