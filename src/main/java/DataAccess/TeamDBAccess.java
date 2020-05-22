@@ -147,7 +147,7 @@ public class TeamDBAccess implements DBAccess<Team>{
                 String mail =  retrievedTeam.getString(3);
                 String status = retrievedTeam.getString(4);
 
-                //team = new Team(teamName,mail,fieldName,status);
+                team = new Team(teamName,mail,fieldName,status);
             }
         }
         catch (SQLException e){
