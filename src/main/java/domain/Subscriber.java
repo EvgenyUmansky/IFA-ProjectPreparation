@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public abstract class Subscriber {
 
-    private final String userName;
     private String name;
+    private String userName;
     private String mail;
     private boolean isMail;
-    private final ArrayList<AlertNotification> alertsMessages;
+    private ArrayList<AlertNotification> alertsMessages;
     public String getUserName() {
         return userName;
     }
@@ -30,15 +30,16 @@ public abstract class Subscriber {
         this.userName = userName;
         this.alertsMessages = new ArrayList<>();
         this.mail = mail;
+        this.name = null;
         this.isMail = false;
     }
 
-    public Subscriber(String userName, String name, String mail, boolean isMail) {
+    public Subscriber(String userName, String mail, String name){
         this.userName = userName;
-        this.name = name;
-        this.mail = mail;
-        this.isMail = isMail;
         this.alertsMessages = new ArrayList<>();
+        this.mail = mail;
+        this.name = name;
+        this.isMail = false;
     }
 
     /**
@@ -94,9 +95,5 @@ public abstract class Subscriber {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
