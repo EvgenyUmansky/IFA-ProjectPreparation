@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class TeamDBAccess implements DBAccess<Team>{
 
@@ -168,5 +169,10 @@ public class TeamDBAccess implements DBAccess<Team>{
             }
         }
         return team;
+    }
+
+    @Override
+    public HashMap<String, Team> conditionedSelect(String[] conditions) {
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package DataAccess;
 import domain.AssociationAgent;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
@@ -133,5 +134,10 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
             }
         }
         return associationAgent;
+    }
+
+    @Override
+    public HashMap<String, AssociationAgent> conditionedSelect(String[] conditions) {
+        return null;
     }
 }

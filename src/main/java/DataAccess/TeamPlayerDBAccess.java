@@ -3,6 +3,7 @@ package DataAccess;
 import domain.TeamPlayer;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
@@ -164,5 +165,10 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         return teamPlayer;
     }
 
+    @Override
+    public HashMap<String, TeamPlayer> conditionedSelect(String[] conditions) {
 
+
+        return null;
+    }
 }
