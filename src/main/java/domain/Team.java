@@ -392,7 +392,14 @@ public class Team {
             addSubscriber(newTeamManager);
         }
     }
-
+    public void addManager(TeamOwner currentOwner, User newManager) {
+        if (this.owners.containsKey(currentOwner.getUserName())) {
+            TeamManager newTeamManager = (TeamManager)newManager.getRoles().get(Role.TEAM_MANAGER);
+            newTeamManager.setCurrentTeam(teamName);
+            this.managers.put(newTeamManager.getUserName(), newTeamManager);
+            addSubscriber(newTeamManager);
+        }
+    }
 
     /**
      * UC 6.5
