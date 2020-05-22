@@ -77,8 +77,8 @@ public class TeamOwnerTest {
 
     @Test
     public void setTeam() {
-        teamOwnerHapoel.setTeam(teamMacabi);
-        assertTrue(teamOwnerHapoel.getTeam() == teamMacabi);
+        teamOwnerHapoel.setTeam(teamMacabi.getTeamName());
+        assertTrue(teamOwnerHapoel.getTeam() == teamMacabi.getTeamName());
 
         teamOwnerHapoel.setTeam(null);
         assertNull(teamOwnerHapoel.getTeam());
@@ -86,15 +86,13 @@ public class TeamOwnerTest {
 
     @Test
     public void getTeam() {
-        teamOwnerHapoel.setTeam(teamHapoel);
-        assertEquals(teamOwnerHapoel.getTeam().getTeamName(),"Hapoel");
-        assertEquals(teamOwnerHapoel.getTeam().getStadium().getFieldName(),"Tedi");
-        assertSame(teamOwnerHapoel.getTeam(), teamHapoel);
+        teamOwnerHapoel.setTeam(teamHapoel.getTeamName());
+        assertSame(teamOwnerHapoel.getTeam(), teamHapoel.getTeamName());
     }
 
     @Test
     public void teamConst(){
-        TeamOwner teamOwner = new TeamOwner("Guy","guyzamos@gmail.com",teamTam,managerAppointments);
+        TeamOwner teamOwner = new TeamOwner("Guy","guyzamos@gmail.com",teamTam.getTeamName(),managerAppointments);
         assertNotNull(teamOwner);
     }
 

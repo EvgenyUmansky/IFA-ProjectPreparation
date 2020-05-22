@@ -5,7 +5,7 @@ package domain;
  */
 public abstract class TeamMember extends Subscriber {
 
-    protected Team currentTeam;
+    protected String currentTeam;
 
 
     /**
@@ -16,12 +16,15 @@ public abstract class TeamMember extends Subscriber {
     public TeamMember(String userName, String mail) {
         super(userName, mail);
     }
+    public TeamMember(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 
     /**
      * Returns the team the member belongs to
      * @return the team the member belongs to
      */
-    public Team getCurrentTeam() {
+    public String getCurrentTeam() {
         return currentTeam;
     }
 
@@ -30,7 +33,7 @@ public abstract class TeamMember extends Subscriber {
      * Updates the team of the team member
      * @param currentTeam the team of the team member
      */
-    public void setCurrentTeam(Team currentTeam) {
+    public void setCurrentTeam(String currentTeam) {
         this.currentTeam = currentTeam;
     }
 }

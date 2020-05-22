@@ -7,13 +7,15 @@ import domain.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class PlayerController {
 
     public ArrayList<TeamPlayer> getPlayers() {
         // TODO: DB arraylist of all players
-        return null;
+        TeamPlayer player = new TeamPlayer("testPlayer", "testPlayer@gmail.com", new Date(), "testPosition", "5");
+        return new ArrayList<TeamPlayer>(Arrays.asList(player));
     }
 
     // ========================= Guest functions ==========================

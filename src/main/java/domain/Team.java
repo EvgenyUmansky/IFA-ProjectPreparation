@@ -45,8 +45,23 @@ public class Team {
         this.fields.put(stadium.getFieldName(), stadium);
         this.teamStatus = TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
+        owner.setTeam(this.teamName);
     }
 
+    public Team(String teamName, String mail, String fieldName, String status) {
+        this.teamName = teamName;
+        this.teamEmail = mail;
+        setTeamStatus(status);
+
+        this.fields = new HashMap<>();
+        fields.put(fieldName, null);
+
+        this.owners = new HashMap<>();
+        this.managers = new HashMap<>();
+        this.coaches = new HashMap<>();
+        this.players = new HashMap<>();
+        this.alert = new Alert();
+    }
 
     //========================= Getters and Setters ========================//
 
@@ -181,6 +196,30 @@ public class Team {
         return this.teamStatus;
     }
 
+
+    public void setTeamStatus(String status) {
+        switch (status) {
+            case "Open":
+                setTeamStatus(TeamStatus.Open);
+                break;
+
+            case "Temporarily Closed":
+                setTeamStatus(TeamStatus.TempClose);
+                break;
+
+            case "Permanently Closed":
+                setTeamStatus(TeamStatus.PermanentlyClose);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void setTeamStatus(TeamStatus status) {
+        this.teamStatus = status;
+    }
+
     /**
      * Updates the team's budget
      *
@@ -209,7 +248,7 @@ public class Team {
      * @param player the new player
      */
     public void addPlayer(TeamPlayer player) {
-        player.setCurrentTeam(this);
+        player.setCurrentTeam(teamName);
         this.players.put(player.getUserName(), player);
         addSubscriber(player);
     }
@@ -221,7 +260,7 @@ public class Team {
      * @param coach the new coach
      */
     public void addCoach(TeamCoach coach) {
-        coach.setCurrentTeam(this);
+        coach.setCurrentTeam(teamName);
         this.coaches.put(coach.getUserName(), coach);
         addSubscriber(coach);
     }
@@ -316,7 +355,7 @@ public class Team {
      */
     protected void addOwner(TeamOwner owner) {
         if (owner.getTeam() == null) {
-            owner.setTeam(this);
+            owner.setTeam(teamName);
         }
         this.owners.put(owner.getUserName(), owner);
         addSubscriber(owner);
@@ -375,12 +414,20 @@ public class Team {
     public void addManager(User currentOwner, User newManager) {
         if (this.owners.containsKey(currentOwner.getUserName())) {
             TeamManager newTeamManager = (TeamManager) newManager.getRoles().get(Role.TEAM_MANAGER);
-            newTeamManager.setCurrentTeam(this);
+            newTeamManager.setCurrentTeam(teamName);
             this.managers.put(newTeamManager.getUserName(), newTeamManager);
             addSubscriber(newTeamManager);
         }
     }
 
+    /*/
+    This addManager function is for adding manager for mock UI tests
+     */
+    public void addManager(TeamManager newManager) {
+        newManager.setCurrentTeam(teamName);
+        this.managers.put(newManager.getUserName(), newManager);
+        addSubscriber(newManager);
+    }
 
     /**
      * UC 6.5

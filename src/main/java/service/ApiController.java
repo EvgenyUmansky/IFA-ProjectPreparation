@@ -334,13 +334,12 @@ public class ApiController {
     /**
      * UC 10.3
      * Adds an event that took place during a game to its events list
-     * @param username the referee's username
      * @param gameId the match
      *
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String username, String gameId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
-        gameController.addGameEventToGame(username, gameId, dateTimeStr, gameMinutes, eventName, description);
+    public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
+        gameController.addGameEventToGame(gameId, eventName, description);
     }
 
 
@@ -356,9 +355,9 @@ public class ApiController {
      * @param description the description of the event
      * @throws Exception in case the update was unsuccessful
      */
-    public void changeGameEvent(String username, String game, String gameEvent, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
+    public void changeGameEvent(String gameId, String eventId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
         // TODO: check the referee is MAIN in UI
-        gameController.changeGameEvent(username, game, gameEvent, dateTimeStr, gameMinutes, eventName, description);
+        gameController.changeGameEvent(gameId, eventId, dateTimeStr, gameMinutes, eventName, description);
     }
 
 

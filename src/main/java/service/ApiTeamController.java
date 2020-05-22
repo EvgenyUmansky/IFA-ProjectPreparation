@@ -38,18 +38,18 @@ public class ApiTeamController {
             }
         }
 
-        String[] players = team.getPlayers();
-        if (players != null) {
+        //String[] players = team.getPlayers();
+/*        if (players != null) {
             for (String player : players) {
                 controller.addPlayer(teamName, player);
             }
-        }
+        }*/
         // TODO: Add all fields
     }
 
     @PostMapping("/teams")
     public TeamDTO createTeam(@RequestBody TeamDTO newTeam, @RequestHeader String username) throws Exception {
         // Create new team to specific user ...? -> should Add user validation
-        return controller.createTeam(username, newTeam.getTeamName(), newTeam.getStadium());
+        return controller.createTeam(username, newTeam.getTeamName(), newTeam.getStadium().getFieldName());
     }
 }

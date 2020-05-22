@@ -1,14 +1,23 @@
 package domain.controllers;
 
+import DataAccess.UserDBAccess;
 import domain.*;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameController {
 
     public ArrayList<Game> getGames() {
+        League mockLeage = new League("testLeage");
+        mockLeage.addReferee(new Referee("refereeTest", "ref@gmail.com"));
+        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
+        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
+        Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
         // TODO: return all games
-        return null;
+        return new ArrayList<Game>(Arrays.asList(mockGame));
     }
 
     public Game getGame(String gameId){
@@ -47,84 +56,84 @@ public class GameController {
      */
     public ArrayList<Game> getRefereeGames(String username) {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        System.out.println(ref.getName());
         return Game.getGamesByReferee(ref);
     }
 
     /**
      * UC 10.3
      * Adds an event that took place during a game to its events list
-     * @param username the referee's username
      * @param gameId the match
      *
-     * @throws Exception in case the addition was unsuccessful
+     * @throws Exception in case the game is over
      */
-    public void addGameEventToGame(String username, String gameId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
-        GameEvent newGameEvent = new GameEvent(dateTimeStr, Integer.parseInt(gameMinutes), GameAlert.valueOf(eventName), description);
-        // TODO: add newGameEvent to DB
-        // TODO: DB Strings
-//        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+    public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
+//        GameDBAccess gameDBAccess = GameDBAccess.getInstance();
+//        GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
 //
-//        // TODO: compare with id from DB
-//        if(isEqualGameInList(Game.getGamesByReferee(ref), game)){
-//            try {
-//                game.addEvent(gameEvent);
-//            }
-//            catch (Exception e){
-//                e.printStackTrace(); // not valid date exception
-//                // TODO: logger
-//            }
+//        Game game = gameDBAccess.select(gameId);
+//
+//        int minuteOfEvent = (int)ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
+//
+//        if(minuteOfEvent >= 90){
+//            throw new Exception("The game is over");
 //        }
-//        else {
-//            throw new Exception("This referee doesn't judge in this game");
-//        }
+//
+//        GameEvent newGameEvent = new GameEvent(minuteOfEvent, GameAlert.valueOf(eventName), description);
+//        game.addEvent(newGameEvent);
+//        gameEventDBAccess.insert(newGameEvent);
+
     }
 
 
     /**
      * UC 10.4
      * Updates an event that took place during a game
-     * @param username the referee's username
-     * @param game the match
+     * @param gameId the match
      * @param eventId the event
      * @param dateTimeStr the time the event took place
-     * @param gameMinutes the minute of the game the event took place in
+     * @param minuteOfEvent the minute of the game the event took place in
      * @param eventName the name of the event
      * @param description the description of the event
-     * @throws Exception in case the update was unsuccessful
+     * @throws Exception in case not event of the game
      */
-    public void changeGameEvent(String username, String game, String eventId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
-        // TODO: DB Strings
-// TODO: check the referee is MAIN in UI
-//        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-//        // TODO: compare with id from DB
-//        if(isEqualGameInList(Game.getGamesByReferee(ref), game)) {
-//            try {
-//                game.changeEvent(gameEvent, dateTimeStr, gameMinutes, eventName,  description);
-//            }
-//            catch (Exception e){
-//                e.printStackTrace();
-//                // TODO: logger
-//            }
+    public void changeGameEvent(String gameId, String eventId, String minuteOfEvent, String dateTimeStr, String eventName, String description) throws Exception {
+//        GameDBAccess gameDBAccess = GameDBAccess.getInstance();
+//        GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
+//
+//        Game game = gameDBAccess.select(gameId);
+//        GameEvent gameEvent = gameEventDBAccess.select(eventId);
+//
+//        if (!game.getGameEvents().containsKey(Integer.parseInt(eventId))) {
+//            throw new Exception("Not event of this game");
 //        }
-//        else {
-//            throw new Exception("This referee doesn't judge in this game");
+//
+//        long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
+//        if (diffInHours > 5) {
+//            throw new Exception("Not allowed to change the game events: out of time");
 //        }
-    }
-
-    /**
-     * Checks if a game already exists in the referee's games list
-     * @param games the list of games
-     * @param game the checked game
-     * @return true if the list contains the game, false if not
-     */
-    private boolean isEqualGameInList(ArrayList<Game> games, Game game){
-        // TODO: change this function to ids from DB
-        // Check if game in ArrayList of games
-        for(Game refGame : games){
-            if(game.isEqualGame(refGame)){
-                return true;
-            }
-        }
-        return false;
+//
+//        // dateTimeStr == null - the dateTimeStr UI field is not filled
+//        if (dateTimeStr != null) {
+//            gameEvent.setGameDate(dateTimeStr);
+//        }
+//
+//        // get minute manually from referee in UI
+//        if(Integer.parseInt(minuteOfEvent) > -1 && Integer.parseInt(minuteOfEvent) < 90){
+//            gameEvent.setGameMinutes(Integer.parseInt(minuteOfEvent));
+//        }
+//
+//        // eventName == null - the eventName UI field is not filled
+//        if (eventName != null) {
+//            gameEvent.setEventName(GameAlert.valueOf(eventName));
+//        }
+//
+//        // description == null - the description UI field is not filled
+//        if (description != null) {
+//            gameEvent.setDescription(description);
+//        }
+//
+//        game.changeEvent(gameEvent);
+//        gameEventDBAccess.update(gameEvent);
     }
 }

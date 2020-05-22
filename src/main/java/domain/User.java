@@ -1,5 +1,6 @@
 package domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,6 +17,7 @@ public class User {
     private HashMap<Role, Subscriber> roles;
     private String mail;
     private boolean isClosed;
+    private boolean isMail;
 
     // ========================= Constructor ==========================
 
@@ -34,6 +36,7 @@ public class User {
         this.roles = new HashMap<>();
         addRoleToUser(Role.FAN);
         isClosed = false;
+        setMail(true);
     }
 
 
@@ -45,17 +48,31 @@ public class User {
      * @param mail
      * @param isClosed
      */
-    public User(String userName, String password, String name, String mail, boolean isClosed){
+    public User(String userName, String password, String name, String mail, boolean isClosed, boolean isMail){
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.mail = mail;
         this.isClosed = isClosed;
         this.roles = new HashMap<>();
+        setMail(isMail);
     }
 
     // ========================= Getters and Setters ==========================
 
+
+    public boolean isMail() {
+        return isMail;
+    }
+
+    public void setMail(boolean mail) {
+        isMail = mail;
+
+        ArrayList<Role> roleTypes = new ArrayList<>(roles.keySet());
+        for(Role role : roleTypes){
+            roles.get(role).setMail(isMail);
+        }
+    }
 
     /**
      * Identifies if the user is deactivated
@@ -234,21 +251,21 @@ public class User {
     public User addRoleToUser(Role role) {
         switch (role) {
             case SYSTEM_ADMIN:
-                return addRoleToUser(role, new SystemAdministrator(userName, mail));
+                return addRoleToUser(role, new SystemAdministrator(userName, mail, name));
             case ASSOCIATION_AGENT:
-                return addRoleToUser(role, new AssociationAgent(userName, mail));
+                return addRoleToUser(role, new AssociationAgent(userName, mail, name));
             case TEAM_PLAYER:
-                return addRoleToUser(role, new TeamPlayer(userName, mail));
+                return addRoleToUser(role, new TeamPlayer(userName, mail, name));
             case COACH:
-                return addRoleToUser(role, new TeamCoach(userName, mail));
+                return addRoleToUser(role, new TeamCoach(userName, mail, name));
             case TEAM_MANAGER:
-                return addRoleToUser(role, new TeamManager(userName, mail));
+                return addRoleToUser(role, new TeamManager(userName, mail, name));
             case TEAM_OWNER:
-                return addRoleToUser(role, new TeamOwner(userName, mail));
+                return addRoleToUser(role, new TeamOwner(userName, mail, name));
             case REFEREE:
-                return addRoleToUser(role, new Referee(userName, mail));
+                return addRoleToUser(role, new Referee(userName, mail, name));
             case FAN:
-                return addRoleToUser(role, new Fan(userName, mail));
+                return addRoleToUser(role, new Fan(userName, mail, name));
         }
         return this;
     }
@@ -316,7 +333,7 @@ public class User {
      */
     public static User getUserByID(String userName) {
         // TODO: Get user from DB
-        return new User(userName, "1234", null, "abc@gmail.com").addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE).addRoleToUser(Role.TEAM_PLAYER).addRoleToUser(Role.COACH).addRoleToUser(Role.TEAM_MANAGER);
+        return new User(userName, "1234", "Mohsen Abdalla", "abc@gmail.com").addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE).addRoleToUser(Role.TEAM_PLAYER).addRoleToUser(Role.COACH).addRoleToUser(Role.TEAM_MANAGER);
     }
 
 
