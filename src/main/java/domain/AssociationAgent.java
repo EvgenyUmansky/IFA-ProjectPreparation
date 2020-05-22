@@ -1,10 +1,22 @@
 package domain;
 
+/**
+ * This class represents an Association Agent user in the system
+ */
 public class AssociationAgent extends Subscriber {
 
-    // Constructor
-    public AssociationAgent(){
 
+    // ========================= constructor ==========================
+
+    /**
+     * Constructor
+     * @param userName the username of the user that is defined as Association Agent
+     * @param mail the mail of the user
+     */
+    public AssociationAgent(String userName, String mail) {
+        super(userName, mail);
     }
-
+    public AssociationAgent(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 }

@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/pojos/GameDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/TeamCoachDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/TeamCoachDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/CoachPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/CoachPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/TeamMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/TeamMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/ApiTeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ApiTeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/pojos/TeamDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/pojos/TeamDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/DataAccess/ManagerDBAccessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DataAccess/ManagerDBAccessTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/DataAccess/TeamCoachDBAccessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DataAccess/TeamCoachDBAccessTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/CoachPageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/CoachPageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$domain_in_IFA_ProjectPreparation.ic" NAME="domain in IFA-ProjectPreparation Coverage Results" MODIFIED="1587465958390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/domain/Team.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="389" column="42" selection-start-line="389" selection-start-column="42" selection-end-line="389" selection-end-column="42" />
+              <folding>
+                <element signature="e#2295#2296#0" expanded="true" />
+                <element signature="e#2325#2326#0" expanded="true" />
+                <element signature="e#2546#2547#0" expanded="true" />
+                <element signature="e#2576#2577#0" expanded="true" />
+                <element signature="e#2807#2808#0" expanded="true" />
+                <element signature="e#2838#2839#0" expanded="true" />
+                <element signature="e#2955#2956#0" expanded="true" />
+                <element signature="e#2985#2986#0" expanded="true" />
+                <element signature="e#3099#3100#0" expanded="true" />
+                <element signature="e#3131#3132#0" expanded="true" />
+                <element signature="e#3272#3273#0" expanded="true" />
+                <element signature="e#3314#3315#0" expanded="true" />
+                <element signature="e#3427#3428#0" expanded="true" />
+                <element signature="e#3458#3459#0" expanded="true" />
+                <element signature="e#3693#3694#0" expanded="true" />
+                <element signature="e#3737#3738#0" expanded="true" />
+                <element signature="e#3968#3969#0" expanded="true" />
+                <element signature="e#4012#4013#0" expanded="true" />
+                <element signature="e#4266#4267#0" expanded="true" />
+                <element signature="e#4295#4296#0" expanded="true" />
+                <element signature="e#4558#4559#0" expanded="true" />
+                <element signature="e#4587#4588#0" expanded="true" />
+                <element signature="e#4712#4713#0" expanded="true" />
+                <element signature="e#4741#4742#0" expanded="true" />
+                <element signature="e#4876#4877#0" expanded="true" />
+                <element signature="e#4907#4908#0" expanded="true" />
+                <element signature="e#5077#5078#0" expanded="true" />
+                <element signature="e#5115#5116#0" expanded="true" />
+                <element signature="e#5635#5636#0" expanded="true" />
+                <element signature="e#5675#5676#0" expanded="true" />
+                <element signature="e#5806#5807#0" expanded="true" />
+                <element signature="e#5842#5843#0" expanded="true" />
+                <element signature="e#5991#5992#0" expanded="true" />
+                <element signature="e#6019#6020#0" expanded="true" />
+                <element signature="e#6772#6773#0" expanded="true" />
+                <element signature="e#6832#6833#0" expanded="true" />
+                <element signature="e#7543#7544#0" expanded="true" />
+                <element signature="e#7599#7600#0" expanded="true" />
+                <element signature="e#11854#11855#0" expanded="true" />
+                <element signature="e#11895#11896#0" expanded="true" />
+                <element signature="e#12060#12061#0" expanded="true" />
+                <element signature="e#12104#12105#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/domain/PlayerPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="113" column="17" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/DataAccess/ManagerDBAccessTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="171" column="49" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/domain/CoachPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="7" column="31" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/domain/CoachPageTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/DataAccess/TeamCoachDBAccessTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="228" column="61" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/domain/TeamMemberTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/TeamCoachDBAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="30" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit4 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Dev" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/service/pojos/LoginDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/SystemAdministrator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/AssociationAgent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/TeamPlayer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/TeamCoach.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/TeamManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/TeamOwner.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/Fan.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/Subscriber.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DataAccess/TeamDBAccess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/pojos/GameDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/pojos/TeamDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/ApiTeamController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/service/SpringRestApiApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/TeamMember.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/PlayerPage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/CoachPage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DataAccess/TeamCoachDBAccess.java" />
+        <option value="$PROJECT_DIR$/tests/domain/CoachPageTest.java" />
+        <option value="$PROJECT_DIR$/tests/DataAccess/TeamCoachDBAccessTest.java" />
+        <option value="$PROJECT_DIR$/tests/domain/TeamMemberTest.java" />
+        <option value="$PROJECT_DIR$/tests/DataAccess/ManagerDBAccessTest.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="IFA-ProjectPreparation" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="IFA-ProjectPreparation" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="873" />
+    <option name="y" value="282" />
+    <option name="width" value="1944" />
+    <option name="height" value="1065" />
+  </component>
+  <component name="ProjectId" id="1al8qGY8YNKHcht1UxtEbx2VOkE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="DataAccess" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="pojos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590166059777" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15234375" />
+    <property name="project.structure.side.proportion" value="0.55773675" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="DataAccess" />
+      <recent name="domain" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="DataAccess" />
+      <recent name="domain.controllers" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SpringRestApiApplication">
+    <configuration name="DataAccess in IFA-ProjectPreparation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DataAccess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DataAccess" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDBAccessTest.delete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DataAccess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DataAccess" />
+      <option name="MAIN_CLASS_NAME" value="DataAccess.UserDBAccessTest" />
+      <option name="METHOD_NAME" value="delete" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDBAccessTest.save" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DataAccess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DataAccess" />
+      <option name="MAIN_CLASS_NAME" value="DataAccess.UserDBAccessTest" />
+      <option name="METHOD_NAME" value="save" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDBAccessTest.select" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DataAccess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DataAccess" />
+      <option name="MAIN_CLASS_NAME" value="DataAccess.UserDBAccessTest" />
+      <option name="METHOD_NAME" value="select" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDBAccessTest.update" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IFA-ProjectPreparation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DataAccess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DataAccess" />
+      <option name="MAIN_CLASS_NAME" value="DataAccess.UserDBAccessTest" />
+      <option name="METHOD_NAME" value="update" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringRestApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="IFA-ProjectPreparation" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="service.SpringRestApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.DataAccess in IFA-ProjectPreparation" />
+        <item itemvalue="JUnit.UserDBAccessTest.select" />
+        <item itemvalue="JUnit.UserDBAccessTest.delete" />
+        <item itemvalue="JUnit.UserDBAccessTest.update" />
+        <item itemvalue="JUnit.UserDBAccessTest.save" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="" />
+      <created>1587130436310</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587130436310</updated>
+      <workItem from="1587130437898" duration="4960000" />
+      <workItem from="1587207212430" duration="12453000" />
+      <workItem from="1587287111047" duration="5553000" />
+      <workItem from="1587299009997" duration="1339000" />
+      <workItem from="1587333265587" duration="86000" />
+      <workItem from="1587389320722" duration="2180000" />
+      <workItem from="1587407882995" duration="10237000" />
+      <workItem from="1587469784589" duration="1472000" />
+      <workItem from="1587471397570" duration="6701000" />
+      <workItem from="1587498485517" duration="5295000" />
+      <workItem from="1587536919487" duration="891000" />
+      <workItem from="1587537860581" duration="261000" />
+      <workItem from="1587542633659" duration="325000" />
+      <workItem from="1587578599782" duration="1312000" />
+      <workItem from="1588246411085" duration="2729000" />
+      <workItem from="1588937572469" duration="256000" />
+      <workItem from="1588938011098" duration="393000" />
+      <workItem from="1589115843546" duration="565000" />
+      <workItem from="1589540484192" duration="9248000" />
+      <workItem from="1589606664804" duration="7702000" />
+      <workItem from="1589634093518" duration="13115000" />
+      <workItem from="1589702284247" duration="3283000" />
+      <workItem from="1589912742991" duration="4661000" />
+      <workItem from="1590096711391" duration="1931000" />
+      <workItem from="1590143267983" duration="11406000" />
+    </task>
+    <task id="LOCAL-00001" summary="After merge with Dev">
+      <created>1587149937495</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1587149937495</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fixed referee and game">
+      <created>1587220158869</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587220158870</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add team owner tests">
+      <created>1587332110187</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587332110187</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Controller Tests complete for iteration 2">
+      <created>1587550477185</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587550477185</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Change controllers">
+      <created>1589546573851</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1589546573852</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Separated controllers in domain">
+      <created>1589609215872</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1589609215872</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Controller service: Objects to Strings">
+      <created>1589611716250</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1589611716250</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Controller service: Objects to Strings">
+      <created>1589630455885</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1589630455885</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Controller service: Objects to Strings">
+      <created>1589630827266</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1589630827266</updated>
+    </task>
+    <task id="LOCAL-00010" summary="service controllers for Spring: Game, PersonalPage, Player, Team">
+      <created>1589642380592</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1589642380592</updated>
+    </task>
+    <task id="LOCAL-00011" summary="service controllers for Spring: Fan, League, Coach">
+      <created>1589661960113</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1589661960113</updated>
+    </task>
+    <task id="LOCAL-00012" summary="solved problem with test libraries">
+      <created>1589806552312</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1589806552312</updated>
+    </task>
+    <task id="LOCAL-00013" summary="UserDBAccess as example">
+      <created>1589816097398</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1589816097398</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Users constructor DB">
+      <created>1589827907407</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1589827907407</updated>
+    </task>
+    <task id="LOCAL-00015" summary="another constructor for subscriber with a name + fixed it in referee">
+      <created>1590092533068</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1590092533068</updated>
+    </task>
+    <task id="LOCAL-00016" summary="final merge">
+      <created>1590102331178</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1590102331178</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added second constructor for all the subscribers with name">
+      <created>1590145497538</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1590145497538</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added second constructor for all the subscribers with name">
+      <created>1590145616109</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1590145616109</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="19154000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20242915" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Web" order="6" side_tool="true" />
+      <window_info id="Image Layers" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3285968" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3285968" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Java Enterprise" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3285968" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Messages" order="14" visible="true" weight="0.3285968" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32955465" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="After merge with Dev" />
+    <MESSAGE value="fixed referee and game" />
+    <MESSAGE value="add team owner tests" />
+    <MESSAGE value="Remove 417 line caused exception" />
+    <MESSAGE value="Change controllers" />
+    <MESSAGE value="Separated controllers in domain" />
+    <MESSAGE value="Controller service: Objects to Strings" />
+    <MESSAGE value="service controllers for Spring: Game, PersonalPage, Player, Team" />
+    <MESSAGE value="service controllers for Spring: Fan, League, Coach" />
+    <MESSAGE value="solved problem with test libraries" />
+    <MESSAGE value="UserDBAccess as example" />
+    <MESSAGE value="Users constructor DB" />
+    <MESSAGE value="another constructor for subscriber with a name + fixed it in referee" />
+    <MESSAGE value="final merge" />
+    <MESSAGE value="added second constructor for all the subscribers with name" />
+    <option name="LAST_COMMIT_MESSAGE" value="added second constructor for all the subscribers with name" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="563" y="139" key="#FieldTest" />
+    <state x="563" y="139" key="#FieldTest/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2272" y="2" key="#Project_Structure" />
+    <state x="440" y="94" key="#Project_Structure/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2272" y="2" key="#Project_Structure/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state x="349" y="361" key="#SQL_Dialects" />
+    <state x="349" y="361" key="#SQL_Dialects/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" />
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" />
+    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
+    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="427" y="113" key="CommitChangelistDialog2" />
+    <state x="427" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" />
+    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state width="675" height="517" key="DebuggerActiveHint" />
+    <state width="675" height="517" key="DebuggerActiveHint/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" />
+    <state x="74" y="73" width="1389" height="679" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2511" y="222" key="FileChooserDialogImpl" />
+    <state x="739" y="275" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2511" y="222" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom" />
+    <state width="1877" height="310" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1493" height="163" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state width="1877" height="310" key="GridCell.Tab.0.center" />
+    <state width="1877" height="310" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1493" height="163" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state width="1877" height="310" key="GridCell.Tab.0.left" />
+    <state width="1877" height="310" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1493" height="163" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right" />
+    <state width="1877" height="310" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state width="1493" height="163" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state x="0" y="0" key="MergeDialog" />
+    <state x="0" y="0" key="MergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="481" y="129" key="MultipleFileMergeDialog" />
+    <state x="481" y="129" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="481" y="129" key="MultipleFileMergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="440" y="94" key="SettingsEditor" />
+    <state x="440" y="94" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2272" y="2" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" />
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog" />
+    <state x="74" y="73" width="1389" height="679" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="1050" y="450" width="591" height="214" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" />
+    <state x="1050" y="450" width="591" height="214" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2277" y="343" width="540" height="229" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state x="337" y="14" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" />
+    <state x="337" y="14" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="731" y="330" key="com.intellij.testIntegration.createTest.CreateTestDialog" />
+    <state x="731" y="330" key="com.intellij.testIntegration.createTest.CreateTestDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="590" y="233" key="git4idea.branch.GitSmartOperationDialog" />
+    <state x="590" y="233" key="git4idea.branch.GitSmartOperationDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2194" y="147" key="new project wizard" />
+    <state x="342" y="181" key="new project wizard/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="2194" y="147" key="new project wizard/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/domain/TeamOwnerTest.java</url>
+          <line>135</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
+          <line>801</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
+          <line>187</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
+          <line>636</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
+          <line>414</line>
+          <properties />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java</url>
+          <line>17</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/domain/TeamCoachTest.java</url>
+          <line>16</line>
+          <properties />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java</url>
+          <line>32</line>
+          <properties />
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="resultSet.getString(1)" language="JAVA" />
+        <watch expression="resultSet.next()" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$domain_in_IFA_ProjectPreparation.ic" NAME="domain in IFA-ProjectPreparation Coverage Results" MODIFIED="1587578799435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$ControllerTest.ic" NAME="ControllerTest Coverage Results" MODIFIED="1587543119145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$service_in_IFA_ProjectPreparation.ic" NAME="service in IFA-ProjectPreparation Coverage Results" MODIFIED="1587580960541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$SystemEventTest.ic" NAME="SystemEventTest Coverage Results" MODIFIED="1587416941972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamTest.ic" NAME="TeamTest Coverage Results" MODIFIED="1587415072452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$TeamOwnerTest.ic" NAME="TeamOwnerTest Coverage Results" MODIFIED="1587331721268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>domain.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$Controller.ic" NAME="Controller Coverage Results" MODIFIED="1587542717251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation.ic" NAME="All in IFA-ProjectPreparation Coverage Results" MODIFIED="1588246524447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__1_.ic" NAME="All in IFA-ProjectPreparation (1) Coverage Results" MODIFIED="1587415882402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$DataAccess_in_IFA_ProjectPreparation.ic" NAME="DataAccess in IFA-ProjectPreparation Coverage Results" MODIFIED="1589832643841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>DataAccess.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__2_.ic" NAME="All in IFA-ProjectPreparation (2) Coverage Results" MODIFIED="1587416024389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__3_.ic" NAME="All in IFA-ProjectPreparation (3) Coverage Results" MODIFIED="1587415489923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/pojos/LoginDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/CoachController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/SystemAdministratorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiCoachController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/SystemAdministrator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="16" column="54" lean-forward="true" selection-start-line="16" selection-start-column="54" selection-end-line="16" selection-end-column="54" />
+          <folding>
+            <element signature="e#444#445#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#581#582#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/AssociationAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <element signature="e#434#435#0" expanded="true" />
+            <element signature="e#471#472#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/TeamCoach.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+          <folding>
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/TeamOwner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="38" column="41" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/DataAccess/OwnerDBAccessTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/Fan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+          <folding>
+            <element signature="e#449#450#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/IntegrationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="104" column="50" lean-forward="true" selection-start-line="104" selection-start-column="50" selection-end-line="104" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/GameAlert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="253" column="86" selection-start-line="253" selection-start-column="86" selection-end-line="253" selection-end-column="86" />
+          <folding>
+            <element signature="e#2975#2976#0" expanded="true" />
+            <element signature="e#3003#3004#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="554" column="13" selection-start-line="554" selection-start-column="13" selection-end-line="554" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/Referee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/Subscriber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="63" column="7" lean-forward="true" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
+          <folding>
+            <element signature="e#2557#2558#0" expanded="true" />
+            <element signature="e#2584#2585#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/TeamDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="149" column="16" selection-start-line="149" selection-start-column="16" selection-end-line="149" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4267">
+          <caret line="295" column="9" selection-start-line="295" selection-start-column="9" selection-end-line="295" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="23" column="45" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/pojos/GameDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="59" column="35" lean-forward="true" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiTeamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/TeamPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1615">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+          <folding>
+            <element signature="e#832#833#0" expanded="true" />
+            <element signature="e#869#870#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/TeamManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="16" column="36" lean-forward="true" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+          <folding>
+            <element signature="e#313#314#0" expanded="true" />
+            <element signature="e#350#351#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/SpringRestApiApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiGameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="7" column="15" lean-forward="true" selection-start-line="7" selection-end-line="7" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiAuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/service/pojos/TeamDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-177">
+          <caret line="142" column="43" lean-forward="true" selection-start-line="142" selection-start-column="43" selection-end-line="142" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1181">
+          <caret line="113" column="55" lean-forward="true" selection-start-line="113" selection-start-column="55" selection-end-line="113" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/TeamMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="389" column="42" selection-start-line="389" selection-start-column="42" selection-end-line="389" selection-end-column="42" />
+          <folding>
+            <element signature="e#2295#2296#0" expanded="true" />
+            <element signature="e#2325#2326#0" expanded="true" />
+            <element signature="e#2546#2547#0" expanded="true" />
+            <element signature="e#2576#2577#0" expanded="true" />
+            <element signature="e#2807#2808#0" expanded="true" />
+            <element signature="e#2838#2839#0" expanded="true" />
+            <element signature="e#2955#2956#0" expanded="true" />
+            <element signature="e#2985#2986#0" expanded="true" />
+            <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#3131#3132#0" expanded="true" />
+            <element signature="e#3272#3273#0" expanded="true" />
+            <element signature="e#3314#3315#0" expanded="true" />
+            <element signature="e#3427#3428#0" expanded="true" />
+            <element signature="e#3458#3459#0" expanded="true" />
+            <element signature="e#3693#3694#0" expanded="true" />
+            <element signature="e#3737#3738#0" expanded="true" />
+            <element signature="e#3968#3969#0" expanded="true" />
+            <element signature="e#4012#4013#0" expanded="true" />
+            <element signature="e#4266#4267#0" expanded="true" />
+            <element signature="e#4295#4296#0" expanded="true" />
+            <element signature="e#4558#4559#0" expanded="true" />
+            <element signature="e#4587#4588#0" expanded="true" />
+            <element signature="e#4712#4713#0" expanded="true" />
+            <element signature="e#4741#4742#0" expanded="true" />
+            <element signature="e#4876#4877#0" expanded="true" />
+            <element signature="e#4907#4908#0" expanded="true" />
+            <element signature="e#5077#5078#0" expanded="true" />
+            <element signature="e#5115#5116#0" expanded="true" />
+            <element signature="e#5635#5636#0" expanded="true" />
+            <element signature="e#5675#5676#0" expanded="true" />
+            <element signature="e#5806#5807#0" expanded="true" />
+            <element signature="e#5842#5843#0" expanded="true" />
+            <element signature="e#5991#5992#0" expanded="true" />
+            <element signature="e#6019#6020#0" expanded="true" />
+            <element signature="e#6772#6773#0" expanded="true" />
+            <element signature="e#6832#6833#0" expanded="true" />
+            <element signature="e#7543#7544#0" expanded="true" />
+            <element signature="e#7599#7600#0" expanded="true" />
+            <element signature="e#11854#11855#0" expanded="true" />
+            <element signature="e#11895#11896#0" expanded="true" />
+            <element signature="e#12060#12061#0" expanded="true" />
+            <element signature="e#12104#12105#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/PlayerPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="113" column="17" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/CoachPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/TeamCoachDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/ManagerDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" column="31" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/domain/CoachPageTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/DataAccess/TeamCoachDBAccessTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="228" column="61" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/domain/TeamMemberTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="34" column="44" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/DataAccess/ManagerDBAccessTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="171" column="49" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
