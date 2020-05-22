@@ -256,7 +256,7 @@ class IntegrationTests {
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
-        coachPage.setCurrentTeam(teamCoach);
+        coachPage.setCurrentTeam(teamCoach.getTeamName());
         assertEquals("The new team is Test Coach Team", fanNotMail.getAlertsMessages().get(10).getMessage());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();

@@ -71,7 +71,7 @@ class TeamPlayerTest {
         Team team = new Team("test",field,owner);
 
         assertNull(player.getCurrentTeam());
-        player.setCurrentTeam(team);
+        player.setCurrentTeam(team.getTeamName());
         assertNotNull(player.getCurrentTeam());
     }
 

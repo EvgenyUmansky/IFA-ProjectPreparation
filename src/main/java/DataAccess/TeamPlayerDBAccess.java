@@ -34,7 +34,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement = connection.prepareStatement(query);
             statement.setString(1, teamPlayer.getUserName());
             statement.setDate(2, (Date) teamPlayer.getBirthDate());
-            statement.setString(3, teamPlayer.getCurrentTeam().getTeamName());
+            statement.setString(3, teamPlayer.getCurrentTeam());
             statement.setString(4, teamPlayer.getPosition());
             statement.setString(5, teamPlayer.getPosition());
 
@@ -71,7 +71,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         try {
             statement = connection.prepareStatement(query);
             statement.setDate(1,(Date) teamPlayer.getBirthDate());
-            statement.setString(2, teamPlayer.getCurrentTeam().getTeamName());
+            statement.setString(2, teamPlayer.getCurrentTeam());
             statement.setString(3, teamPlayer.getPosition());
             statement.setString(4, teamPlayer.getSquadNumber());
 
