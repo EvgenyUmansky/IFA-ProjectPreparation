@@ -56,6 +56,7 @@ public class GameController {
      */
     public ArrayList<Game> getRefereeGames(String username) {
         Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        System.out.println(ref.getName());
         return Game.getGamesByReferee(ref);
     }
 

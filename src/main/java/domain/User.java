@@ -333,7 +333,7 @@ public class User {
      */
     public static User getUserByID(String userName) {
         // TODO: Get user from DB
-        return new User(userName, "1234", null, "abc@gmail.com").addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE).addRoleToUser(Role.TEAM_PLAYER).addRoleToUser(Role.COACH).addRoleToUser(Role.TEAM_MANAGER);
+        return new User(userName, "1234", "Mohsen Abdalla", "abc@gmail.com").addRoleToUser(Role.TEAM_OWNER).addRoleToUser(Role.ASSOCIATION_AGENT).addRoleToUser(Role.REFEREE).addRoleToUser(Role.TEAM_PLAYER).addRoleToUser(Role.COACH).addRoleToUser(Role.TEAM_MANAGER);
     }
 
 
