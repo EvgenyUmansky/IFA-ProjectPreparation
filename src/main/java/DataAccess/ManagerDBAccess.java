@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class ManagerDBAccess implements DBAccess<TeamManager> {
@@ -163,6 +164,11 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             }
         }
         return teamManager;
+    }
+
+    @Override
+    public HashMap<String, TeamManager> conditionedSelect(String[] conditions) {
+        return null;
     }
 
 
