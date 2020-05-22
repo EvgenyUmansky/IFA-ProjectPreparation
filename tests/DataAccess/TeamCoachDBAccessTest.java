@@ -1,7 +1,5 @@
 package DataAccess;
 
-import domain.Referee;
-import domain.RefereeType;
 import domain.Team;
 import domain.TeamCoach;
 import org.junit.jupiter.api.AfterEach;
@@ -49,9 +47,6 @@ class TeamCoachDBAccessTest {
         preparedStatement = connection.prepareStatement("insert into [Teams] values ('Team_1', null, null, 'open')");
         preparedStatement.executeUpdate();
         connection.commit();
-
-
-
     }
 
     @AfterEach
@@ -234,6 +229,10 @@ class TeamCoachDBAccessTest {
         preparedStatement = connection.prepareStatement("delete from [Coaches] where username = 'UserName_1'");
         preparedStatement.executeUpdate();
         connection.commit();
+    }
 
+    @Test
+    void conditionedSelect() {
+        teamCoachDBAccess.conditionedSelect(null);
     }
 }

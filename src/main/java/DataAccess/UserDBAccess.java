@@ -238,7 +238,8 @@ public class UserDBAccess implements DBAccess<User> {
                 users.put(username,new User(username, password, name, mail, isClosed, isMail));
             }
         } catch (SQLException e) {
-
+            // TODO: Alert window
+            e.printStackTrace();
         }
 
         return users;

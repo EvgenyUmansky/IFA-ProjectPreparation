@@ -177,6 +177,10 @@ public class UserDBAccessTest {
         assertEquals("password_2", selectedUser.getPassword());
         assertEquals("testMail_2@gmail.com", selectedUser.getMail());
         assertFalse(selectedUser.isClosed());
+    }
 
+    @Test
+    void conditionedSelect() {
+        // TODO: write test
     }
 }

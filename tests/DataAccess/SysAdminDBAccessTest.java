@@ -157,4 +157,9 @@ class SysAdminDBAccessTest {
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
+    @Test
+    void conditionedSelect() {
+        sysAdminDBAccess.conditionedSelect(null);
+    }
 }
