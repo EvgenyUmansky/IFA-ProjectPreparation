@@ -154,7 +154,8 @@ class TeamCoachDBAccessTest {
         resultSet.next();
         assertEquals("Team_1", resultSet.getString(2));
 
-        // update teamCoach in DB, Referee type == null
+        // update teamCoach in DB
+        teamCoach.setQualification("5");
         teamCoachDBAccess.update(teamCoach);
 
         // check the teamCoach updated in the DB
@@ -162,8 +163,8 @@ class TeamCoachDBAccessTest {
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
         assertEquals(teamCoach.getUserName(), resultSet.getString(1));
-        assertNull(resultSet.getString(2));
-        assertEquals(String.valueOf(teamCoach.getQualification()), resultSet.getString(3));
+        assertNull(resultSet.getString(3));
+        assertEquals(String.valueOf(teamCoach.getQualification()), resultSet.getString(4));
 
         // delete the teamCoach from DB
         preparedStatement = connection.prepareStatement("delete from [Coaches] where username = 'UserName_1'");
@@ -184,7 +185,7 @@ class TeamCoachDBAccessTest {
         connection.commit();
 
         // insert the teamCoach to DB
-        preparedStatement = connection.prepareStatement("insert into [Coaches] values ('UserName_1', 'ASSISTANT', 0)");
+        preparedStatement = connection.prepareStatement("insert into [Coaches] values ('UserName_1', 'Team_1', 'ASSISTANT', 0)");
         preparedStatement.executeUpdate();
         connection.commit();
 
