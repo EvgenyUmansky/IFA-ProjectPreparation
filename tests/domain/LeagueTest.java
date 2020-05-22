@@ -77,8 +77,8 @@ class LeagueTest {
     @Test
     void updateTableOfTheLeague() {
         Game firstGame = new Game(leaguePerSeason1, leagueTeams[0], leagueTeams[1], new Field("asadfs", 500), "2016-11-09 11:44", new ArrayList<>());
-        firstGame.setGuestTeamGoals(0);//REAL
-        firstGame.setHostTeamGoals(1);// FCB
+        firstGame.setGuestTeamScore(0);//REAL
+        firstGame.setHostTeamScore(1);// FCB
 
         HashMap<Team, Integer> tableLeague = leaguePerSeason1.updateTableOfTheLeague(firstGame);
         assertEquals(3, leaguePerSeason1.getTeamsInLeaguePerSeason().get(leagueTeams[0]));
@@ -95,8 +95,8 @@ class LeagueTest {
     @Test
     void updateTableOfTheLeague2() {
         Game firstGame = new Game(leaguePerSeason1, leagueTeams[0], leagueTeams[1], new Field("asadfs", 500), "2016-11-09 11:44", new ArrayList<>());
-        firstGame.setGuestTeamGoals(1);//REAL
-        firstGame.setHostTeamGoals(0);// FCB
+        firstGame.setGuestTeamScore(1);//REAL
+        firstGame.setHostTeamScore(0);// FCB
 
         HashMap<Team, Integer> tableLeague = leaguePerSeason1.updateTableOfTheLeague(firstGame);
         assertEquals(0, leaguePerSeason1.getTeamsInLeaguePerSeason().get(leagueTeams[0]));
@@ -113,8 +113,8 @@ class LeagueTest {
     @Test
     void updateTableOfTheLeague3() {
         Game firstGame = new Game(leaguePerSeason1, leagueTeams[0], leagueTeams[1], new Field("asadfs", 500), "2016-11-09 11:44", new ArrayList<>());
-        firstGame.setGuestTeamGoals(1);//REAL
-        firstGame.setHostTeamGoals(1);// FCB
+        firstGame.setGuestTeamScore(1);//REAL
+        firstGame.setHostTeamScore(1);// FCB
 
         HashMap<Team, Integer> tableLeague = leaguePerSeason1.updateTableOfTheLeague(firstGame);
         assertEquals(1, leaguePerSeason1.getTeamsInLeaguePerSeason().get(leagueTeams[0]));

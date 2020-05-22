@@ -1,7 +1,9 @@
 package domain;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +23,8 @@ public class Game {
     private LocalDateTime gameDate;
     private final ArrayList<Referee> referees;
     private final HashMap<Integer, GameEvent> gameEvents;
-    private int hostTeamGoals;
-    private int guestTeamGoals;
+    private int hostTeamScore;
+    private int guestTeamScore;
     private final Alert alertFans;
     private final Alert alertReferees;
 
@@ -47,8 +49,8 @@ public class Game {
         this.field = field;
         this.referees = referees;
         this.gameEvents = new HashMap<>();
-        this.hostTeamGoals = 0;
-        this.guestTeamGoals = 0;
+        this.hostTeamScore = 0;
+        this.guestTeamScore = 0;
         this.alertFans = new Alert();
         this.alertReferees = new Alert();
 
@@ -79,8 +81,8 @@ public class Game {
         this.field = field;
         this.referees = referees;
         this.gameEvents = new HashMap<>();
-        this.hostTeamGoals = 0;
-        this.guestTeamGoals = 0;
+        this.hostTeamScore = 0;
+        this.guestTeamScore = 0;
         this.alertFans = new Alert();
         this.alertReferees = new Alert();
 
@@ -358,32 +360,32 @@ public class Game {
      * Returns the number of goals the home team scored
      * @return the number of goals the home team scored
      */
-    public int getHostTeamGoals() {
-        return hostTeamGoals;
+    public int getHostTeamScore() {
+        return hostTeamScore;
     }
 
     /**
      * Updates the number of goals the home team scored
-     * @param hostTeamGoals the number of goals the home team scored
+     * @param hostTeamScore the number of goals the home team scored
      */
-    public void setHostTeamGoals(int hostTeamGoals) {
-        this.hostTeamGoals = hostTeamGoals;
+    public void setHostTeamScore(int hostTeamScore) {
+        this.hostTeamScore = hostTeamScore;
     }
 
     /**
      * Returns the number of goals the visiting team scored
      * @return the number of goals the visiting team scored
      */
-    public int getGuestTeamGoals() {
-        return guestTeamGoals;
+    public int getGuestTeamScore() {
+        return guestTeamScore;
     }
 
     /**
      * Updates the number of goals the visiting team scored
-     * @param guestTeamGoals the number of goals the visiting team scored
+     * @param guestTeamScore the number of goals the visiting team scored
      */
-    public void setGuestTeamGoals(int guestTeamGoals) {
-        this.guestTeamGoals = guestTeamGoals;
+    public void setGuestTeamScore(int guestTeamScore) {
+        this.guestTeamScore = guestTeamScore;
     }
 
     /**
@@ -407,7 +409,7 @@ public class Game {
      * @return the score at string in format: "0:0"
      */
     public String getGameScore(){
-        return this.hostTeamGoals + ":" + this.guestTeamGoals;
+        return this.hostTeamScore + ":" + this.guestTeamScore;
     }
 
     /**

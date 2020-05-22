@@ -149,11 +149,11 @@ public class League {
         Team homeGameTeam = game.getHostTeam(); Team awayGameTeam = game.getGuestTeam();
         for(Team team : teamsTable.keySet()){
             if(team.equals(homeGameTeam)){
-                hostTeamScore = game.getHostTeamGoals();
+                hostTeamScore = game.getHostTeamScore();
                 homeTeam = team;
             }
             if (team.equals(awayGameTeam)){
-                awayTeamScore = game.getGuestTeamGoals();
+                awayTeamScore = game.getGuestTeamScore();
                 awayTeam = team;
             }
         }

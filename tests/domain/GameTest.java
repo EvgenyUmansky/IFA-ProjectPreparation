@@ -319,25 +319,25 @@ class GameTest {
 
     @Test
     void getHostTeamScore() {
-        assertEquals(0, game.getHostTeamGoals());
+        assertEquals(0, game.getHostTeamScore());
     }
 
 
     @Test
     void setHostTeamScore() {
-        game.setHostTeamGoals(3);
-        assertEquals(3, game.getHostTeamGoals());
+        game.setHostTeamScore(3);
+        assertEquals(3, game.getHostTeamScore());
     }
 
     @Test
     void getGuestTeamScore() {
-        assertEquals(0, game.getGuestTeamGoals());
+        assertEquals(0, game.getGuestTeamScore());
     }
 
     @Test
     void setGuestTeamScore() {
-        game.setGuestTeamGoals(3);
-        assertEquals(3, game.getGuestTeamGoals());
+        game.setGuestTeamScore(3);
+        assertEquals(3, game.getGuestTeamScore());
     }
 
     @Test
@@ -354,8 +354,8 @@ class GameTest {
     @Test
     void getGameScore() {
         assertEquals("0:0", game.getGameScore());
-        game.setHostTeamGoals(3);
-        game.setGuestTeamGoals(2);
+        game.setHostTeamScore(3);
+        game.setGuestTeamScore(2);
         assertEquals("3:2", game.getGameScore());
     }
 
