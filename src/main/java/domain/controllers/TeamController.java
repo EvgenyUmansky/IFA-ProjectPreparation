@@ -18,12 +18,17 @@ public class TeamController {
         // TODO: Save new team to DB
         return new TeamDTO(
                 newTeam.getTeamName(),
-                newTeam.getStadium().getFieldName(),
-                newTeam.getFields().keySet().toArray(new String[0]),
-                newTeam.getPlayers().keySet().toArray(new String[0]),
-                newTeam.getCoaches().keySet().toArray(new String[0]),
-                newTeam.getManagers().keySet().toArray(new String[0]),
-                newTeam.getOwners().keySet().toArray(new String[0]),
+                newTeam.getStadium(),
+                //newTeam.getFields().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getFields().values()),
+                //newTeam.getPlayers().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getPlayers().values()),
+                //newTeam.getCoaches().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getCoaches().values()),
+                //newTeam.getManagers().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getManagers().values()),
+                //newTeam.getOwners().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getOwners().values()),
                 newTeam.getTeamStatus().name()
         );
 
@@ -32,17 +37,24 @@ public class TeamController {
     public ArrayList<TeamDTO> getTeams() {
         // TODO: get all teams from DB
         ArrayList<Team> array = new ArrayList<>();
-        array.add(new Team("test", new Field("Test field", 1), new TeamOwner("user", "user@gmail.com")));
+        Team mockTeam = new Team("test", new Field("Test field", 1), new TeamOwner("user", "user@gmail.com"));
+        mockTeam.addPlayer(new TeamPlayer("noga123", "noga@gmail.com", "Noga Zohar"));
+        mockTeam.addCoach(new TeamCoach("roy123", "roy@gmail.com", "Roy Judes"));
+        array.add(mockTeam);
         ArrayList<TeamDTO> response = new ArrayList<>();
         for (Team team : array) {
             response.add(new TeamDTO(
                     team.getTeamName(),
-                    team.getStadium().getFieldName(),
-                    team.getFields().keySet().toArray(new String[0]),
-                    team.getPlayers().keySet().toArray(new String[0]),
-                    team.getCoaches().keySet().toArray(new String[0]),
-                    team.getManagers().keySet().toArray(new String[0]),
-                    team.getOwners().keySet().toArray(new String[0]),
+                    team.getStadium(),
+                    //team.getFields().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getFields().values()),
+                    //team.getPlayers().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getPlayers().values()),
+                    //team.getCoaches().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getCoaches().values()),
+                    //team.getManagers().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getManagers().values()),
+                    new ArrayList<>(team.getOwners().values()),
                     team.getTeamStatus().name()
             ));
         }

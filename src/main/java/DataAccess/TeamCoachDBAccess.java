@@ -34,7 +34,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             statement = connection.prepareStatement(query);
             statement.setString(1,teamCoach.getUserName());
             if(teamCoach.getCurrentTeam() != null) {
-                statement.setString(2, teamCoach.getCurrentTeam().getTeamName());
+                statement.setString(2, teamCoach.getCurrentTeam());
             }
             else{
                 statement.setString(2, null);
@@ -78,7 +78,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
         try{
             statement = connection.prepareStatement(query);
-            statement.setString(1,teamCoach.getCurrentTeam().getTeamName());
+            statement.setString(1,teamCoach.getCurrentTeam());
             statement.setString(2,teamCoach.getRole());
             statement.setString(3,teamCoach.getQualification());
             statement.setString(4,teamCoach.getUserName());

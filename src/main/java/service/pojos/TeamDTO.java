@@ -1,18 +1,20 @@
 package service.pojos;
 
-import java.util.HashMap;
+import domain.*;
+
+import java.util.ArrayList;
 
 public class TeamDTO {
     private String teamName;
-    private String stadium; //The team's main stadium, where they play official matches
-    private String[] fields; //All the team's fields, including the stadium and training fields
-    private String[] players;
-    private String[] coaches;
-    private String[] managers;
-    private String[] owners;
+    private Field stadium; //The team's main stadium, where they play official matches
+    private ArrayList<Field> fields; //All the team's fields, including the stadium and training fields
+    private ArrayList<TeamPlayer> players;
+    private ArrayList<TeamCoach> coaches;
+    private ArrayList<TeamManager> managers;
+    private ArrayList<TeamOwner> owners;
     private String teamStatus;
 
-    public TeamDTO(String teamName, String stadium, String[] fields, String[] players, String[] coaches, String[] managers, String[] owners, String teamStatus) {
+    public TeamDTO(String teamName, Field stadium, ArrayList<Field> fields, ArrayList<TeamPlayer> players, ArrayList<TeamCoach> coaches, ArrayList<TeamManager> managers, ArrayList<TeamOwner> owners, String teamStatus) {
         this.teamName = teamName;
         this.stadium = stadium;
         this.fields = fields;
@@ -27,27 +29,27 @@ public class TeamDTO {
         return teamName;
     }
 
-    public String getStadium() {
+    public Field getStadium() {
         return stadium;
     }
 
-    public String[] getFields() {
+    public ArrayList<Field> getFields() {
         return fields;
     }
 
-    public String[] getPlayers() {
+    public ArrayList<TeamPlayer> getPlayers() {
         return players;
     }
 
-    public String[] getCoaches() {
+    public ArrayList<TeamCoach> getCoaches() {
         return coaches;
     }
 
-    public String[] getManagers() {
+    public ArrayList<TeamManager> getManagers() {
         return managers;
     }
 
-    public String[] getOwners() {
+    public ArrayList<TeamOwner> getOwners() {
         return owners;
     }
 

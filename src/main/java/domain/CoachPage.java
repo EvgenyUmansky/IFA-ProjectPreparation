@@ -7,7 +7,7 @@ public class CoachPage extends PersonalPage {
 
     private String role;
     private String qualification;
-    private Team currentTeam;
+    private String currentTeam;
 
 
     //Constructor
@@ -54,9 +54,9 @@ public class CoachPage extends PersonalPage {
      * Updates the coach's team to the given team
      * @param currentTeam to the given team
      */
-    public void setCurrentTeam(Team currentTeam) {
+    public void setCurrentTeam(String currentTeam) {
         this.currentTeam = currentTeam;
-        getAlert().sendAlert(new AlertNotification("Team of the user of page " + getName() + "  has changed", "The new team is " + currentTeam.getTeamName()));
+        getAlert().sendAlert(new AlertNotification("Team of the user of page " + getName() + "  has changed", "The new team is " + currentTeam));
     }
 
     /**
@@ -79,7 +79,7 @@ public class CoachPage extends PersonalPage {
      * Returns the team of the coach
      * @return the team of the coach
      */
-    public Team getCurrentTeam() {
+    public String getCurrentTeam() {
         return currentTeam;
     }
 }

@@ -10,7 +10,7 @@ public class PlayerPage extends PersonalPage {
     private Date birthDate;
     private String position;
     private String squadNumber;
-    private Team currentTeam;
+    private String currentTeam;
 
     /**
      * Constructor
@@ -76,7 +76,7 @@ public class PlayerPage extends PersonalPage {
      * @param currentTeam the team the player plays for
      * @return the updated page
      */
-    public PlayerPage setCurrentTeam(Team currentTeam) {
+    public PlayerPage setCurrentTeam(String currentTeam) {
         this.currentTeam = currentTeam;
         getAlert().sendAlert(new AlertNotification("Team of the user of page " + getName() + "  has changed", "The new team is " + currentTeam));
 
@@ -111,7 +111,7 @@ public class PlayerPage extends PersonalPage {
      * Returns the team the player plays for
      * @return the team the player plays for
      */
-    public Team getCurrentTeam() {
+    public String getCurrentTeam() {
         return currentTeam;
     }
 }
