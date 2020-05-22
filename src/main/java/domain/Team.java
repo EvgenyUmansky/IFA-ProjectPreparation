@@ -45,6 +45,7 @@ public class Team {
         this.fields.put(stadium.getFieldName(), stadium);
         this.teamStatus = TeamStatus.Open;
         this.owners.put(owner.getUserName(), owner);
+        owner.setTeam(this.teamName);
     }
 
     public Team(String teamName, String mail, String fieldName, String status) {

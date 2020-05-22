@@ -37,7 +37,7 @@ public class TeamController {
     public ArrayList<TeamDTO> getTeams() {
         // TODO: get all teams from DB
         ArrayList<Team> array = new ArrayList<>();
-        Team mockTeam = new Team("test", new Field("Test field", 1), new TeamOwner("alona123","owner@gmail.com", "Alona Barkat"));
+        Team mockTeam = new Team("testTeam", new Field("testField", 1), new TeamOwner("alona123","owner@gmail.com", "Alona Barkat"));
         mockTeam.addPlayer(new TeamPlayer("noga123", "noga@gmail.com", "Noga Zohar"));
         mockTeam.addCoach(new TeamCoach("roy123", "roy@gmail.com", "Roy Judes"));
         mockTeam.addManager(new TeamManager("mohsen123", "mohsen@gmail.com", "Mohsen Abdalla"));
