@@ -245,4 +245,9 @@ class OwnerDBAccessTest {
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
+    @Test
+    void conditionedSelect() {
+        ownerDBAccess.conditionedSelect(null);
+    }
 }

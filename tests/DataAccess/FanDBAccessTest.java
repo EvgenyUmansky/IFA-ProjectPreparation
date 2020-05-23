@@ -156,4 +156,9 @@ class FanDBAccessTest {
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
+    @Test
+    void conditionedSelect() {
+        fanDBAccess.conditionedSelect(null);
+    }
 }

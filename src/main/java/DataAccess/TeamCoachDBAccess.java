@@ -159,9 +159,10 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 String qualification =  retrievedUser.getString(4);
 
 
-                teamCoach = new TeamCoach(username, qualification);
+                teamCoach = new TeamCoach(username, "");
+                teamCoach.setQualification(qualification);
                 teamCoach.setRole(role);
-                // TODO: 19/05/2020 set current team of teamCoach??
+                teamCoach.setCurrentTeam(teamName);
             }
         }
         catch (SQLException e){

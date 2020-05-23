@@ -28,7 +28,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [TeamPlayer] values (?, ?, ?, ?, ?)";
+        String query = "insert into [Players] values (?, ?, ?, ?, ?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
@@ -37,7 +37,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.setDate(2, (Date) teamPlayer.getBirthDate());
             statement.setString(3, teamPlayer.getCurrentTeam());
             statement.setString(4, teamPlayer.getPosition());
-            statement.setString(5, teamPlayer.getPosition());
+            statement.setString(5, teamPlayer.getSquadNumber());
 
             statement.executeUpdate();
             connection.commit();
@@ -64,7 +64,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         }
 
         String query = "update [Players] " +
-                "set BirthDate = ?, TeamName = ?, Position = ?, SquadNumber = ?, " +
+                "set BirthDate = ?, TeamName = ?, Position = ?, SquadNumber = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -75,7 +75,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.setString(2, teamPlayer.getCurrentTeam());
             statement.setString(3, teamPlayer.getPosition());
             statement.setString(4, teamPlayer.getSquadNumber());
-
+            statement.setString(5, teamPlayer.getUserName());
 
             statement.executeUpdate();
             connection.commit();
@@ -167,8 +167,6 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
 
     @Override
     public HashMap<String, TeamPlayer> conditionedSelect(String[] conditions) {
-
-
         return null;
     }
 }
