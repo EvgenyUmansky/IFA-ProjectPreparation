@@ -18,6 +18,12 @@ public class PlayerController {
         return new ArrayList<TeamPlayer>(Arrays.asList(player));
     }
 
+    public ArrayList<TeamPlayer> getAvailablePlayers() { // TODO: implement!!!!!!!!
+        // TODO: DB arraylist of all players
+        TeamPlayer player = new TeamPlayer("testPlayer", "testPlayer@gmail.com", new Date(), "testPosition", "5");
+        return new ArrayList<TeamPlayer>(Arrays.asList(player));
+    }
+
     // ========================= Guest functions ==========================
     // ====================================================================
 
