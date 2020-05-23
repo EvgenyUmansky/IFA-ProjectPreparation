@@ -55,6 +55,7 @@ public class Team {
 
         this.fields = new HashMap<>();
         fields.put(fieldName, null);
+        this.stadium = new Field(fieldName, 0);
 
         this.owners = new HashMap<>();
         this.managers = new HashMap<>();
@@ -198,16 +199,16 @@ public class Team {
 
 
     public void setTeamStatus(String status) {
-        switch (status) {
-            case "Open":
+        switch (status.toLowerCase()) {
+            case "open":
                 setTeamStatus(TeamStatus.Open);
                 break;
 
-            case "Temporarily Closed":
+            case "temporarily closed":
                 setTeamStatus(TeamStatus.TempClose);
                 break;
 
-            case "Permanently Closed":
+            case "permanently closed":
                 setTeamStatus(TeamStatus.PermanentlyClose);
                 break;
 

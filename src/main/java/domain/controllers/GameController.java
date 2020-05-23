@@ -1,5 +1,6 @@
 package domain.controllers;
 
+import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
 import domain.*;
 
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameController {
+//    private DBAccess<User> uda = UserDBAccess.getInstance();
+//    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
+//    private GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
 
     public ArrayList<Game> getGames() {
         League mockLeage = new League("testLeage");
@@ -38,7 +42,7 @@ public class GameController {
      */
     public void addFanSubscriptionToGame(String gameId, String username) {
         // TODO: get from DB
-        // Game game = DB game
+        // Game game = gameDBAccess.select(gameId);
         // game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
     }
 
@@ -68,9 +72,6 @@ public class GameController {
      * @throws Exception in case the game is over
      */
     public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-//        GameDBAccess gameDBAccess = GameDBAccess.getInstance();
-//        GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
-//
 //        Game game = gameDBAccess.select(gameId);
 //
 //        int minuteOfEvent = (int)ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
@@ -98,9 +99,6 @@ public class GameController {
      * @throws Exception in case not event of the game
      */
     public void changeGameEvent(String gameId, String eventId, String minuteOfEvent, String dateTimeStr, String eventName, String description) throws Exception {
-//        GameDBAccess gameDBAccess = GameDBAccess.getInstance();
-//        GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
-//
 //        Game game = gameDBAccess.select(gameId);
 //        GameEvent gameEvent = gameEventDBAccess.select(eventId);
 //
