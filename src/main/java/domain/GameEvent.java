@@ -30,7 +30,7 @@ public class GameEvent {
         // set id
         this.id = nextId.incrementAndGet();
 
-        this.dateTime = LocalDateTime.now();
+        this.dateTime = LocalDateTime.now().withNano(0).withSecond(0);
         this.gameMinutes = gameMinutes;
         this.eventName = eventName;
         this.description = description;

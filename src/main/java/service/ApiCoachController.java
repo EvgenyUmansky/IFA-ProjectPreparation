@@ -21,7 +21,9 @@ public class ApiCoachController {
 
     @GetMapping("/coaches")
     public ArrayList<TeamCoach> getCoaches(@RequestParam(required = false) boolean available) {
-        //return controller.getAvailableCoaches();
-        return null;
+        if (available) {
+            return controller.getAvailableCoaches();
+        }
+        return controller.getCoaches();
     }
 }

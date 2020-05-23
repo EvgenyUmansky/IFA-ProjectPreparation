@@ -4,6 +4,7 @@ import domain.*;
 import domain.controllers.AuthController;
 import domain.controllers.SystemAdministratorController;
 import service.pojos.UserDTO;
+import service.pojos.GameDTO;
 
 import java.text.ParseException;
 import java.util.*;
@@ -326,7 +327,7 @@ public class ApiController {
      * @param username the referee's username
      * @return the list of games that the referee referees at
      */
-    public ArrayList<Game> getRefereeGames(String username) {
+    public ArrayList<GameDTO> getRefereeGames(String username) {
         return gameController.getRefereeGames(username);
     }
 
@@ -346,9 +347,8 @@ public class ApiController {
     /**
      * UC 10.4
      * Updates an event that took place during a game
-     * @param username the referee's username
-     * @param game the match
-     * @param gameEvent the event
+     * @param gameId the game
+     * @param eventId the event
      * @param dateTimeStr the time the event took place
      * @param gameMinutes the minute of the game the event took place in
      * @param eventName the name of the event

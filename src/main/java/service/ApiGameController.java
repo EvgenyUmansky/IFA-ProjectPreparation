@@ -2,6 +2,7 @@ package service;
 
 import domain.*;
 import org.springframework.web.bind.annotation.*;
+import service.pojos.GameDTO;
 
 import java.util.ArrayList;
 
@@ -15,8 +16,8 @@ public class ApiGameController {
     }
 
     @GetMapping("/games")
-    // This will get games by referee user in the following way: /games?username=<username>
-    public ArrayList<Game> getRefereeGames(@RequestParam("username") String userName){
+    // This will get games by referee user in the following way: /games?referee=<username>
+    public ArrayList<GameDTO> getRefereeGames(@RequestParam("referee") String userName){
         return controller.getRefereeGames(userName);
     }
 
