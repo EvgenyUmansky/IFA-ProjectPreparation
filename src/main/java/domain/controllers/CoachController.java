@@ -1,13 +1,22 @@
 package domain.controllers;
 
+import DataAccess.DBAccess;
+import DataAccess.TeamCoachDBAccess;
+import DataAccess.TeamPlayerDBAccess;
 import domain.Role;
 import domain.TeamCoach;
+import domain.TeamPlayer;
 import domain.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class CoachController {
+
+    private DBAccess<TeamCoach> cda = TeamCoachDBAccess.getInstance();
+
+
     // ========================= Guest functions ========================
     // ==================================================================
 
@@ -52,9 +61,16 @@ public class CoachController {
 
     public ArrayList<TeamCoach> getAvailableCoaches() {
         // TODO: DB arraylist of all available Coaches
-        TeamCoach coach1 = new TeamCoach("testCoach1", "testCoach1@gmail.com", "Diego Simeone");
+       /* TeamCoach coach1 = new TeamCoach("testCoach1", "testCoach1@gmail.com", "Diego Simeone");
         TeamCoach coach2 = new TeamCoach("testCoach2", "testCoach2@gmail.com", "José Mourinho");
         TeamCoach coach3 = new TeamCoach("testCoach3", "testCoach3@gmail.com", "Unai Emery");
-        return new ArrayList<TeamCoach>(Arrays.asList(coach1,coach2,coach3));
+        return new ArrayList<TeamCoach>(Arrays.asList(coach1,coach2,coach3));*/
+
+        String[] conditions = new String[2];
+        conditions[0] = "teamName";
+        conditions[1] = "";
+        HashMap<String, TeamCoach> availableCoaches = cda.conditionedSelect(conditions);
+
+        return new ArrayList<>(availableCoaches.values());
     }
 }

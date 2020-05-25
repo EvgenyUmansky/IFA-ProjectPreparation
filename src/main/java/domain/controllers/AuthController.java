@@ -2,7 +2,9 @@ package domain.controllers;
 
 import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
+import DataAccess.UserRolesDBAccess;
 import domain.*;
+import javafx.util.Pair;
 import service.pojos.UserDTO;
 
 import java.util.*;
@@ -15,6 +17,8 @@ public class AuthController {
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
     private DBAccess<User> uda = UserDBAccess.getInstance();
+    private DBAccess< Pair<String,ArrayList<String>> > urda = UserRolesDBAccess.getInstance();
+
     //private DBAccess<HashMap<,>> uda = UserDBAccess.getInstance();
 
     // ========================= Constructor =========================
@@ -47,9 +51,7 @@ public class AuthController {
      * @return the user's instance
      */
     public UserDTO login(String userName, String password) throws Exception {
-//        UserDBAccess userDBAccess = UserDBAccess.getInstance();
-//        User user = userDBAccess.select(userName);
-        User user = User.getUserByID(userName);
+       User user = uda.select(userName);
 
         if (user == null) {
             throw new Exception("User not found!");
@@ -59,16 +61,13 @@ public class AuthController {
             throw new Exception("Wrong password!");
         }
 
-
-
-
         user.connect();
-        ArrayList<String> rolesAsSrings = new ArrayList<>();
-        Role[] roles = user.getRoles().keySet().toArray(new Role[0]);
+        ArrayList<String> rolesAsStrings = urda.select(userName).getValue();
+       /* Role[] roles = user.getRoles().keySet().toArray(new Role[0]);
         for (Role role : roles) {
-            rolesAsSrings.add(role.name());
-        }
-        return new UserDTO(user.getUserName(), user.getName(), rolesAsSrings.toArray(new String[0]), user.getMail());
+            rolesAsStrings.add(role.name());
+        }*/
+        return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail());
     }
 
 
