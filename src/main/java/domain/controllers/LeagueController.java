@@ -3,12 +3,19 @@ package domain.controllers;
 import domain.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LeagueController {
 
     public ArrayList<League> getLeagues(){
         // TODO: get leagues from DB
-        return null;
+        League league1 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(), "aleph");
+        League league2 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"bet");
+        League league3 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"gimel");
+//        League league4 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"dalet");
+//        League league5 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"hea");
+
+        return  new ArrayList<League>(Arrays.asList(league1,league2,league3));
     }
 
     // =================== Guest functions ====================

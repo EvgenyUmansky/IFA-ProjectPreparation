@@ -3,6 +3,7 @@ package domain.controllers;
 import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
 import domain.*;
+import service.pojos.GameDTO;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -58,10 +59,34 @@ public class GameController {
      * @param username the referee's username
      * @return the list of games that the referee referees at
      */
-    public ArrayList<Game> getRefereeGames(String username) {
-        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        System.out.println(ref.getName());
-        return Game.getGamesByReferee(ref);
+    public ArrayList<GameDTO> getRefereeGames(String username) {
+        // TODO: get all games for this referee from DB
+//        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+//        ArrayList<Game> ans  = Game.getGamesByReferee(ref);
+
+        ArrayList<Game> array = new ArrayList<>();
+        League mockLeague = new League("testLeage");
+        mockLeague.addReferee((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
+        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
+        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
+        Game mockGame = new Game(mockLeague, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeague.getReferees()));
+        mockGame.addEvent(new GameEvent(60, GameAlert.GOAL, "Messi did goal"));
+        mockGame.addEvent(new GameEvent(75, GameAlert.INJURY, "Yossi Benayoun got injured"));
+        array.add(mockGame);
+        ArrayList<GameDTO> response = new ArrayList<>();
+        for (Game game : array) {
+            response.add(new GameDTO(
+                    game.getId(),
+                    game.getHostTeam().getTeamName(),
+                    game.getGuestTeam().getTeamName(),
+                    game.getField(),
+                    game.getGameDate(),
+                    game.getReferees(),
+                    new ArrayList<>(game.getGameEvents().values()),
+                    game.getGameScore()
+            ));
+        }
+        return response;
     }
 
     /**
