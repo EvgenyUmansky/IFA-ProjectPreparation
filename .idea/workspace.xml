@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="finished login">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/UserRolesDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/GameAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/GameAlert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,25 +21,137 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="63" column="65" selection-start-line="63" selection-start-column="65" selection-end-line="63" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/UserRolesDBAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#601#602#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit4 Test Class" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/DataAccess/UserRolesDBAccess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="1400" />
+    <option name="height" value="785" />
   </component>
   <component name="ProjectId" id="1al8qGY8YNKHcht1UxtEbx2VOkE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="DataAccess" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -55,14 +169,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590096194219" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590396193452" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.55773675" />
   </component>
@@ -94,7 +208,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringRestApiApplication">
+  <component name="RunManager" selected="JUnit.DataAccess in IFA-ProjectPreparation">
     <configuration name="DataAccess in IFA-ProjectPreparation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
@@ -357,6 +471,38 @@
     <option name="localTasksCounter" value="19" />
     <servers />
   </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.16430596" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -376,6 +522,12 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -510,56 +662,55 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/domain/TeamOwnerTest.java</url>
           <line>135</line>
+          <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>801</line>
+          <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>187</line>
+          <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>636</line>
+          <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>414</line>
+          <properties />
           <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/domain/TeamCoachTest.java</url>
           <line>16</line>
+          <properties />
           <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/TeamDBAccessTest.java</url>
           <line>98</line>
+          <properties />
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/TeamDBAccessTest.java</url>
           <line>209</line>
+          <properties />
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/TeamPlayerDBAccessTest.java</url>
           <line>93</line>
+          <properties />
           <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
@@ -596,5 +747,109 @@
       <FILTER>domain.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$All_in_IFA_ProjectPreparation__1_.ic" NAME="All in IFA-ProjectPreparation (1) Coverage Results" MODIFIED="1587415882402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataAccess/UserRolesDBAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#601#602#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/AuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="63" column="65" selection-start-line="63" selection-start-column="65" selection-end-line="63" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Invalid</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>IFA-ProjectPreparation</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ch.qos.logback:logback-classic:1.2.3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.55773675" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
