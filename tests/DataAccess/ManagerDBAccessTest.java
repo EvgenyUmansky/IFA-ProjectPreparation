@@ -105,7 +105,7 @@ class ManagerDBAccessTest {
         connection.commit();
 
         // save teamManager to DB
-        teamManager.setCurrentTeam(team);
+        teamManager.setCurrentTeam(team.getTeamName());
         managerDBAccess.save(teamManager);
 
         // check the teamManager saved in the DB
@@ -113,7 +113,7 @@ class ManagerDBAccessTest {
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
         assertEquals(teamManager.getUserName(), resultSet.getString(1));
-        assertEquals(teamManager.getCurrentTeam().getTeamName(), resultSet.getString(2));
+        assertEquals(teamManager.getCurrentTeam(), resultSet.getString(2));
 
 
         // delete the teamManager from DB
@@ -161,7 +161,7 @@ class ManagerDBAccessTest {
         assertEquals("UserName_1", resultSet.getString(1));
 
         // update user in DB
-        teamManager.setCurrentTeam(team);
+        teamManager.setCurrentTeam(team.getTeamName());
         managerDBAccess.update(teamManager);
 
         // check the teamManager updated in the DB
@@ -169,7 +169,7 @@ class ManagerDBAccessTest {
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
         assertEquals(teamManager.getUserName(), resultSet.getString(1));
-        assertEquals(teamManager.getCurrentTeam().getTeamName(), resultSet.getString(2));
+        assertEquals(teamManager.getCurrentTeam(), resultSet.getString(2));
 
 
         // delete the teamManager from DB
@@ -244,5 +244,10 @@ class ManagerDBAccessTest {
         preparedStatement = connection.prepareStatement("delete from [Managers] where username = 'UserName_1'");
         preparedStatement.executeUpdate();
         connection.commit();
+    }
+
+    @Test
+    void conditionedSelect() {
+        managerDBAccess.conditionedSelect(null);
     }
 }

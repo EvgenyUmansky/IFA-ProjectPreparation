@@ -7,13 +7,27 @@ import domain.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class PlayerController {
 
     public ArrayList<TeamPlayer> getPlayers() {
         // TODO: DB arraylist of all players
-        return null;
+        TeamPlayer player1 = new TeamPlayer("testPlayer1", "testPlayer1@gmail.com", "Lionel Messi");
+        TeamPlayer player2 = new TeamPlayer("testPlayer2", "testPlayer2@gmail.com", "David Beckham");
+        TeamPlayer player3 = new TeamPlayer("testPlayer3", "testPlayer3@gmail.com", "Cristiano Ronaldo");
+        TeamPlayer player4 = new TeamPlayer("testPlayer4", "testPlayer4@gmail.com", "Zlatan Ibrahimović");
+        TeamPlayer player5 = new TeamPlayer("testPlayer5", "testPlayer5@gmail.com", "Paolo Maldini");
+        return new ArrayList<TeamPlayer>(Arrays.asList(player1,player2,player3));
+    }
+
+    public ArrayList<TeamPlayer> getAvailablePlayers() {
+        // TODO: DB arraylist of all available players
+        TeamPlayer player1 = new TeamPlayer("testPlayer1", "testPlayer1@gmail.com", "Diego Maradona");
+        TeamPlayer player2 = new TeamPlayer("testPlayer2", "testPlayer2@gmail.com", "Neymar");
+        TeamPlayer player3 = new TeamPlayer("testPlayer3", "testPlayer3@gmail.com", "Wayne Rooney");
+        return new ArrayList<TeamPlayer>(Arrays.asList(player1,player2,player3));
     }
 
     // ========================= Guest functions ==========================

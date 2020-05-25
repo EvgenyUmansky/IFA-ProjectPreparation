@@ -3,6 +3,7 @@ package DataAccess;
 import domain.TeamPlayer;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
@@ -27,16 +28,16 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [TeamPlayer] values (?, ?, ?, ?, ?)";
+        String query = "insert into [Players] values (?, ?, ?, ?, ?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, teamPlayer.getUserName());
             statement.setDate(2, (Date) teamPlayer.getBirthDate());
-            statement.setString(3, teamPlayer.getCurrentTeam().getTeamName());
+            statement.setString(3, teamPlayer.getCurrentTeam());
             statement.setString(4, teamPlayer.getPosition());
-            statement.setString(5, teamPlayer.getPosition());
+            statement.setString(5, teamPlayer.getSquadNumber());
 
             statement.executeUpdate();
             connection.commit();
@@ -63,7 +64,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         }
 
         String query = "update [Players] " +
-                "set BirthDate = ?, TeamName = ?, Position = ?, SquadNumber = ?, " +
+                "set BirthDate = ?, TeamName = ?, Position = ?, SquadNumber = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -71,10 +72,10 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         try {
             statement = connection.prepareStatement(query);
             statement.setDate(1,(Date) teamPlayer.getBirthDate());
-            statement.setString(2, teamPlayer.getCurrentTeam().getTeamName());
+            statement.setString(2, teamPlayer.getCurrentTeam());
             statement.setString(3, teamPlayer.getPosition());
             statement.setString(4, teamPlayer.getSquadNumber());
-
+            statement.setString(5, teamPlayer.getUserName());
 
             statement.executeUpdate();
             connection.commit();
@@ -164,5 +165,8 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         return teamPlayer;
     }
 
-
+    @Override
+    public HashMap<String, TeamPlayer> conditionedSelect(String[] conditions) {
+        return null;
+    }
 }

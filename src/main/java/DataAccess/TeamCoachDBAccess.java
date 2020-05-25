@@ -2,6 +2,7 @@ package DataAccess;
 import domain.TeamCoach;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
@@ -32,7 +33,12 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1,teamCoach.getUserName());
-            statement.setString(2,teamCoach.getCurrentTeam().getTeamName());
+            if(teamCoach.getCurrentTeam() != null) {
+                statement.setString(2, teamCoach.getCurrentTeam());
+            }
+            else{
+                statement.setString(2, null);
+            }
             statement.setString(3,teamCoach.getRole());
             statement.setString(4,teamCoach.getQualification());
 
@@ -60,7 +66,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
     @Override
     public void update(TeamCoach teamCoach) {
         if(teamCoach == null){
-            System.out.println("Couldn't execute 'update(TeamCoach teamCoach)' in TeamCoachDBAccess: the user is null");
+            System.out.println("Couldn't execute 'update(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
             return;
         }
 
@@ -72,7 +78,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
         try{
             statement = connection.prepareStatement(query);
-            statement.setString(1,teamCoach.getCurrentTeam().getTeamName());
+            statement.setString(1,teamCoach.getCurrentTeam());
             statement.setString(2,teamCoach.getRole());
             statement.setString(3,teamCoach.getQualification());
             statement.setString(4,teamCoach.getUserName());
@@ -153,9 +159,10 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 String qualification =  retrievedUser.getString(4);
 
 
-                teamCoach = new TeamCoach(username, qualification);
+                teamCoach = new TeamCoach(username, "");
+                teamCoach.setQualification(qualification);
                 teamCoach.setRole(role);
-                // TODO: 19/05/2020 set current team of teamCoach??
+                teamCoach.setCurrentTeam(teamName);
             }
         }
         catch (SQLException e){
@@ -177,6 +184,11 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             }
         }
         return teamCoach;
+    }
+
+    @Override
+    public HashMap<String, TeamCoach> conditionedSelect(String[] conditions) {
+        return null;
     }
 
 }

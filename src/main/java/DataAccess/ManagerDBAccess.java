@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class ManagerDBAccess implements DBAccess<TeamManager> {
@@ -36,7 +37,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             statement = connection.prepareStatement(query);
             statement.setString(1, teamManager.getUserName());
             if(teamManager.getCurrentTeam() != null) {
-                statement.setString(2, teamManager.getCurrentTeam().getTeamName());
+                statement.setString(2, teamManager.getCurrentTeam());
             }
             else {
                 statement.setString(2, null);
@@ -75,7 +76,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setString(1, teamManager.getCurrentTeam().getTeamName());
+            statement.setString(1, teamManager.getCurrentTeam());
             statement.setString(2, teamManager.getUserName());
 
 
@@ -163,6 +164,11 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             }
         }
         return teamManager;
+    }
+
+    @Override
+    public HashMap<String, TeamManager> conditionedSelect(String[] conditions) {
+        return null;
     }
 
 

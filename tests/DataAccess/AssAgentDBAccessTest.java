@@ -153,4 +153,9 @@ class AssAgentDBAccessTest {
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
+    @Test
+    void conditionedSelect() {
+        assAgentDBAccess.conditionedSelect(null);
+    }
 }

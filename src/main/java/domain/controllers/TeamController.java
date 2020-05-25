@@ -1,15 +1,65 @@
 package domain.controllers;
 
 import domain.*;
+import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class TeamController {
 
-    public ArrayList<Team> getTeams() {
+    public TeamDTO createTeam(String teamOwner, String name, String stadium){
+        User user = User.getUserByID(teamOwner);
+        Field field = Field.getFieldByName(stadium);
+        user.addRoleToUser(Role.TEAM_OWNER);
+        TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
+        Team newTeam = new Team(name, field, owner);
+        // TODO: Save new team to DB
+        return new TeamDTO(
+                newTeam.getTeamName(),
+                newTeam.getStadium(),
+                //newTeam.getFields().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getFields().values()),
+                //newTeam.getPlayers().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getPlayers().values()),
+                //newTeam.getCoaches().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getCoaches().values()),
+                //newTeam.getManagers().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getManagers().values()),
+                //newTeam.getOwners().keySet().toArray(new String[0]),
+                new ArrayList<>(newTeam.getOwners().values()),
+                newTeam.getTeamStatus().name()
+        );
+
+    }
+
+    public ArrayList<TeamDTO> getTeams() {
         // TODO: get all teams from DB
-        return null;
+        ArrayList<Team> array = new ArrayList<>();
+        Team mockTeam = new Team("testTeam", new Field("testField", 1), new TeamOwner("alona123","owner@gmail.com", "Alona Barkat"));
+        mockTeam.addPlayer(new TeamPlayer("noga123", "noga@gmail.com", "Noga Zohar"));
+        mockTeam.addCoach(new TeamCoach("roy123", "roy@gmail.com", "Roy Judes"));
+        mockTeam.addManager(new TeamManager("mohsen123", "mohsen@gmail.com", "Mohsen Abdalla"));
+        array.add(mockTeam);
+        ArrayList<TeamDTO> response = new ArrayList<>();
+        for (Team team : array) {
+            response.add(new TeamDTO(
+                    team.getTeamName(),
+                    team.getStadium(),
+                    //team.getFields().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getFields().values()),
+                    //team.getPlayers().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getPlayers().values()),
+                    //team.getCoaches().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getCoaches().values()),
+                    //team.getManagers().keySet().toArray(new String[0]),
+                    new ArrayList<>(team.getManagers().values()),
+                    new ArrayList<>(team.getOwners().values()),
+                    team.getTeamStatus().name()
+            ));
+        }
+        return response;
     }
 
     // ========================= Guest functions ============================
@@ -157,7 +207,7 @@ public class TeamController {
         }
         User ownerUser = User.getUserByID(userNameTeamOwner), newOwnerUser = User.getUserByID(userNameNewTeamOwner);
         TeamOwner owner = ((TeamOwner)ownerUser.getRoles().get(Role.TEAM_OWNER));
-        newOwnerUser.getRoles().put(Role.TEAM_OWNER, new TeamOwner(userNameNewTeamOwner, newOwnerUser.getMail(), team, new HashSet<>()));
+        newOwnerUser.getRoles().put(Role.TEAM_OWNER, new TeamOwner(userNameNewTeamOwner, newOwnerUser.getMail(), team.getTeamName(), new HashSet<>()));
         owner.addToOwnerAppointments((TeamOwner) newOwnerUser.getRoles().get(Role.TEAM_OWNER));
         team.addOwner(ownerUser,newOwnerUser);
     }

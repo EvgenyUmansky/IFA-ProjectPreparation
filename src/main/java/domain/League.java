@@ -47,6 +47,10 @@ public class League {
      */
     public League(String leagueName) {
         this.leagueName = leagueName;
+        this.teamsTable = new LinkedHashMap<>();
+        this.games = new ArrayList<>();
+        this.isBegin = false;
+        this.referees = new HashSet<>();
     }
 
 

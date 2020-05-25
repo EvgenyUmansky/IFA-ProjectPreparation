@@ -20,6 +20,9 @@ public class Fan extends Subscriber{
         super(userName, mail);
     }
 
+    public Fan(String userName, String mail, String name) {
+        super(userName, mail, name);
+    }
 
 
 

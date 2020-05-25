@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 
 @RestController
-public class PersonalPageController {
+public class ApiPersonalPageController {
 
     private final domain.controllers.PersonalPageController controller;
 
-    public PersonalPageController(){
+    public ApiPersonalPageController(){
         controller = new domain.controllers.PersonalPageController();
     }
 
@@ -21,7 +21,7 @@ public class PersonalPageController {
     }
 
     // This will get pages by user in the following way: /pages?username=<username>
-    @GetMapping("/pages")
+    @GetMapping("/pages/{pageName}")
     public ArrayList<PersonalPage> getPagesByUsername(@RequestParam("username") String userName){
         return controller.getPagesByUsername(userName);
     }

@@ -3,6 +3,8 @@ package service;
 import domain.*;
 import domain.controllers.AuthController;
 import domain.controllers.SystemAdministratorController;
+import service.pojos.UserDTO;
+import service.pojos.GameDTO;
 
 import java.text.ParseException;
 import java.util.*;
@@ -10,7 +12,7 @@ import java.util.*;
 /**
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
-public class Controller {
+public class ApiController {
     private final domain.controllers.CoachController coachController;
     private final domain.controllers.FanController fanController;
     private final domain.controllers.GuestController guestController;
@@ -28,7 +30,7 @@ public class Controller {
     /**
      * Constructor
      */
-    public Controller() {
+    public ApiController() {
         this.coachController = new domain.controllers.CoachController();
         this.fanController = new domain.controllers.FanController();
         this.guestController = new domain.controllers.GuestController();
@@ -60,7 +62,7 @@ public class Controller {
      * @param password the user's password
      * @return the user's instance
      */
-    public User login(String userName, String password) throws Exception {
+    public UserDTO login(String userName, String password) throws Exception {
         return startController.login(userName, password);
     }
 
@@ -325,7 +327,7 @@ public class Controller {
      * @param username the referee's username
      * @return the list of games that the referee referees at
      */
-    public ArrayList<Game> getRefereeGames(String username) {
+    public ArrayList<GameDTO> getRefereeGames(String username) {
         return gameController.getRefereeGames(username);
     }
 
@@ -333,31 +335,29 @@ public class Controller {
     /**
      * UC 10.3
      * Adds an event that took place during a game to its events list
-     * @param username the referee's username
      * @param gameId the match
      *
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String username, String gameId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
-        gameController.addGameEventToGame(username, gameId, dateTimeStr, gameMinutes, eventName, description);
+    public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
+        gameController.addGameEventToGame(gameId, eventName, description);
     }
 
 
     /**
      * UC 10.4
      * Updates an event that took place during a game
-     * @param username the referee's username
-     * @param game the match
-     * @param gameEvent the event
+     * @param gameId the game
+     * @param eventId the event
      * @param dateTimeStr the time the event took place
      * @param gameMinutes the minute of the game the event took place in
      * @param eventName the name of the event
      * @param description the description of the event
      * @throws Exception in case the update was unsuccessful
      */
-    public void changeGameEvent(String username, String game, String gameEvent, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
+    public void changeGameEvent(String gameId, String eventId, String dateTimeStr, String gameMinutes, String eventName, String description) throws Exception {
         // TODO: check the referee is MAIN in UI
-        gameController.changeGameEvent(username, game, gameEvent, dateTimeStr, gameMinutes, eventName, description);
+        gameController.changeGameEvent(gameId, eventId, dateTimeStr, gameMinutes, eventName, description);
     }
 
 
@@ -711,16 +711,6 @@ public class Controller {
     public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
         return startController.getUserRoles(userName);
     }
-
-
-
-    /**
-     * TEST function - SHOULD BE IMPLEMENTED IN UI
-     */
-    public User showLoginPanel() throws Exception {
-        return startController.showLoginPanel();
-    }
-
 
     /**
      *  TEST function - SHOULD BE IMPLEMENTED IN UI

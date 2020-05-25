@@ -2,10 +2,10 @@ package service;
 
 import org.springframework.web.bind.annotation.*;
 
-public class RefereeController {
+public class ApiRefereeController {
     private final domain.controllers.RefereeController controller;
 
-    public RefereeController(){
+    public ApiRefereeController(){
         controller = new domain.controllers.RefereeController();
     }
 

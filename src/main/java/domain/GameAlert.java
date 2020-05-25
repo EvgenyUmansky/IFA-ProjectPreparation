@@ -6,9 +6,10 @@ package domain;
 public enum GameAlert {
     GOAL,
     OFFSIDE,
-    OFFENSE,
+    FOUL,
     RED_CARD,
     YELLOW_CARD,
     INJURY,
-    PLAYER_REPLACEMENT
+    PLAYER_IN,
+    PLAYER_OUT
 }

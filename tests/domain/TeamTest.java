@@ -61,7 +61,7 @@ class TeamTest {
         User ownerUser = new User("ownerUser", "123", "shak", "s@mail.com");
         User ownerUser2 = new User("ownerUser2", "123", "shak", "s@mail.com");
         TeamOwner ownerTest2 = new TeamOwner("ownerUser2", "s@mail.com");
-        owner.setTeam(team);
+        owner.setTeam(team.getTeamName());
         ownerUser.addRoleToUser(Role.TEAM_OWNER, owner);
         ownerUser2.addRoleToUser(Role.TEAM_OWNER, ownerTest2);
 

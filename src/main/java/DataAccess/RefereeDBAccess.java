@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class RefereeDBAccess implements DBAccess<Referee> {
@@ -180,6 +181,11 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             }
         }
         return referee;
+    }
+
+    @Override
+    public HashMap<String, Referee> conditionedSelect(String[] conditions) {
+        return null;
     }
 
 
