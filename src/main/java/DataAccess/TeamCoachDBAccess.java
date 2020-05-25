@@ -27,7 +27,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [Coaches] values (?, ?, ?, ?)";
+        String query = "insert into [Coaches] values (?, ?, ?, ?,?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
@@ -41,6 +41,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             }
             statement.setString(3,teamCoach.getRole());
             statement.setString(4,teamCoach.getQualification());
+            statement.setString(5,teamCoach.getName());
 
 
             statement.executeUpdate();
@@ -71,7 +72,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
         }
 
         String query = "update [Coaches] " +
-                "set TeamName = ?, Role = ?, Qualification = ? " +
+                "set TeamName = ?, Role = ?, Qualification = ?, Name = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -81,7 +82,8 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             statement.setString(1,teamCoach.getCurrentTeam());
             statement.setString(2,teamCoach.getRole());
             statement.setString(3,teamCoach.getQualification());
-            statement.setString(4,teamCoach.getUserName());
+            statement.setString(4,teamCoach.getName());
+            statement.setString(5,teamCoach.getUserName());
 
 
             statement.executeUpdate();
@@ -157,12 +159,11 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 String teamName = retrievedUser.getString(2);
                 String role =  retrievedUser.getString(3);
                 String qualification =  retrievedUser.getString(4);
+                String name =  retrievedUser.getString(5);
 
 
-                teamCoach = new TeamCoach(username, "");
-                teamCoach.setQualification(qualification);
-                teamCoach.setRole(role);
-                teamCoach.setCurrentTeam(teamName);
+                teamCoach = new TeamCoach(username, "",role, qualification,name);
+                // TODO: 19/05/2020 set current team of teamCoach??
             }
         }
         catch (SQLException e){
@@ -188,7 +189,58 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
     @Override
     public HashMap<String, TeamCoach> conditionedSelect(String[] conditions) {
-        return null;
+        String query = "select * from [Coaches] where";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedCoaches = null;
+        HashMap<String, TeamCoach> coaches = new HashMap<>();
+
+        for (int i = 0; i < conditions.length; i++) {
+            if (i % 2 == 0) {
+                query += " " + conditions[i];
+            } else {
+                query += " = ?";
+                if (i < conditions.length - 1)
+                    query += ",";
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+            int i = 0;
+            while (i < conditions.length) {
+                switch (conditions[i].toLowerCase()) {
+                    case "username":
+                    case "teamname":
+                    case "role":
+                    case "qualification":
+                    case "name":
+                        statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                        break;
+
+
+                    default:
+                        break;
+                }
+                i += 2;
+            }
+
+            retrievedCoaches = statement.executeQuery();
+
+
+            while(retrievedCoaches.next()){
+                String username = retrievedCoaches.getString(1);
+                String teamname =  retrievedCoaches.getString(2);
+                String role =  retrievedCoaches.getString(3);
+                String qualification =  retrievedCoaches.getString(4);
+                String name =  retrievedCoaches.getString(5);
+
+                coaches.put(username,new TeamCoach(username, "",role, qualification,name));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return coaches;
     }
 
 }

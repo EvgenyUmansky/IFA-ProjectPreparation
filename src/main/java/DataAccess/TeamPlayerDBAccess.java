@@ -28,7 +28,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [Players] values (?, ?, ?, ?, ?)";
+        String query = "insert into [Players] values (?, ?, ?, ?, ?, ?)";
 
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
@@ -38,6 +38,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.setString(3, teamPlayer.getCurrentTeam());
             statement.setString(4, teamPlayer.getPosition());
             statement.setString(5, teamPlayer.getSquadNumber());
+            statement.setString(6, teamPlayer.getName());
 
             statement.executeUpdate();
             connection.commit();
@@ -64,7 +65,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         }
 
         String query = "update [Players] " +
-                "set BirthDate = ?, TeamName = ?, Position = ?, SquadNumber = ? " +
+                "set BirthDate = ?, TeamName = ?, Position = ?, SquadNumber = ?," + "name = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -75,7 +76,8 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.setString(2, teamPlayer.getCurrentTeam());
             statement.setString(3, teamPlayer.getPosition());
             statement.setString(4, teamPlayer.getSquadNumber());
-            statement.setString(5, teamPlayer.getUserName());
+            statement.setString(5, teamPlayer.getName());
+            statement.setString(6, teamPlayer.getUserName());
 
             statement.executeUpdate();
             connection.commit();
@@ -144,7 +146,8 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 String teamName = retrievedUser.getString(3);
                 String position = retrievedUser.getString(4);
                 String squadNumber = retrievedUser.getString(5);
-                teamPlayer = new TeamPlayer(username, "", birthDate, position, squadNumber);
+                String name = retrievedUser.getString(6);
+                teamPlayer = new TeamPlayer(username, "", birthDate, position, squadNumber,name);
             }
         } catch (SQLException e) {
             assert false;
@@ -165,8 +168,64 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
         return teamPlayer;
     }
 
+
     @Override
     public HashMap<String, TeamPlayer> conditionedSelect(String[] conditions) {
-        return null;
+        String query = "select * from [Players] where";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedPlayers = null;
+        HashMap<String, TeamPlayer> players = new HashMap<>();
+
+        for (int i = 0; i < conditions.length; i++) {
+            if (i % 2 == 0) {
+                query += " " + conditions[i];
+            } else {
+                query += " = ?";
+                if (i < conditions.length - 1)
+                    query += ",";
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+            int i = 0;
+            while (i < conditions.length) {
+                switch (conditions[i].toLowerCase()) {
+                    case "username":
+                    case "teamname":
+                    case "position":
+                    case "squadnumber":
+                    case "name":
+                        statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                        break;
+
+                    case "birthdate":
+                        statement.setDate((int) (i / 2) + 1, Date.valueOf(conditions[i + 1]));
+                        break;
+
+                    default:
+                        break;
+                }
+                i += 2;
+            }
+
+            retrievedPlayers = statement.executeQuery();
+
+
+            while(retrievedPlayers.next()){
+                String username = retrievedPlayers.getString(1);
+                Date birthdate = retrievedPlayers.getDate(2);
+                String teamname =  retrievedPlayers.getString(3);
+                String position =  retrievedPlayers.getString(4);
+                String squadnumber =  retrievedPlayers.getString(5);
+                String name =  retrievedPlayers.getString(6);
+
+                players.put(username,new TeamPlayer(username, "",birthdate, position, squadnumber,name));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return players;
     }
 }
