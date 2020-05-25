@@ -4,6 +4,7 @@ import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
 import DataAccess.UserRolesDBAccess;
 import domain.*;
+import javafx.util.Pair;
 import service.pojos.UserDTO;
 
 import java.util.*;
@@ -16,7 +17,7 @@ public class AuthController {
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
     private DBAccess<User> uda = UserDBAccess.getInstance();
-    private DBAccess<ArrayList<String>> urda = UserRolesDBAccess.getInstance();
+    private DBAccess< Pair<String,ArrayList<String>> > urda = UserRolesDBAccess.getInstance();
 
     //private DBAccess<HashMap<,>> uda = UserDBAccess.getInstance();
 
@@ -61,7 +62,7 @@ public class AuthController {
         }
 
         user.connect();
-        ArrayList<String> rolesAsStrings = urda.select(userName);
+        ArrayList<String> rolesAsStrings = urda.select(userName).getValue();
        /* Role[] roles = user.getRoles().keySet().toArray(new Role[0]);
         for (Role role : roles) {
             rolesAsStrings.add(role.name());
