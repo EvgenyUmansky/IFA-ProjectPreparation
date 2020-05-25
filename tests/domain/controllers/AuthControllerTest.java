@@ -31,8 +31,8 @@ class AuthControllerTest {
 
     @AfterEach
     public void deleteAfterTest() {
-        userDBAccess.delete(new User("UserName_1", "Password_1", "Name_1", "Mail@gmail"));
         userRolesDBAccess.delete(new Pair<>("UserName_1", new ArrayList<String>(){{add("TeamPlayer"); add("TeamCoach");}}));
+        userDBAccess.delete(new User("UserName_1", "Password_1", "Name_1", "Mail@gmail"));
         authController = null;
         userDTO = null;
         userDBAccess = null;
