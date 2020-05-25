@@ -1,5 +1,8 @@
 package domain.controllers;
 
+import DataAccess.DBAccess;
+import DataAccess.TeamPlayerDBAccess;
+import DataAccess.UserDBAccess;
 import domain.Role;
 import domain.TeamPlayer;
 import domain.User;
@@ -9,8 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 
 public class PlayerController {
+
+    private DBAccess<TeamPlayer> pda = TeamPlayerDBAccess.getInstance();
+
 
     public ArrayList<TeamPlayer> getPlayers() {
         // TODO: DB arraylist of all players
@@ -24,10 +31,17 @@ public class PlayerController {
 
     public ArrayList<TeamPlayer> getAvailablePlayers() {
         // TODO: DB arraylist of all available players
-        TeamPlayer player1 = new TeamPlayer("testPlayer1", "testPlayer1@gmail.com", "Diego Maradona");
+       /* TeamPlayer player1 = new TeamPlayer("testPlayer1", "testPlayer1@gmail.com", "Diego Maradona");
         TeamPlayer player2 = new TeamPlayer("testPlayer2", "testPlayer2@gmail.com", "Neymar");
         TeamPlayer player3 = new TeamPlayer("testPlayer3", "testPlayer3@gmail.com", "Wayne Rooney");
-        return new ArrayList<TeamPlayer>(Arrays.asList(player1,player2,player3));
+        return new ArrayList<TeamPlayer>(Arrays.asList(player1,player2,player3));*/
+
+       String[] conditions = new String[2];
+       conditions[0] = "teamName";
+       conditions[1] = "";
+       HashMap<String,TeamPlayer> availablePlayers = pda.conditionedSelect(conditions);
+
+       return new ArrayList<>(availablePlayers.values());
     }
 
     // ========================= Guest functions ==========================

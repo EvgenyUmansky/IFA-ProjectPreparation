@@ -21,6 +21,12 @@ public class TeamCoach extends TeamMember {
     public TeamCoach(String userName, String mail, String name) {
         super(userName, mail, name);
     }
+
+    public TeamCoach(String username, String mail, String role, String qualification, String name){
+        super(username,mail,name);
+        this.role = role;
+        this.qualification = qualification;
+    }
     //========================= Getters and Setters ==========================//
 
     /**

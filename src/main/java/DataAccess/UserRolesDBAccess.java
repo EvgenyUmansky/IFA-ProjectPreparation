@@ -2,6 +2,7 @@ package DataAccess;
 
 import domain.Role;
 import domain.User;
+import javafx.util.Pair;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UserRolesDBAccess implements DBAccess<ArrayList<String>>{
+public class UserRolesDBAccess implements DBAccess<Pair<String,ArrayList<String>>>{
 
     private static final UserRolesDBAccess instance = new UserRolesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -24,27 +25,28 @@ public class UserRolesDBAccess implements DBAccess<ArrayList<String>>{
     }
 
     @Override
-    public void save(ArrayList<String> roles) {
+    public void save(Pair<String,ArrayList<String>> roles) {
 
     }
 
     @Override
-    public void update(ArrayList<String> roles) {
+    public void update(Pair<String,ArrayList<String>> roles) {
 
     }
 
     @Override
-    public void delete(ArrayList<String> roles) {
+    public void delete(Pair<String,ArrayList<String>> roles) {
 
     }
 
     @Override
-    public ArrayList<String> select(String username) {
+    public Pair<String,ArrayList<String>> select(String username) {
         String query = "select * from [UserRoles] where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUsers = null;
         ArrayList<String> roles = new ArrayList<>();
+        Pair<String,ArrayList<String>> userRoles = null;
 
 
         try{
@@ -55,6 +57,7 @@ public class UserRolesDBAccess implements DBAccess<ArrayList<String>>{
             while(retrievedUsers.next()){
                roles.add(retrievedUsers.getString(2));
             }
+            userRoles = new Pair<>(username,roles);
         }
         catch (SQLException e){
             //FIXME: change this to exception
@@ -74,11 +77,11 @@ public class UserRolesDBAccess implements DBAccess<ArrayList<String>>{
                 e3.printStackTrace();
             }
         }
-        return roles;
+        return userRoles;
     }
 
     @Override
-    public HashMap<String, ArrayList<String>> conditionedSelect(String[] conditions) {
+    public HashMap<String, Pair<String,ArrayList<String>>> conditionedSelect(String[] conditions) {
         return null;
     }
 }
