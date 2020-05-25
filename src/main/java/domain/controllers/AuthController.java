@@ -5,6 +5,7 @@ import DataAccess.UserDBAccess;
 import DataAccess.UserRolesDBAccess;
 import domain.*;
 import javafx.util.Pair;
+import org.apache.log4j.Logger;
 import service.pojos.UserDTO;
 
 import java.util.*;
@@ -13,6 +14,7 @@ import java.util.*;
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
 public class AuthController {
+    static Logger logger = Logger.getLogger(AuthController.class);
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
@@ -51,9 +53,11 @@ public class AuthController {
      * @return the user's instance
      */
     public UserDTO login(String userName, String password) throws Exception {
-       User user = uda.select(userName);
-
+        User user = uda.select(userName);
         if (user == null) {
+            logger.error("User not found!");
+            Logger.getLogger(AuthController.class).error("User not found!"); // SystemEvent
+            Logger.getLogger("requestLogger").info("Wrong password!"); // GameEvent
             throw new Exception("User not found!");
         }
 
