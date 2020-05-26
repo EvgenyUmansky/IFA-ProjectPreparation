@@ -20,7 +20,6 @@ public class GameController {
     private DBAccess<League> lda = LeagueDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
-//    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
 //    private GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
 
     public ArrayList<Game> getGames() {
@@ -31,19 +30,19 @@ public class GameController {
         Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
         // TODO: return all games
         return new ArrayList<Game>(Arrays.asList(mockGame));
+
+
     }
 
     public Game getGame(String gameId){
-        // TODO: get from DB
-        // Game game = DB game
-        // return game;
+         return gda.select(gameId);
 
-        Game game = gda.select(gameId);
-        String[] conditions = new String[] {"leagueName", game.getLeague().getLeagueName(),"year",Integer.toString(game.getLeague().getSeason())};
-        League league = game.getLeague();
-        league = lda.conditionedSelect(conditions).get(game.getLeague().getLeagueName());
-
-        return game;
+//        Game game = gda.select(gameId);
+//        String[] conditions = new String[] {"leagueName", game.getLeague().getLeagueName(),"year",Integer.toString(game.getLeague().getSeason())};
+//        League league = game.getLeague();
+//        league = lda.conditionedSelect(conditions).get(game.getLeague().getLeagueName());
+//
+//        return game;
     }
 
     // ========================= Fan functions ========================
@@ -137,7 +136,7 @@ public class GameController {
      * @throws Exception in case the game is over
      */
     public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-       // Game game = gameDBAccess.select(gameId);
+        Game game = gda.select(gameId);
 
        // int minuteOfEvent = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
 
@@ -146,9 +145,10 @@ public class GameController {
 //        }
 
         LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
-        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId),gameDate,eventName,description);
+        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId), gameDate, eventName, description);
         geda.save(gameEvent);
 
+        // TODO: save alerts of referees and fans in DB
         logger.info(eventName + ": event was added to game " + gameId);
     }
 
@@ -165,40 +165,40 @@ public class GameController {
      * @throws Exception in case not event of the game
      */
     public void changeGameEvent(String gameId, String eventId, String minuteOfEvent, String dateTimeStr, String eventName, String description) throws Exception {
-//        Game game = gameDBAccess.select(gameId);
-//        GameEvent gameEvent = gameEventDBAccess.select(eventId);
-//
+        Game game = gda.select(gameId);
+        GameEvent gameEvent = geda.select(eventId);
+
 //        if (!game.getGameEvents().containsKey(Integer.parseInt(eventId))) {
 //            throw new Exception("Not event of this game");
 //        }
-//
-//        long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
-//        if (diffInHours > 5) {
-//            throw new Exception("Not allowed to change the game events: out of time");
-//        }
-//
-//        // dateTimeStr == null - the dateTimeStr UI field is not filled
-//        if (dateTimeStr != null) {
-//            gameEvent.setGameDate(dateTimeStr);
-//        }
-//
-//        // get minute manually from referee in UI
-//        if(Integer.parseInt(minuteOfEvent) > -1 && Integer.parseInt(minuteOfEvent) < 90){
-//            gameEvent.setGameMinutes(Integer.parseInt(minuteOfEvent));
-//        }
-//
-//        // eventName == null - the eventName UI field is not filled
-//        if (eventName != null) {
-//            gameEvent.setEventName(GameAlert.valueOf(eventName));
-//        }
-//
-//        // description == null - the description UI field is not filled
-//        if (description != null) {
-//            gameEvent.setDescription(description);
-//        }
-//
-//        game.changeEvent(gameEvent);
-//        gameEventDBAccess.update(gameEvent);
+
+        long diffInHours = ChronoUnit.HOURS.between(game.getGameDate(), LocalDateTime.now());
+        if (diffInHours > 5) {
+            throw new Exception("Not allowed to change the game events: out of time");
+        }
+
+        // dateTimeStr == null - the dateTimeStr UI field is not filled
+        if (dateTimeStr != null) {
+            gameEvent.setGameDate(dateTimeStr);
+        }
+
+        // get minute manually from referee in UI
+        if(Integer.parseInt(minuteOfEvent) > -1 && Integer.parseInt(minuteOfEvent) < 90){
+            gameEvent.setGameMinutes(Integer.parseInt(minuteOfEvent));
+        }
+
+        // eventName == null - the eventName UI field is not filled
+        if (eventName != null) {
+            gameEvent.setEventName(GameAlert.valueOf(eventName));
+        }
+
+        // description == null - the description UI field is not filled
+        if (description != null) {
+            gameEvent.setDescription(description);
+        }
+
+       // game.changeEvent(gameEvent);
+        geda.update(gameEvent);
 
         logger.info(eventId + ": event was changed in game " + gameId);
     }
