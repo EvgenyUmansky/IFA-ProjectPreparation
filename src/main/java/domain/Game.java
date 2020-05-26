@@ -91,6 +91,21 @@ public class Game {
         this.gameDate = gameDate;
     }
 
+    public Game(int gameID, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore){
+        this.id = gameID;
+        this.field = new Field(fieldName,0);
+        this.hostTeam = new Team(hostTeam,field,null);
+        this.guestTeam = new Team(guestTeam,null,null);
+        this.gameDate = gameDate;
+        this.hostTeamScore = hostTeamScore;
+        this.guestTeamScore = guestTeamScore;
+
+        this.gameEvents = new HashMap<>();
+        this.referees = new ArrayList<>();
+        this.alertFans = new Alert();
+        this.alertReferees = new Alert();
+    }
+
 
 /////////// Functionality ///////////
 
