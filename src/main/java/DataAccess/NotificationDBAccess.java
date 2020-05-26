@@ -1,17 +1,15 @@
 package DataAccess;
 
-import domain.AlertNotification;
-import javafx.util.Pair;
+import domain.Notification;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class NotificationDBAccess implements DBAccess<AlertNotification> {
+public class NotificationDBAccess implements DBAccess<Notification> {
     static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
 
     private static final NotificationDBAccess instance = new NotificationDBAccess();
@@ -26,7 +24,7 @@ public class NotificationDBAccess implements DBAccess<AlertNotification> {
     }
 
     @Override
-    public void save(AlertNotification notification) {
+    public void save(Notification notification) {
         if(notification == null){
             logger.error("Couldn't execute 'save(AlertNotification notification)' in NotificationDBAccess: the notification is null");
             System.out.println("Couldn't execute 'save(AlertNotification notification)' in NotificationDBAccess: the notification is null");
@@ -66,7 +64,7 @@ public class NotificationDBAccess implements DBAccess<AlertNotification> {
     }
 
     @Override
-    public void update(AlertNotification notification) {
+    public void update(Notification notification) {
         if(notification == null){
             logger.error("Couldn't execute 'update(AlertNotification notification)' in NotificationDBAccess: the notification is null");
             System.out.println("Couldn't execute 'update(AlertNotification notification)' in NotificationDBAccess: the notification is null");
@@ -107,7 +105,7 @@ public class NotificationDBAccess implements DBAccess<AlertNotification> {
     }
 
     @Override
-    public void delete(AlertNotification notification) {
+    public void delete(Notification notification) {
         if(notification == null){
             logger.error("Couldn't execute 'delete(AlertNotification notification)' in NotificationDBAccess: the notification is null");
             System.out.println("Couldn't execute 'delete(AlertNotification notification)' in NotificationDBAccess: the notification is null");
@@ -144,14 +142,14 @@ public class NotificationDBAccess implements DBAccess<AlertNotification> {
     }
 
     @Override
-    public AlertNotification select(String id) {
+    public Notification select(String id) {
         String query = "select * \n" +
                 "from [Notification] \n" +
                 "where NotificationId = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUsers = null;
-        AlertNotification alertNotification = null;
+        Notification notification = null;
         try{
             statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -160,7 +158,7 @@ public class NotificationDBAccess implements DBAccess<AlertNotification> {
             if(retrievedUsers.next()){
                 String title = retrievedUsers.getString(2);
                 String subject = retrievedUsers.getString(3);
-                alertNotification = new AlertNotification(Integer.parseInt(id), title, subject);
+                notification = new Notification(Integer.parseInt(id), title, subject);
             }
         }
         catch (SQLException e){
@@ -185,11 +183,11 @@ public class NotificationDBAccess implements DBAccess<AlertNotification> {
             }
         }
 
-        return alertNotification;
+        return notification;
     }
 
     @Override
-    public HashMap<String, AlertNotification> conditionedSelect(String[] conditions) {
+    public HashMap<String, Notification> conditionedSelect(String[] conditions) {
         return null;
     }
 }

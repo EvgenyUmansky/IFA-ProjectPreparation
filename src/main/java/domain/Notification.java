@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * This class represents a notification that is sent to users in the system.
  */
-public class AlertNotification {
+public class Notification {
 
     static AtomicInteger nextId = new AtomicInteger();
     private final int id;
@@ -20,7 +20,7 @@ public class AlertNotification {
      * @param title the title of the message
      * @param subject the content of the message
      */
-    public AlertNotification(String title, String subject) {
+    public Notification(String title, String subject) {
         // set id
         this.id = nextId.incrementAndGet();
 
@@ -34,7 +34,7 @@ public class AlertNotification {
      * @param title the title of the message
      * @param subject the content of the message
      */
-    public AlertNotification(int id, String title, String subject) {
+    public Notification(int id, String title, String subject) {
         // set id
         this.id = id;
 

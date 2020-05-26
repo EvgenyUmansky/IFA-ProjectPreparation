@@ -20,7 +20,7 @@ public class FanController {
      */
     public void sendComplaintToSysAdmin(String username, String sysAdmin, String title, String message) {
         SystemAdministrator admin = (SystemAdministrator) User.getUserByID(sysAdmin).getRoles().get(Role.SYSTEM_ADMIN);
-        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(new ArrayList<SystemAdministrator>(){{add(admin);}}, new AlertNotification(title, message));
+        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(new ArrayList<SystemAdministrator>(){{add(admin);}}, new Notification(title, message));
 
         logger.info(username + " sent complaint to SysAdmins");
     }

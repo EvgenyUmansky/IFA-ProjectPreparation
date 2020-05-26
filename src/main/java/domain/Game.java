@@ -1,9 +1,7 @@
 package domain;
 
-import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -181,9 +179,9 @@ public class Game {
 
         String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName();
         String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + getGameScore();
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(title, message);
 
-        return alertFans.sendAlert(alertNotification);
+        return alertFans.sendAlert(notification);
     }
 
 
@@ -196,11 +194,11 @@ public class Game {
 
         String title =  "It's close! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " remains " + "one day!";
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(title, message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
-        isSentMap.putAll(alertFans.sendAlert(alertNotification));
-        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+        isSentMap.putAll(alertFans.sendAlert(notification));
+        isSentMap.putAll(alertReferees.sendAlert(notification));
 
         return isSentMap;
     }
@@ -213,11 +211,11 @@ public class Game {
     public Map<String, Boolean> sendAlertChangeDateGame() {
         String title =  "The date has changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.withNano(0).withSecond(0).toString();
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(title, message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
-        isSentMap.putAll(alertFans.sendAlert(alertNotification));
-        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+        isSentMap.putAll(alertFans.sendAlert(notification));
+        isSentMap.putAll(alertReferees.sendAlert(notification));
 
         return isSentMap;
     }
@@ -232,9 +230,9 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        AlertNotification alertNotification = new AlertNotification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Notification notification = new Notification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        alertFans.sendAlert(notification);
+        alertReferees.sendAlert(notification);
     }
 
 
@@ -247,9 +245,9 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        AlertNotification alertNotification = new AlertNotification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Notification notification = new Notification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        alertFans.sendAlert(notification);
+        alertReferees.sendAlert(notification);
     }
 
     /**

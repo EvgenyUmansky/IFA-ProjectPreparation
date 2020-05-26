@@ -45,7 +45,7 @@ class IntegrationTests {
     SystemAdministrator sysAdminMail;
     SystemAdministrator sysAdminNotMail;
     ArrayList<SystemAdministrator> sysAdminsList;
-    AlertNotification alertNotification;
+    Notification notification;
 
 
     // ========================= TeamMembers receive Alerts from Team Tests =================================
@@ -117,7 +117,7 @@ class IntegrationTests {
         sysAdminsList.add(sysAdminMail);
         sysAdminsList.add(sysAdminNotMail);
 
-        alertNotification = new AlertNotification("Complaint to admins", "This project is very very hard, it eats all our time!");
+        notification = new Notification("Complaint to admins", "This project is very very hard, it eats all our time!");
 
 
         // ========================= TeamMembers receive Alerts from Team Tests =================================
@@ -366,8 +366,8 @@ class IntegrationTests {
     // ========================= Sys Admins receive Alerts (complaints) from Fans Tests ======================
     @Test
     void sysAdminsReceiveAlertsFromFans() {
-        fanNotMail.sendComplaintToSysAdmin(sysAdminsList, alertNotification);
-        assertEquals(alertNotification.getSubject(), sysAdminsList.get(1).getNotifications().get(0).getSubject());
+        fanNotMail.sendComplaintToSysAdmin(sysAdminsList, notification);
+        assertEquals(notification.getSubject(), sysAdminsList.get(1).getNotifications().get(0).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
     }

@@ -1,6 +1,5 @@
 package domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,7 +18,7 @@ public class User {
     private boolean isClosed;
     private boolean isMail;
 
-    private ArrayList<AlertNotification> notifications;
+    private ArrayList<Notification> notifications;
 
     // ========================= Constructor ==========================
 
@@ -68,7 +67,7 @@ public class User {
      * Adds a notification to the user's notifications box in the system
      * @param notification alert message
      */
-    public void addNotifications(AlertNotification notification){
+    public void addNotifications(Notification notification){
         this.notifications.add(notification);
     }
 
@@ -76,7 +75,7 @@ public class User {
      * Returns all the notifications the user has received.
      * @return all the notifications the user has received.
      */
-    public ArrayList<AlertNotification> getNotifications() {
+    public ArrayList<Notification> getNotifications() {
         return notifications;
     }
 

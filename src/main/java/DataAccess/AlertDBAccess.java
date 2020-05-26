@@ -1,6 +1,6 @@
 package DataAccess;
 
-import domain.AlertNotification;
+import domain.Notification;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotification>>> {
+public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<Notification>>> {
     static Logger logger = Logger.getLogger(AlertDBAccess.class.getName());
 
     private static final AlertDBAccess instance = new AlertDBAccess();
@@ -26,7 +26,7 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
     }
 
     @Override
-    public void save(Pair<String, ArrayList<AlertNotification>> userNotificationPair) {
+    public void save(Pair<String, ArrayList<Notification>> userNotificationPair) {
         if(userNotificationPair == null){
             logger.error("Couldn't execute 'save(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess: the userNotificationPair is null");
             System.out.println("Couldn't execute 'save(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess: the userNotificationPair is null");
@@ -44,10 +44,10 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
         String query = "insert into [Alert] values (?, ?, ?)";
 
         String userName = userNotificationPair.getKey();
-        ArrayList<AlertNotification> notifications = userNotificationPair.getValue();
+        ArrayList<Notification> notifications = userNotificationPair.getValue();
 
         try {
-            for (AlertNotification notification : notifications){
+            for (Notification notification : notifications){
                 statement = connection.prepareStatement(query);
                 statement.setString(1, userName);
                 statement.setInt(2, notification.getId());
@@ -76,7 +76,7 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
     }
 
     @Override
-    public void update(Pair<String, ArrayList<AlertNotification>> userNotificationPair) {
+    public void update(Pair<String, ArrayList<Notification>> userNotificationPair) {
         if(userNotificationPair == null){
             logger.error("Couldn't execute 'update(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess: the userNotificationPair is null");
             System.out.println("Couldn't execute 'update(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess: the userNotificationPair is null");
@@ -96,10 +96,10 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
         PreparedStatement statement = null;
 
         String userName = userNotificationPair.getKey();
-        ArrayList<AlertNotification> notifications = userNotificationPair.getValue();
+        ArrayList<Notification> notifications = userNotificationPair.getValue();
 
         try {
-            for (AlertNotification notification : notifications) {
+            for (Notification notification : notifications) {
                 statement = connection.prepareStatement(query);
                 statement.setBoolean(1, notification.isSeen());
                 statement.setString(2, userName);
@@ -127,7 +127,7 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
     }
 
     @Override
-    public void delete(Pair<String, ArrayList<AlertNotification>> userNotificationPair) {
+    public void delete(Pair<String, ArrayList<Notification>> userNotificationPair) {
         if(userNotificationPair == null){
             System.out.println("Couldn't execute 'delete(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess: the roles is null");
             return;
@@ -143,10 +143,10 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
         PreparedStatement statement = null;
 
         String userName = userNotificationPair.getKey();
-        ArrayList<AlertNotification> notifications = userNotificationPair.getValue();
+        ArrayList<Notification> notifications = userNotificationPair.getValue();
 
         try{
-            for(AlertNotification notification : notifications) {
+            for(Notification notification : notifications) {
                 statement = connection.prepareStatement(query);
                 statement.setString(1, userName);
                 statement.setInt(2, notification.getId());
@@ -174,7 +174,7 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
     }
 
     @Override
-    public Pair<String, ArrayList<AlertNotification>> select(String username) {
+    public Pair<String, ArrayList<Notification>> select(String username) {
         String query = "select Alert.NotificationId, Title, [Subject], isSeen\n" +
                 "from Alert \n" +
                 "inner join [Notification] on Alert.NotificationId = [Notification].NotificationId\n" +
@@ -182,8 +182,8 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUsers = null;
-        ArrayList<AlertNotification> notifications = new ArrayList<>();
-        Pair<String, ArrayList<AlertNotification>> userNotifications = null;
+        ArrayList<Notification> notifications = new ArrayList<>();
+        Pair<String, ArrayList<Notification>> userNotifications = null;
 
 
         try{
@@ -196,10 +196,10 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
                 String title = retrievedUsers.getString(2);
                 String subject = retrievedUsers.getString(3);
                 boolean isSeen = retrievedUsers.getBoolean(4);
-                AlertNotification alertNotification = new AlertNotification(notificationId, title, subject);
-                alertNotification.setSeen(isSeen);
+                Notification notification = new Notification(notificationId, title, subject);
+                notification.setSeen(isSeen);
 
-                notifications.add(alertNotification);
+                notifications.add(notification);
             }
             userNotifications = new Pair<>(username,notifications);
         }
@@ -229,7 +229,7 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
 
 
     @Override
-    public HashMap<String, Pair<String, ArrayList<AlertNotification>>> conditionedSelect(String[] conditions) {
+    public HashMap<String, Pair<String, ArrayList<Notification>>> conditionedSelect(String[] conditions) {
         return null;
     }
 }
