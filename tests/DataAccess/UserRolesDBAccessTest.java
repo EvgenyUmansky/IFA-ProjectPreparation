@@ -49,12 +49,20 @@ class UserRolesDBAccessTest {
         roles = null;
         System.setOut(originalOut);
         userRolesDBAccess = null;
-        connection.close();
-        connection = null;
-        preparedStatement.close();
-        preparedStatement = null;
-        resultSet.close();
-        resultSet = null;
+        if(connection != null) {
+            connection.close();
+            connection = null;
+        }
+
+        if(preparedStatement != null) {
+            preparedStatement.close();
+            preparedStatement = null;
+        }
+
+        if(resultSet != null) {
+            resultSet.close();
+            resultSet = null;
+        }
     }
 
     @Test
