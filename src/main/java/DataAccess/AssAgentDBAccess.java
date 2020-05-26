@@ -53,8 +53,8 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
-                logger.error(e3.getMessage());
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'save(AssociationAgent associationAgent)' in UserDBAccess for " + associationAgent.getUserName());
             }
         }
@@ -96,8 +96,8 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
-                logger.error(e3.getMessage());
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
             }
         }
@@ -139,8 +139,8 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
-                logger.error(e3.getMessage());
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
             }
         }

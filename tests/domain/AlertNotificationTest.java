@@ -33,13 +33,13 @@ class AlertNotificationTest {
 
     @Test
     void getMessage() {
-        assertEquals("Text", alertNotification.getMessage());
+        assertEquals("Text", alertNotification.getSubject());
     }
 
     @Test
     void setMessage() {
-        alertNotification.setMessage("New Text");
-        assertEquals("New Text", alertNotification.getMessage());
+        alertNotification.setSubject("New Text");
+        assertEquals("New Text", alertNotification.getSubject());
     }
 
     @Test

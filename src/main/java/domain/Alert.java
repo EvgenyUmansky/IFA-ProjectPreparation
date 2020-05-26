@@ -1,6 +1,5 @@
 package domain;
 
-import domain.controllers.GameController;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -166,7 +165,7 @@ public class Alert {
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to, false));
             msg.setSubject(alertNotification.getTitle());
-            msg.setText(alertNotification.getMessage());
+            msg.setText(alertNotification.getSubject());
             Transport.send(msg);
 
             System.out.println("The mail sent successfully");

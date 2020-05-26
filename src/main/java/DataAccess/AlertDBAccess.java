@@ -108,10 +108,12 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
                 statement.executeUpdate();
                 connection.commit();
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             logger.error(e.getMessage());
-            System.out.println("Couldn't execute 'update(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess for " + userNotificationPair.getKey());
-        } finally {
+            e.printStackTrace();
+        }
+        finally {
             try {
                 if (statement != null) {
                     statement.close();
@@ -119,10 +121,9 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
                 connection.close();
             } catch (SQLException e) {
                 logger.error(e.getMessage());
-                System.out.println("Couldn't close 'update(Pair<String, AlertNotification> userNotificationPair)' in AlertDBAccess for " + userNotificationPair.getKey());
+                e.printStackTrace();
             }
         }
-
     }
 
     @Override
@@ -174,8 +175,10 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
 
     @Override
     public Pair<String, ArrayList<AlertNotification>> select(String username) {
-
-        String query = "select * from [Alert] where username = ?";
+        String query = "select Alert.NotificationId, Title, [Subject], isSeen\n" +
+                "from Alert \n" +
+                "inner join [Notification] on Alert.NotificationId = [Notification].NotificationId\n" +
+                "where Alert.Username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUsers = null;
@@ -189,7 +192,14 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<AlertNotif
             retrievedUsers = statement.executeQuery();
 
             while(retrievedUsers.next()){
-                notifications.add(new AlertNotification(Integer.parseInt(retrievedUsers.getString(2)), "", ""));
+                int notificationId = Integer.parseInt(retrievedUsers.getString(1));
+                String title = retrievedUsers.getString(2);
+                String subject = retrievedUsers.getString(3);
+                boolean isSeen = retrievedUsers.getBoolean(4);
+                AlertNotification alertNotification = new AlertNotification(notificationId, title, subject);
+                alertNotification.setSeen(isSeen);
+
+                notifications.add(alertNotification);
             }
             userNotifications = new Pair<>(username,notifications);
         }
