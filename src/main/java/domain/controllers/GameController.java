@@ -1,17 +1,20 @@
 package domain.controllers;
 
 import DataAccess.DBAccess;
+import DataAccess.GameEventDBAccess;
 import DataAccess.RefereeGamesDBAccess;
 import domain.*;
 import javafx.util.Pair;
 import service.pojos.GameDTO;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameController {
 
     private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
+    private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
 //    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
@@ -135,7 +138,9 @@ public class GameController {
 //        GameEvent newGameEvent = new GameEvent(minuteOfEvent, GameAlert.valueOf(eventName), description);
 //        game.addEvent(newGameEvent);
 //        gameEventDBAccess.insert(newGameEvent);
-
+        LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
+        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId),gameDate,eventName,description);
+        geda.save(gameEvent);
     }
 
 
