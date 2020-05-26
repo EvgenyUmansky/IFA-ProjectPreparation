@@ -43,8 +43,8 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
                     statement.close();
                 }
                 connection.close();
-            } catch (SQLException e3) {
-                e3.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 

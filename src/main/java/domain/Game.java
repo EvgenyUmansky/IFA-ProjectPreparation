@@ -91,8 +91,9 @@ public class Game {
         this.gameDate = gameDate;
     }
 
-    public Game(int gameID, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore){
+    public Game(int gameID, League league, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore){
         this.id = gameID;
+        this.league = league;
         this.field = new Field(fieldName,0);
         this.hostTeam = new Team(hostTeam,field,null);
         this.guestTeam = new Team(guestTeam,null,null);

@@ -1,9 +1,14 @@
 package domain;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * This class represents a notification that is sent to users in the system.
  */
 public class AlertNotification {
+
+    static AtomicInteger nextId = new AtomicInteger();
+    private final int id;
 
     private String title;
     private String message;
@@ -16,10 +21,28 @@ public class AlertNotification {
      * @param message the content of the message
      */
     public AlertNotification(String title, String message) {
+        // set id
+        this.id = nextId.incrementAndGet();
+
         this.title = title;
         this.message = message;
         this.isSeen = false;
     }
+
+    /**
+     * Constructor DB
+     * @param title the title of the message
+     * @param message the content of the message
+     */
+    public AlertNotification(int id, String title, String message) {
+        // set id
+        this.id = id;
+
+        this.title = title;
+        this.message = message;
+        this.isSeen = false;
+    }
+
 
 
 /////////// Getters and Setters ///////////
@@ -71,4 +94,12 @@ public class AlertNotification {
     public void setSeen(boolean seen) {
         isSeen = seen;
     }
+
+    /**
+     *  get NotificationId
+      */
+    public int getId() {
+        return id;
+    }
+
 }

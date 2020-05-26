@@ -119,7 +119,6 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
                 System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + userName);
             }
         }
-
     }
 
     @Override

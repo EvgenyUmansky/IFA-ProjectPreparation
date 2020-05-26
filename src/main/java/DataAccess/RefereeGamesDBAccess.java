@@ -81,7 +81,7 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
                 String guestTeam = retrievedGames.getString(3);
                 String fieldName = retrievedGames.getString(4);
                 LocalDateTime gameDate = retrievedGames.getTimestamp(5).toLocalDateTime();
-                int hostTamScore = retrievedGames.getInt(6);
+                int hostTeamScore = retrievedGames.getInt(6);
                 int guestTeamScore = retrievedGames.getInt(7);
                 String league = retrievedGames.getString(8);
                 int season = retrievedGames.getInt(9);
@@ -92,7 +92,7 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
 
                 if(!(gameIDs.contains(gameID))){
                     gameIDs.add(gameID);
-                    game = new Game(gameID,hostTeam,guestTeam,fieldName,gameDate,hostTamScore,guestTeamScore);
+                    game = new Game(gameID, new League(league, season), hostTeam,guestTeam,fieldName,gameDate,hostTeamScore,guestTeamScore);
                     games.add(game);
                 }
 
