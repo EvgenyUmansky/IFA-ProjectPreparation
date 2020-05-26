@@ -1,4 +1,5 @@
 package service;
+import domain.GameEvent;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -6,6 +7,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import service.model.Notification;
+import service.pojos.GameEventDTO;
 
 @Controller
 public class ApiNotificationsController {
@@ -19,8 +21,8 @@ public class ApiNotificationsController {
 
     @MessageMapping("/topic/game/{gameId}")
     @SendTo("/topic/game/register/{gameId}")
-    public String sendMessage(@Payload String notification) {
+    public String sendMessage(@Payload GameEventDTO notification) {
         System.out.println(notification);
-        return notification;
+        return notification.toString();
     }
 }
