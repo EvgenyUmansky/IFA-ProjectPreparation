@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -130,22 +131,19 @@ public class GameController {
      * @throws Exception in case the game is over
      */
     public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-//        Game game = gameDBAccess.select(gameId);
-//
-//        int minuteOfEvent = (int)ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
-//
+       // Game game = gameDBAccess.select(gameId);
+
+       // int minuteOfEvent = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
+
 //        if(minuteOfEvent >= 90){
 //            throw new Exception("The game is over");
 //        }
-//
-//        GameEvent newGameEvent = new GameEvent(minuteOfEvent, GameAlert.valueOf(eventName), description);
-//        game.addEvent(newGameEvent);
-//        gameEventDBAccess.insert(newGameEvent);
 
-        logger.info(eventName + ": event was added to game " + gameId);
         LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
         GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId),gameDate,eventName,description);
         geda.save(gameEvent);
+
+        logger.info(eventName + ": event was added to game " + gameId);
     }
 
 
