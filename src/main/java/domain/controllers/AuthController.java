@@ -1,5 +1,6 @@
 package domain.controllers;
 
+import DataAccess.AlertDBAccess;
 import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
 import DataAccess.UserRolesDBAccess;
@@ -20,7 +21,7 @@ public class AuthController {
     private HashSet<League> leagues;
     private DBAccess<User> uda = UserDBAccess.getInstance();
     private DBAccess< Pair<String,ArrayList<String>> > urda = UserRolesDBAccess.getInstance();
-    //private DBAccess<Alert> ada = UserDBAccess.getInstance();
+    private DBAccess<Pair<String, ArrayList<Notification>>> ada = AlertDBAccess.getInstance();
 
     // ========================= Constructor =========================
 
@@ -68,7 +69,7 @@ public class AuthController {
         // roles
         ArrayList<String> rolesAsStrings = urda.select(userName).getValue();
         // Notifications
-//        ArrayList<AlertNotification> notifications = ada.select(username);
+        ArrayList<Notification> notifications = ada.select(userName).getValue();
 
        /* Role[] roles = user.getRoles().keySet().toArray(new Role[0]);
         for (Role role : roles) {
