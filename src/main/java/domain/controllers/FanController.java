@@ -1,10 +1,12 @@
 package domain.controllers;
 
 import domain.*;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class FanController {
+    static Logger logger = Logger.getLogger(FanController.class.getName());
     // ========================= Fan functions ============================
     // ====================================================================
 
@@ -19,6 +21,8 @@ public class FanController {
     public void sendComplaintToSysAdmin(String username, String sysAdmin, String title, String message) {
         SystemAdministrator admin = (SystemAdministrator) User.getUserByID(sysAdmin).getRoles().get(Role.SYSTEM_ADMIN);
         ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(new ArrayList<SystemAdministrator>(){{add(admin);}}, new AlertNotification(title, message));
+
+        logger.info(username + " sent complaint to SysAdmins");
     }
 
     // UC 3.5 - get history of fans searches
@@ -31,7 +35,10 @@ public class FanController {
      */
     public String[] getFanHistory(String username) {
         //TODO - get from data base
+
+        logger.info(username + " got search history");
         return ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).getSearchHistory();
+
     }
 
     /**
@@ -41,6 +48,7 @@ public class FanController {
      * @return the fan's info
      */
     public String getFanProfileDetails(String username) {
+        logger.info(username + " got profile details");
         return User.getUserByID(username).getProfileDetails();
     }
 
@@ -54,5 +62,6 @@ public class FanController {
      */
     public void setFanProfileDetails(String username, String newPassword, String newName, String newMail) {
         User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
+        logger.info(username + " set new profile details");
     }
 }

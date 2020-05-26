@@ -4,12 +4,14 @@ import DataAccess.DBAccess;
 import DataAccess.RefereeGamesDBAccess;
 import domain.*;
 import javafx.util.Pair;
+import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameController {
+    static Logger logger = Logger.getLogger(GameController.class.getName());
 
     private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
 
@@ -47,6 +49,7 @@ public class GameController {
         // TODO: get from DB
         // Game game = gameDBAccess.select(gameId);
         // game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
+        logger.info(username + ": subscription was added to game " + gameId);
     }
 
 
@@ -136,6 +139,7 @@ public class GameController {
 //        game.addEvent(newGameEvent);
 //        gameEventDBAccess.insert(newGameEvent);
 
+        logger.info(eventName + ": event was added to game " + gameId);
     }
 
 
@@ -185,5 +189,7 @@ public class GameController {
 //
 //        game.changeEvent(gameEvent);
 //        gameEventDBAccess.update(gameEvent);
+
+        logger.info(eventId + ": event was changed in game " + gameId);
     }
 }

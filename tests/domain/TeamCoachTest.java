@@ -50,7 +50,7 @@ class TeamCoachTest {
 
     @Test
     void getAlertsMessages() {
-        ArrayList<AlertNotification> alertNotifications = coach.getAlertsMessages();
+        ArrayList<AlertNotification> alertNotifications = coach.getNotifications();
         assertNotNull(alertNotifications);
     }
 

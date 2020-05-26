@@ -1,10 +1,12 @@
 package domain.controllers;
 
 import domain.*;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class RefereeController {
+    static Logger logger = Logger.getLogger(RefereeController.class.getName());
 
     // =================== Association Agent functions ====================
     // ====================================================================
@@ -21,6 +23,7 @@ public class RefereeController {
     public void createReferee(String username, String password, String name, String mail) throws Exception {
         // this.register(username, password, name, mail).addRoleToUser(Role.REFEREE);
         // TODO: Send invitation to referee
+        logger.info(username + " referee was created");
     }
 
     /**
@@ -29,6 +32,7 @@ public class RefereeController {
      * @param username the referee's username
      */
     public void removeReferee(String username) {
+        logger.info(username + " referee was removed");
         User.getUserByID(username).removeRoleFromUser(Role.REFEREE);
     }
 
@@ -46,6 +50,7 @@ public class RefereeController {
      * @return the info about the referee
      */
     public String getRefereeDetails(String username) {
+        logger.info(username + " got his details");
         return User.getUserByID(username).getProfileDetails() + "\n" + ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).getRefereeDetails();
     }
 
@@ -62,6 +67,8 @@ public class RefereeController {
     public void setRefereeProfileDetails(String username, String newPassword, String newName, String newMail, String qualification, String refereeType) {
         User.getUserByID(username).setProfileDetails(newPassword, newName, newMail);
         ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE)).setRefereeDetails(newMail, Integer.parseInt(qualification), RefereeType.valueOf(refereeType));
+
+        logger.info(username + " set his details");
     }
 
 }

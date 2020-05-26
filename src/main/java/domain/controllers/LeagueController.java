@@ -1,11 +1,13 @@
 package domain.controllers;
 
 import domain.*;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LeagueController {
+    static Logger logger = Logger.getLogger(LeagueController.class.getName());
 
     public ArrayList<League> getLeagues(){
         // TODO: get leagues from DB
@@ -53,6 +55,7 @@ public class LeagueController {
      * @return an instance of the new league
      */
     public League setLeague(String leagueName) {
+        logger.info(leagueName + " was set");
         return new League(leagueName);
     }
 
@@ -65,6 +68,7 @@ public class LeagueController {
      * @return the updated league
      */
     public League updateSeasonForLeague(String leagueName, String season) {
+        logger.info(season + " was updated for " + leagueName);
         return League.getLeagueByName(leagueName).setSeason(Integer.parseInt(season));
     }
 
@@ -84,6 +88,7 @@ public class LeagueController {
 //        Alert alert = new Alert();
 //        alert.addToMailSet(User.getUserByID(userName).getRoles().get(Role.REFEREE));
 //        alert.sendAlert(new AlertNotification("Invitation","MAZAL TOV! you are a referee!!"));
+        logger.info(userName + " was added to " + leagueName);
     }
 
     /**
@@ -98,6 +103,7 @@ public class LeagueController {
         // TODO: get league
         // League league = get from DB by leagueName
         // league.getRankingMethod().setRankingMethod(Integer.parseInt(winP), Integer.parseInt(loseP), Integer.parseInt(drawP));
+        logger.info("New Ranking Method was added to " + league);
     }
 
     /**
@@ -110,8 +116,10 @@ public class LeagueController {
         SchedulingMethod schedulingMethod;
         switch(schedulingMethodName) {
             case "OneGameSchedulingMethod":
+                logger.info(schedulingMethodName + " Scheduling Method was added to " + league);
                  schedulingMethod = new OneGameSchedulingMethod();
             case "TwoGameSchedulingMethod":
+                logger.info(schedulingMethodName + " Scheduling Method was added to " + league);
                 schedulingMethod = new TwoGameSchedulingMethod();
             default:
                 return;

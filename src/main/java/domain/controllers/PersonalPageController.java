@@ -2,10 +2,12 @@ package domain.controllers;
 
 import domain.PersonalPage;
 import domain.User;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class PersonalPageController {
+    static Logger logger = Logger.getLogger(PersonalPageController.class.getName());
 
     public ArrayList<PersonalPage> getPages() {
         // TODO: all personal pages
@@ -24,6 +26,7 @@ public class PersonalPageController {
         // TODO: get from DB
         // PersonalPage page = DB pageName
         // page.addSubscriber((Fan) User.getUserByID(username).getRoles().get(Role.FAN));
+        logger.info(username + " was added to " + page);
     }
 
 
@@ -52,6 +55,7 @@ public class PersonalPageController {
         // TODO: get from DB
         //PersonalPage page = get from DB
         //return page.setInfo(info);
+        logger.info(info + " was updated in " + pageName);
         return null;
     }
 

@@ -19,6 +19,8 @@ public class User {
     private boolean isClosed;
     private boolean isMail;
 
+    private ArrayList<AlertNotification> notifications;
+
     // ========================= Constructor ==========================
 
     /**
@@ -37,6 +39,8 @@ public class User {
         addRoleToUser(Role.FAN);
         isClosed = false;
         setMail(true);
+
+        notifications = new ArrayList<>();
     }
 
 
@@ -60,6 +64,21 @@ public class User {
 
     // ========================= Getters and Setters ==========================
 
+    /**
+     * Adds a notification to the user's notifications box in the system
+     * @param notification alert message
+     */
+    public void addNotifications(AlertNotification notification){
+        this.notifications.add(notification);
+    }
+
+    /**
+     * Returns all the notifications the user has received.
+     * @return all the notifications the user has received.
+     */
+    public ArrayList<AlertNotification> getNotifications() {
+        return notifications;
+    }
 
     public boolean isMail() {
         return isMail;

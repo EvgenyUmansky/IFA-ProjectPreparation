@@ -6,6 +6,7 @@ import DataAccess.UserDBAccess;
 import domain.Role;
 import domain.TeamPlayer;
 import domain.User;
+import org.apache.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class PlayerController {
+    static Logger logger = Logger.getLogger(PlayerController.class.getName());
 
     private DBAccess<TeamPlayer> pda = TeamPlayerDBAccess.getInstance();
 
@@ -54,6 +56,7 @@ public class PlayerController {
      * @return the player instance by his name
      */
     public TeamPlayer getPlayersDetails(String playerName) {
+        logger.info(playerName + " got his details");
         return TeamPlayer.getPlayerByName(playerName);
     }
 
@@ -77,6 +80,8 @@ public class PlayerController {
             playerUser.setName(playerName);
         }
         ((TeamPlayer)User.getUserByID(username).getRoles().get(Role.TEAM_PLAYER)).updateDetails(new SimpleDateFormat("dd/MM/yyyy").parse(birthDate),position,squadNumber);
+
+        logger.info(playerName + " updated his details");
     }
 
 }

@@ -13,7 +13,7 @@ public abstract class Subscriber {
     private String userName;
     private String mail;
     private boolean isMail;
-    private ArrayList<AlertNotification> alertsMessages;
+    private ArrayList<AlertNotification> notifications;
     public String getUserName() {
         return userName;
     }
@@ -28,7 +28,7 @@ public abstract class Subscriber {
      */
     public Subscriber(String userName, String mail){
         this.userName = userName;
-        this.alertsMessages = new ArrayList<>();
+        this.notifications = new ArrayList<>();
         this.mail = mail;
         this.name = null;
         this.isMail = false;
@@ -36,7 +36,7 @@ public abstract class Subscriber {
 
     public Subscriber(String userName, String mail, String name){
         this.userName = userName;
-        this.alertsMessages = new ArrayList<>();
+        this.notifications = new ArrayList<>();
         this.mail = mail;
         this.name = name;
         this.isMail = false;
@@ -44,13 +44,10 @@ public abstract class Subscriber {
 
     /**
      * Adds a notification to the user's notifications box in the system
-     * @param message the notification
-     * @return the notification
+     * @param notification alert message
      */
-    public AlertNotification addAlertMessage(AlertNotification message){
-        this.alertsMessages.add(message);
-
-        return message;
+    public void addNotifications(AlertNotification notification){
+        this.notifications.add(notification);
     }
 
     /**
@@ -89,8 +86,8 @@ public abstract class Subscriber {
      * Returns all the notifications the user has received.
      * @return all the notifications the user has received.
      */
-    public ArrayList<AlertNotification> getAlertsMessages() {
-        return alertsMessages;
+    public ArrayList<AlertNotification> getNotifications() {
+        return notifications;
     }
 
     public String getName() {

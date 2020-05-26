@@ -1,6 +1,7 @@
 package domain.controllers;
 
 import domain.*;
+import org.apache.log4j.Logger;
 import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class TeamController {
+    static Logger logger = Logger.getLogger(TeamController.class.getName());
 
     public TeamDTO createTeam(String teamOwner, String name, String stadium){
         User user = User.getUserByID(teamOwner);
@@ -16,6 +18,8 @@ public class TeamController {
         TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
         Team newTeam = new Team(name, field, owner);
         // TODO: Save new team to DB
+
+        logger.info(name + " team was created");
         return new TeamDTO(
                 newTeam.getTeamName(),
                 newTeam.getStadium(),
@@ -31,7 +35,6 @@ public class TeamController {
                 new ArrayList<>(newTeam.getOwners().values()),
                 newTeam.getTeamStatus().name()
         );
-
     }
 
     public ArrayList<TeamDTO> getTeams() {
@@ -72,6 +75,7 @@ public class TeamController {
      * @return the team instance by the team's name
      */
     public Team getTeamDetails(String teamName) {
+        logger.info(teamName + " get details");
         return Team.getTeamByName(teamName);
     }
 
@@ -96,7 +100,9 @@ public class TeamController {
         if(player == null){
             throw new Exception("This user is not a player");
         }
+
         team.addPlayer(player);
+        logger.info(userName + " player was added to team " + teamName);
     }
 
     /**
@@ -117,6 +123,7 @@ public class TeamController {
             throw new Exception("This user is not a coach");
         }
         team.addCoach(coach);
+        logger.info(userName + " coach was added to team " + teamName);
     }
 
     /**
@@ -133,6 +140,8 @@ public class TeamController {
             throw new Exception("This team is currently closed");
         }
         team.addField(Field.getFieldByName(fieldName));
+
+        logger.info(fieldName + " field was added to team " + teamName);
     }
 
     /**
@@ -153,6 +162,8 @@ public class TeamController {
             throw new Exception("This user is not a player");
         }
         team.removePlayer(player);
+
+        logger.info(userName + " player was removed from team " + teamName);
     }
 
     /**
@@ -173,6 +184,8 @@ public class TeamController {
             throw new Exception("This user is not a coach");
         }
         team.removeCoach(coach);
+
+        logger.info(userName + " coach was removed from team " + teamName);
     }
 
     /**
@@ -189,6 +202,8 @@ public class TeamController {
             throw new Exception("This team is currently closed");
         }
         team.removeField(Field.getFieldByName(fieldName));
+
+        logger.info(fieldName + " field was removed from team " + teamName);
     }
 
     /**
@@ -210,6 +225,8 @@ public class TeamController {
         newOwnerUser.getRoles().put(Role.TEAM_OWNER, new TeamOwner(userNameNewTeamOwner, newOwnerUser.getMail(), team.getTeamName(), new HashSet<>()));
         owner.addToOwnerAppointments((TeamOwner) newOwnerUser.getRoles().get(Role.TEAM_OWNER));
         team.addOwner(ownerUser,newOwnerUser);
+
+        logger.info(userNameNewTeamOwner + " owner was added to team " + teamName);
     }
 
     /**
@@ -232,6 +249,8 @@ public class TeamController {
         owner.removeFromOwnerAppointments(removedOwner);
         team.removeOwner(removedOwnerUser);
         removedOwnerUser.removeRoleFromUser(Role.TEAM_OWNER);
+
+        logger.info(userNameRemovedTeamOwner + " owner was removed from team " + teamName);
     }
 
     /**
@@ -253,6 +272,8 @@ public class TeamController {
         newManagerUser.getRoles().put(Role.TEAM_MANAGER,new TeamManager(userNameNewTeamManager, newManagerUser.getMail()));
         owner.addToManagerAppointments((TeamManager) newManagerUser.getRoles().get(Role.TEAM_MANAGER));
         team.addManager(ownerUser,newManagerUser);
+
+        logger.info(userNameNewTeamManager + " manager was added to team " + teamName);
     }
 
     /**
@@ -276,6 +297,8 @@ public class TeamController {
         owner.removeFromManagerAppointments(manager);
         team.removeManager(removedManagerUser);
         removedManagerUser.removeRoleFromUser(Role.TEAM_MANAGER);
+
+        logger.info(userNameRemovedTeamManager + " manager was removed from team " + teamName);
     }
 
     /**
@@ -289,6 +312,7 @@ public class TeamController {
         Team team = Team.getTeamByName(teamName);
 
         team.closeTeam(User.getUserByID(userName));
+        logger.info(userName + " closed the team " + teamName);
     }
 
     /**
@@ -300,6 +324,8 @@ public class TeamController {
         // TODO: get team from DB by teamName
         Team team = Team.getTeamByName(teamName);
         team.openTeam();
+
+        logger.info( teamName + " was opened " + teamName);
     }
 
 
