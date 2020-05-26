@@ -1,25 +1,48 @@
 package domain;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * This class represents a notification that is sent to users in the system.
  */
-public class AlertNotification {
+public class Notification {
+
+    static AtomicInteger nextId = new AtomicInteger();
+    private final int id;
 
     private String title;
-    private String message;
+    private String subject;
     private boolean isSeen;
 
 
     /**
      * Constructor
      * @param title the title of the message
-     * @param message the content of the message
+     * @param subject the content of the message
      */
-    public AlertNotification(String title, String message) {
+    public Notification(String title, String subject) {
+        // set id
+        this.id = nextId.incrementAndGet();
+
         this.title = title;
-        this.message = message;
+        this.subject = subject;
         this.isSeen = false;
     }
+
+    /**
+     * Constructor DB
+     * @param title the title of the message
+     * @param subject the content of the message
+     */
+    public Notification(int id, String title, String subject) {
+        // set id
+        this.id = id;
+
+        this.title = title;
+        this.subject = subject;
+        this.isSeen = false;
+    }
+
 
 
 /////////// Getters and Setters ///////////
@@ -44,16 +67,16 @@ public class AlertNotification {
      * Returns the content of the message
      * @return the content of the message
      */
-    public String getMessage() {
-        return message;
+    public String getSubject() {
+        return subject;
     }
 
     /**
      * Sets the content of the message to the given message
-     * @param message the given message
+     * @param subject the given message
      */
-    public void setMessage(String message) {
-        this.message = message;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     /**
@@ -71,4 +94,12 @@ public class AlertNotification {
     public void setSeen(boolean seen) {
         isSeen = seen;
     }
+
+    /**
+     *  get NotificationId
+      */
+    public int getId() {
+        return id;
+    }
+
 }

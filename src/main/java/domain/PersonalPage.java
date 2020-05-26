@@ -40,7 +40,7 @@ public abstract class PersonalPage {
      */
     public PersonalPage setName(String name) {
         this.name = name;
-        alert.sendAlert(new AlertNotification("Name of the page " + this.name + " has changed", "The new name is " + name));
+        alert.sendAlert(new Notification("Name of the page " + this.name + " has changed", "The new name is " + name));
 
         return this;
     }
@@ -53,7 +53,7 @@ public abstract class PersonalPage {
      */
     public PersonalPage setInfo(String info) {
         this.info = info;
-        alert.sendAlert(new AlertNotification("Info of the page " + this.name + "  has changed", "The new info is " + info));
+        alert.sendAlert(new Notification("Info of the page " + this.name + "  has changed", "The new info is " + info));
 
         return this;
     }
@@ -66,7 +66,7 @@ public abstract class PersonalPage {
      */
     public PersonalPage setMail(String mail) {
         this.mail = mail;
-        alert.sendAlert(new AlertNotification("Mail of the page " + this.name + "  has changed", "The new mail is " + mail));
+        alert.sendAlert(new Notification("Mail of the page " + this.name + "  has changed", "The new mail is " + mail));
 
         return this;
     }

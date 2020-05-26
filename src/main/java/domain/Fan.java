@@ -32,15 +32,15 @@ public class Fan extends Subscriber{
      * UC 3.4
      * Sends a user's complaint to the admins of the system
      * @param sysAdmins the system administrators
-     * @param alertNotification the complaint
+     * @param notification the complaint
      * @return a Map that holds a system administrator username as key and a boolean value of true whether he has received the message or false otherwise
      */
-    public Map<String, Boolean> sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, AlertNotification alertNotification) {
+    public Map<String, Boolean> sendComplaintToSysAdmin(ArrayList<SystemAdministrator> sysAdmins, Notification notification) {
         Alert alert = new Alert();
         for(SystemAdministrator sysAdmin : sysAdmins){
             alert.addSubscriber(sysAdmin);
         }
-        return alert.sendAlert(alertNotification);
+        return alert.sendAlert(notification);
     }
 
 

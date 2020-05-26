@@ -1,6 +1,5 @@
 package domain;
 
-import java.security.acl.Owner;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -320,14 +319,14 @@ public class Team {
         if (teamStatus == TeamStatus.Open || teamStatus == TeamStatus.TempClose) {
             if (user.getRoles().containsKey(Role.SYSTEM_ADMIN)) {
                 teamStatus = TeamStatus.PermanentlyClose;
-                alert.sendAlert(new AlertNotification("close team permanently", "you team close permanently"));
+                alert.sendAlert(new Notification("close team permanently", "you team close permanently"));
                 return;
             }
         }
         if (teamStatus == TeamStatus.Open) {
             if (user.getRoles().containsKey(Role.TEAM_OWNER)) {
                 teamStatus = TeamStatus.TempClose;
-                alert.sendAlert(new AlertNotification("close team temporary", "you team close temporary"));
+                alert.sendAlert(new Notification("close team temporary", "you team close temporary"));
             }
         } else {
             throw new Error("This team is already closed");
@@ -341,7 +340,7 @@ public class Team {
     public void openTeam() {
         if (teamStatus == TeamStatus.TempClose) {
             teamStatus = TeamStatus.Open;
-            alert.sendAlert(new AlertNotification("open your team", "your team open again"));
+            alert.sendAlert(new Notification("open your team", "your team open again"));
         } else {
             throw new Error("This team can't be reopened");
         }

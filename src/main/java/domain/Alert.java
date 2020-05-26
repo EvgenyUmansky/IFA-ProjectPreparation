@@ -1,6 +1,5 @@
 package domain;
 
-import domain.controllers.GameController;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -111,21 +110,21 @@ public class Alert {
 
     /**
      * Sends a notification to all of the Subscribers in each list. Each Subscriber would receive the notification in a platform according to the list he's in.
-     * @param alertNotification the notification sent to each Subscriber
+     * @param notification the notification sent to each Subscriber
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the message or false otherwise
      */
-    public Map<String, Boolean> sendAlert(AlertNotification alertNotification)  {
+    public Map<String, Boolean> sendAlert(Notification notification)  {
         // TODO: save this map in DB
         Map isSentMap = new HashMap<>();
 
         for(Subscriber user : this.mailAlertList){
-            boolean isSent = sendMailAlert(user.getMail(), alertNotification);
+            boolean isSent = sendMailAlert(user.getMail(), notification);
             isSentMap.put(user.getUserName(), isSent);
 
         }
 
         for(Subscriber user : this.inSystemAlertList){
-            sendInSystemAlert(user, alertNotification);
+            sendInSystemAlert(user, notification);
             isSentMap.put(user.getUserName(), true);
         }
 
@@ -135,10 +134,10 @@ public class Alert {
     /**
      * Sends a notification by mail
      * @param to the mail address of the recipient
-     * @param alertNotification the notification
+     * @param notification the notification
      * @return true if the recipient has received the mail, false otherwise
      */
-    private boolean sendMailAlert(String to, AlertNotification alertNotification) {
+    private boolean sendMailAlert(String to, Notification notification) {
 
         // Get a Properties object
         Properties props = System.getProperties();
@@ -165,8 +164,8 @@ public class Alert {
             msg.setFrom(new InternetAddress(username));
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to, false));
-            msg.setSubject(alertNotification.getTitle());
-            msg.setText(alertNotification.getMessage());
+            msg.setSubject(notification.getTitle());
+            msg.setText(notification.getSubject());
             Transport.send(msg);
 
             System.out.println("The mail sent successfully");
@@ -184,10 +183,10 @@ public class Alert {
     /**
      * Sends a notification by the system's notifications system
      * @param user the recipient
-     * @param alertNotification the notification
+     * @param notification the notification
      */
-    private void sendInSystemAlert(Subscriber user, AlertNotification alertNotification){
-        user.addNotifications(alertNotification);
+    private void sendInSystemAlert(Subscriber user, Notification notification){
+        user.addNotifications(notification);
     }
 
 

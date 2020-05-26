@@ -47,6 +47,21 @@ public class League {
      */
     public League(String leagueName) {
         this.leagueName = leagueName;
+        this.season = season;
+        this.teamsTable = new LinkedHashMap<>();
+        this.games = new ArrayList<>();
+        this.isBegin = false;
+        this.referees = new HashSet<>();
+    }
+
+    /**
+     * Constructor
+     * @param leagueName the name of the league
+     * @param season the season
+     */
+    public League(String leagueName, int season) {
+        this.leagueName = leagueName;
+        this.season = season;
         this.teamsTable = new LinkedHashMap<>();
         this.games = new ArrayList<>();
         this.isBegin = false;

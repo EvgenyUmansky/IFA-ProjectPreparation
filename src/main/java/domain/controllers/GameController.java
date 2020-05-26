@@ -1,8 +1,6 @@
 package domain.controllers;
 
-import DataAccess.DBAccess;
-import DataAccess.GameEventDBAccess;
-import DataAccess.RefereeGamesDBAccess;
+import DataAccess.*;
 import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
@@ -18,6 +16,8 @@ public class GameController {
 
     private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
     private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
+    private DBAccess<Game> gda = GameDBAccess.getInstance();
+    private DBAccess<League> lda = LeagueDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
 //    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
@@ -37,7 +37,13 @@ public class GameController {
         // TODO: get from DB
         // Game game = DB game
         // return game;
-        return null;
+
+        Game game = gda.select(gameId);
+        String[] conditions = new String[] {"leagueName", game.getLeague().getLeagueName(),"year",Integer.toString(game.getLeague().getSeason())};
+        League league = game.getLeague();
+        league = lda.conditionedSelect(conditions).get(game.getLeague().getLeagueName());
+
+        return game;
     }
 
     // ========================= Fan functions ========================

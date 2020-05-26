@@ -252,7 +252,7 @@ public class ApiController {
      * @param sysAdmins the list of system administrators
      * @param message the complaint
      */
-    public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, AlertNotification message) {
+    public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, Notification message) {
         // TODO: Strings in signature
         //((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
     }

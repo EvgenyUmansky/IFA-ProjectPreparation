@@ -126,7 +126,7 @@ class AlertTest {
     void sendAlert() {
         alert.addToMailSet(fans.get(0));
         alert.addToSystemSet(fans.get(1));
-        Map<String, Boolean> isSentMap = alert.sendAlert(new AlertNotification("Title", "Text"));
+        Map<String, Boolean> isSentMap = alert.sendAlert(new Notification("Title", "Text"));
 
         for(String user : isSentMap.keySet()){
             assertTrue(isSentMap.get(user));
@@ -135,7 +135,7 @@ class AlertTest {
         alert.clearSubscribers();
         fans.get(0).setMail("");
         alert.addToMailSet(fans.get(0));
-        isSentMap = alert.sendAlert(new AlertNotification("Title", "Text"));
+        isSentMap = alert.sendAlert(new Notification("Title", "Text"));
         for(String user : isSentMap.keySet()){
             assertFalse(isSentMap.get(user));
         }

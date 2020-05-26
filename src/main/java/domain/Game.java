@@ -1,9 +1,7 @@
 package domain;
 
-import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,7 +89,23 @@ public class Game {
         this.gameDate = gameDate;
     }
 
-    public Game(int gameID, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore){
+    public Game(int gameID, League league, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore){
+        this.id = gameID;
+        this.league = league;
+        this.field = new Field(fieldName,0);
+        this.hostTeam = new Team(hostTeam,field,null);
+        this.guestTeam = new Team(guestTeam,null,null);
+        this.gameDate = gameDate;
+        this.hostTeamScore = hostTeamScore;
+        this.guestTeamScore = guestTeamScore;
+
+        this.gameEvents = new HashMap<>();
+        this.referees = new ArrayList<>();
+        this.alertFans = new Alert();
+        this.alertReferees = new Alert();
+    }
+
+    public Game(int gameID, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore, String leagueName, int season){
         this.id = gameID;
         this.field = new Field(fieldName,0);
         this.hostTeam = new Team(hostTeam,field,null);
@@ -104,6 +118,7 @@ public class Game {
         this.referees = new ArrayList<>();
         this.alertFans = new Alert();
         this.alertReferees = new Alert();
+        this.league = new League(leagueName,season,true,0,0,0);
     }
 
 
@@ -180,9 +195,9 @@ public class Game {
 
         String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName();
         String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + getGameScore();
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(title, message);
 
-        return alertFans.sendAlert(alertNotification);
+        return alertFans.sendAlert(notification);
     }
 
 
@@ -195,11 +210,11 @@ public class Game {
 
         String title =  "It's close! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " remains " + "one day!";
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(title, message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
-        isSentMap.putAll(alertFans.sendAlert(alertNotification));
-        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+        isSentMap.putAll(alertFans.sendAlert(notification));
+        isSentMap.putAll(alertReferees.sendAlert(notification));
 
         return isSentMap;
     }
@@ -212,11 +227,11 @@ public class Game {
     public Map<String, Boolean> sendAlertChangeDateGame() {
         String title =  "The date has changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.withNano(0).withSecond(0).toString();
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(title, message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
-        isSentMap.putAll(alertFans.sendAlert(alertNotification));
-        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+        isSentMap.putAll(alertFans.sendAlert(notification));
+        isSentMap.putAll(alertReferees.sendAlert(notification));
 
         return isSentMap;
     }
@@ -231,9 +246,9 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        AlertNotification alertNotification = new AlertNotification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Notification notification = new Notification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        alertFans.sendAlert(notification);
+        alertReferees.sendAlert(notification);
     }
 
 
@@ -246,9 +261,9 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        AlertNotification alertNotification = new AlertNotification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Notification notification = new Notification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        alertFans.sendAlert(notification);
+        alertReferees.sendAlert(notification);
     }
 
     /**
