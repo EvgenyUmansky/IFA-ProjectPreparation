@@ -12,11 +12,11 @@ public class GameEvent {
     static AtomicInteger nextId = new AtomicInteger();
     private final int id;
 
-
     private LocalDateTime dateTime;
     private int gameMinutes;
     private GameAlert eventName;
     private String description;
+    private int gameID;
 
 /////////// Constructors ///////////
 
@@ -33,6 +33,16 @@ public class GameEvent {
         this.dateTime = LocalDateTime.now().withNano(0).withSecond(0);
         this.gameMinutes = gameMinutes;
         this.eventName = eventName;
+        this.description = description;
+    }
+
+    public GameEvent(int id, int gameID, LocalDateTime gameDate, int gameMinutes, String eventName, String description) {
+        this.id = id;
+
+        this.gameID = gameID;
+        this.dateTime = gameDate;
+        this.gameMinutes = gameMinutes;
+        setEventName(eventName);
         this.description = description;
     }
 
@@ -102,6 +112,54 @@ public class GameEvent {
     public void setEventName(GameAlert eventName) {
         this.eventName = eventName;
     }
+
+    public void setEventName(String eventName) {
+        switch (eventName.toLowerCase()){
+            case "goal":
+                setEventName(GameAlert.GOAL);
+                break;
+
+            case "injury":
+                setEventName(GameAlert.INJURY);
+                break;
+
+            case "foul":
+                setEventName(GameAlert.FOUL);
+                break;
+
+            case "player_in":
+                setEventName(GameAlert.PLAYER_IN);
+                break;
+
+            case "player_out":
+                setEventName(GameAlert.PLAYER_OUT);
+                break;
+
+            case "yellow_card":
+                setEventName(GameAlert.YELLOW_CARD);
+                break;
+
+            case "red_card":
+                setEventName(GameAlert.RED_CARD);
+                break;
+
+            case "offside":
+                setEventName(GameAlert.OFFSIDE);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public int getGameID(){
+        return gameID;
+    }
+
+    public void setGameID(int gameID){
+        this.gameID = gameID;
+    }
+
 
     /**
      * Returns the description of the event

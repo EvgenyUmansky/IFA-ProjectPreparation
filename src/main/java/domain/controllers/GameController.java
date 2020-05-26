@@ -1,16 +1,18 @@
 package domain.controllers;
 
 import DataAccess.DBAccess;
-import DataAccess.UserDBAccess;
+import DataAccess.RefereeGamesDBAccess;
 import domain.*;
+import javafx.util.Pair;
 import service.pojos.GameDTO;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameController {
+
+    private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
+
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
 //    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
 //    private GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
@@ -64,6 +66,9 @@ public class GameController {
 //        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
 //        ArrayList<Game> ans  = Game.getGamesByReferee(ref);
 
+
+
+        /*
         ArrayList<Game> array = new ArrayList<>();
         League mockLeague = new League("testLeage");
         mockLeague.addReferee((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
@@ -87,6 +92,28 @@ public class GameController {
             ));
         }
         return response;
+*/
+
+        Pair<String, ArrayList<Game>> retrievedGamesReferee = rgda.select(username);
+        ArrayList<Game> games = retrievedGamesReferee.getValue();
+
+        ArrayList<GameDTO> gamesDTO = new ArrayList<>();
+
+        for (Game game : games) {
+            gamesDTO.add(new GameDTO(
+                    game.getId(),
+                    game.getHostTeam().getTeamName(),
+                    game.getGuestTeam().getTeamName(),
+                    game.getField(),
+                    game.getGameDate(),
+                    game.getReferees(),
+                    new ArrayList<>(game.getGameEvents().values()),
+                    game.getGameScore()
+            ));
+        }
+
+    return gamesDTO;
+
     }
 
     /**

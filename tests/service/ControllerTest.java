@@ -523,7 +523,7 @@
 //        controller.setRankingMethod(5,3,4,leaguePerSeason);
 //        assertEquals(5, leaguePerSeason.getRankingMethod().getWinPoints());
 //        assertEquals(4, leaguePerSeason.getRankingMethod().getDrawPoints());
-//        assertEquals(3, leaguePerSeason.getRankingMethod().getLoosPoints());
+//        assertEquals(3, leaguePerSeason.getRankingMethod().getLosePoints());
 //    }
 //
 //

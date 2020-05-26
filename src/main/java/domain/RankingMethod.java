@@ -6,7 +6,7 @@ package domain;
 public class RankingMethod  {
 
     private int winPoints;
-    private int loosPoints;
+    private int losePoints;
     private int drawPoints;
 
 
@@ -17,7 +17,7 @@ public class RankingMethod  {
      */
     public RankingMethod() {
         this.winPoints = 3;
-        this.loosPoints = 0;
+        this.losePoints = 0;
         this.drawPoints = 1;
     }
 
@@ -27,13 +27,13 @@ public class RankingMethod  {
      * Sets the amount of points each team receives according to the result of a match
      * @param winPoints the amount of points given for a win
      * @param drawPoints the amount of points given for a draw
-     * @param loosPoints the amount of points given for a loss
+     * @param losePoints the amount of points given for a loss
      * @return true if the update was successful, false otherwise
      */
-    public boolean setRankingMethod(int winPoints, int drawPoints, int loosPoints){
-        if(winPoints > drawPoints && winPoints > loosPoints && drawPoints > loosPoints){
+    public boolean setRankingMethod(int winPoints, int drawPoints, int losePoints){
+        if(winPoints > drawPoints && winPoints > losePoints && drawPoints > losePoints){
             this.winPoints = winPoints;
-            this.loosPoints = loosPoints;
+            this.losePoints = losePoints;
             this.drawPoints = drawPoints;
             return true;
         }
@@ -54,8 +54,8 @@ public class RankingMethod  {
      * Returns the amount of points given for a loss
      * @return the amount of points given for a loss
      */
-    public int getLoosPoints() {
-        return loosPoints;
+    public int getLosePoints() {
+        return losePoints;
     }
 
     /**
