@@ -7,12 +7,14 @@ import domain.Role;
 import domain.TeamCoach;
 import domain.TeamPlayer;
 import domain.User;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class CoachController {
+    static Logger logger = Logger.getLogger(CoachController.class.getName());
 
     private DBAccess<TeamCoach> cda = TeamCoachDBAccess.getInstance();
 
@@ -27,6 +29,7 @@ public class CoachController {
      * @return the coach instance by his name
      */
     public TeamCoach getCoachDetails(String coachName) {
+        logger.info(coachName + " got profile details");
         return TeamCoach.getCoachByName(coachName);
     }
 
@@ -48,6 +51,8 @@ public class CoachController {
             coachUser.setName(coachName);
         }
         ((TeamCoach)User.getUserByID(username).getRoles().get(Role.COACH)).updateDetails(qualification,role);
+
+        logger.info(coachName + " updated profile details");
     }
 
     public ArrayList<TeamCoach> getCoaches() {

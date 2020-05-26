@@ -1,17 +1,23 @@
 package domain.controllers;
 
 import DataAccess.DBAccess;
+import DataAccess.GameEventDBAccess;
 import DataAccess.RefereeGamesDBAccess;
 import domain.*;
 import javafx.util.Pair;
+import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameController {
+    static Logger logger = Logger.getLogger(GameController.class.getName());
 
     private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
+    private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
 //    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
@@ -47,6 +53,7 @@ public class GameController {
         // TODO: get from DB
         // Game game = gameDBAccess.select(gameId);
         // game.addFanToAlerts((Fan)User.getUserByID(username).getRoles().get(Role.FAN));
+        logger.info(username + ": subscription was added to game " + gameId);
     }
 
 
@@ -124,18 +131,19 @@ public class GameController {
      * @throws Exception in case the game is over
      */
     public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-//        Game game = gameDBAccess.select(gameId);
-//
-//        int minuteOfEvent = (int)ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
-//
+       // Game game = gameDBAccess.select(gameId);
+
+       // int minuteOfEvent = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
+
 //        if(minuteOfEvent >= 90){
 //            throw new Exception("The game is over");
 //        }
-//
-//        GameEvent newGameEvent = new GameEvent(minuteOfEvent, GameAlert.valueOf(eventName), description);
-//        game.addEvent(newGameEvent);
-//        gameEventDBAccess.insert(newGameEvent);
 
+        LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
+        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId),gameDate,eventName,description);
+        geda.save(gameEvent);
+
+        logger.info(eventName + ": event was added to game " + gameId);
     }
 
 
@@ -185,5 +193,7 @@ public class GameController {
 //
 //        game.changeEvent(gameEvent);
 //        gameEventDBAccess.update(gameEvent);
+
+        logger.info(eventId + ": event was changed in game " + gameId);
     }
 }

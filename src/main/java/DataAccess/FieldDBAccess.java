@@ -2,11 +2,13 @@ package DataAccess;
 
 import domain.Field;
 import domain.TeamPlayer;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashMap;
 
 public class FieldDBAccess implements DBAccess<Field>{
+    static Logger logger = Logger.getLogger(FieldDBAccess.class.getName());
 
     private static final FieldDBAccess instance = new FieldDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -93,6 +95,7 @@ public class FieldDBAccess implements DBAccess<Field>{
                 fields.put(retrievedFields.getString(1),new Field(retrievedFields.getString(1),retrievedFields.getDouble(2)));
             }
         } catch (SQLException e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
 

@@ -1,10 +1,11 @@
 package domain.controllers;
 
 import domain.User;
+import org.apache.log4j.Logger;
 
 public class SystemAdministratorController {
 
-
+    static Logger logger = Logger.getLogger(SystemAdministratorController.class.getName());
     // =================== System Manager functions ====================
     // =================================================================
 
@@ -15,6 +16,7 @@ public class SystemAdministratorController {
      * @param userName the removed user's username
      */
     public void removeUserFromSystem(String userName) {
+        logger.info(userName + " was removed");
         User.getUserByID(userName).closeUser();
     }
 

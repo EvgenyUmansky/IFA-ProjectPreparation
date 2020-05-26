@@ -36,6 +36,15 @@ public class GameEvent {
         this.description = description;
     }
 
+    public GameEvent(int gameID, LocalDateTime gameTime, String eventName, String description) {
+        // set id
+        this.id = nextId.incrementAndGet();
+        this.gameID = gameID;
+        this.dateTime = gameTime;
+        setEventName(eventName);
+        this.description = description;
+    }
+
     public GameEvent(int id, int gameID, LocalDateTime gameDate, int gameMinutes, String eventName, String description) {
         this.id = id;
 

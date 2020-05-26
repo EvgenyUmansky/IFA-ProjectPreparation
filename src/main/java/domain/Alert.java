@@ -1,5 +1,8 @@
 package domain;
 
+import domain.controllers.GameController;
+import org.apache.log4j.Logger;
+
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -8,6 +11,7 @@ import javax.mail.internet.*;
  * This class represents a notifications system.
  */
 public class Alert {
+    static Logger logger = Logger.getLogger(Alert.class.getName());
 
     private Set<Subscriber> mailAlertList;
     private Set<Subscriber> inSystemAlertList;
@@ -169,6 +173,8 @@ public class Alert {
             return true;
         }
         catch (Exception e){
+            logger.error(e.getMessage());
+
             e.printStackTrace();
             return false;
         }
@@ -181,7 +187,7 @@ public class Alert {
      * @param alertNotification the notification
      */
     private void sendInSystemAlert(Subscriber user, AlertNotification alertNotification){
-        user.addAlertMessage(alertNotification);
+        user.addNotifications(alertNotification);
     }
 
 
