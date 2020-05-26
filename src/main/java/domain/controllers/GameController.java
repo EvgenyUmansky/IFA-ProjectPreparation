@@ -1,12 +1,14 @@
 package domain.controllers;
 
 import DataAccess.DBAccess;
+import DataAccess.GameEventDBAccess;
 import DataAccess.RefereeGamesDBAccess;
 import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,6 +16,7 @@ public class GameController {
     static Logger logger = Logger.getLogger(GameController.class.getName());
 
     private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
+    private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
 //    private GameDBAccess gameDBAccess = GameDBAccess.getInstance();
@@ -140,6 +143,9 @@ public class GameController {
 //        gameEventDBAccess.insert(newGameEvent);
 
         logger.info(eventName + ": event was added to game " + gameId);
+        LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
+        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId),gameDate,eventName,description);
+        geda.save(gameEvent);
     }
 
 
