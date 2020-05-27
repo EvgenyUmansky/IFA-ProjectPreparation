@@ -33,14 +33,13 @@ public class NotificationDBAccess implements DBAccess<Notification> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [Notification] values (?, ?, ?)";
+        String query = "insert into [Notification] values (?, ?)";
 
         try {
             statement = connection.prepareStatement(query);
 
             statement.setInt(1, notification.getId());
-            statement.setString(2, notification.getTitle());
-            statement.setString(3, notification.getSubject());
+            statement.setString(2, notification.getSubject());
 
             statement.executeUpdate();
             connection.commit();
@@ -72,16 +71,15 @@ public class NotificationDBAccess implements DBAccess<Notification> {
         }
 
         String query = "update [Notification] " +
-                "set Title = ?, Subject = ? " +
+                "set Subject = ? " +
                 "where NotificationId = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setString(1, notification.getTitle());
-            statement.setString(2, notification.getSubject());
-            statement.setInt(3, notification.getId());
+            statement.setString(1, notification.getSubject());
+            statement.setInt(2, notification.getId());
 
             statement.executeUpdate();
             connection.commit();
@@ -156,9 +154,8 @@ public class NotificationDBAccess implements DBAccess<Notification> {
             retrievedUsers = statement.executeQuery();
 
             if(retrievedUsers.next()){
-                String title = retrievedUsers.getString(2);
-                String subject = retrievedUsers.getString(3);
-                notification = new Notification(Integer.parseInt(id), title, subject);
+                String subject = retrievedUsers.getString(2);
+                notification = new Notification(Integer.parseInt(id), subject);
             }
         }
         catch (SQLException e){

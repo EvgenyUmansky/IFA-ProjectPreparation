@@ -10,8 +10,8 @@ public class ApiFanController {
     }
 
     @PostMapping("/users/{username}")
-    public void addFanSubscriptionToGame(@PathVariable String username, @RequestParam String sysAdmin, @RequestParam String title, @RequestParam String message){
-        controller.sendComplaintToSysAdmin(username, sysAdmin, title, message);
+    public void addFanSubscriptionToGame(@PathVariable String username, @RequestParam String sysAdmin, @RequestParam String message){
+        controller.sendComplaintToSysAdmin(username, sysAdmin, message);
     }
 
     @GetMapping("/users")

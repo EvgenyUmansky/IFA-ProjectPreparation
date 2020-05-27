@@ -339,8 +339,8 @@ public class ApiController {
      *
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-        gameController.addGameEventToGame(gameId, eventName, description);
+    public void addGameEventToGame(String gameId, String gameMinutes, String eventName, String description) throws Exception {
+        gameController.addGameEventToGame(gameId, gameMinutes, eventName, description);
     }
 
 

@@ -253,12 +253,6 @@ class GameTest {
     }
 
     @Test
-    void getGamesByReferee(){
-        ArrayList<Game> games = Game.getGamesByReferee(referees.get(0));
-        assertEquals(1,games.size());
-    }
-
-    @Test
     void getLeaguePerSeason() {
         assertEquals(leaguePerSeasons.get(0).getSeason(), game.getLeague().getSeason());
     }

@@ -18,7 +18,7 @@ class FanTest {
     @BeforeEach
     public void insert() {
         fan = new Fan("Evgeny", "euguman@gmail.com");
-        notification = new Notification("Title sysAdmin", "Text");
+        notification = new Notification("Text");
 
         sysAdmins = new ArrayList<>();
         sysAdmins.add(new SystemAdministrator("SysAdmin_1", "euguman@gmail.com"));

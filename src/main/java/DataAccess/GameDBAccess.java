@@ -2,12 +2,15 @@ package DataAccess;
 
 import domain.Game;
 import domain.User;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDBAccess implements DBAccess<Game>{
+    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
 
     private static final GameDBAccess instance = new GameDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -52,7 +55,8 @@ public class GameDBAccess implements DBAccess<Game>{
             connection.commit();
         }
         catch (SQLException e){
-            //TODO: logger
+            logger.error(e.getMessage());
+            e.printStackTrace();
         }
         finally {
             try {
@@ -61,8 +65,9 @@ public class GameDBAccess implements DBAccess<Game>{
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
-                //TODO: logger
+            catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -117,7 +122,8 @@ public class GameDBAccess implements DBAccess<Game>{
             }
         }
         catch (SQLException e){
-            //TODO: logger
+            logger.error(e.getMessage());
+            e.printStackTrace();
         }
         finally {
             try {
@@ -128,11 +134,59 @@ public class GameDBAccess implements DBAccess<Game>{
                     retrievedGame.close();
                 }
                 connection.close();
-            } catch (SQLException e3) {
-                //TODO: logger
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
             }
         }
         return game;
+    }
+
+    /**
+     * Retrieves a games that user follows
+     * @param username the id of the game
+     */
+    public ArrayList<Integer> selectGamesByUser(String username) {
+        String query = "select Game.GameId, RefereesInGames.UserName as RefereeName, FansInGames.UserName as FanName " +
+                "from Game " +
+                "join RefereesInGames on Game.GameId = RefereesInGames.GameId " +
+                "join FansInGames on Game.GameId = FansInGames.GameId " +
+                "where RefereesInGames.UserName = ? or FansInGames.UserName = ?";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedGame = null;
+        ArrayList<Integer> gameIds = new ArrayList<>();
+
+        try{
+            statement = connection.prepareStatement(query);
+            statement.setString(1, username);
+            statement.setString(2, username);
+            retrievedGame = statement.executeQuery();
+
+            if(retrievedGame.next()){
+                int gameId = Integer.parseInt(retrievedGame.getString(1));
+                gameIds.add(gameId);
+            }
+        }
+        catch (SQLException e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedGame != null) {
+                    retrievedGame.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return gameIds;
     }
 
     /**

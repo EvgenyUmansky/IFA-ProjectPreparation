@@ -164,7 +164,7 @@ public class Alert {
             msg.setFrom(new InternetAddress(username));
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to, false));
-            msg.setSubject(notification.getTitle());
+            msg.setSubject("Notification from Football System");
             msg.setText(notification.getSubject());
             Transport.send(msg);
 

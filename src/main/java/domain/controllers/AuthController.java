@@ -1,9 +1,6 @@
 package domain.controllers;
 
-import DataAccess.AlertDBAccess;
-import DataAccess.DBAccess;
-import DataAccess.UserDBAccess;
-import DataAccess.UserRolesDBAccess;
+import DataAccess.*;
 import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
@@ -22,6 +19,7 @@ public class AuthController {
     private DBAccess<User> uda = UserDBAccess.getInstance();
     private DBAccess< Pair<String,ArrayList<String>> > urda = UserRolesDBAccess.getInstance();
     private DBAccess<Pair<String, ArrayList<Notification>>> ada = AlertDBAccess.getInstance();
+    private GameDBAccess gda = GameDBAccess.getInstance();
 
     // ========================= Constructor =========================
 
@@ -66,19 +64,47 @@ public class AuthController {
         }
 
         user.connect();
-        // roles
-        ArrayList<String> rolesAsStrings = urda.select(userName).getValue();
-        // Notifications
-        ArrayList<Notification> notifications = ada.select(userName).getValue();
 
-       /* Role[] roles = user.getRoles().keySet().toArray(new Role[0]);
-        for (Role role : roles) {
-            rolesAsStrings.add(role.name());
-        }*/
+    /////////// Roles ///////////
+        ArrayList<String> rolesAsStrings = urda.select(userName).getValue();
+
+    /////////// Notifications ///////////
+        ArrayList<String> notifications = getNotSeenNotifications(userName);
+
+
+    /////////// Games ///////////
+        ArrayList<Integer> games = gda.selectGamesByUser(userName);
+
+
+        // add notifications to UserDTO
+        // add games to UserDTO
         logger.info(userName + " login to the system");
         return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail());
     }
 
+    /**
+     * get all not seen notifications of a user and update them as seen in DB
+     *
+     * @param userName - user name of user
+     * @return array list with all not seen notifications of the user
+     */
+    private ArrayList<String> getNotSeenNotifications(String userName){
+        ArrayList<Notification> notifications = ada.select(userName).getValue();
+        ArrayList<Notification> seenNotifications = new ArrayList<>(); // notifications marked seen
+        ArrayList<String> notificationsString = new ArrayList<>();
+
+        for(Notification notification : notifications){
+            if(!notification.isSeen()) {
+                notificationsString.add(notification.getSubject());
+                notification.setSeen(true); // mark the notification as seen
+                seenNotifications.add(notification);
+            }
+        }
+
+        ada.update(new Pair<>(userName, seenNotifications)); // update not seen notification as seen
+
+        return notificationsString;
+    }
 
     /**
      * UC 3.1
