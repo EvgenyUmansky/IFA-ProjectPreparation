@@ -79,7 +79,7 @@ public class AuthController {
         // add notifications to UserDTO
         // add games to UserDTO
         logger.info(userName + " login to the system");
-        return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail());
+        return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail(), notifications.toArray(new String[0]), games.toArray(new String[0]));
     }
 
     /**
