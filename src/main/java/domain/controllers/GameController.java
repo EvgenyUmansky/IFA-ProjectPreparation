@@ -138,10 +138,10 @@ public class GameController {
      * @param gameId the match
      *
      */
-    public GameDTO addGameEventToGame(String gameId, String eventName, String description) {
+    public GameDTO addGameEventToGame(String gameId, String minute, String eventName, String description) {
     ////// Create new game event and save it to DB //////
-        LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
-        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId), gameDate, eventName, description);
+        LocalDateTime eventDate = LocalDateTime.now().withNano(0).withSecond(0);
+        GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId), eventDate, Integer.parseInt(minute), eventName, description);
         geda.save(gameEvent);
 
     ////// Add event to game and save notification of the event to DB for each game subscriber //////

@@ -26,7 +26,7 @@ public class GameEvent {
      * @param eventName the type of the event
      * @param description the description of the event
      */
-    public GameEvent(int gameMinutes, GameAlert eventName, String description) {
+    public GameEvent(int gameId, int gameMinutes, GameAlert eventName, String description) {
         // set id
         this.id = nextId.incrementAndGet();
 
@@ -36,10 +36,11 @@ public class GameEvent {
         this.description = description;
     }
 
-    public GameEvent(int gameID, LocalDateTime gameTime, String eventName, String description) {
+    public GameEvent(int gameID, LocalDateTime gameTime, int gameMinutes, String eventName, String description) {
         // set id
         this.id = nextId.incrementAndGet();
         this.gameID = gameID;
+        this.gameMinutes = gameMinutes;
         this.dateTime = gameTime;
         setEventName(eventName);
         this.description = description;

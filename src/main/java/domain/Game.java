@@ -271,23 +271,6 @@ public class Game {
     }
 
 
-    /**
-     * UC 10.2
-     * Retrieves all the matches that a given referee has refereed
-     * @param referee the given referee
-     * @return all the matches the referee has refereed
-     */
-    public static ArrayList<Game> getGamesByReferee(Referee referee){
-        //TODO: Get data from DB (like SELECT * FROM GAMES WHERE Referee=username)
-        Game mockGame = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), LocalDateTime.now().withNano(0).withSecond(0), new ArrayList<Referee>() {{
-            add(referee);
-        }});
-        mockGame.addEvent(new GameEvent(60, GameAlert.GOAL, "Messi did goal"));
-        return new ArrayList<Game>() {{
-            add(mockGame);
-        }};
-    }
-
 /////////// Getters and Setters ///////////
 
     /**
