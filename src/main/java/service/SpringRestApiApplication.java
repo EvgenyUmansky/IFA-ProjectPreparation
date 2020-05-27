@@ -3,7 +3,6 @@ package service;
 // To fix any import issue - just add those packages to filepath
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.SpringVersion;
 
 
 @SpringBootApplication

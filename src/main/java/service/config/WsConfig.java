@@ -24,7 +24,6 @@ public class WsConfig implements WebSocketMessageBrokerConfigurer{
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration channelRegistration) {
-
     }
 
     @Override
