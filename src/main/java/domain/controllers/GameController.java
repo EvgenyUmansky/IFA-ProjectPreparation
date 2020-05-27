@@ -38,7 +38,20 @@ public class GameController {
     }
 
     public Game getGame(String gameId){
-         return gda.select(gameId);
+        Game game = gda.select(gameId);
+
+        // get referees to game from DB and save notification for them
+        ArrayList<Referee> referees = rgda.selectRefereesOfGame(gameId).getValue();
+        for(Referee referee : referees){
+            game.addRefereeToGame(referee);
+        }
+
+        // get fans to game from DB and save notification for them
+        ArrayList<Fan> fans = fgda.selectFansOfGame(gameId).getValue();
+        for(Fan fan : fans){
+            game.addFanToAlerts(fan);
+        }
+        return game;
 
 //        Game game = gda.select(gameId);
 //        String[] conditions = new String[] {"leagueName", game.getLeague().getLeagueName(),"year",Integer.toString(game.getLeague().getSeason())};
