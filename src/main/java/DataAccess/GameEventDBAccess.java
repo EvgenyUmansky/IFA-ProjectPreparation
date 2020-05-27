@@ -1,6 +1,7 @@
 package DataAccess;
 
 import domain.GameEvent;
+import org.apache.log4j.Logger;
 
 import javax.validation.constraints.Null;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 
 public class GameEventDBAccess implements DBAccess<GameEvent>{
 
+    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
     private static final GameEventDBAccess instance = new GameEventDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -26,7 +28,9 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
     @Override
     public void save(GameEvent gameEvent) {
         if(gameEvent == null){
-            throw new NullPointerException();
+            logger.error("gameEvent == null in GameEventDBAccess save(GameEvent gameEvent)");
+            System.out.println("gameEvent == null in GameEventDBAccess save(GameEvent gameEvent)");
+            return;
         }
         String query = "insert into [GameEvent] values (?, ?, ?, ?, ?)";
         Connection connection = DBConnector.getConnection();
@@ -44,6 +48,7 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
             connection.commit();
         }
         catch(SQLException e){
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
@@ -53,8 +58,9 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
-                e3.printStackTrace();
+            catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

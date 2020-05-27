@@ -32,7 +32,9 @@ public class GameDBAccess implements DBAccess<Game>{
     @Override
     public void save(Game game) {
         if(game == null){
-            //TODO: logger
+            logger.error("game == null in GameDBAccess save(Game game)");
+            System.out.println("game == null in GameDBAccess save(Game game)");
+            return;
         }
 
         Connection connection = DBConnector.getConnection();
@@ -96,6 +98,9 @@ public class GameDBAccess implements DBAccess<Game>{
      */
     @Override
     public Game select(String gameIDString) {
+        if(gameIDString.isEmpty()){
+            return null;
+        }
         int gameID = Integer.valueOf(gameIDString);
         String query = "select * from [Game] where gameID = ?";
         Connection connection = DBConnector.getConnection();

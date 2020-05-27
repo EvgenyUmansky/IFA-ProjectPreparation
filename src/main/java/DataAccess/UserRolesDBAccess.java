@@ -3,6 +3,7 @@ package DataAccess;
 import domain.Role;
 import domain.User;
 import javafx.util.Pair;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 
 public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<String>> >{
 
+    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
     private static final UserRolesDBAccess instance = new UserRolesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -27,11 +29,13 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
     @Override
     public void save(Pair<String,ArrayList<String>> roles) {
         if(roles == null){
+            logger.error("Couldn't execute 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles is null");
             System.out.println("Couldn't execute 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles is null");
             return;
         }
 
         if(roles.getValue() == null){
+            logger.error("Couldn't execute 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles.getValue() is null");
             System.out.println("Couldn't execute 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles.getValue() is null");
             return;
         }
@@ -45,7 +49,6 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
 
         String query = "insert into [UserRoles] values (?, ?)";
         try {
-            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             for(String role : rawRoles) {
                 statement = connection.prepareStatement(query);
                 statement.setString(1, userName);
@@ -56,6 +59,7 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
             }
         }
         catch (SQLException | NullPointerException e){
+            logger.error(e.getMessage());
             System.out.println("Couldn't execute 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess for " + userName);
         }
         finally {
@@ -65,7 +69,8 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess for " + userName);
             }
         }
@@ -79,11 +84,13 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
     @Override
     public void delete(Pair<String,ArrayList<String>> roles) {
         if(roles == null){
+            logger.error("Couldn't execute 'delete(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles is null");
             System.out.println("Couldn't execute 'delete(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles is null");
             return;
         }
 
         if(roles.getValue() == null){
+            logger.error("Couldn't execute 'delete(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles.getValue() is null");
             System.out.println("Couldn't execute 'delete(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess: the roles.getValue() is null");
             return;
         }
@@ -106,6 +113,7 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
             }
         }
         catch(SQLException e){
+            logger.error(e.getMessage());
             System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess for " + userName);
         }
         finally {
@@ -115,7 +123,8 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + userName);
             }
         }
@@ -142,7 +151,7 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
             userRoles = new Pair<>(username,roles);
         }
         catch (SQLException e){
-            //FIXME: change this to exception
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
@@ -154,9 +163,9 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
                     retrievedUsers.close();
                 }
                 connection.close();
-            } catch (SQLException e3) {
-                //FIXME: change this to exception
-                e3.printStackTrace();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
             }
         }
         return userRoles;
