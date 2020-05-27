@@ -131,17 +131,18 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
                 String league = retrievedGames.getString(8);
                 int season = retrievedGames.getInt(9);
                 int eventID = retrievedGames.getInt(10);
-                LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
-                String eventName =retrievedGames.getString(12);
-                String description = retrievedGames.getString(13);
-
                 if(!(gameIDs.contains(gameID))){
                     gameIDs.add(gameID);
                     game = new Game(gameID, new League(league, season), hostTeam,guestTeam,fieldName,gameDate,hostTeamScore,guestTeamScore);
                     games.add(game);
                 }
 
-                game.addEvent(new GameEvent(eventID, gameID, gameDate,(int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName,description));
+                if(eventID != 0) {
+                    LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
+                    String eventName = retrievedGames.getString(12);
+                    String description = retrievedGames.getString(13);
+                    game.addEvent(new GameEvent(eventID, gameID, gameDate, (int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName, description));
+                }
             }
         }
         catch (SQLException e){

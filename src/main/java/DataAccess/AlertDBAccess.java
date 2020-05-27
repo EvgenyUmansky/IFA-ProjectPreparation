@@ -175,7 +175,7 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<Notificati
 
     @Override
     public Pair<String, ArrayList<Notification>> select(String username) {
-        String query = "select Alert.NotificationId, Title, [Subject], isSeen\n" +
+        String query = "select Alert.NotificationId, [Subject], isSeen\n" +
                 "from Alert \n" +
                 "inner join [Notification] on Alert.NotificationId = [Notification].NotificationId\n" +
                 "where Alert.Username = ?";
@@ -184,8 +184,6 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<Notificati
         ResultSet retrievedUsers = null;
         ArrayList<Notification> notifications = new ArrayList<>();
         Pair<String, ArrayList<Notification>> userNotifications = null;
-
-
         try{
             statement = connection.prepareStatement(query);
             statement.setString(1,username);
