@@ -9,23 +9,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>{
+public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>{
     static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
 
-    private static final RefereeGamesDBAccess instance = new RefereeGamesDBAccess();
+    private static final FanGamesDBAccess instance = new FanGamesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
-    private RefereeGamesDBAccess() {
+    private FanGamesDBAccess() {
 
     }
 
-    public static RefereeGamesDBAccess getInstance() {
+    public static FanGamesDBAccess getInstance() {
         return instance;
     }
 
@@ -58,11 +56,11 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
      */
     @Override
     public Pair<String, ArrayList<Game>> select(String username) {
-        String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate,[GameEvent].EventName, [GameEvent].Description" +
-                " from [RefereesInGames]" +
-                " join [Game] on [Game].gameID = [RefereesInGames].gameID" +
-                " join [GameEvent]  on [Game].gameID = [GameEvent].gameID" +
-                " where username = ? order by [Game].GameID";
+        String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate,[GameEvent].EventName, [GameEvent].Description " +
+                "from [FansInGames] " +
+                "join [Game] on [Game].gameID = [FansInGames].gameID " +
+                "join [GameEvent]  on [Game].gameID = [FansInGames].gameID " +
+                "where username = '' order by [Game].GameID";
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -123,32 +121,32 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
         return new Pair<>(username,games);
     }
 
-    public Pair<String, ArrayList<Referee>> selectRefereesOfGame(String gameId) {
-        String query = "select [RefereesInGames].GameId, [User].Username, [User].Mail, [User].IsMail " +
-                "from [RefereesInGames] " +
-                "join [User] on [RefereesInGames].username = [User].username " +
+    public Pair<String, ArrayList<Fan>> selectFansOfGame(String gameId) {
+        String query = "select [FansInGames].GameId, [User].Username, [User].Mail, [User].IsMail " +
+                "from [FansInGames] " +
+                "join [User] on [FansInGames].username = [User].username " +
                 "where GameId = ?";
 
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        ResultSet retrievedReferees = null;
-        ArrayList<Referee> referees = new ArrayList<>();
+        ResultSet retrievedFans = null;
+        ArrayList<Fan> fans = new ArrayList<>();
 
         try{
             statement = connection.prepareStatement(query);
             statement.setString(1, gameId);
-            retrievedReferees = statement.executeQuery();
+            retrievedFans = statement.executeQuery();
 
-            while(retrievedReferees.next()){
-                String userName = retrievedReferees.getString(2);
-                String mail = retrievedReferees.getString(3);
-                boolean isMail = retrievedReferees.getBoolean(4);
+            while(retrievedFans.next()){
+                String userName = retrievedFans.getString(2);
+                String mail = retrievedFans.getString(3);
+                boolean isMail = retrievedFans.getBoolean(4);
 
-                Referee referee = new Referee(userName, mail);
+                Fan referee = new Fan(userName, mail);
                 referee.setMail(isMail);
 
-                referees.add(referee);
+                fans.add(referee);
             }
         }
         catch (SQLException e){
@@ -160,8 +158,8 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
                 if (statement != null) {
                     statement.close();
                 }
-                if (retrievedReferees != null) {
-                    retrievedReferees.close();
+                if (retrievedFans != null) {
+                    retrievedFans.close();
                 }
                 connection.close();
             } catch (SQLException e) {
@@ -170,7 +168,7 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
             }
         }
 
-        return new Pair<>(gameId, referees);
+        return new Pair<>(gameId, fans);
     }
 
     /**

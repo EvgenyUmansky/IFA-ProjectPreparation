@@ -191,11 +191,8 @@ public class Game {
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the notification or false otherwise
      */
     public Map<String, Boolean> sendAlertScoreToFan()  {
-        //TODO some logic with observer: when the game ends
-
-        String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName();
         String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + getGameScore();
-        Notification notification = new Notification(title, message);
+        Notification notification = new Notification(message);
 
         return alertFans.sendAlert(notification);
     }
@@ -206,11 +203,8 @@ public class Game {
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the notification or false otherwise
      */
     public Map<String, Boolean> sendAlertCloseGame()  {
-        //TODO some logic with observer: when remains one day
-
-        String title =  "It's close! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " remains " + "one day!";
-        Notification notification = new Notification(title, message);
+        Notification notification = new Notification(message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
         isSentMap.putAll(alertFans.sendAlert(notification));
@@ -225,9 +219,8 @@ public class Game {
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the notification or false otherwise
      */
     public Map<String, Boolean> sendAlertChangeDateGame() {
-        String title =  "The date has changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.withNano(0).withSecond(0).toString();
-        Notification notification = new Notification(title, message);
+        Notification notification = new Notification(message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
         isSentMap.putAll(alertFans.sendAlert(notification));
@@ -246,7 +239,7 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        Notification notification = new Notification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        Notification notification = new Notification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName() + ": " + event.toString());
         alertFans.sendAlert(notification);
         alertReferees.sendAlert(notification);
     }
@@ -261,7 +254,7 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        Notification notification = new Notification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
+        Notification notification = new Notification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName() + " " + event.toString());
         alertFans.sendAlert(notification);
         alertReferees.sendAlert(notification);
     }
@@ -277,23 +270,6 @@ public class Game {
                 && this.getGameDate().compareTo(game.getGameDate()) == 0;
     }
 
-
-    /**
-     * UC 10.2
-     * Retrieves all the matches that a given referee has refereed
-     * @param referee the given referee
-     * @return all the matches the referee has refereed
-     */
-    public static ArrayList<Game> getGamesByReferee(Referee referee){
-        //TODO: Get data from DB (like SELECT * FROM GAMES WHERE Referee=username)
-        Game mockGame = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), LocalDateTime.now().withNano(0).withSecond(0), new ArrayList<Referee>() {{
-            add(referee);
-        }});
-        mockGame.addEvent(new GameEvent(60, GameAlert.GOAL, "Messi did goal"));
-        return new ArrayList<Game>() {{
-            add(mockGame);
-        }};
-    }
 
 /////////// Getters and Setters ///////////
 

@@ -18,9 +18,9 @@ public class FanController {
      * @param sysAdmin the list of system administrators
      * @param message the complaint
      */
-    public void sendComplaintToSysAdmin(String username, String sysAdmin, String title, String message) {
+    public void sendComplaintToSysAdmin(String username, String sysAdmin, String message) {
         SystemAdministrator admin = (SystemAdministrator) User.getUserByID(sysAdmin).getRoles().get(Role.SYSTEM_ADMIN);
-        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(new ArrayList<SystemAdministrator>(){{add(admin);}}, new Notification(title, message));
+        ((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(new ArrayList<SystemAdministrator>(){{add(admin);}}, new Notification(message));
 
         logger.info(username + " sent complaint to SysAdmins");
     }

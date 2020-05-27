@@ -10,7 +10,6 @@ public class Notification {
     static AtomicInteger nextId = new AtomicInteger();
     private final int id;
 
-    private String title;
     private String subject;
     private boolean isSeen;
 
@@ -20,25 +19,22 @@ public class Notification {
      * @param title the title of the message
      * @param subject the content of the message
      */
-    public Notification(String title, String subject) {
+    public Notification(String subject) {
         // set id
         this.id = nextId.incrementAndGet();
 
-        this.title = title;
         this.subject = subject;
         this.isSeen = false;
     }
 
     /**
      * Constructor DB
-     * @param title the title of the message
      * @param subject the content of the message
      */
-    public Notification(int id, String title, String subject) {
+    public Notification(int id, String subject) {
         // set id
         this.id = id;
 
-        this.title = title;
         this.subject = subject;
         this.isSeen = false;
     }
@@ -46,22 +42,6 @@ public class Notification {
 
 
 /////////// Getters and Setters ///////////
-
-    /**
-     * Returns the title of the message
-     * @return the title of the message
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the title of the message to the given title
-     * @param title the given title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     /**
      * Returns the content of the message

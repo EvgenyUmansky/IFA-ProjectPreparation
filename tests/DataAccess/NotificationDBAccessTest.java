@@ -28,7 +28,7 @@ class NotificationDBAccessTest {
     @BeforeEach
     public void insertBeforeTest() {
         System.setOut(new PrintStream(outContent));
-        notification = new Notification(1, "title_1", "subject_1");
+        notification = new Notification(1, "subject_1");
         notificationDBAccess = NotificationDBAccess.getInstance();
         connection = DBConnector.getConnection();
         preparedStatement = null;
@@ -80,8 +80,7 @@ class NotificationDBAccessTest {
         preparedStatement = connection.prepareStatement("select * from [Notification] where NotificationId = '1'" );
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        assertEquals(notification.getTitle(), resultSet.getString(2));
-        assertEquals(notification.getSubject(), resultSet.getString(3));
+        assertEquals(notification.getSubject(), resultSet.getString(2));
 
 
         // delete the notification from DB
@@ -103,7 +102,7 @@ class NotificationDBAccessTest {
         connection.commit();
 
         // insert the notification to DB
-        preparedStatement = connection.prepareStatement("insert into [Notification] values ('1', 'title_2', 'subject_2')");
+        preparedStatement = connection.prepareStatement("insert into [Notification] values ('1', 'subject_2')");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -120,8 +119,7 @@ class NotificationDBAccessTest {
         preparedStatement = connection.prepareStatement("select * from [Notification] where NotificationId = '1'" );
         resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        assertEquals(notification.getTitle(), resultSet.getString(2));
-        assertEquals(notification.getSubject(), resultSet.getString(3));
+        assertEquals(notification.getSubject(), resultSet.getString(2));
 
         // delete the notification from DB
         preparedStatement = connection.prepareStatement("delete from [Notification] where NotificationId = '1'");
@@ -142,7 +140,7 @@ class NotificationDBAccessTest {
         connection.commit();
 
         // insert the notification to DB
-        preparedStatement = connection.prepareStatement("insert into [Notification] values ('1', 'title_1', 'subject_1')");
+        preparedStatement = connection.prepareStatement("insert into [Notification] values ('1', 'subject_1')");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -171,7 +169,7 @@ class NotificationDBAccessTest {
         connection.commit();
 
         // insert the notification to DB
-        preparedStatement = connection.prepareStatement("insert into [Notification] values ('1', 'title_1', 'subject_1')");
+        preparedStatement = connection.prepareStatement("insert into [Notification] values ('1', 'subject_1')");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -184,7 +182,6 @@ class NotificationDBAccessTest {
         // check select
         Notification selectedNotification = notificationDBAccess.select("1");
         assertEquals(1, selectedNotification.getId());
-        assertEquals("title_1", selectedNotification.getTitle());
         assertEquals("subject_1", selectedNotification.getSubject());
     }
 
