@@ -33,18 +33,24 @@ public class Team {
      */
     public Team(String name, Field stadium, TeamOwner owner) {
         this.teamName = name;
-        this.stadium = stadium;
         this.fields = new HashMap<>();
         this.owners = new HashMap<>();
         this.managers = new HashMap<>();
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
         this.alert = new Alert();
-        this.alert.addSubscriber(owner);
-        this.fields.put(stadium.getFieldName(), stadium);
         this.teamStatus = TeamStatus.Open;
-        this.owners.put(owner.getUserName(), owner);
-        owner.setTeam(this.teamName);
+
+        if(stadium != null){
+            this.stadium = stadium;
+            this.fields.put(stadium.getFieldName(), stadium);
+        }
+
+        if(owner != null) {
+            this.alert.addSubscriber(owner);
+            this.owners.put(owner.getUserName(), owner);
+            owner.setTeam(this.teamName);
+        }
     }
 
     public Team(String teamName, String mail, String fieldName, String status) {
