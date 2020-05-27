@@ -4,6 +4,7 @@ import DataAccess.DBAccess;
 import DataAccess.UserDBAccess;
 import domain.*;
 import service.pojos.GameDTO;
+import service.pojos.GameEventDTO;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -18,14 +19,14 @@ public class GameController {
     public ArrayList<Game> getGames() {
         League mockLeage = new League("testLeage");
         mockLeage.addReferee(new Referee("refereeTest", "ref@gmail.com"));
-        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
-        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
+        Team teamA = new Team("teamA", new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
+        Team teamB = new Team("teamB", new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
         Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
         // TODO: return all games
         return new ArrayList<Game>(Arrays.asList(mockGame));
     }
 
-    public Game getGame(String gameId){
+    public Game getGame(String gameId) {
         // TODO: get from DB
         // Game game = DB game
         // return game;
@@ -38,7 +39,8 @@ public class GameController {
     /**
      * UC 3.3
      * Adds a fan as a subscriber to a game
-     * @param gameId the game
+     *
+     * @param gameId   the game
      * @param username the fan's username
      */
     public void addFanSubscriptionToGame(String gameId, String username) {
@@ -48,14 +50,25 @@ public class GameController {
     }
 
 
-
-
     // ========================= Referee functions ========================
     // ====================================================================
+
+    private GameEventDTO convertEventToEventDTO(Game game, GameEvent event) {
+        return new GameEventDTO(event.getDateTime().toString(),Integer.toString(game.getId()), game.getHostTeam().getTeamName() + " - " + game.getGuestTeam().getTeamName(), Integer.toString(event.getGameMinutes()), event.getEventName().name(), event.getDescription());
+    }
+
+    private ArrayList<GameEventDTO> convertEventsToEventsDTO(Game game, ArrayList<GameEvent> events) {
+        ArrayList<GameEventDTO> dtoEvents = new ArrayList<>();
+        for (GameEvent event : events) {
+            dtoEvents.add(convertEventToEventDTO(game, event));
+        }
+        return dtoEvents;
+    }
 
     /**
      * UC 10.2
      * Returns a list of games that the referee referees at
+     *
      * @param username the referee's username
      * @return the list of games that the referee referees at
      */
@@ -67,8 +80,8 @@ public class GameController {
         ArrayList<Game> array = new ArrayList<>();
         League mockLeague = new League("testLeage");
         mockLeague.addReferee((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
-        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
-        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
+        Team teamA = new Team("teamA", new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
+        Team teamB = new Team("teamB", new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
         Game mockGame = new Game(mockLeague, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeague.getReferees()));
         mockGame.addEvent(new GameEvent(60, GameAlert.GOAL, "Messi did goal"));
         mockGame.addEvent(new GameEvent(75, GameAlert.INJURY, "Yossi Benayoun got injured"));
@@ -82,7 +95,7 @@ public class GameController {
                     game.getField(),
                     game.getGameDate(),
                     game.getReferees(),
-                    new ArrayList<>(game.getGameEvents().values()),
+                    new ArrayList<>(convertEventsToEventsDTO(game, new ArrayList<>(game.getGameEvents().values()))),
                     game.getGameScore()
             ));
         }
@@ -92,8 +105,8 @@ public class GameController {
     /**
      * UC 10.3
      * Adds an event that took place during a game to its events list
-     * @param gameId the match
      *
+     * @param gameId the match
      * @throws Exception in case the game is over
      */
     public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
@@ -115,12 +128,13 @@ public class GameController {
     /**
      * UC 10.4
      * Updates an event that took place during a game
-     * @param gameId the match
-     * @param eventId the event
-     * @param dateTimeStr the time the event took place
+     *
+     * @param gameId        the match
+     * @param eventId       the event
+     * @param dateTimeStr   the time the event took place
      * @param minuteOfEvent the minute of the game the event took place in
-     * @param eventName the name of the event
-     * @param description the description of the event
+     * @param eventName     the name of the event
+     * @param description   the description of the event
      * @throws Exception in case not event of the game
      */
     public void changeGameEvent(String gameId, String eventId, String minuteOfEvent, String dateTimeStr, String eventName, String description) throws Exception {

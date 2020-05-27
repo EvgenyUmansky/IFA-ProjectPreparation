@@ -30,7 +30,8 @@ public class ApiNotificationsController {
     @SendTo("/topic/game/register/{gameId}")
     public String sendMessage(@Payload GameEventDTO notification) {
         //controller.addGameEventToGame(notification.getGameId(),notification.getEvent(),notification.getMinutes(), notification.getDescription());
-        System.out.println(notification);
+        notification.pinDate();
+        System.out.println(notification.toString());
         return notification.toString();
     }
 }
