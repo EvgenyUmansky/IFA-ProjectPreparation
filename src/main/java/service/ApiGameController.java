@@ -27,8 +27,8 @@ public class ApiGameController {
     }
 
     @PostMapping("/games/{gameId}")
-    public void addFanSubscriptionToGame(@PathVariable String gameId, @RequestParam String gameMinute, @RequestParam String eventName, @RequestParam String description) throws Exception {
-        controller.addGameEventToGame(gameId, gameMinute, eventName, description);
+    public GameDTO addFanSubscriptionToGame(@PathVariable String gameId, @RequestParam String gameMinute, @RequestParam String eventName, @RequestParam String description) throws Exception {
+        return controller.addGameEventToGame(gameId, gameMinute, eventName, description);
     }
 
     // This will update event by referee user in the following way: /games/{gameId}?eventId=<eventId>
