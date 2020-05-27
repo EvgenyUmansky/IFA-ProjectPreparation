@@ -1,6 +1,8 @@
 package domain.controllers;
 
+import DataAccess.*;
 import domain.*;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
 import service.pojos.TeamDTO;
 
@@ -10,14 +12,23 @@ import java.util.HashSet;
 
 public class TeamController {
     static Logger logger = Logger.getLogger(TeamController.class.getName());
+    DBAccess<User> uda = UserDBAccess.getInstance();
+    DBAccess<Field> fda = FieldDBAccess.getInstance();
+    DBAccess<Team> tda = TeamDBAccess.getInstance();
+    DBAccess<Pair<String,String>> tfda = TeamFieldsDBAccess.getInstance();
+    DBAccess<TeamOwner> oda = OwnerDBAccess.getInstance();
 
     public TeamDTO createTeam(String teamOwner, String name, String stadium){
-        User user = User.getUserByID(teamOwner);
-        Field field = Field.getFieldByName(stadium);
+        User user = uda.select(teamOwner);
+        Field field = fda.select(stadium);
         user.addRoleToUser(Role.TEAM_OWNER);
         TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
         Team newTeam = new Team(name, field, owner);
-        // TODO: Save new team to DB
+
+        tda.save(newTeam);
+        uda.update(user);
+        oda.save(owner);
+        tfda.save(new Pair<>(name,stadium));
 
         logger.info(name + " team was created");
         return new TeamDTO(
