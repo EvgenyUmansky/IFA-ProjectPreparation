@@ -1,6 +1,7 @@
 package domain.controllers;
 
 import DataAccess.*;
+import ExternalSystemsAccess.*;
 import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
@@ -21,6 +22,10 @@ public class AuthController {
     private DBAccess<Pair<String, ArrayList<Notification>>> ada = AlertDBAccess.getInstance();
     private GameDBAccess gda = GameDBAccess.getInstance();
 
+    private TaxSystemAccess taxSystem;
+    private AccountingSystemAccess accountingSystem;
+
+
     // ========================= Constructor =========================
 
     /**
@@ -31,7 +36,7 @@ public class AuthController {
     }
 
 
-     // ========================= System functions ========================
+    // ========================= System functions ========================
     // ====================================================================
 
     /**
@@ -39,7 +44,8 @@ public class AuthController {
      * Connects to external systems
      */
     public void connectToExternalSystems() {
-        // TODO: Connect to external system. if fails throws Exception
+        taxSystem = new TaxProxy();
+        accountingSystem = new AccountingProxy();
     }
 
 
