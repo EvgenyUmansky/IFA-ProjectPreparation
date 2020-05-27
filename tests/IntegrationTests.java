@@ -117,7 +117,7 @@ class IntegrationTests {
         sysAdminsList.add(sysAdminMail);
         sysAdminsList.add(sysAdminNotMail);
 
-        notification = new Notification("Complaint to admins", "This project is very very hard, it eats all our time!");
+        notification = new Notification("This project is very very hard, it eats all our time!");
 
 
         // ========================= TeamMembers receive Alerts from Team Tests =================================

@@ -6,6 +6,7 @@ import javafx.util.Pair;
 import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
 
+import javax.security.auth.login.CredentialNotFoundException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ import java.util.Arrays;
 public class GameController {
     static Logger logger = Logger.getLogger(GameController.class.getName());
 
-    private DBAccess<Pair<String, ArrayList<Game>>> rgda = RefereeGamesDBAccess.getInstance();
+    private RefereeGamesDBAccess rgda = RefereeGamesDBAccess.getInstance();
+    private FanGamesDBAccess fgda = FanGamesDBAccess.getInstance();
+    private AlertDBAccess ada = AlertDBAccess.getInstance();
     private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
-    private DBAccess<Game> gda = GameDBAccess.getInstance();
+    private GameDBAccess gda = GameDBAccess.getInstance();
     private DBAccess<League> lda = LeagueDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
@@ -61,9 +64,6 @@ public class GameController {
         logger.info(username + ": subscription was added to game " + gameId);
     }
 
-
-
-
     // ========================= Referee functions ========================
     // ====================================================================
 
@@ -74,11 +74,8 @@ public class GameController {
      * @return the list of games that the referee referees at
      */
     public ArrayList<GameDTO> getRefereeGames(String username) {
-        // TODO: get all games for this referee from DB
 //        Referee ref = ((Referee) User.getUserByID(username).getRoles().get(Role.REFEREE));
 //        ArrayList<Game> ans  = Game.getGamesByReferee(ref);
-
-
 
         /*
         ArrayList<Game> array = new ArrayList<>();
@@ -128,28 +125,57 @@ public class GameController {
 
     }
 
+    // ========================= Event functions ========================
+    // ====================================================================
+
+//    public GameEventDTO getEvent(String eventId){
+//
+//    }
+
     /**
      * UC 10.3
      * Adds an event that took place during a game to its events list
      * @param gameId the match
      *
-     * @throws Exception in case the game is over
      */
-    public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-        Game game = gda.select(gameId);
-
-       // int minuteOfEvent = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), game.getGameDate());
-
-//        if(minuteOfEvent >= 90){
-//            throw new Exception("The game is over");
-//        }
-
+    public GameDTO addGameEventToGame(String gameId, String eventName, String description) {
+    ////// Create new game event and save it to DB //////
         LocalDateTime gameDate = LocalDateTime.now().withNano(0).withSecond(0);
         GameEvent gameEvent = new GameEvent(Integer.parseInt(gameId), gameDate, eventName, description);
         geda.save(gameEvent);
 
-        // TODO: save alerts of referees and fans in DB
+    ////// Add event to game and save notification of the event to DB for each game subscriber //////
+        Game game = gda.select(gameId);
+        Notification notification = new Notification("New event: " + game.getHostTeam().getTeamName() + " vs " + game.getGuestTeam().getTeamName() + ": " + gameEvent.toString());
+
+        // get referees to game from DB and save notification for them
+        ArrayList<Referee> referees = rgda.selectRefereesOfGame(gameId).getValue();
+        for(Referee referee : referees){
+            game.addRefereeToGame(referee);
+            ada.save(new Pair<>(referee.getUserName(), new ArrayList<Notification>(){{add(notification);}}));
+        }
+
+        // get fans to game from DB and save notification for them
+        ArrayList<Fan> fans = fgda.selectFansOfGame(gameId).getValue();
+        for(Fan fan : fans){
+            game.addFanToAlerts(fan);
+            ada.save(new Pair<>(fan.getUserName(), new ArrayList<Notification>(){{add(notification);}}));
+        }
+
+        // add event to game and send mails
+        game.addEvent(gameEvent);
         logger.info(eventName + ": event was added to game " + gameId);
+
+        return new GameDTO(
+                game.getId(),
+                game.getHostTeam().getTeamName(),
+                game.getGuestTeam().getTeamName(),
+                game.getField(),
+                game.getGameDate(),
+                game.getReferees(),
+                new ArrayList<>(game.getGameEvents().values()),
+                game.getGameScore()
+        );
     }
 
 

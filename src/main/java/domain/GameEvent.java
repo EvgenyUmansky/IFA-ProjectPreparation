@@ -190,7 +190,7 @@ public class GameEvent {
     public String toString() {
         return  dateTime + " " +
                 gameMinutes + ", " +
-                eventName.toString() +" " +
+                eventName.toString() + " " +
                 description;
     }
 }

@@ -12,7 +12,7 @@ class NotificationTest {
 
     @BeforeEach
     public void insert() {
-        notification = new Notification("Title", "Text");
+        notification = new Notification( "Text");
     }
 
     @AfterEach
@@ -20,16 +20,6 @@ class NotificationTest {
         notification = null;
     }
 
-    @Test
-    void getTitle() {
-        assertEquals("Title", notification.getTitle());
-    }
-
-    @Test
-    void setTitle() {
-        notification.setTitle("New Title");
-        assertEquals("New Title", notification.getTitle());
-    }
 
     @Test
     void getMessage() {

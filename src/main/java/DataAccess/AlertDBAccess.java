@@ -193,10 +193,9 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<Notificati
 
             while(retrievedUsers.next()){
                 int notificationId = Integer.parseInt(retrievedUsers.getString(1));
-                String title = retrievedUsers.getString(2);
-                String subject = retrievedUsers.getString(3);
-                boolean isSeen = retrievedUsers.getBoolean(4);
-                Notification notification = new Notification(notificationId, title, subject);
+                String subject = retrievedUsers.getString(2);
+                boolean isSeen = retrievedUsers.getBoolean(3);
+                Notification notification = new Notification(notificationId, subject);
                 notification.setSeen(isSeen);
 
                 notifications.add(notification);
