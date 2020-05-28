@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class GameEvent {
     // ID
-    static AtomicInteger nextId = new AtomicInteger();
-    private final int id;
+    // static AtomicInteger nextId = new AtomicInteger();
+    private int id;
 
     private LocalDateTime dateTime;
     private int gameMinutes;
@@ -28,7 +28,8 @@ public class GameEvent {
      */
     public GameEvent(int gameId, int gameMinutes, GameAlert eventName, String description) {
         // set id
-        this.id = nextId.incrementAndGet();
+        // this.id = nextId.incrementAndGet();
+        this.id = 0;
 
         this.dateTime = LocalDateTime.now().withNano(0).withSecond(0);
         this.gameMinutes = gameMinutes;
@@ -38,7 +39,9 @@ public class GameEvent {
 
     public GameEvent(int gameID, LocalDateTime gameTime, int gameMinutes, String eventName, String description) {
         // set id
-        this.id = nextId.incrementAndGet();
+        // this.id = nextId.incrementAndGet();
+        this.id = 0;
+        ;
         this.gameID = gameID;
         this.gameMinutes = gameMinutes;
         this.dateTime = gameTime;
@@ -64,6 +67,13 @@ public class GameEvent {
      */
     public int getId() {
         return this.id;
+    }
+
+    /**
+     * Sets the id of event
+     */
+    public void getId(int id) {
+         this.id = id;
     }
 
     /**

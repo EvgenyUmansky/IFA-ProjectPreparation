@@ -21,20 +21,21 @@ public class GameController {
     private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
     private GameDBAccess gda = GameDBAccess.getInstance();
     private DBAccess<League> lda = LeagueDBAccess.getInstance();
+    private NotificationDBAccess nda = NotificationDBAccess.getInstance();
 
 //    private DBAccess<User> uda = UserDBAccess.getInstance();
 //    private GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
 
     public ArrayList<Game> getGames() {
-        League mockLeage = new League("testLeage");
-        mockLeage.addReferee(new Referee("refereeTest", "ref@gmail.com"));
-        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
-        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
-        Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
-        // TODO: return all games
-        return new ArrayList<Game>(Arrays.asList(mockGame));
+//        League mockLeage = new League("testLeage");
+//        mockLeage.addReferee(new Referee("refereeTest", "ref@gmail.com"));
+//        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
+//        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
+//        Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
+//        // TODO: return all games
+//        return new ArrayList<Game>(Arrays.asList(mockGame));
 
-
+        return null;
     }
 
     public Game getGame(String gameId){
@@ -52,13 +53,6 @@ public class GameController {
             game.addFanToAlerts(fan);
         }
         return game;
-
-//        Game game = gda.select(gameId);
-//        String[] conditions = new String[] {"leagueName", game.getLeague().getLeagueName(),"year",Integer.toString(game.getLeague().getSeason())};
-//        League league = game.getLeague();
-//        league = lda.conditionedSelect(conditions).get(game.getLeague().getLeagueName());
-//
-//        return game;
     }
 
     // ========================= Fan functions ========================
@@ -128,6 +122,8 @@ public class GameController {
     ////// Add event to game and save notification of the event to DB for each game subscriber //////
         Game game = gda.select(gameId);
         Notification notification = new Notification("New event: " + game.getHostTeam().getTeamName() + " vs " + game.getGuestTeam().getTeamName() + ": " + gameEvent.toString());
+        nda.save(notification);
+        notification.setId(nda.selectNotificationId(notification.getSubject()));
 
         // get referees to game from DB and save notification for them
         ArrayList<Referee> referees = rgda.selectRefereesOfGame(gameId).getValue();

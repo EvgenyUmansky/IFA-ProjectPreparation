@@ -11,8 +11,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * This class represents a football match
  */
 public class Game {
-    static AtomicInteger nextId = new AtomicInteger();
-    private final int id;
+    // static AtomicInteger nextId = new AtomicInteger();
+    private int id;
 
     private League league;
     private Team hostTeam;
@@ -39,7 +39,8 @@ public class Game {
      */
     public Game(League league, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
         // set id
-        this.id = nextId.incrementAndGet();
+       // this.id = nextId.incrementAndGet();
+        this.id = 0;
 
         this.league = league;
         this.hostTeam = hostTeam;
@@ -71,7 +72,8 @@ public class Game {
      */
     public Game(League league, Team hostTeam, Team guestTeam, Field field, LocalDateTime gameDate, ArrayList<Referee> referees) {
         // set id
-        this.id = nextId.incrementAndGet();
+        // this.id = nextId.incrementAndGet();
+        this.id = 0;
 
         this.league = league;
         this.hostTeam = hostTeam;
@@ -280,6 +282,14 @@ public class Game {
     public int getId() {
         return this.id;
     }
+
+    /**
+     *  Sets the id of game
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 
     /**
