@@ -1,6 +1,7 @@
 package DataAccess;
 
 import javafx.util.Pair;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final TeamFieldsDBAccess instance = new TeamFieldsDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -35,7 +36,7 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
             connection.commit();
         }
         catch (SQLException e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -44,7 +45,7 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
                 }
                 connection.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
 
