@@ -19,7 +19,7 @@ public class Game {
     private Team guestTeam;
     private Field field;
     private LocalDateTime gameDate;
-    private final ArrayList<Referee> referees;
+    private ArrayList<Referee> referees;
     private final HashMap<Integer, GameEvent> gameEvents;
     private int hostTeamScore;
     private int guestTeamScore;
@@ -246,6 +246,15 @@ public class Game {
         alertReferees.sendAlert(notification);
     }
 
+    /**
+     * Adds a game events from DB
+     * @param events - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
+     */
+    public void addEvents(ArrayList<GameEvent> events) {
+        for(GameEvent event : events){
+            this.gameEvents.put(event.getId(), event);
+        }
+    }
 
     /**
      * UC 10.4
@@ -362,6 +371,14 @@ public class Game {
      */
     public ArrayList<Referee> getReferees() {
         return referees;
+    }
+
+    /**
+     * Adds a referee to the list of referees in this match
+     * @param referees the added referees
+     */
+    public void setReferees(ArrayList<Referee> referees){
+        this.referees = referees;
     }
 
     /**
