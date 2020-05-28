@@ -1,6 +1,7 @@
 package DataAccess;
 
 import domain.User;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 
 public class UserDBAccess implements DBAccess<User> {
 
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final UserDBAccess instance = new UserDBAccess();
   /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -25,7 +27,7 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void save(User user) {
         if(user == null){
-            System.out.println("Couldn't execute 'save(User user)' in UserDBAccess: the user is null");
+            logger.error("Couldn't execute 'save(User user)' in UserDBAccess: the user is null");
             return;
         }
 
@@ -34,7 +36,6 @@ public class UserDBAccess implements DBAccess<User> {
         String query = "insert into [User] values (?, ?, ?, ?, ?, ?)";
 
         try {
-            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1,user.getUserName());
             statement.setString(2,user.getName());
@@ -47,7 +48,7 @@ public class UserDBAccess implements DBAccess<User> {
             connection.commit();
         }
         catch (SQLException | NullPointerException e){
-            System.out.println("Couldn't execute 'save(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -57,7 +58,7 @@ public class UserDBAccess implements DBAccess<User> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -66,7 +67,7 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void update(User user) {
         if(user == null){
-            System.out.println("Couldn't execute 'update(User user)' in UserDBAccess: the user is null");
+            logger.error("Couldn't execute 'update(User user)' in UserDBAccess: the user is null");
             return;
         }
 
@@ -90,7 +91,7 @@ public class UserDBAccess implements DBAccess<User> {
             connection.commit();
         }
         catch(SQLException e){
-            System.out.println("Couldn't execute 'update(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -100,7 +101,7 @@ public class UserDBAccess implements DBAccess<User> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -108,7 +109,7 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void delete(User user) {
         if(user == null){
-            System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess: the user is null");
+            logger.error("Couldn't execute 'delete(User user)' in UserDBAccess: the user is null");
             return;
         }
 
@@ -124,7 +125,7 @@ public class UserDBAccess implements DBAccess<User> {
             connection.commit();
         }
         catch(SQLException e){
-            System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -134,7 +135,7 @@ public class UserDBAccess implements DBAccess<User> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
             }
         }
     }
@@ -166,7 +167,7 @@ public class UserDBAccess implements DBAccess<User> {
         }
         catch (SQLException e){
             assert false;
-            System.out.println("Couldn't execute 'select(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -178,7 +179,7 @@ public class UserDBAccess implements DBAccess<User> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error(e3.getMessage());
             }
         }
         return user;
@@ -239,6 +240,7 @@ public class UserDBAccess implements DBAccess<User> {
             }
         } catch (SQLException e) {
             // TODO: Alert window
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
 

@@ -1,12 +1,13 @@
 package DataAccess;
 import domain.TeamCoach;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashMap;
 
 
 public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final TeamCoachDBAccess instance = new TeamCoachDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -21,7 +22,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
     @Override
     public void save(TeamCoach teamCoach) {
         if(teamCoach == null){
-            System.out.println("Couldn't execute 'save(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
+            logger.error("Couldn't execute 'save(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
             return;
         }
 
@@ -48,8 +49,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             connection.commit();
         }
         catch (SQLException | NullPointerException e){
-            System.out.println("Couldn't execute 'save(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-        }
+            logger.error(e.getMessage());        }
         finally {
             try {
                 if (statement != null) {
@@ -58,8 +58,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-            }
+                logger.error(e3.getMessage());            }
         }
     }
 
@@ -67,7 +66,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
     @Override
     public void update(TeamCoach teamCoach) {
         if(teamCoach == null){
-            System.out.println("Couldn't execute 'update(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
+            logger.error("Couldn't execute 'save(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
             return;
         }
 
@@ -85,13 +84,11 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             statement.setString(4,teamCoach.getName());
             statement.setString(5,teamCoach.getUserName());
 
-
             statement.executeUpdate();
             connection.commit();
         }
         catch(SQLException e){
-            System.out.println("Couldn't execute 'update(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-        }
+            logger.error(e.getMessage());        }
         finally {
             try {
                 if (statement != null) {
@@ -100,8 +97,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-            }
+                logger.error(e3.getMessage());            }
         }
     }
 
@@ -109,7 +105,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
     @Override
     public void delete(TeamCoach teamCoach) {
         if(teamCoach == null){
-            System.out.println("Couldn't execute 'delete(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
+            logger.error("Couldn't execute 'save(TeamCoach teamCoach)' in TeamCoachDBAccess: the teamCoach is null");
             return;
         }
 
@@ -125,8 +121,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
             connection.commit();
         }
         catch(SQLException e){
-            System.out.println("Couldn't execute 'delete(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-        }
+            logger.error(e.getMessage());        }
         finally {
             try {
                 if (statement != null) {
@@ -135,8 +130,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-            }
+                logger.error(e3.getMessage());            }
         }
     }
 
@@ -161,15 +155,13 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 String qualification =  retrievedUser.getString(4);
                 String name =  retrievedUser.getString(5);
 
-
                 teamCoach = new TeamCoach(username, "",role, qualification,name);
                 // TODO: 19/05/2020 set current team of teamCoach??
             }
         }
         catch (SQLException e){
             assert false;
-            System.out.println("Couldn't execute 'select(TeamCoach teamCoach)' in TeamCoachDBAccess for " + teamCoach.getUserName());
-        }
+            logger.error(e.getMessage());        }
         finally {
             try {
                 if (statement != null) {
@@ -181,8 +173,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamCoach teamCoach)' in UserDBAccess for " + teamCoach.getUserName());
-            }
+                logger.error(e3.getMessage());            }
         }
         return teamCoach;
     }
@@ -237,8 +228,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 coaches.put(username,new TeamCoach(username, "",role, qualification,name));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            logger.error(e.getMessage());        }
 
         return coaches;
     }

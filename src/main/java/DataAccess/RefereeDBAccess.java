@@ -2,6 +2,7 @@ package DataAccess;
 
 import domain.Referee;
 import domain.RefereeType;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 
 public class RefereeDBAccess implements DBAccess<Referee> {
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final RefereeDBAccess instance = new RefereeDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -26,7 +27,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
     @Override
     public void save(Referee referee) {
         if (referee == null) {
-            System.out.println("Couldn't execute 'save(Referee referee)' in RefereeDBAccess: the referee is null");
+            logger.error("Couldn't execute 'save(Referee referee)' in RefereeDBAccess: the referee is null");
             return;
         }
 
@@ -50,7 +51,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException | NullPointerException e) {
-            System.out.println("Couldn't execute 'save(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -58,7 +59,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -67,7 +68,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
     @Override
     public void update(Referee referee) {
         if (referee == null) {
-            System.out.println("Couldn't execute 'update(Referee referee)' in RefereeDBAccess: the referee is null");
+            logger.error("Couldn't execute 'save(Referee referee)' in RefereeDBAccess: the referee is null");
             return;
         }
 
@@ -92,7 +93,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'update(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -100,7 +101,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -108,7 +109,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
     @Override
     public void delete(Referee referee) {
         if (referee == null) {
-            System.out.println("Couldn't execute 'delete(Referee referee)' in RefereeDBAccess: the referee is null");
+            logger.error("Couldn't execute 'save(Referee referee)' in RefereeDBAccess: the referee is null");
             return;
         }
 
@@ -123,7 +124,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'delete(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -131,7 +132,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -166,7 +167,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
 
         } catch (SQLException e) {
             assert false;
-            System.out.println("Couldn't execute 'select(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -177,7 +178,7 @@ public class RefereeDBAccess implements DBAccess<Referee> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(Referee referee)' in RefereeDBAccess for " + referee.getUserName());
+                logger.error(e3.getMessage());
             }
         }
         return referee;

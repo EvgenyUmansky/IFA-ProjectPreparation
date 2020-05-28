@@ -188,6 +188,7 @@ public class AuthController {
         try {
             c.init();
         } catch (Exception e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
     }

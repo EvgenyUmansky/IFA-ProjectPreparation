@@ -1,23 +1,41 @@
 package domain.controllers;
 
+import DataAccess.DBAccess;
+import DataAccess.LeagueDBAccess;
 import domain.*;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
+import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class LeagueController {
     static Logger logger = Logger.getLogger(LeagueController.class.getName());
 
-    public ArrayList<League> getLeagues(){
+    private DBAccess<League> lda = LeagueDBAccess.getInstance();
+
+    public ArrayList<League> getLeagues() {
         // TODO: get leagues from DB
-        League league1 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(), "aleph");
+       /* League league1 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(), "aleph");
         League league2 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"bet");
-        League league3 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"gimel");
+        League league3 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"gimel");*/
 //        League league4 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"dalet");
 //        League league5 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"hea");
 
-        return  new ArrayList<League>(Arrays.asList(league1,league2,league3));
+        HashMap<String, League> allLeagues = lda.conditionedSelect(new String[0]);
+        return new ArrayList<>(allLeagues.values());
+    }
+
+    public League createSeason(String leagueName, String season, String scheduling, String winPoints, String losePoints, String drawPoints) {
+        League league = new League(leagueName, Integer.parseInt(season), scheduling.equalsIgnoreCase("oneGameSchedulingMethod"),
+                Integer.parseInt(winPoints), Integer.parseInt(losePoints), Integer.parseInt(drawPoints));
+
+        lda.save(league);
+
+        logger.info(leagueName + " " + season + "  was created");
+        return league;
     }
 
     // =================== Guest functions ====================
@@ -26,6 +44,7 @@ public class LeagueController {
     /**
      * UC 2.4
      * Returns the league instance that matches the league name
+     *
      * @param leagueName the league name
      * @return the league instance that matches the league name
      */
@@ -36,6 +55,7 @@ public class LeagueController {
     /**
      * UC 2.4
      * Returns the leagues instances from a certain season
+     *
      * @param year the season
      * @return the leagues instances from the season
      */
@@ -44,13 +64,13 @@ public class LeagueController {
     }
 
 
-
     // =================== Association Agent functions ====================
     // ====================================================================
 
     /**
      * UC 9.1
      * Creates a new league
+     *
      * @param leagueName the league name
      * @return an instance of the new league
      */
@@ -63,8 +83,9 @@ public class LeagueController {
     /**
      * UC 9.2
      * Updates the season in the league
+     *
      * @param leagueName the league name
-     * @param season the season
+     * @param season     the season
      * @return the updated league
      */
     public League updateSeasonForLeague(String leagueName, String season) {
@@ -75,8 +96,9 @@ public class LeagueController {
     /**
      * UC 9.4
      * Adds a referee to a league in a specific season
+     *
      * @param leagueName the league
-     * @param userName the referee's username
+     * @param userName   the referee's username
      */
     public void addRefereeToLeaguePerSeason(String leagueName, String userName) {
         //This method will be shown after the user chose a referee from the list (using getReferees() method)
@@ -94,10 +116,11 @@ public class LeagueController {
     /**
      * UC 9.5
      * Sets the ranking method in the league
+     *
      * @param league the league
-     * @param winP amount of points given for a win
-     * @param drawP amount of points given for a draw
-     * @param loseP amount of points given for a loss
+     * @param winP   amount of points given for a win
+     * @param drawP  amount of points given for a draw
+     * @param loseP  amount of points given for a loss
      */
     public void setRankingMethod(String league, String winP, String drawP, String loseP) {
         // TODO: get league
@@ -109,15 +132,16 @@ public class LeagueController {
     /**
      * UC 9.6
      * Sets the scheduling method of teams into games in the league
-     * @param league the league
+     *
+     * @param league               the league
      * @param schedulingMethodName the scheduling method
      */
     public void setSchedulingMethod(String league, String schedulingMethodName) {
         SchedulingMethod schedulingMethod;
-        switch(schedulingMethodName) {
+        switch (schedulingMethodName) {
             case "OneGameSchedulingMethod":
                 logger.info(schedulingMethodName + " Scheduling Method was added to " + league);
-                 schedulingMethod = new OneGameSchedulingMethod();
+                schedulingMethod = new OneGameSchedulingMethod();
             case "TwoGameSchedulingMethod":
                 logger.info(schedulingMethodName + " Scheduling Method was added to " + league);
                 schedulingMethod = new TwoGameSchedulingMethod();
@@ -132,6 +156,7 @@ public class LeagueController {
     /**
      * UC 9.7
      * schedules teams into games in a league
+     *
      * @param leagueName the league
      */
     public void scheduleGamesInLeagues(String leagueName) {
