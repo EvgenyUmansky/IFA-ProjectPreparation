@@ -14,10 +14,10 @@ public class GameDTO {
     private Field field;
     private LocalDateTime gameDate;
     private ArrayList<Referee> referees;
-    private ArrayList<GameEvent> gameEvents;
+    private ArrayList<GameEventDTO> gameEvents;
     private String gameScore;
 
-    public GameDTO(int gameId, String hostTeam, String guestTeam, Field field, LocalDateTime gameDate, ArrayList<Referee> referees, ArrayList<GameEvent> gameEvents, String gameScore){
+    public GameDTO(int gameId, String hostTeam, String guestTeam, Field field, LocalDateTime gameDate, ArrayList<Referee> referees, ArrayList<GameEventDTO> gameEvents, String gameScore){
         this.gameId = gameId;
         this.hostTeam = hostTeam;
         this.guestTeam = guestTeam;
@@ -52,7 +52,7 @@ public class GameDTO {
         return referees;
     }
 
-    public ArrayList<GameEvent> getGameEvents() {
+    public ArrayList<GameEventDTO> getGameEvents() {
         return gameEvents;
     }
 

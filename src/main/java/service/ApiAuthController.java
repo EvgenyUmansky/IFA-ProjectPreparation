@@ -9,6 +9,7 @@ import service.pojos.UserDTO;
 
 import java.util.HashMap;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiAuthController {
     private final domain.controllers.AuthController controller;

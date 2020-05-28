@@ -5,6 +5,7 @@ import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
+import service.pojos.GameEventDTO;
 
 import javax.security.auth.login.CredentialNotFoundException;
 import java.time.LocalDateTime;
@@ -72,6 +73,17 @@ public class GameController {
 
     // ========================= Referee functions ========================
     // ====================================================================
+    private GameEventDTO convertEventToEventDTO(Game game, GameEvent event) {
+        return new GameEventDTO(event.getDateTime().toString(),Integer.toString(game.getId()), game.getHostTeam().getTeamName() + " - " + game.getGuestTeam().getTeamName(), Integer.toString(event.getGameMinutes()), event.getEventName().name(), event.getDescription());
+    }
+
+    private ArrayList<GameEventDTO> convertEventsToEventsDTO(Game game, ArrayList<GameEvent> events) {
+        ArrayList<GameEventDTO> dtoEvents = new ArrayList<>();
+        for (GameEvent event : events) {
+            dtoEvents.add(convertEventToEventDTO(game, event));
+        }
+        return dtoEvents;
+    }
 
     /**
      * UC 10.2
@@ -93,7 +105,7 @@ public class GameController {
                     game.getField(),
                     game.getGameDate(),
                     game.getReferees(),
-                    new ArrayList<>(game.getGameEvents().values()),
+                    new ArrayList<>(convertEventsToEventsDTO(game, new ArrayList<>(game.getGameEvents().values()))),
                     game.getGameScore()
             ));
         }
@@ -150,7 +162,7 @@ public class GameController {
                 game.getField(),
                 game.getGameDate(),
                 game.getReferees(),
-                new ArrayList<>(game.getGameEvents().values()),
+                new ArrayList<>(convertEventsToEventsDTO(game, new ArrayList<>(game.getGameEvents().values()))),
                 game.getGameScore()
         );
     }
