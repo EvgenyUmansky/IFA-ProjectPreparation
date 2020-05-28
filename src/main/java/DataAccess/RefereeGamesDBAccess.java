@@ -58,7 +58,7 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
      */
     @Override
     public Pair<String, ArrayList<Game>> select(String username) {
-        String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate,[GameEvent].EventName, [GameEvent].Description " +
+        String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate, [GameEvent].EventName, [GameEvent].Description, [GameEvent].[Minutes] " +
                 "from [RefereesInGames] " +
                 "full join [Game] on [Game].gameID = [RefereesInGames].gameID " +
                 "full join [GameEvent]  on [Game].gameID = [GameEvent].gameID " +
@@ -99,7 +99,8 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
                     LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
                     String eventName = retrievedGames.getString(12);
                     String description = retrievedGames.getString(13);
-                    game.addEvent(new GameEvent(eventID, gameID, gameDate, (int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName, description));
+                    int minutes = retrievedGames.getInt(14);
+                    game.addEvent(new GameEvent(eventID, gameID, eventDate, minutes, eventName, description));
                 }
 
             }
@@ -127,9 +128,10 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
     }
 
     public Pair<String, ArrayList<Referee>> selectRefereesOfGame(String gameId) {
-        String query = "select [RefereesInGames].GameId, [User].Username, [User].Mail, [User].IsMail " +
+        String query = "select [RefereesInGames].GameId, [User].Username, [User].[Name], [User].Mail, [User].IsMail, [Referee].Qualification, [Referee].[Type] " +
                 "from [RefereesInGames] " +
                 "join [User] on [RefereesInGames].username = [User].username " +
+                "join [Referee] on [RefereesInGames].username = [Referee].username " +
                 "where GameId = ?";
 
 
@@ -145,11 +147,16 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
 
             while(retrievedReferees.next()){
                 String userName = retrievedReferees.getString(2);
-                String mail = retrievedReferees.getString(3);
-                boolean isMail = retrievedReferees.getBoolean(4);
+                String name = retrievedReferees.getString(3);
+                String mail = retrievedReferees.getString(4);
+                boolean isMail = retrievedReferees.getBoolean(5);
+                int qualification = retrievedReferees.getInt(6);
+                String type = retrievedReferees.getString(7);
 
-                Referee referee = new Referee(userName, mail);
+                Referee referee = new Referee(userName, mail, name);
                 referee.setMail(isMail);
+                referee.setQualification(qualification);
+                referee.setRefereeType(RefereeType.valueOf(type));
 
                 referees.add(referee);
             }

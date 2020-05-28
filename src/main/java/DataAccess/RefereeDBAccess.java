@@ -141,7 +141,10 @@ public class RefereeDBAccess implements DBAccess<Referee> {
     // the user really has according to the DB
     @Override
     public Referee select(String username) {
-        String query = "select * from [Referee] where username = ?";
+        String query = "select [Referee].*, [User].name, [User].Mail, [User].IsMail " +
+                "from [Referee] " +
+                "inner join [User] on [Referee].UserName = [User].Username " +
+                "where [Referee].username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUser = null;
@@ -153,16 +156,20 @@ public class RefereeDBAccess implements DBAccess<Referee> {
             retrievedUser = statement.executeQuery();
 
             if (retrievedUser.next()) {
-                referee = new Referee(username, "");
+                String refType = retrievedUser.getString(2);
+                int qualification = retrievedUser.getInt(3);
+                String name = retrievedUser.getString(4);
+                String mail = retrievedUser.getString(5);
+                String isMail = retrievedUser.getString(6);
 
-
-                String refType = retrievedUser.getString("Type");
+                referee = new Referee(username, mail, name);
+                referee.setMail(isMail);
 
                 if (refType != null) {
                     referee.setRefereeType(RefereeType.valueOf(refType));
                 }
 
-                referee.setQualification(Integer.parseInt(retrievedUser.getString("Qualification")));
+                referee.setQualification(qualification);
             }
 
         } catch (SQLException e) {

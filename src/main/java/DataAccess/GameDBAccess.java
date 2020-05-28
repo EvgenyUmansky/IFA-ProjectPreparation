@@ -232,6 +232,53 @@ public class GameDBAccess implements DBAccess<Game>{
         return gameId;
     }
 
+    public ArrayList<Game> selectAllGames() {
+        String query = "select * from [Game]";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedGame = null;
+        ArrayList<Game> games = new ArrayList<>();
+
+        try{
+            statement = connection.prepareStatement(query);
+            retrievedGame = statement.executeQuery();
+
+            while (retrievedGame.next()){
+                int gameId = retrievedGame.getInt(1);
+                String hostTeamName = retrievedGame.getString(2);
+                String guestTeamName = retrievedGame.getString(3);
+                String fieldName = retrievedGame.getString(4);
+                LocalDateTime gameDate = retrievedGame.getTimestamp(5).toLocalDateTime();
+                int hostScore = retrievedGame.getInt(6);
+                int guestScore = retrievedGame.getInt(7);
+                String leagueName = retrievedGame.getString(8);
+                int season = retrievedGame.getInt(9);
+
+                Game game = new Game(gameId, hostTeamName, guestTeamName, fieldName, gameDate, hostScore, guestScore, leagueName, season);
+                games.add(game);
+            }
+        }
+        catch (SQLException e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedGame != null) {
+                    retrievedGame.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return games;
+    }
+
     /**
      * Retrieves one or more games that fit the given conditions in the database
      * @param conditions the wanted values of the fields in the table
@@ -241,4 +288,5 @@ public class GameDBAccess implements DBAccess<Game>{
     public HashMap<String, Game> conditionedSelect(String[] conditions) {
         return null;
     }
+
 }
