@@ -1,6 +1,7 @@
 package domain.controllers;
 
 import DataAccess.*;
+import ExternalSystemsAccess.*;
 import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
@@ -19,7 +20,12 @@ public class AuthController {
     private DBAccess<User> uda = UserDBAccess.getInstance();
     private DBAccess< Pair<String,ArrayList<String>> > urda = UserRolesDBAccess.getInstance();
     private DBAccess<Pair<String, ArrayList<Notification>>> ada = AlertDBAccess.getInstance();
-    private GameDBAccess gda = GameDBAccess.getInstance();
+    private RefereeGamesDBAccess rgda = RefereeGamesDBAccess.getInstance();
+    private FanGamesDBAccess fgda = FanGamesDBAccess.getInstance();
+
+    private TaxSystemAccess taxSystem;
+    private AccountingSystemAccess accountingSystem;
+
 
     // ========================= Constructor =========================
 
@@ -31,7 +37,7 @@ public class AuthController {
     }
 
 
-     // ========================= System functions ========================
+    // ========================= System functions ========================
     // ====================================================================
 
     /**
@@ -39,7 +45,8 @@ public class AuthController {
      * Connects to external systems
      */
     public void connectToExternalSystems() {
-        // TODO: Connect to external system. if fails throws Exception
+        taxSystem = new TaxProxy();
+        accountingSystem = new AccountingProxy();
     }
 
 
@@ -73,13 +80,24 @@ public class AuthController {
 
 
     /////////// Games ///////////
-        ArrayList<Integer> games = gda.selectGamesByUser(userName);
+        ArrayList<Game> games = new ArrayList<>();
+        ArrayList<String> gameIds = new ArrayList<>();
 
+        if(rolesAsStrings.contains("FAN")){
+            games = fgda.select(userName).getValue();
+        }
+        else if(rolesAsStrings.contains("REFEREE")){
+            games = rgda.select(userName).getValue();
+        }
+
+        for(Game game : games){
+            gameIds.add(String.valueOf(game.getId()));
+        }
 
         // add notifications to UserDTO
-        // add games to UserDTO
+        // add gameIds to UserDTO
         logger.info(userName + " login to the system");
-        return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail());
+        return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail(), notifications.toArray(new String[0]), gameIds.toArray(new String[0]));
     }
 
     /**

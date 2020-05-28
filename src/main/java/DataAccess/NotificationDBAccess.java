@@ -33,13 +33,14 @@ public class NotificationDBAccess implements DBAccess<Notification> {
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
-        String query = "insert into [Notification] values (?, ?)";
+        // String query = "insert into [Notification] values (?, ?)";
+        String query = "insert into [Notification] values (?)";
 
         try {
             statement = connection.prepareStatement(query);
 
-            statement.setInt(1, notification.getId());
-            statement.setString(2, notification.getSubject());
+            //statement.setInt(1, notification.getId());
+            statement.setString(1, notification.getSubject());
 
             statement.executeUpdate();
             connection.commit();
@@ -100,6 +101,43 @@ public class NotificationDBAccess implements DBAccess<Notification> {
             }
         }
 
+    }
+
+    public int selectNotificationId(String subject) {
+        String query = "select * from [Notification] where Subject = ?";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedGame = null;
+        int notificationId = 0;
+
+        try{
+            statement = connection.prepareStatement(query);
+            statement.setString(1, subject);
+            retrievedGame = statement.executeQuery();
+
+            if(retrievedGame.next()){
+                notificationId = retrievedGame.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedGame != null) {
+                    retrievedGame.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return notificationId;
     }
 
     @Override

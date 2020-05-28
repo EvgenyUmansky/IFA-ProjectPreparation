@@ -58,11 +58,11 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
      */
     @Override
     public Pair<String, ArrayList<Game>> select(String username) {
-        String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate,[GameEvent].EventName, [GameEvent].Description" +
-                " from [RefereesInGames]" +
-                " join [Game] on [Game].gameID = [RefereesInGames].gameID" +
-                " join [GameEvent]  on [Game].gameID = [GameEvent].gameID" +
-                " where username = ? order by [Game].GameID";
+        String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate,[GameEvent].EventName, [GameEvent].Description " +
+                "from [RefereesInGames] " +
+                "full join [Game] on [Game].gameID = [RefereesInGames].gameID " +
+                "full join [GameEvent]  on [Game].gameID = [GameEvent].gameID " +
+                "where username = ? order by [Game].GameID";
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -88,9 +88,6 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
                 String league = retrievedGames.getString(8);
                 int season = retrievedGames.getInt(9);
                 int eventID = retrievedGames.getInt(10);
-                LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
-                String eventName =retrievedGames.getString(12);
-                String description = retrievedGames.getString(13);
 
                 if(!(gameIDs.contains(gameID))){
                     gameIDs.add(gameID);
@@ -98,7 +95,13 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
                     games.add(game);
                 }
 
-                game.addEvent(new GameEvent(eventID, gameID, gameDate,(int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName,description));
+                if(eventID != 0) {
+                    LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
+                    String eventName = retrievedGames.getString(12);
+                    String description = retrievedGames.getString(13);
+                    game.addEvent(new GameEvent(eventID, gameID, gameDate, (int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName, description));
+                }
+
             }
         }
         catch (SQLException e){

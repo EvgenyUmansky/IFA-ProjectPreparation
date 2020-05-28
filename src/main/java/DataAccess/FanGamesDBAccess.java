@@ -32,7 +32,52 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
      */
     @Override
     public void save(Pair<String, ArrayList<Game>> stringArrayListPair) {
+        if(stringArrayListPair == null){
+            logger.error("Couldn't execute 'save(Pair<String, ArrayList<Game>> stringArrayListPair)' in FanGamesDBAccess: the stringArrayListPair is null");
+            System.out.println("Couldn't execute 'save(Pair<String, ArrayList<Game>> stringArrayListPair)' in FanGamesDBAccess: the stringArrayListPair is null");
+            return;
+        }
 
+        if(stringArrayListPair.getValue() == null){
+            logger.error("Couldn't execute 'save(Pair<String, ArrayList<Game>> stringArrayListPair)' in FanGamesDBAccess: the stringArrayListPair.getValue() is null");
+            System.out.println("Couldn't execute 'save(Pair<String, ArrayList<Game>> stringArrayListPair)' in FanGamesDBAccess: the stringArrayListPair.getValue() is null");
+            return;
+        }
+
+
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+
+        String userName = stringArrayListPair.getKey();
+        ArrayList<Game> games = stringArrayListPair.getValue();
+
+        String query = "insert into [FansInGames] values (?, ?)";
+        try {
+            for(Game game : games) {
+                statement = connection.prepareStatement(query);
+                statement.setString(1, userName);
+                statement.setInt(2, game.getId());
+
+                statement.executeUpdate();
+                connection.commit();
+            }
+        }
+        catch (SQLException | NullPointerException e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -58,9 +103,9 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
     public Pair<String, ArrayList<Game>> select(String username) {
         String query = "select [Game].*, [GameEvent].EventID, [GameEvent].EventDate,[GameEvent].EventName, [GameEvent].Description " +
                 "from [FansInGames] " +
-                "join [Game] on [Game].gameID = [FansInGames].gameID " +
-                "join [GameEvent]  on [Game].gameID = [FansInGames].gameID " +
-                "where username = '' order by [Game].GameID";
+                "full join [Game] on [Game].gameID = [FansInGames].gameID " +
+                "full join [GameEvent]  on [Game].gameID = [FansInGames].gameID " +
+                "where username = ? order by [Game].GameID";
 
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -86,17 +131,18 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
                 String league = retrievedGames.getString(8);
                 int season = retrievedGames.getInt(9);
                 int eventID = retrievedGames.getInt(10);
-                LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
-                String eventName =retrievedGames.getString(12);
-                String description = retrievedGames.getString(13);
-
                 if(!(gameIDs.contains(gameID))){
                     gameIDs.add(gameID);
                     game = new Game(gameID, new League(league, season), hostTeam,guestTeam,fieldName,gameDate,hostTeamScore,guestTeamScore);
                     games.add(game);
                 }
 
-                game.addEvent(new GameEvent(eventID, gameID, gameDate,(int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName,description));
+                if(eventID != 0) {
+                    LocalDateTime eventDate = retrievedGames.getTimestamp(11).toLocalDateTime();
+                    String eventName = retrievedGames.getString(12);
+                    String description = retrievedGames.getString(13);
+                    game.addEvent(new GameEvent(eventID, gameID, gameDate, (int) ChronoUnit.MINUTES.between(eventDate, gameDate), eventName, description));
+                }
             }
         }
         catch (SQLException e){
