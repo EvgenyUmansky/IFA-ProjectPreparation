@@ -3,6 +3,7 @@ package service;
 import domain.*;
 import org.springframework.web.bind.annotation.*;
 import service.pojos.GameDTO;
+import service.pojos.GameEventDTO;
 
 import java.util.ArrayList;
 
@@ -27,9 +28,14 @@ public class ApiGameController {
     }
 
     @PostMapping("/games/{gameId}")
-    public GameDTO addFanSubscriptionToGame(@PathVariable String gameId, @RequestParam String gameMinute, @RequestParam String eventName, @RequestParam String description) throws Exception {
-        return controller.addGameEventToGame(gameId, gameMinute, eventName, description);
+    public GameDTO addGameEventToGame(@RequestBody GameEventDTO event) throws Exception {
+        return controller.addGameEventToGame(event.getGameId(), event.getMinutes(), event.getEvent(), event.getDescription());
     }
+
+//    @PostMapping("/games/{gameId}")
+//    public GameDTO addFanSubscriptionToGame(@PathVariable String gameId, @RequestParam String gameMinute, @RequestParam String eventName, @RequestParam String description) throws Exception {
+//        return controller.addGameEventToGame(gameId, gameMinute, eventName, description);
+//    }
 
     // This will update event by referee user in the following way: /games/{gameId}?eventId=<eventId>
     @PutMapping("/games/{gameId}")
