@@ -1,6 +1,7 @@
 package DataAccess;
 
 import domain.TeamOwner;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 
 public class OwnerDBAccess implements DBAccess<TeamOwner> {
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final OwnerDBAccess instance = new OwnerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -25,7 +26,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void save(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'save(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
+            logger.error("teamOwner object is null");
             return;
         }
 
@@ -34,13 +35,11 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
         String query = "insert into [Owners] values (?, ?)";
 
         try {
-            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, teamOwner.getUserName());
-            if(teamOwner.getTeam() != null) {
+            if (teamOwner.getTeam() != null) {
                 statement.setString(2, teamOwner.getTeam());
-            }
-            else {
+            } else {
                 statement.setString(2, null);
             }
 
@@ -48,7 +47,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException | NullPointerException e) {
-            System.out.println("Couldn't execute 'save(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -56,7 +55,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -65,7 +64,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void update(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'update(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
+            logger.error("Couldn't execute 'update(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
             return;
         }
 
@@ -81,11 +80,10 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             statement.setString(2, teamOwner.getUserName());
 
 
-
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'update(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -93,7 +91,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -101,7 +99,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void delete(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'delete(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
+            logger.error("Couldn't execute 'delete(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
             return;
         }
 
@@ -116,7 +114,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'delete(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -124,7 +122,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -149,7 +147,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             }
         } catch (SQLException e) {
             assert false;
-            System.out.println("Couldn't execute 'select(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -160,7 +158,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
         return teamOwner;

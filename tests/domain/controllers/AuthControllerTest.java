@@ -48,14 +48,27 @@ class AuthControllerTest {
         assertThrows(Exception.class, () -> authController.login(null, "Password_1"));
         assertThrows(Exception.class, () -> authController.login("UserName_1", "Error"));
 
-        userDTO = authController.login("UserName_1", "Password_1");
-        assertEquals("UserName_1", userDTO.getUsername());
-        assertEquals("Name_1", userDTO.getName());
-        assertEquals("Mail_1@gmail.com", userDTO.getMail());
+        userDTO = authController.login("Referee_1", "password_1");
+        assertEquals("Referee_1", userDTO.getUsername());
+        assertEquals("RefereeName_1", userDTO.getName());
+        assertEquals("testMail_1@gmail.com", userDTO.getMail());
 
         String[] roles = userDTO.getRoles();
-        assertEquals("TeamCoach", roles[0]);
-        assertEquals("TeamPlayer", roles[1]);
+        assertEquals("REFEREE", roles[0]);
+
+        String[] gameIds = userDTO.getGames();
+        assertEquals("1000", gameIds[0]);
+
+        userDTO = authController.login("Fan_3", "password_1");
+        assertEquals("Fan_3", userDTO.getUsername());
+        assertEquals("FanName_3", userDTO.getName());
+        assertEquals("testMail_3@gmail.com", userDTO.getMail());
+
+        roles = userDTO.getRoles();
+        assertEquals("FAN", roles[0]);
+
+        gameIds = userDTO.getGames();
+        assertEquals("1000", gameIds[0]);
     }
 
     @Test

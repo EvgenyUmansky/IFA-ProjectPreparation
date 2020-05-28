@@ -23,7 +23,6 @@ public class GameDBAccess implements DBAccess<Game>{
         return instance;
     }
 
-    //gameid hostteam guestteam field gamedate hostteamscore guestteamscore league season
 
     /**
      * Saves a game as a record in the matching table in the database

@@ -1,13 +1,14 @@
 package DataAccess;
 
 import domain.TeamPlayer;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashMap;
 
 
 public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final TeamPlayerDBAccess instance = new TeamPlayerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -22,7 +23,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
     @Override
     public void save(TeamPlayer teamPlayer) {
         if (teamPlayer == null) {
-            System.out.println("Couldn't execute 'save(TeamPlayer teamPlayer)' in TeamPlayerDBAccess: the teamPlayer is null");
+            logger.error("Couldn't execute 'save(TeamPlayer teamPlayer)' in TeamPlayerDBAccess: the teamPlayer is null");
             return;
         }
 
@@ -43,7 +44,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException | NullPointerException e) {
-            System.out.println("Couldn't execute 'save(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -51,7 +52,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -60,7 +61,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
     @Override
     public void update(TeamPlayer teamPlayer) {
         if (teamPlayer == null) {
-            System.out.println("Couldn't execute 'update(TeamPlayer teamPlayer)' in TeamPlayerDBAccess: the teamPlayer is null");
+            logger.error("Couldn't execute 'update(TeamPlayer teamPlayer)' in TeamPlayerDBAccess: the teamPlayer is null");
             return;
         }
 
@@ -82,7 +83,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'update(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -90,7 +91,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -98,7 +99,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
     @Override
     public void delete(TeamPlayer teamPlayer) {
         if (teamPlayer == null) {
-            System.out.println("Couldn't execute 'delete(TeamPlayer teamPlayer)' in TeamPlayerDBAccess: the teamPlayer is null");
+            logger.error("Couldn't execute 'delete(TeamPlayer teamPlayer)' in TeamPlayerDBAccess: the teamPlayer is null");
             return;
         }
 
@@ -113,7 +114,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'delete(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -121,7 +122,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -151,7 +152,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
             }
         } catch (SQLException e) {
             assert false;
-            System.out.println("Couldn't execute 'select(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -162,7 +163,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamPlayer teamPlayer)' in TeamPlayerDBAccess for " + teamPlayer.getUserName());
+                logger.error(e3.getMessage());
             }
         }
         return teamPlayer;
@@ -223,7 +224,7 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 players.put(username,new TeamPlayer(username, "",birthdate, position, squadnumber,name));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return players;
