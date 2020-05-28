@@ -1,6 +1,8 @@
 package DataAccess;
 
 import domain.TeamManager;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +11,7 @@ import java.util.HashMap;
 
 
 public class ManagerDBAccess implements DBAccess<TeamManager> {
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final ManagerDBAccess instance = new ManagerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -24,7 +26,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
     @Override
     public void save(TeamManager teamManager) {
         if (teamManager == null) {
-            System.out.println("Couldn't execute 'save(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
+            logger.error("Couldn't execute 'save(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
             return;
         }
 
@@ -33,7 +35,6 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
         String query = "insert into [Managers] values (?, ?)";
 
         try {
-            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, teamManager.getUserName());
             if(teamManager.getCurrentTeam() != null) {
@@ -47,7 +48,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException | NullPointerException e) {
-            System.out.println("Couldn't execute 'save(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -55,7 +56,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -64,7 +65,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
     @Override
     public void update(TeamManager teamManager) {
         if (teamManager == null) {
-            System.out.println("Couldn't execute 'update(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
+            logger.error("Couldn't execute 'save(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
             return;
         }
 
@@ -84,7 +85,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'update(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -100,7 +101,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
     @Override
     public void delete(TeamManager teamManager) {
         if (teamManager == null) {
-            System.out.println("Couldn't execute 'delete(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
+            logger.error("Couldn't execute 'save(TeamManager teamManager)' in ManagerDBAccess: the teamManager is null");
             return;
         }
 
@@ -115,7 +116,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'delete(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -123,7 +124,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -144,12 +145,11 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
             retrievedUser = statement.executeQuery();
 
             if (retrievedUser.next()) {
-
                 teamManager = new TeamManager(username, "");
             }
         } catch (SQLException e) {
             assert false;
-            System.out.println("Couldn't execute 'select(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -160,7 +160,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamManager teamManager)' in ManagerDBAccess for " + teamManager.getUserName());
+                logger.error(e3.getMessage());
             }
         }
         return teamManager;

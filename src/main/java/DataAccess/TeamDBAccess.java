@@ -1,6 +1,7 @@
 package DataAccess;
 
 import domain.Team;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TeamDBAccess implements DBAccess<Team>{
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final TeamDBAccess instance = new TeamDBAccess();
 
     public TeamDBAccess() {
@@ -23,7 +24,7 @@ public class TeamDBAccess implements DBAccess<Team>{
     public void save(Team team) {
         if(team == null){
             //TODO: change this to an alert
-            System.out.println("Couldn't execute 'save(Team team)' in TeamDBAccess: the team is null");
+            logger.error("Couldn't execute 'save(Team team)' in TeamDBAccess: the team is null");
             return;
         }
 
@@ -43,6 +44,7 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
         catch (SQLException e){
             //TODO: throw an exception and catch it outside and pop an alert
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
@@ -54,6 +56,7 @@ public class TeamDBAccess implements DBAccess<Team>{
             }
             catch (SQLException e3) {
                 //TODO: throw an exception and catch it outside and pop an alert
+                logger.error(e3.getMessage());
                 e3.printStackTrace();
             }
         }
@@ -63,7 +66,7 @@ public class TeamDBAccess implements DBAccess<Team>{
     public void update(Team team) {
         if(team == null){
             //TODO: change this to an alert
-            System.out.println("Couldn't execute 'update(Team team)' in TeamDBAccess: the team is null");
+            logger.error("Couldn't execute 'update(Team team)' in TeamDBAccess: the team is null");
             return;
         }
 
@@ -85,6 +88,7 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
         catch (SQLException e){
             //TODO: change this to an alert
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
@@ -96,6 +100,7 @@ public class TeamDBAccess implements DBAccess<Team>{
             }
             catch (SQLException e3) {
                 //TODO: change this to an alert
+                logger.error(e3.getMessage());
                 e3.printStackTrace();
             }
         }
@@ -105,7 +110,7 @@ public class TeamDBAccess implements DBAccess<Team>{
     public void delete(Team team) {
         if(team == null){
             //TODO: change this to an alert
-            System.out.println("Couldn't execute 'delete(Team team)' in TeamDBAccess: the team is null");
+            logger.error("Couldn't execute 'delete(Team team)' in TeamDBAccess: the team is null");
             return;
         }
 
@@ -122,6 +127,7 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
         catch(SQLException e) {
             //TODO: change this to an alert
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
@@ -133,6 +139,7 @@ public class TeamDBAccess implements DBAccess<Team>{
             }
             catch (SQLException e3) {
                 //TODO: change this to an alert
+                logger.error(e3.getMessage());
                 e3.printStackTrace();
             }
         }
@@ -162,6 +169,7 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
         catch (SQLException e){
             //TODO: change this to an alert
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
@@ -176,6 +184,7 @@ public class TeamDBAccess implements DBAccess<Team>{
             }
             catch (SQLException e3) {
                 //TODO: change this to an alert
+                logger.error(e3.getMessage());
                 e3.printStackTrace();
             }
         }

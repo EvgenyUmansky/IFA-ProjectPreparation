@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Notification {
 
-    static AtomicInteger nextId = new AtomicInteger();
-    private final int id;
+    // static AtomicInteger nextId = new AtomicInteger();
+    private int id;
 
     private String subject;
     private boolean isSeen;
@@ -16,12 +16,12 @@ public class Notification {
 
     /**
      * Constructor
-     * @param title the title of the message
      * @param subject the content of the message
      */
     public Notification(String subject) {
         // set id
-        this.id = nextId.incrementAndGet();
+        //this.id = nextId.incrementAndGet();
+        this.id = 0;
 
         this.subject = subject;
         this.isSeen = false;
@@ -80,6 +80,13 @@ public class Notification {
       */
     public int getId() {
         return id;
+    }
+
+    /**
+     *  set NotificationId
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

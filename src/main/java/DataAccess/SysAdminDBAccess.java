@@ -1,27 +1,29 @@
 package DataAccess;
+
 import domain.SystemAdministrator;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashMap;
 
 
 public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final SysAdminDBAccess instance = new SysAdminDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
-    private SysAdminDBAccess(){
+    private SysAdminDBAccess() {
 
     }
 
-    public static SysAdminDBAccess getInstance(){
+    public static SysAdminDBAccess getInstance() {
         return instance;
     }
 
     @Override
     public void save(SystemAdministrator systemAdministrator) {
-        if(systemAdministrator == null){
-            System.out.println("Couldn't execute 'save(SystemAdministrator systemAdministrator)' in SysAdminDBAccess: the systemAdministrator is null");
+        if (systemAdministrator == null) {
+            logger.error("Couldn't execute 'save(SystemAdministrator systemAdministrator)' in SysAdminDBAccess: the systemAdministrator is null");
             return;
         }
 
@@ -32,24 +34,21 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
         try {
             //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
-            statement.setString(1,systemAdministrator.getUserName());
+            statement.setString(1, systemAdministrator.getUserName());
 
 
             statement.executeUpdate();
             connection.commit();
-        }
-        catch (SQLException | NullPointerException e){
-            System.out.println("Couldn't execute 'save(SystemAdministrator systemAdministrator)' in SysAdminDBAccess for " + systemAdministrator.getUserName());
-        }
-        finally {
+        } catch (SQLException | NullPointerException e) {
+            logger.error(e.getMessage());
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
                 connection.close();
-            }
-            catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(SystemAdministrator systemAdministrator)' in UserDBAccess for " + systemAdministrator.getUserName());
+            } catch (SQLException e3) {
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -62,8 +61,8 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
 
     @Override
     public void delete(SystemAdministrator systemAdministrator) {
-        if(systemAdministrator == null){
-            System.out.println("Couldn't execute 'delete(SystemAdministrator systemAdministrator)' in SysAdminDBAccess: the systemAdministrator is null");
+        if (systemAdministrator == null) {
+            logger.error("Couldn't execute 'save(SystemAdministrator systemAdministrator)' in SysAdminDBAccess: the systemAdministrator is null");
             return;
         }
 
@@ -71,25 +70,22 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
 
-        try{
+        try {
             statement = connection.prepareStatement(query);
-            statement.setString(1,systemAdministrator.getUserName());
+            statement.setString(1, systemAdministrator.getUserName());
 
             statement.executeUpdate();
             connection.commit();
-        }
-        catch(SQLException e){
-            System.out.println("Couldn't execute 'delete(SystemAdministrator systemAdministrator)' in SysAdminDBAccess for " + systemAdministrator.getUserName());
-        }
-        finally {
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
                 }
                 connection.close();
-            }
-            catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(SystemAdministrator systemAdministrator)' in SysAdminDBAccess for " + systemAdministrator.getUserName());
+            } catch (SQLException e3) {
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -104,22 +100,18 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
         ResultSet retrievedUser = null;
         SystemAdministrator systemAdministrator = null;
 
-        try{
+        try {
             statement = connection.prepareStatement(query);
-            statement.setString(1,username);
+            statement.setString(1, username);
             retrievedUser = statement.executeQuery();
 
-            if(retrievedUser.next()){
-
-
+            if (retrievedUser.next()) {
                 systemAdministrator = new SystemAdministrator(username, "");
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             assert false;
-            System.out.println("Couldn't execute 'select(SystemAdministrator systemAdministrator)' in SysAdminDBAccess for " + systemAdministrator.getUserName());
-        }
-        finally {
+            logger.error(e.getMessage());
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
@@ -128,9 +120,8 @@ public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
                     retrievedUser.close();
                 }
                 connection.close();
-            }
-            catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(SystemAdministrator systemAdministrator)' in SysAdminDBAccess for " + systemAdministrator.getUserName());
+            } catch (SQLException e3) {
+                logger.error(e3.getMessage());
             }
         }
         return systemAdministrator;

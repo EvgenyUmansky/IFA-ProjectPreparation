@@ -2,6 +2,8 @@ package DataAccess;
 
 import domain.Field;
 import domain.League;
+import domain.OneGameSchedulingMethod;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,13 +12,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class LeagueDBAccess implements DBAccess<League>{
-
+    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
     private static final LeagueDBAccess instance = new LeagueDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
-    private LeagueDBAccess(){
-
-    }
+    private LeagueDBAccess(){ }
 
     public static LeagueDBAccess getInstance(){
         return instance;
@@ -24,17 +24,48 @@ public class LeagueDBAccess implements DBAccess<League>{
 
     @Override
     public void save(League league) {
+        if(league == null){
+            logger.error("league object is null");
+        }
 
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        String query = "insert into [Leagues] values (?, ?, ?, ?, ?, ?)";
+
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1,league.getLeagueName());
+            statement.setInt(2,league.getSeason());
+            statement.setBoolean(3,(league.getSchedulingMethod() instanceof OneGameSchedulingMethod)); //FIXME: change to !instanceof if test fails
+            statement.setInt(4,league.getRankingMethod().getWinPoints());
+            statement.setInt(5,league.getRankingMethod().getLosePoints());
+            statement.setInt(6,league.getRankingMethod().getDrawPoints());
+
+            statement.executeUpdate();
+            connection.commit();
+        }
+        catch (SQLException | NullPointerException e){
+            logger.error(e.getMessage());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                logger.error(e3.getMessage());
+            }
+        }
     }
 
     @Override
     public void update(League league) {
-
     }
 
     @Override
     public void delete(League league) {
-
     }
 
     @Override
@@ -108,7 +139,7 @@ public class LeagueDBAccess implements DBAccess<League>{
                 leagues.put(leagueName,new League(leagueName,season,scheduling,winPoints,drawPoints,losePoints));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return leagues;

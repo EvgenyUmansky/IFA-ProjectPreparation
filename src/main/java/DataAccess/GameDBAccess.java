@@ -23,7 +23,6 @@ public class GameDBAccess implements DBAccess<Game>{
         return instance;
     }
 
-    //gameid hostteam guestteam field gamedate hostteamscore guestteamscore league season
 
     /**
      * Saves a game as a record in the matching table in the database
@@ -43,7 +42,7 @@ public class GameDBAccess implements DBAccess<Game>{
 
         try{
             statement = connection.prepareStatement(query);
-            statement.setInt(1,game.getId());
+           // statement.setInt(1,game.getId());
             statement.setString(2,game.getHostTeam().getTeamName());
             statement.setString(3,game.getGuestTeam().getTeamName());
             statement.setString(4,game.getField().getFieldName());
@@ -192,6 +191,45 @@ public class GameDBAccess implements DBAccess<Game>{
             }
         }
         return gameIds;
+    }
+
+    public int selectGameId(String hostTeam, String guestTeam, String gameDate) {
+        String query = "select * from [Game] where HostTeam = ? and GuestTeam = ? and GameDate = ?";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedGame = null;
+        int gameId = 0;
+
+        try{
+            statement = connection.prepareStatement(query);
+            statement.setString(1, hostTeam);
+            statement.setString(2, guestTeam);
+            statement.setString(3, gameDate);
+            retrievedGame = statement.executeQuery();
+
+            if(retrievedGame.next()){
+                gameId = retrievedGame.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedGame != null) {
+                    retrievedGame.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return gameId;
     }
 
     /**
