@@ -2,6 +2,7 @@ package DataAccess;
 
 import domain.Field;
 import domain.League;
+import domain.OneGameSchedulingMethod;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +15,7 @@ public class LeagueDBAccess implements DBAccess<League>{
     private static final LeagueDBAccess instance = new LeagueDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
-    private LeagueDBAccess(){
-
-    }
+    private LeagueDBAccess(){ }
 
     public static LeagueDBAccess getInstance(){
         return instance;
@@ -24,7 +23,41 @@ public class LeagueDBAccess implements DBAccess<League>{
 
     @Override
     public void save(League league) {
+        if(league == null){
+            //TODO: logger
+        }
 
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        String query = "insert into [Leagues] values (?, ?, ?, ?, ?, ?)";
+
+        try {
+            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
+            statement = connection.prepareStatement(query);
+            statement.setString(1,league.getLeagueName());
+            statement.setInt(2,league.getSeason());
+            statement.setBoolean(3,(league.getSchedulingMethod() instanceof OneGameSchedulingMethod)); //FIXME: change to !instanceof if test fails
+            statement.setInt(4,league.getRankingMethod().getWinPoints());
+            statement.setInt(5,league.getRankingMethod().getLosePoints());
+            statement.setInt(6,league.getRankingMethod().getDrawPoints());
+
+            statement.executeUpdate();
+            connection.commit();
+        }
+        catch (SQLException | NullPointerException e){
+            //TODO: logger
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                //TODO: logger
+            }
+        }
     }
 
     @Override
