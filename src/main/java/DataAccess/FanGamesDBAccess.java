@@ -168,7 +168,7 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
     }
 
     public Pair<String, ArrayList<Fan>> selectFansOfGame(String gameId) {
-        String query = "select [FansInGames].GameId, [User].Username, [User].Mail, [User].IsMail " +
+        String query = "select [FansInGames].GameId, [User].Username, [User].[Name], [User].Mail, [User].IsMail " +
                 "from [FansInGames] " +
                 "join [User] on [FansInGames].username = [User].username " +
                 "where GameId = ?";
@@ -186,13 +186,14 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
 
             while(retrievedFans.next()){
                 String userName = retrievedFans.getString(2);
-                String mail = retrievedFans.getString(3);
-                boolean isMail = retrievedFans.getBoolean(4);
+                String name = retrievedFans.getString(3);
+                String mail = retrievedFans.getString(4);
+                boolean isMail = retrievedFans.getBoolean(5);
 
-                Fan referee = new Fan(userName, mail);
-                referee.setMail(isMail);
+                Fan fan = new Fan(userName, mail, name);
+                fan.setMail(isMail);
 
-                fans.add(referee);
+                fans.add(fan);
             }
         }
         catch (SQLException e){

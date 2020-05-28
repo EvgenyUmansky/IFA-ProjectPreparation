@@ -5,6 +5,7 @@ import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
+import service.pojos.GameEventDTO;
 
 import javax.security.auth.login.CredentialNotFoundException;
 import java.time.LocalDateTime;
@@ -18,27 +19,22 @@ public class GameController {
     private RefereeGamesDBAccess rgda = RefereeGamesDBAccess.getInstance();
     private FanGamesDBAccess fgda = FanGamesDBAccess.getInstance();
     private AlertDBAccess ada = AlertDBAccess.getInstance();
-    private DBAccess<GameEvent> geda = GameEventDBAccess.getInstance();
+    private GameEventDBAccess geda = GameEventDBAccess.getInstance();
     private GameDBAccess gda = GameDBAccess.getInstance();
-    private DBAccess<League> lda = LeagueDBAccess.getInstance();
     private NotificationDBAccess nda = NotificationDBAccess.getInstance();
 
-//    private DBAccess<User> uda = UserDBAccess.getInstance();
-//    private GameEventDBAccess gameEventDBAccess = GameEventDBAccess.getInstance();
+    public ArrayList<GameDTO> getGames() {
+        ArrayList<Game> rawGames = gda.selectAllGames();
+        ArrayList<GameDTO> games = new ArrayList<>();
 
-    public ArrayList<Game> getGames() {
-//        League mockLeage = new League("testLeage");
-//        mockLeage.addReferee(new Referee("refereeTest", "ref@gmail.com"));
-//        Team teamA = new Team("teamA",new Field("FieldA", 100), new TeamOwner("ownerA", "ownerA@gmail.com"));
-//        Team teamB = new Team("teamB",new Field("FieldB", 100), new TeamOwner("ownerB", "ownerB@gmail.com"));
-//        Game mockGame = new Game(mockLeage, teamA, teamB, teamA.getStadium(), "2016-11-09 11:44", new ArrayList<Referee>(mockLeage.getReferees()));
-//        // TODO: return all games
-//        return new ArrayList<Game>(Arrays.asList(mockGame));
+        for(Game game : rawGames){
+            games.add(getGame(String.valueOf(game.getId())));
+        }
 
-        return null;
+        return games;
     }
 
-    public Game getGame(String gameId){
+    public GameDTO getGame(String gameId){
         Game game = gda.select(gameId);
 
         // get referees to game from DB and save notification for them
@@ -52,7 +48,20 @@ public class GameController {
         for(Fan fan : fans){
             game.addFanToAlerts(fan);
         }
-        return game;
+
+        // get events of the game
+        game.addEvents(geda.selectByGameID(gameId));
+
+        return  new GameDTO(
+                game.getId(),
+                game.getHostTeam().getTeamName(),
+                game.getGuestTeam().getTeamName(),
+                game.getField(),
+                game.getGameDate(),
+                game.getReferees(),
+                new ArrayList<>(convertEventsToEventsDTO(game, new ArrayList<>(game.getGameEvents().values()))),
+                game.getGameScore()
+        );
     }
 
     // ========================= Fan functions ========================
@@ -72,6 +81,17 @@ public class GameController {
 
     // ========================= Referee functions ========================
     // ====================================================================
+    private GameEventDTO convertEventToEventDTO(Game game, GameEvent event) {
+        return new GameEventDTO(event.getDateTime().toString(),Integer.toString(game.getId()), game.getHostTeam().getTeamName() + " - " + game.getGuestTeam().getTeamName(), Integer.toString(event.getGameMinutes()), event.getEventName().name(), event.getDescription());
+    }
+
+    private ArrayList<GameEventDTO> convertEventsToEventsDTO(Game game, ArrayList<GameEvent> events) {
+        ArrayList<GameEventDTO> dtoEvents = new ArrayList<>();
+        for (GameEvent event : events) {
+            dtoEvents.add(convertEventToEventDTO(game, event));
+        }
+        return dtoEvents;
+    }
 
     /**
      * UC 10.2
@@ -81,7 +101,14 @@ public class GameController {
      */
     public ArrayList<GameDTO> getRefereeGames(String username) {
         Pair<String, ArrayList<Game>> retrievedGamesReferee = rgda.select(username);
-        ArrayList<Game> games = retrievedGamesReferee.getValue();
+        ArrayList<Game> rawGames = retrievedGamesReferee.getValue();
+        ArrayList<Game> games = new ArrayList<>();
+
+        for(Game game : rawGames){
+            ArrayList<Referee> referees = rgda.selectRefereesOfGame(String.valueOf(game.getId())).getValue();
+            game.setReferees(referees);
+            games.add(game);
+        }
 
         ArrayList<GameDTO> gamesDTO = new ArrayList<>();
 
@@ -93,7 +120,7 @@ public class GameController {
                     game.getField(),
                     game.getGameDate(),
                     game.getReferees(),
-                    new ArrayList<>(game.getGameEvents().values()),
+                    new ArrayList<>(convertEventsToEventsDTO(game, new ArrayList<>(game.getGameEvents().values()))),
                     game.getGameScore()
             ));
         }
@@ -121,7 +148,7 @@ public class GameController {
 
     ////// Add event to game and save notification of the event to DB for each game subscriber //////
         Game game = gda.select(gameId);
-        Notification notification = new Notification("New event: " + game.getHostTeam().getTeamName() + " vs " + game.getGuestTeam().getTeamName() + ": " + gameEvent.toString());
+        Notification notification = new Notification(eventDate + ":" + '\n' + eventName + " in " + game.getHostTeam().getTeamName() + " - " + game.getGuestTeam().getTeamName() + " game in minute " + minute + ": " + description);
         nda.save(notification);
         notification.setId(nda.selectNotificationId(notification.getSubject()));
 
@@ -139,6 +166,9 @@ public class GameController {
             ada.save(new Pair<>(fan.getUserName(), new ArrayList<Notification>(){{add(notification);}}));
         }
 
+        // get events of the game
+        game.addEvents(geda.selectByGameID(gameId));
+
         // add event to game and send mails
         game.addEvent(gameEvent);
         logger.info(eventName + ": event was added to game " + gameId);
@@ -150,7 +180,7 @@ public class GameController {
                 game.getField(),
                 game.getGameDate(),
                 game.getReferees(),
-                new ArrayList<>(game.getGameEvents().values()),
+                new ArrayList<>(convertEventsToEventsDTO(game, new ArrayList<>(game.getGameEvents().values()))),
                 game.getGameScore()
         );
     }

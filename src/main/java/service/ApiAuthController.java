@@ -9,6 +9,7 @@ import service.pojos.UserDTO;
 
 import java.util.HashMap;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiAuthController {
     private final domain.controllers.AuthController controller;
@@ -29,7 +30,7 @@ public class ApiAuthController {
 
     @PostMapping("/logout")
     // This will log out in the following way: /users?username=<username>
-    public void logout(@RequestParam("username") String userName) throws Exception {
+    public void logout(@RequestParam("username") String userName) {
         controller.logout(userName);
     }
 
