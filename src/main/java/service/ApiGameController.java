@@ -41,7 +41,7 @@ public class ApiGameController {
         return controller.addGameEventToGame(event.getGameId(), event.getMinutes(), event.getEvent(), event.getDescription());
     }
 
-    @PostMapping("/games/{gameId}/{userName}")
+    @PostMapping("/games/follow")
     public void addFanSubscriptionToGame(@RequestBody FollowDTO follow) {
         controller.addFanSubscriptionToGame(follow.getGameId(), follow.getUserName());
     }
