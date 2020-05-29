@@ -1,5 +1,6 @@
 package DataAccess;
 
+import domain.League;
 import domain.Team;
 import org.apache.log4j.Logger;
 
@@ -219,6 +220,65 @@ public class TeamDBAccess implements DBAccess<Team>{
      */
     @Override
     public HashMap<String, Team> conditionedSelect(String[] conditions) {
-        return null;
+        String query;
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedTeams = null;
+        HashMap<String, Team> teams = new HashMap<>();
+
+        if(conditions.length == 0){
+            query = "select * from [Teams]";
+        }
+        else {
+            query = "select * from [Teams] where";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "teamname":
+                        case "fieldname":
+                        case "email":
+                        case "status":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    i += 2;
+                }
+            }
+
+            retrievedTeams = statement.executeQuery();
+
+
+            while(retrievedTeams.next()){
+                String teamName = retrievedTeams.getString(1);
+                String fieldName = retrievedTeams.getString(2);
+                String email = retrievedTeams.getString(3);
+                String status = retrievedTeams.getString(4);
+
+
+                teams.put(teamName,new Team(teamName,fieldName,email,status));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return teams;
     }
 }
