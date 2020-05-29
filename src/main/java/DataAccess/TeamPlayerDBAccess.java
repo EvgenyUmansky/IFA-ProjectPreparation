@@ -172,52 +172,62 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
 
     @Override
     public HashMap<String, TeamPlayer> conditionedSelect(String[] conditions) {
-        String query = "select * from [Players] where ";
+        String query;
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement;
         ResultSet retrievedPlayers;
         HashMap<String, TeamPlayer> players = new HashMap<>();
 
-        for (int i = 0; i < conditions.length; i++) {
-            if (i % 2 == 0) {
-                query += " " + conditions[i];
-            } else {
-                if(conditions[i].equals("null")){
-                    query += " is null";
-                    continue;
+        if(conditions.length == 0){
+            query = "select * from [Players]";
+        }
+
+
+        else {
+            query = "select * from [Players] where ";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    if (conditions[i].equals("null")) {
+                        query += " is null";
+                        continue;
+                    }
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
                 }
-                query += " = ?";
-                if (i < conditions.length - 1)
-                    query += ",";
             }
         }
         try {
             statement = connection.prepareStatement(query);
-            int i = 0;
-            while (i < conditions.length) {
-                switch (conditions[i].toLowerCase()) {
-                    case "username":
-                    case "teamname":
-                        if(!conditions[i + 1].equals("null")) {
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "username":
+                        case "teamname":
+                            if (!conditions[i + 1].equals("null")) {
+                                statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            }
+                            break;
+                        case "position":
+                        case "squadnumber":
+                        case "name":
                             statement.setString((int) (i / 2) + 1, conditions[i + 1]);
-                        }
-                        break;
-                    case "position":
-                    case "squadnumber":
-                    case "name":
-                        statement.setString((int) (i / 2) + 1, conditions[i + 1]);
-                        break;
+                            break;
 
-                    case "birthdate":
-                        statement.setDate((int) (i / 2) + 1, Date.valueOf(conditions[i + 1]));
-                        break;
+                        case "birthdate":
+                            statement.setDate((int) (i / 2) + 1, Date.valueOf(conditions[i + 1]));
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+                    i += 2;
                 }
-                i += 2;
             }
-
             retrievedPlayers = statement.executeQuery();
 
 
@@ -229,7 +239,10 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 String squadnumber =  retrievedPlayers.getString(5);
                 String name =  retrievedPlayers.getString(6);
 
-                players.put(username,new TeamPlayer(username, "",birthdate, position, squadnumber,name));
+
+                TeamPlayer teamPlayer = new TeamPlayer(username, "",birthdate, position, squadnumber,name);
+                teamPlayer.setCurrentTeam(teamname);
+                players.put(username,teamPlayer);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
