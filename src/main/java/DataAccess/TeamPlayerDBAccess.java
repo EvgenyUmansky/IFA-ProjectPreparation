@@ -172,16 +172,20 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
 
     @Override
     public HashMap<String, TeamPlayer> conditionedSelect(String[] conditions) {
-        String query = "select * from [Players] where";
+        String query = "select * from [Players] where ";
         Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedPlayers = null;
+        PreparedStatement statement;
+        ResultSet retrievedPlayers;
         HashMap<String, TeamPlayer> players = new HashMap<>();
 
         for (int i = 0; i < conditions.length; i++) {
             if (i % 2 == 0) {
                 query += " " + conditions[i];
             } else {
+                if(conditions[i].equals("null")){
+                    query += " is null";
+                    continue;
+                }
                 query += " = ?";
                 if (i < conditions.length - 1)
                     query += ",";
@@ -194,6 +198,10 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 switch (conditions[i].toLowerCase()) {
                     case "username":
                     case "teamname":
+                        if(!conditions[i + 1].equals("null")) {
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                        }
+                        break;
                     case "position":
                     case "squadnumber":
                     case "name":

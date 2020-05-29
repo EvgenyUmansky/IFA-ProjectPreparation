@@ -1,5 +1,6 @@
 package DataAccess;
 
+import domain.League;
 import domain.Team;
 import org.apache.log4j.Logger;
 
@@ -10,7 +11,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TeamDBAccess implements DBAccess<Team>{
+
     static Logger logger = Logger.getLogger(TeamDBAccess.class.getName());
+
+    /**
+     * Singleton
+     */
     private static final TeamDBAccess instance = new TeamDBAccess();
 
     public TeamDBAccess() {
@@ -20,6 +26,10 @@ public class TeamDBAccess implements DBAccess<Team>{
         return instance;
     }
 
+    /**
+     * Saves an object as a record in the matching table in the database
+     * @param team the object
+     */
     @Override
     public void save(Team team) {
         if(team == null){
@@ -62,6 +72,10 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
     }
 
+    /**
+     * Updates the object's matching record in the database
+     * @param team the object
+     */
     @Override
     public void update(Team team) {
         if(team == null){
@@ -106,6 +120,10 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
     }
 
+    /**
+     * Deletes the object's matching record from the database
+     * @param team the object
+     */
     @Override
     public void delete(Team team) {
         if(team == null){
@@ -146,6 +164,10 @@ public class TeamDBAccess implements DBAccess<Team>{
 
     }
 
+    /**
+     * Retrieves an object that matches the given id from the database
+     * @param teamName the id of the object
+     */
     @Override
     public Team select(String teamName) {
         String query = "select * from Teams where TeamName = ?";
@@ -191,8 +213,72 @@ public class TeamDBAccess implements DBAccess<Team>{
         return team;
     }
 
+    /**
+     * Retrieves one or more objects that fit the given conditions in the database
+     * @param conditions the wanted values of the fields in the table
+     * @return the matching objects
+     */
     @Override
     public HashMap<String, Team> conditionedSelect(String[] conditions) {
-        return null;
+        String query;
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedTeams = null;
+        HashMap<String, Team> teams = new HashMap<>();
+
+        if(conditions.length == 0){
+            query = "select * from [Teams]";
+        }
+        else {
+            query = "select * from [Teams] where";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "teamname":
+                        case "fieldname":
+                        case "email":
+                        case "status":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    i += 2;
+                }
+            }
+
+            retrievedTeams = statement.executeQuery();
+
+
+            while(retrievedTeams.next()){
+                String teamName = retrievedTeams.getString(1);
+                String fieldName = retrievedTeams.getString(2);
+                String email = retrievedTeams.getString(3);
+                String status = retrievedTeams.getString(4);
+
+
+                teams.put(teamName,new Team(teamName,fieldName,email,status));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return teams;
     }
 }

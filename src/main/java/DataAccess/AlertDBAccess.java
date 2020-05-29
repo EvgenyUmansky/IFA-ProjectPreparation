@@ -229,4 +229,8 @@ public class AlertDBAccess implements DBAccess<Pair<String, ArrayList<Notificati
     public HashMap<String, Pair<String, ArrayList<Notification>>> conditionedSelect(String[] conditions) {
         return null;
     }
+
+
+
+
 }

@@ -11,6 +11,7 @@ import service.pojos.TeamDTO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class LeagueController {
     static Logger logger = Logger.getLogger(LeagueController.class.getName());
@@ -19,14 +20,14 @@ public class LeagueController {
     private DBAccess<ArrayList<League>> lsda = LeagueSeasonDBAccess.getInstance();
 
     public ArrayList<League> getLeagues() {
-        // TODO: get leagues from DB
-       /* League league1 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(), "aleph");
-        League league2 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"bet");
-        League league3 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"gimel");*/
-//        League league4 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"dalet");
-//        League league5 = new League(2020, new OneGameSchedulingMethod(), new RankingMethod(),"hea");
-
         HashMap<String, League> allLeagues = lda.conditionedSelect(new String[0]);
+
+        ArrayList<League> leagueArray = new ArrayList<>(allLeagues.values());
+
+        for(League league : leagueArray){
+
+        }
+
         return new ArrayList<>(allLeagues.values());
     }
 

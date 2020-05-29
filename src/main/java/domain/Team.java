@@ -247,6 +247,42 @@ public class Team {
     //========================= Functionality ========================//
 
 
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public void setStadium(Field stadium) {
+        this.stadium = stadium;
+    }
+
+    public void setFields(HashMap<String, Field> fields) {
+        this.fields = fields;
+    }
+
+    public void setPlayers(HashMap<String, TeamPlayer> players) {
+        this.players = players;
+    }
+
+    public void setCoaches(HashMap<String, TeamCoach> coaches) {
+        this.coaches = coaches;
+    }
+
+    public void setManagers(HashMap<String, TeamManager> managers) {
+        this.managers = managers;
+    }
+
+    public void setOwners(HashMap<String, TeamOwner> owners) {
+        this.owners = owners;
+    }
+
+    public void setTeamPage(PersonalPage teamPage) {
+        this.teamPage = teamPage;
+    }
+
+    public void setAlert(Alert alert) {
+        this.alert = alert;
+    }
+
     /**
      * UC 6.1
      * Adds a player to the team
@@ -359,7 +395,7 @@ public class Team {
      *
      * @param owner the new owner
      */
-    protected void addOwner(TeamOwner owner) {
+    public void addOwner(TeamOwner owner) {
         if (owner.getTeam() == null) {
             owner.setTeam(teamName);
         }

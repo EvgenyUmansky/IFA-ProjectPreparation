@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ApiGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ApiGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ApiLeagueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ApiLeagueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/ApiTeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/ApiTeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataAccess/UserDBAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/controllers/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/PlayerController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,91 +19,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiAuthController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-              <folding>
-                <element signature="e#417#418#0" expanded="true" />
-                <element signature="e#485#486#0" expanded="true" />
-                <element signature="e#567#568#0" expanded="true" />
-                <element signature="e#620#621#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="179" selection-start-line="179" selection-end-line="179" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/domain/Alert.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiTeamController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="70">
-              <caret line="54" column="82" selection-start-line="54" selection-start-column="82" selection-end-line="54" selection-end-column="82" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiGameController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiLeagueController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/LeagueController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,52 +40,6 @@
   </component>
   <component name="ProjectId" id="1al8qGY8YNKHcht1UxtEbx2VOkE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IFA-ProjectPreparation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IFA-ProjectPreparation" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -189,7 +57,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590758228665" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1590678926540" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
@@ -223,18 +91,6 @@
       <recent name="C:\Users\EvgeniyU\Desktop\ThirdYear\Semestr_2\Project Preparation\IFA-ProjectPreparation\src" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Spring Boot.SpringRestApiApplication">
     <configuration name="AuthControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
@@ -246,6 +102,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="domain.controllers" />
       <option name="MAIN_CLASS_NAME" value="domain.controllers.AuthControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -276,6 +133,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="domain.controllers" />
       <option name="MAIN_CLASS_NAME" value="domain.controllers.GameControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -369,7 +227,7 @@
       <workItem from="1590396916119" duration="10604000" />
       <workItem from="1590590903313" duration="6813000" />
       <workItem from="1590598664228" duration="7058000" />
-      <workItem from="1590680564384" duration="23420000" />
+      <workItem from="1590680564384" duration="37090000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -595,54 +453,29 @@
       <option name="project" value="LOCAL" />
       <updated>1590696155411</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="GameController: fixed architecture">
+      <created>1590752008144</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1590752008144</updated>
+    </task>
+    <task id="LOCAL-00034" summary="tests for DB">
+      <created>1590763217908</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1590763217908</updated>
+    </task>
+    <task id="LOCAL-00035" summary="DB Access Leagues Referees">
+      <created>1590766809798</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1590766809798</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="GameControllerTest_addGameEventToGame - 2020.05.29 at 15h 59m 39s.xml">
-      <configuration name="GameControllerTest.addGameEventToGame" configurationId="JUnit" />
-    </history-entry>
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1081000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18986385" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27659574" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3285968" />
-      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32827735" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.32733223" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" weight="0.32955465" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Bean Validation" order="9" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
@@ -662,14 +495,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -688,11 +514,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Separated controllers in domain" />
-    <MESSAGE value="Controller service: Objects to Strings" />
-    <MESSAGE value="service controllers for Spring: Game, PersonalPage, Player, Team" />
     <MESSAGE value="service controllers for Spring: Fan, League, Coach" />
     <MESSAGE value="solved problem with test libraries" />
     <MESSAGE value="UserDBAccess as example" />
@@ -715,119 +539,164 @@
     <MESSAGE value="getGame works" />
     <MESSAGE value="id fixed&#10;tests for GameController" />
     <MESSAGE value="GameController: fixed db accesses, getGame(), getGames()" />
-    <option name="LAST_COMMIT_MESSAGE" value="GameController: fixed db accesses, getGame(), getGames()" />
+    <MESSAGE value="GameController: fixed architecture" />
+    <MESSAGE value="tests for DB" />
+    <MESSAGE value="DB Access Leagues Referees" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB Access Leagues Referees" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="726" y="63" key="#Auto_Import" />
-    <state x="726" y="63" key="#Auto_Import/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="563" y="139" key="#FieldTest" />
-    <state x="563" y="139" key="#FieldTest/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="440" y="94" key="#Project_Structure" />
-    <state x="440" y="94" key="#Project_Structure/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2272" y="2" key="#Project_Structure/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state x="349" y="361" key="#SQL_Dialects" />
-    <state x="349" y="361" key="#SQL_Dialects/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" />
-    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" />
-    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="690" y="296" key="#com.intellij.ide.util.PackageChooserDialog" />
-    <state x="690" y="296" key="#com.intellij.ide.util.PackageChooserDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" />
-    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="522" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" />
-    <state x="522" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="743" y="389" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" />
-    <state x="743" y="389" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" />
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="92" y="92" width="1736" height="856" key="AVDManager" />
-    <state x="92" y="92" width="1736" height="856" key="AVDManager/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="427" y="113" key="CommitChangelistDialog2" />
-    <state x="427" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" />
-    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2262" y="2" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="675" height="517" key="DebuggerActiveHint" />
-    <state width="675" height="517" key="DebuggerActiveHint/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" />
-    <state x="74" y="73" width="1389" height="679" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2511" y="222" key="FileChooserDialogImpl" />
-    <state x="739" y="275" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2511" y="222" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom" />
-    <state width="1877" height="261" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.0.center" />
-    <state width="1877" height="261" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.0.left" />
-    <state width="1877" height="261" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.0.right" />
-    <state width="1877" height="261" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.1.bottom" />
-    <state width="1877" height="261" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.1.center" />
-    <state width="1877" height="261" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.1.left" />
-    <state width="1877" height="261" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="1877" height="261" key="GridCell.Tab.1.right" />
-    <state width="1877" height="261" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state width="1493" height="330" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state x="0" y="0" key="MergeDialog" />
-    <state x="0" y="0" key="MergeDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="0" y="0" key="MergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog" />
-    <state x="481" y="129" width="683" height="523" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2272" y="2" key="SettingsEditor" />
-    <state x="440" y="94" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2272" y="2" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state x="116" y="117" width="1688" height="806" key="ShowDiffWithBranchDialog" />
-    <state x="93" y="93" width="1350" height="638" key="ShowDiffWithBranchDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="116" y="117" width="1688" height="806" key="ShowDiffWithBranchDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" />
-    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2362" y="204" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state width="968" height="520" key="XDebugger.FullValuePopup" />
-    <state width="968" height="520" key="XDebugger.FullValuePopup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog" />
-    <state x="74" y="73" width="1389" height="679" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1536.824@0.0.1536.824" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" />
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="1050" y="450" width="591" height="214" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" />
-    <state x="1050" y="450" width="591" height="214" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2277" y="343" width="540" height="229" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state x="337" y="14" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" />
-    <state x="337" y="14" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" />
-    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="731" y="330" key="com.intellij.testIntegration.createTest.CreateTestDialog" />
-    <state x="731" y="330" key="com.intellij.testIntegration.createTest.CreateTestDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="690" y="281" key="extract.method.dialog" />
-    <state x="690" y="281" key="extract.method.dialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="590" y="233" key="git4idea.branch.GitSmartOperationDialog" />
-    <state x="590" y="233" key="git4idea.branch.GitSmartOperationDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2194" y="147" key="new project wizard" />
-    <state x="342" y="181" key="new project wizard/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
-    <state x="2194" y="147" key="new project wizard/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" />
+    <state x="726" y="63" key="#Auto_Import" timestamp="1590679782372" />
+    <state x="726" y="63" key="#Auto_Import/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782372" />
+    <state x="563" y="139" key="#FieldTest" timestamp="1590679782373" />
+    <state x="563" y="139" key="#FieldTest/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
+    <state x="440" y="94" key="#Project_Structure" timestamp="1590679782373" />
+    <state x="440" y="94" key="#Project_Structure/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
+    <state x="2272" y="2" key="#Project_Structure/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782373" />
+    <state x="349" y="361" key="#SQL_Dialects" timestamp="1590679782373" />
+    <state x="349" y="361" key="#SQL_Dialects/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590679782373" />
+    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1590679782373" />
+    <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
+    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser" timestamp="1590765970338">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1590679782373" />
+    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590765970338" />
+    <state x="690" y="296" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1590682505048">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="296" key="#com.intellij.ide.util.PackageChooserDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590682505048" />
+    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1590679782373" />
+    <state x="618" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782373" />
+    <state x="522" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1590679782373" />
+    <state x="522" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
+    <state x="743" y="389" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1590681440066">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="743" y="389" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590681440066" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1590679782374" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590679782374" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="AVDManager/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1590766808749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="427" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590766808749" />
+    <state x="2262" y="2" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
+    <state width="675" height="517" key="DebuggerActiveHint" timestamp="1590771909152">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="675" height="517" key="DebuggerActiveHint/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590771909152" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1590746381872">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="74" y="73" width="1389" height="679" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590746381872" />
+    <state x="2511" y="222" key="FileChooserDialogImpl" timestamp="1590679782374" />
+    <state x="739" y="275" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="2511" y="222" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
+    <state width="1877" height="331" key="GridCell.Tab.0.bottom" timestamp="1590772139658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139658" />
+    <state width="1493" height="330" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
+    <state width="1877" height="331" key="GridCell.Tab.0.center" timestamp="1590772139653">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139653" />
+    <state width="1493" height="330" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
+    <state width="1877" height="331" key="GridCell.Tab.0.left" timestamp="1590772139653">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139653" />
+    <state width="1493" height="330" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
+    <state width="1877" height="331" key="GridCell.Tab.0.right" timestamp="1590772139658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139658" />
+    <state width="1493" height="330" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
+    <state width="1877" height="331" key="GridCell.Tab.1.bottom" timestamp="1590772139658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139658" />
+    <state width="1493" height="330" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458588" />
+    <state width="1877" height="331" key="GridCell.Tab.1.center" timestamp="1590772139658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139658" />
+    <state width="1493" height="330" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458588" />
+    <state width="1877" height="331" key="GridCell.Tab.1.left" timestamp="1590772139658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139658" />
+    <state width="1493" height="330" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
+    <state width="1877" height="331" key="GridCell.Tab.1.right" timestamp="1590772139658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="331" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590772139658" />
+    <state width="1493" height="330" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458588" />
+    <state x="0" y="0" key="MergeDialog" timestamp="1590679782374" />
+    <state x="0" y="0" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="0" y="0" key="MergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog" timestamp="1590766833557">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="481" y="129" width="683" height="523" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590766833557" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1590757502704">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590757502704" />
+    <state x="2272" y="2" key="SettingsEditor/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590699014992" />
+    <state x="116" y="117" width="1688" height="806" key="ShowDiffWithBranchDialog" timestamp="1590748196293">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="ShowDiffWithBranchDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="116" y="117" width="1688" height="806" key="ShowDiffWithBranchDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590748196293" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590767036264">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590767036264" />
+    <state x="2362" y="204" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
+    <state width="968" height="520" key="XDebugger.FullValuePopup" timestamp="1590679782374" />
+    <state width="968" height="520" key="XDebugger.FullValuePopup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1590679782374" />
+    <state x="74" y="73" width="1389" height="679" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.dvcs.ui.CompareBranchesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1590679782374" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="1050" y="450" width="591" height="214" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1590679782374" />
+    <state x="1050" y="450" width="591" height="214" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="2277" y="343" width="540" height="229" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
+    <state x="337" y="14" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1590679782374" />
+    <state x="337" y="14" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590682484245">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590682484245" />
+    <state x="731" y="330" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1590763088532">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="731" y="330" key="com.intellij.testIntegration.createTest.CreateTestDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590763088532" />
+    <state x="690" y="281" key="extract.method.dialog" timestamp="1590679782374" />
+    <state x="690" y="281" key="extract.method.dialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="590" y="233" key="git4idea.branch.GitSmartOperationDialog" timestamp="1590679782374" />
+    <state x="590" y="233" key="git4idea.branch.GitSmartOperationDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="2194" y="147" key="new project wizard" timestamp="1590679782374" />
+    <state x="342" y="181" key="new project wizard/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
+    <state x="2194" y="147" key="new project wizard/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590750317506">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590750317506" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -835,92 +704,87 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/domain/TeamOwnerTest.java</url>
           <line>135</line>
-          <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>801</line>
-          <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>187</line>
-          <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>636</line>
-          <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/service/ControllerTest.java</url>
           <line>414</line>
-          <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/domain/TeamCoachTest.java</url>
           <line>16</line>
-          <properties />
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/TeamDBAccessTest.java</url>
           <line>98</line>
-          <properties />
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/TeamDBAccessTest.java</url>
           <line>209</line>
-          <properties />
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/TeamPlayerDBAccessTest.java</url>
           <line>93</line>
-          <properties />
           <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/UserRolesDBAccessTest.java</url>
           <line>180</line>
-          <properties />
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/GameEventDBAccessTest.java</url>
           <line>78</line>
-          <properties />
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/GameDBAccessTest.java</url>
           <line>80</line>
-          <properties />
           <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/DataAccess/RefereeGamesDBAccessTest.java</url>
-          <line>142</line>
-          <properties />
-          <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/DataAccess/AlertDBAccessTest.java</url>
           <line>141</line>
-          <properties />
           <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java</url>
+          <line>157</line>
+          <option name="timeStamp" value="136" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tests/domain/controllers/GameControllerTest.java</url>
           <line>59</line>
-          <properties />
-          <option name="timeStamp" value="132" />
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/service/ApiPlayerController.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/DataAccess/TeamPlayerDBAccess.java</url>
+          <line>197</line>
+          <option name="timeStamp" value="140" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -963,41 +827,5 @@
     <SUITE FILE_PATH="coverage/IFA_ProjectPreparation$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1590668279184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>domain.controllers.*</FILTER>
     </SUITE>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiLeagueController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/service/ApiAuthController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="e#417#418#0" expanded="true" />
-            <element signature="e#485#486#0" expanded="true" />
-            <element signature="e#567#568#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/domain/Alert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

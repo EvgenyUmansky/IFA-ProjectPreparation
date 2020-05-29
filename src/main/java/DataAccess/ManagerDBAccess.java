@@ -1,6 +1,7 @@
 package DataAccess;
 
 import domain.TeamManager;
+import domain.TeamOwner;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -168,7 +169,63 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
 
     @Override
     public HashMap<String, TeamManager> conditionedSelect(String[] conditions) {
-        return null;
+
+        String query;
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedManagers = null;
+        HashMap<String, TeamManager> teamManagers = new HashMap<>();
+
+        if(conditions.length == 0){
+            query = "select * from [Managers]";
+        }
+        else {
+            query = "select * from [Managers] where";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "username":
+                        case "teamname":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    i += 2;
+                }
+            }
+
+            retrievedManagers = statement.executeQuery();
+
+
+            while(retrievedManagers.next()){
+                String userName = retrievedManagers.getString(1);
+                String teamName = retrievedManagers.getString(2);
+
+
+                teamManagers.put(userName,new TeamManager(userName,"",teamName));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return teamManagers;
     }
 
 
