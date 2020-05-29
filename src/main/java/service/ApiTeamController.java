@@ -6,7 +6,7 @@ import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiTeamController {
 
