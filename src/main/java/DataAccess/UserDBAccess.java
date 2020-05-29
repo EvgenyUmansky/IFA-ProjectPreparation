@@ -187,44 +187,55 @@ public class UserDBAccess implements DBAccess<User> {
 
     @Override
     public HashMap<String, User> conditionedSelect(String[] conditions) {
-        String query = "select * from [User] where ";
+        String query;
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUsers = null;
         HashMap<String, User> users = new HashMap<>();
 
-        for (int i = 0; i < conditions.length; i++) {
-            if (i % 2 == 0) {
-                query += " " + conditions[i];
-            } else {
-                query += " = ?";
-                if (i < conditions.length - 1)
-                    query += ",";
+
+        if(conditions.length == 0){
+            query = "select * from [User]";
+        }
+
+        else {
+            query = "select * from [User] where ";
+
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
             }
         }
         try {
             statement = connection.prepareStatement(query);
-            int i = 0;
-            while (i < conditions.length) {
-                switch (conditions[i].toLowerCase()) {
-                    case "username":
-                    case "name":
-                    case "mail":
-                    case "password":
-                        statement.setString((int) (i / 2) + 1, conditions[i + 1]);
-                        break;
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "username":
+                        case "name":
+                        case "mail":
+                        case "password":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
 
-                    case "ismail":
-                    case "isclosed":
-                        statement.setBoolean((int) (i / 2) + 1, conditions[i + 1].equals("true"));
-                        break;
+                        case "ismail":
+                        case "isclosed":
+                            statement.setBoolean((int) (i / 2) + 1, conditions[i + 1].equals("true"));
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+                    i += 2;
                 }
-                i += 2;
             }
-
             retrievedUsers = statement.executeQuery();
 
 

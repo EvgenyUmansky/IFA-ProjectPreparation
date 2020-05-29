@@ -34,7 +34,7 @@ class UserRolesDBAccessTest {
         connection = DBConnector.getConnection();
 
         // insert the user to DB
-        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_1', 'password_1', 'testMail_1@gmail.com', 'false', 'false')");
+        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_11', 'name_11', 'password_11', 'testMail_11@gmail.com', 'false', 'false')");
         preparedStatement.executeUpdate();
         connection.commit();
     }
@@ -42,7 +42,7 @@ class UserRolesDBAccessTest {
     @AfterEach
     public void deleteAfterTest() throws SQLException {
         // delete the user from DB if exists
-        preparedStatement = connection.prepareStatement("delete from [User] where username = 'UserName_1'");
+        preparedStatement = connection.prepareStatement("delete from [User] where username = 'UserName_11'");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -217,6 +217,7 @@ class UserRolesDBAccessTest {
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
 
     @Test
     void conditionedSelect() {
