@@ -1,7 +1,6 @@
 package DataAccess;
 
 import domain.TeamManager;
-import domain.TeamOwner;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -218,8 +217,9 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
                 String userName = retrievedManagers.getString(1);
                 String teamName = retrievedManagers.getString(2);
 
-
-                teamManagers.put(userName,new TeamManager(userName,"",teamName));
+                TeamManager teamManager = new TeamManager(userName, "", "");
+                teamManager.setCurrentTeam(teamName);
+                teamManagers.put(userName, teamManager);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

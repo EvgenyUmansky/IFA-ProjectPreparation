@@ -77,8 +77,11 @@ public class TeamController {
             player.setName(playerUser.getName());
             player.setMail(playerUser.getMail());
 
-            Team team = allTeams.get(player.getCurrentTeam());
-            team.addPlayer(player);
+
+            if(player.getCurrentTeam() != null) {
+                Team team = allTeams.get(player.getCurrentTeam());
+                team.addPlayer(player);
+            }
         }
 
         ArrayList<String> owners = new ArrayList<>(allOwners.keySet());
@@ -88,8 +91,10 @@ public class TeamController {
             owner.setName(ownerUser.getName());
             owner.setMail(ownerUser.getMail());
 
-            Team team = allTeams.get(owner.getTeam());
-            team.addOwner(owner);
+            if(owner.getTeam() != null) {
+                Team team = allTeams.get(owner.getTeam());
+                team.addOwner(owner);
+            }
         }
 
         ArrayList<String> coaches = new ArrayList<>(allCoaches.keySet());
@@ -99,8 +104,10 @@ public class TeamController {
             coach.setName(coachUser.getName());
             coach.setMail(coachUser.getMail());
 
-            Team team = allTeams.get(coach.getCurrentTeam());
-            team.addCoach(coach);
+            if(coach.getCurrentTeam() != null) {
+                Team team = allTeams.get(coach.getCurrentTeam());
+                team.addCoach(coach);
+            }
         }
 
         ArrayList<String> managers = new ArrayList<>(allManagers.keySet());
@@ -110,8 +117,10 @@ public class TeamController {
             manager.setName(managerUser.getName());
             manager.setMail(managerUser.getMail());
 
-            Team team = allTeams.get(manager.getCurrentTeam());
-            team.addManager(manager);
+            if(manager.getCurrentTeam() != null) {
+                Team team = allTeams.get(manager.getCurrentTeam());
+                team.addManager(manager);
+            }
         }
 
         ArrayList<Pair<String, String>> teamFieldPairs = new ArrayList<>(teamFields.values());

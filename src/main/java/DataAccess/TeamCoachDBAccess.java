@@ -231,7 +231,9 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 String qualification =  retrievedCoaches.getString(4);
                 String name =  retrievedCoaches.getString(5);
 
-                coaches.put(username,new TeamCoach(username, "",role, qualification,name));
+                TeamCoach teamCoach = new TeamCoach(username, "",role, qualification,name);
+                teamCoach.setCurrentTeam(teamname);
+                coaches.put(username,teamCoach);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());        }
