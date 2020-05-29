@@ -1,6 +1,5 @@
 package DataAccess;
 
-import domain.Game;
 import domain.Referee;
 import javafx.util.Pair;
 import org.junit.jupiter.api.AfterEach;
@@ -15,13 +14,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class RefereeGamesDBAccessTest {
+class GameRefereesDBAccessTest {
+
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream(); // prints log - for exception
     private final PrintStream originalOut = System.out;
 
-    RefereeGamesDBAccess refereeGamesDBAccess;
+    GameRefereesDBAccess refereeGamesDBAccess;
     Connection connection;
     PreparedStatement preparedStatement;
     ResultSet resultSet;
@@ -30,7 +30,7 @@ class RefereeGamesDBAccessTest {
     public void insertBeforeTest() throws SQLException {
         System.setOut(new PrintStream(outContent));
 
-        refereeGamesDBAccess = RefereeGamesDBAccess.getInstance();
+        refereeGamesDBAccess = GameRefereesDBAccess.getInstance();
         connection = DBConnector.getConnection();
 
         // insert the user to DB
@@ -87,9 +87,9 @@ class RefereeGamesDBAccessTest {
     }
 
     @Test
-    void select() throws SQLException {
-        Pair<String, ArrayList<Game>> gamesEmpty = refereeGamesDBAccess.select("");
-        assertEquals(0, gamesEmpty.getValue().size());
+    void selectRefereesOfGame() throws SQLException {
+        Pair<String, ArrayList<Referee>> refereesEmpty = refereeGamesDBAccess.select("");
+        assertEquals(0, refereesEmpty.getValue().size());
 
         // delete the user from DB if exists
         preparedStatement = connection.prepareStatement("delete from [RefereesInGames] where username = 'Referee_test'");
@@ -108,14 +108,15 @@ class RefereeGamesDBAccessTest {
         assertEquals("Referee_test", resultSet.getString(1));
 
         // check select
-        ArrayList<Game> games = refereeGamesDBAccess.select("Referee_test").getValue();
-        assertEquals(1000, games.get(0).getId());
+        ArrayList<Referee> referees = refereeGamesDBAccess.select("1000").getValue();
+        assertEquals("Referee_test", referees.get(referees.size() - 1).getUserName());
 
         // delete the role from DB
         preparedStatement = connection.prepareStatement("delete from [RefereesInGames] where username = 'Referee_test'");
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
 
     @Test
     void conditionedSelect() {
