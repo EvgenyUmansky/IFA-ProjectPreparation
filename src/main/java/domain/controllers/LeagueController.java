@@ -22,7 +22,11 @@ public class LeagueController {
     public ArrayList<League> getLeagues() {
         HashMap<String, League> allLeagues = lda.conditionedSelect(new String[0]);
 
-        HashSet<League> leagueSet = new HashSet<>(allLeagues.values());
+        ArrayList<League> leagueArray = new ArrayList<>(allLeagues.values());
+
+        for(League league : leagueArray){
+
+        }
 
         return new ArrayList<>(allLeagues.values());
     }

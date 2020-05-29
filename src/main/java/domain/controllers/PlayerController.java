@@ -32,15 +32,10 @@ public class PlayerController {
     }
 
     public ArrayList<TeamPlayer> getAvailablePlayers() {
-        // TODO: DB arraylist of all available players
-       /* TeamPlayer player1 = new TeamPlayer("testPlayer1", "testPlayer1@gmail.com", "Diego Maradona");
-        TeamPlayer player2 = new TeamPlayer("testPlayer2", "testPlayer2@gmail.com", "Neymar");
-        TeamPlayer player3 = new TeamPlayer("testPlayer3", "testPlayer3@gmail.com", "Wayne Rooney");
-        return new ArrayList<TeamPlayer>(Arrays.asList(player1,player2,player3));*/
 
        String[] conditions = new String[2];
-       conditions[0] = "teamName";
-       conditions[1] = "";
+       conditions[0] = "teamname";
+       conditions[1] = "null";
        HashMap<String,TeamPlayer> availablePlayers = pda.conditionedSelect(conditions);
 
        return new ArrayList<>(availablePlayers.values());

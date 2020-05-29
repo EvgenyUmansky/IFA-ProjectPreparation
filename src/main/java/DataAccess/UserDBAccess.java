@@ -187,7 +187,7 @@ public class UserDBAccess implements DBAccess<User> {
 
     @Override
     public HashMap<String, User> conditionedSelect(String[] conditions) {
-        String query = "select * from [User] where";
+        String query = "select * from [User] where ";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedUsers = null;
