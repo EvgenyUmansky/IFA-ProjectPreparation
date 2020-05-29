@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/DataAccess/GameFansDBAccessTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/DataAccess/GameRefereesDBAccessTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/LeaguesInRefereeDBAccess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataAccess/RefereesInLeagueDBAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain/controllers/LeagueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/controllers/LeagueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/DataAccess/RefereeGamesDBAccessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/DataAccess/RefereeGamesDBAccessTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +25,8 @@
       <list>
         <option value="JUnit4 Test Class" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -229,7 +227,7 @@
       <workItem from="1590396916119" duration="10604000" />
       <workItem from="1590590903313" duration="6813000" />
       <workItem from="1590598664228" duration="7058000" />
-      <workItem from="1590680564384" duration="29374000" />
+      <workItem from="1590680564384" duration="32834000" />
     </task>
     <task id="LOCAL-00001" summary="After merge with Dev">
       <created>1587149937495</created>
@@ -462,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590752008144</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="tests for DB">
+      <created>1590763217908</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1590763217908</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +510,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Controller service: Objects to Strings" />
     <MESSAGE value="service controllers for Spring: Game, PersonalPage, Player, Team" />
     <MESSAGE value="service controllers for Spring: Fan, League, Coach" />
     <MESSAGE value="solved problem with test libraries" />
@@ -530,7 +534,8 @@
     <MESSAGE value="id fixed&#10;tests for GameController" />
     <MESSAGE value="GameController: fixed db accesses, getGame(), getGames()" />
     <MESSAGE value="GameController: fixed architecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="GameController: fixed architecture" />
+    <MESSAGE value="tests for DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests for DB" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -547,11 +552,11 @@
     <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
     <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1590679782373" />
     <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782373" />
-    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser" timestamp="1590748337171">
+    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser" timestamp="1590765970338">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1590679782373" />
-    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590748337171" />
+    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590765970338" />
     <state x="690" y="296" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1590682505048">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -571,11 +576,11 @@
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
     <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1590679782374" />
     <state x="92" y="92" width="1736" height="856" key="AVDManager/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
-    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1590752005917">
+    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1590763216904">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="427" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
-    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590752005917" />
+    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590763216904" />
     <state x="2262" y="2" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
     <state width="675" height="517" key="DebuggerActiveHint" timestamp="1590751937636">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -632,11 +637,11 @@
     <state x="0" y="0" key="MergeDialog" timestamp="1590679782374" />
     <state x="0" y="0" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
     <state x="0" y="0" key="MergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
-    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog" timestamp="1590752040254">
+    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog" timestamp="1590763257467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="481" y="129" width="683" height="523" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
-    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590752040254" />
+    <state x="481" y="129" width="1063" height="629" key="MultipleFileMergeDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590763257467" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1590757502704">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -647,11 +652,11 @@
     </state>
     <state x="93" y="93" width="1350" height="638" key="ShowDiffWithBranchDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
     <state x="116" y="117" width="1688" height="806" key="ShowDiffWithBranchDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590748196293" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590752237603">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590763265000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590752237603" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590763265000" />
     <state x="2362" y="204" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
     <state width="968" height="520" key="XDebugger.FullValuePopup" timestamp="1590679782374" />
     <state width="968" height="520" key="XDebugger.FullValuePopup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
