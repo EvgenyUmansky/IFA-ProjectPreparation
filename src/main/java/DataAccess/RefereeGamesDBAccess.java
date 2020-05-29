@@ -127,62 +127,6 @@ public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Gam
         return new Pair<>(username,games);
     }
 
-    public Pair<String, ArrayList<Referee>> selectRefereesOfGame(String gameId) {
-        String query = "select [RefereesInGames].GameId, [User].Username, [User].[Name], [User].Mail, [User].IsMail, [Referee].Qualification, [Referee].[Type] " +
-                "from [RefereesInGames] " +
-                "join [User] on [RefereesInGames].username = [User].username " +
-                "join [Referee] on [RefereesInGames].username = [Referee].username " +
-                "where GameId = ?";
-
-
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedReferees = null;
-        ArrayList<Referee> referees = new ArrayList<>();
-
-        try{
-            statement = connection.prepareStatement(query);
-            statement.setString(1, gameId);
-            retrievedReferees = statement.executeQuery();
-
-            while(retrievedReferees.next()){
-                String userName = retrievedReferees.getString(2);
-                String name = retrievedReferees.getString(3);
-                String mail = retrievedReferees.getString(4);
-                boolean isMail = retrievedReferees.getBoolean(5);
-                int qualification = retrievedReferees.getInt(6);
-                String type = retrievedReferees.getString(7);
-
-                Referee referee = new Referee(userName, mail, name);
-                referee.setMail(isMail);
-                referee.setQualification(qualification);
-                referee.setRefereeType(RefereeType.valueOf(type));
-
-                referees.add(referee);
-            }
-        }
-        catch (SQLException e){
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (retrievedReferees != null) {
-                    retrievedReferees.close();
-                }
-                connection.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-
-        return new Pair<>(gameId, referees);
-    }
-
     /**
      * @param conditions
      * @return

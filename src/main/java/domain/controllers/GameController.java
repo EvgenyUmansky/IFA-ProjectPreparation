@@ -7,16 +7,17 @@ import org.apache.log4j.Logger;
 import service.pojos.GameDTO;
 import service.pojos.GameEventDTO;
 
-import javax.security.auth.login.CredentialNotFoundException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 
 public class GameController {
     static Logger logger = Logger.getLogger(GameController.class.getName());
 
     private RefereeGamesDBAccess rgda = RefereeGamesDBAccess.getInstance();
+    private GameRefereesDBAccess grda = GameRefereesDBAccess.getInstance();
+    private GameFansDBAccess gfda = GameFansDBAccess.getInstance();
     private FanGamesDBAccess fgda = FanGamesDBAccess.getInstance();
     private AlertDBAccess ada = AlertDBAccess.getInstance();
     private GameEventDBAccess geda = GameEventDBAccess.getInstance();
@@ -24,10 +25,10 @@ public class GameController {
     private NotificationDBAccess nda = NotificationDBAccess.getInstance();
 
     public ArrayList<GameDTO> getGames() {
-        ArrayList<Game> rawGames = gda.selectAllGames();
+        HashMap<String, Game> rawGames = gda.conditionedSelect(new String[0]);
         ArrayList<GameDTO> games = new ArrayList<>();
 
-        for(Game game : rawGames){
+        for(Game game : rawGames.values()){
             games.add(getGame(String.valueOf(game.getId())));
         }
 
@@ -38,19 +39,21 @@ public class GameController {
         Game game = gda.select(gameId);
 
         // get referees to game from DB and save notification for them
-        ArrayList<Referee> referees = rgda.selectRefereesOfGame(gameId).getValue();
+        ArrayList<Referee> referees = grda.select(gameId).getValue();
         for(Referee referee : referees){
             game.addRefereeToGame(referee);
         }
 
         // get fans to game from DB and save notification for them
-        ArrayList<Fan> fans = fgda.selectFansOfGame(gameId).getValue();
+        ArrayList<Fan> fans = gfda.select(gameId).getValue();
         for(Fan fan : fans){
             game.addFanToAlerts(fan);
         }
 
         // get events of the game
-        game.addEvents(geda.selectByGameID(gameId));
+        HashMap<String, GameEvent> eventsMap = geda.conditionedSelect(new String[]{"GameId", gameId});
+        ArrayList<GameEvent> events = new ArrayList<>(eventsMap.values());
+        game.addEvents(events);
 
         return  new GameDTO(
                 game.getId(),
@@ -105,7 +108,7 @@ public class GameController {
         ArrayList<Game> games = new ArrayList<>();
 
         for(Game game : rawGames){
-            ArrayList<Referee> referees = rgda.selectRefereesOfGame(String.valueOf(game.getId())).getValue();
+            ArrayList<Referee> referees = grda.select(String.valueOf(game.getId())).getValue();
             game.setReferees(referees);
             games.add(game);
         }
@@ -150,24 +153,28 @@ public class GameController {
         Game game = gda.select(gameId);
         Notification notification = new Notification(eventDate + ":" + '\n' + eventName + " in " + game.getHostTeam().getTeamName() + " - " + game.getGuestTeam().getTeamName() + " game in minute " + minute + ": " + description);
         nda.save(notification);
-        notification.setId(nda.selectNotificationId(notification.getSubject()));
+        HashMap<String, Notification> notificationMap = nda.conditionedSelect(new String[]{"Subject", notification.getSubject()});
+        int nId = Integer.parseInt(notificationMap.keySet().iterator().next());
+        notification.setId(nId);
 
         // get referees to game from DB and save notification for them
-        ArrayList<Referee> referees = rgda.selectRefereesOfGame(gameId).getValue();
+        ArrayList<Referee> referees = grda.select(gameId).getValue();
         for(Referee referee : referees){
             game.addRefereeToGame(referee);
             ada.save(new Pair<>(referee.getUserName(), new ArrayList<Notification>(){{add(notification);}}));
         }
 
         // get fans to game from DB and save notification for them
-        ArrayList<Fan> fans = fgda.selectFansOfGame(gameId).getValue();
+        ArrayList<Fan> fans = gfda.select(gameId).getValue();
         for(Fan fan : fans){
             game.addFanToAlerts(fan);
             ada.save(new Pair<>(fan.getUserName(), new ArrayList<Notification>(){{add(notification);}}));
         }
 
         // get events of the game
-        game.addEvents(geda.selectByGameID(gameId));
+        HashMap<String, GameEvent> eventsMap = geda.conditionedSelect(new String[]{"GameId", gameId});
+        ArrayList<GameEvent> events = new ArrayList<>(eventsMap.values());
+        game.addEvents(events);
 
         // add event to game and send mails
         game.addEvent(gameEvent);
