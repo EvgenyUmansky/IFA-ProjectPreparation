@@ -28,13 +28,11 @@ public class FieldController {
     }
 
     public ArrayList<Field> getAvailableFields() {
-        // TODO: DB arraylist of all available Fields
-        /*Field field1 = new Field("The Allianz Arena", 5);
-        Field field2 = new Field("Old Trafford", 10);
-        Field field3 = new Field("Camp Nou", 15);
-        return new ArrayList<Field>(Arrays.asList(field1,field2,field3));*/
+        String[] conditions = new String[2];
+        conditions[0] = "TeamFields.TeamName";
+        conditions[1] = "null";
 
-        HashMap<String,Field> availableFields = fda.conditionedSelect(new String[0]);
+        HashMap<String,Field> availableFields = fda.conditionedSelect(conditions);
         return new ArrayList<>(availableFields.values());
     }
 }

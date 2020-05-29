@@ -2,6 +2,7 @@ package DataAccess;
 
 import domain.Field;
 import domain.TeamPlayer;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -43,60 +44,54 @@ public class FieldDBAccess implements DBAccess<Field>{
 
     @Override
     public HashMap<String, Field> conditionedSelect(String[] conditions) {
-        String query;
+        String query = "select * " +
+                "from Fields " +
+                "full join TeamFields on Fields.FieldName = TeamFields.FieldName where ";
         Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedFields = null;
+        PreparedStatement statement;
+        ResultSet retrievedFields;
         HashMap<String, Field> fields = new HashMap<>();
 
-
-        if(conditions.length == 0){
-            query = "select * from [Field]";
-        }
-        else {
-            query = "select * from [Field] where";
-
-            for (int i = 0; i < conditions.length; i++) {
-                if (i % 2 == 0) {
-                    query += " " + conditions[i];
-                } else {
-                    query += " = ?";
-                    if (i < conditions.length - 1)
-                        query += ",";
+        for (int i = 0; i < conditions.length; i++) {
+            if (i % 2 == 0) {
+                query += " " + conditions[i];
+            } else {
+                if(conditions[i].equals("null")){
+                    query += " is null";
+                    continue;
                 }
+                query += " = ?";
+                if (i < conditions.length - 1)
+                    query += ",";
             }
         }
         try {
             statement = connection.prepareStatement(query);
-
-            if(conditions.length > 0) {
-                int i = 0;
-                while (i < conditions.length) {
-                    switch (conditions[i].toLowerCase()) {
-                        case "fieldName":
+            int i = 0;
+            while (i < conditions.length) {
+                switch (conditions[i].toLowerCase()) {
+                    case "fieldname":
+                    case "propertycost":
+                    case "teamname":
+                        if(!conditions[i + 1].equals("null")) {
                             statement.setString((int) (i / 2) + 1, conditions[i + 1]);
-                            break;
-
-                        case "propertycost":
-                            statement.setDouble((int) (i / 2) + 1, Double.valueOf(conditions[i + 1]));
-                            break;
-
-                        default:
-                            break;
-                    }
-                    i += 2;
+                        }
+                        break;
                 }
+                i += 2;
             }
 
             retrievedFields = statement.executeQuery();
 
 
             while(retrievedFields.next()){
-                fields.put(retrievedFields.getString(1),new Field(retrievedFields.getString(1),retrievedFields.getDouble(2)));
+                String fieldName = retrievedFields.getString(1);
+                int propertyCost = retrievedFields.getInt(2);
+
+                fields.put(fieldName, new Field(fieldName, propertyCost));
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
-            e.printStackTrace();
         }
 
         return fields;
