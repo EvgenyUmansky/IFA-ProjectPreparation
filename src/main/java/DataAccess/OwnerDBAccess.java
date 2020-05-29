@@ -1,5 +1,6 @@
 package DataAccess;
 
+import domain.Team;
 import domain.TeamOwner;
 import org.apache.log4j.Logger;
 
@@ -166,7 +167,62 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
 
     @Override
     public HashMap<String, TeamOwner> conditionedSelect(String[] conditions) {
-        return null;
+        String query;
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedOwners = null;
+        HashMap<String, TeamOwner> teamOwners = new HashMap<>();
+
+        if(conditions.length == 0){
+            query = "select * from [Owners]";
+        }
+        else {
+            query = "select * from [Owners] where";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "username":
+                        case "teamname":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    i += 2;
+                }
+            }
+
+            retrievedOwners = statement.executeQuery();
+
+
+            while(retrievedOwners.next()){
+                String userName = retrievedOwners.getString(1);
+                String teamName = retrievedOwners.getString(2);
+
+
+                teamOwners.put(userName,new TeamOwner(userName,"",teamName));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return teamOwners;
     }
 
 
