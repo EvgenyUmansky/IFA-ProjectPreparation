@@ -117,36 +117,36 @@ class RefereeGamesDBAccessTest {
         connection.commit();
     }
 
-    @Test
-    void selectRefereesOfGame() throws SQLException {
-        Pair<String, ArrayList<Referee>> refereesEmpty = refereeGamesDBAccess.selectRefereesOfGame("");
-        assertEquals(0, refereesEmpty.getValue().size());
-
-        // delete the user from DB if exists
-        preparedStatement = connection.prepareStatement("delete from [RefereesInGames] where username = 'Referee_test'");
-        preparedStatement.executeUpdate();
-        connection.commit();
-
-        // insert the role to DB
-        preparedStatement = connection.prepareStatement("insert into [RefereesInGames] values ('Referee_test', '1000')");
-        preparedStatement.executeUpdate();
-        connection.commit();
-
-        // check the role exists in DB
-        preparedStatement = connection.prepareStatement("select * from [RefereesInGames] where username = 'Referee_test'" );
-        resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        assertEquals("Referee_test", resultSet.getString(1));
-
-        // check select
-        ArrayList<Referee> referees = refereeGamesDBAccess.selectRefereesOfGame("1000").getValue();
-        assertEquals("Referee_test", referees.get(referees.size() - 1).getUserName());
-
-        // delete the role from DB
-        preparedStatement = connection.prepareStatement("delete from [RefereesInGames] where username = 'Referee_test'");
-        preparedStatement.executeUpdate();
-        connection.commit();
-    }
+//    @Test
+//    void selectRefereesOfGame() throws SQLException {
+//        Pair<String, ArrayList<Referee>> refereesEmpty = refereeGamesDBAccess.selectRefereesOfGame("");
+//        assertEquals(0, refereesEmpty.getValue().size());
+//
+//        // delete the user from DB if exists
+//        preparedStatement = connection.prepareStatement("delete from [RefereesInGames] where username = 'Referee_test'");
+//        preparedStatement.executeUpdate();
+//        connection.commit();
+//
+//        // insert the role to DB
+//        preparedStatement = connection.prepareStatement("insert into [RefereesInGames] values ('Referee_test', '1000')");
+//        preparedStatement.executeUpdate();
+//        connection.commit();
+//
+//        // check the role exists in DB
+//        preparedStatement = connection.prepareStatement("select * from [RefereesInGames] where username = 'Referee_test'" );
+//        resultSet = preparedStatement.executeQuery();
+//        resultSet.next();
+//        assertEquals("Referee_test", resultSet.getString(1));
+//
+//        // check select
+//        ArrayList<Referee> referees = refereeGamesDBAccess.selectRefereesOfGame("1000").getValue();
+//        assertEquals("Referee_test", referees.get(referees.size() - 1).getUserName());
+//
+//        // delete the role from DB
+//        preparedStatement = connection.prepareStatement("delete from [RefereesInGames] where username = 'Referee_test'");
+//        preparedStatement.executeUpdate();
+//        connection.commit();
+//    }
 
     @Test
     void conditionedSelect() {

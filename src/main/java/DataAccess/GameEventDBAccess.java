@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class GameEventDBAccess implements DBAccess<GameEvent>{
 
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(GameEventDBAccess.class.getName());
     private static final GameEventDBAccess instance = new GameEventDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -118,44 +118,44 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
         return null;
     }
 
-    public int selectGameEventId(String gameId, String eventDate, String eventName) {
-        String query = "select * from [GameEvent] where GameId = ? and EventDate = ? and EventName = ?";
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedGame = null;
-        int gameEventId = 0;
-
-        try{
-            statement = connection.prepareStatement(query);
-            statement.setString(1, gameId);
-            statement.setString(2, eventDate);
-            statement.setString(3, eventName);
-            retrievedGame = statement.executeQuery();
-
-            if(retrievedGame.next()){
-                gameEventId = retrievedGame.getInt(1);
-            }
-        }
-        catch (SQLException e){
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (retrievedGame != null) {
-                    retrievedGame.close();
-                }
-                connection.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-        return gameEventId;
-    }
+//    public int selectGameEventId(String gameId, String eventDate, String eventName) {
+//        String query = "select * from [GameEvent] where GameId = ? and EventDate = ? and EventName = ?";
+//        Connection connection = DBConnector.getConnection();
+//        PreparedStatement statement = null;
+//        ResultSet retrievedGame = null;
+//        int gameEventId = 0;
+//
+//        try{
+//            statement = connection.prepareStatement(query);
+//            statement.setString(1, gameId);
+//            statement.setString(2, eventDate);
+//            statement.setString(3, eventName);
+//            retrievedGame = statement.executeQuery();
+//
+//            if(retrievedGame.next()){
+//                gameEventId = retrievedGame.getInt(1);
+//            }
+//        }
+//        catch (SQLException e){
+//            logger.error(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        finally {
+//            try {
+//                if (statement != null) {
+//                    statement.close();
+//                }
+//                if (retrievedGame != null) {
+//                    retrievedGame.close();
+//                }
+//                connection.close();
+//            } catch (SQLException e) {
+//                logger.error(e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
+//        return gameEventId;
+//    }
 
 
     /**
@@ -164,19 +164,39 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
      */
     @Override
     public HashMap<String, GameEvent> conditionedSelect(String[] conditions) {
-        return null;
-    }
+        String query = "select * from GameEvent "; //where GameId = ?";
 
-    public ArrayList<GameEvent> selectByGameID(String gameId) {
-        String query = "select * from GameEvent where GameId = ?";
+        if(conditions == null || conditions.length == 0){
+            // no need
+        }
+
+        query += "where ";
+
+        for(int i = 0; i < conditions.length; i++){
+            if(i % 2 == 0){
+                query += " " + conditions[i];
+            }
+            else {
+                query += " = ?";
+            }
+        }
+
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedEvent = null;
 
-        ArrayList<GameEvent> events = new ArrayList<>();
+        HashMap<String, GameEvent> events = new HashMap<>();
         try{
             statement = connection.prepareStatement(query);
-            statement.setString(1, gameId);
+
+            int index = 1;
+            for(int i = 0; i < conditions.length; i++){
+                if(i % 2 != 0){
+                    statement.setString(index, conditions[i]);
+                    index++;
+                }
+            }
+
             retrievedEvent = statement.executeQuery();
 
             while (retrievedEvent.next()){
@@ -187,7 +207,7 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
                 String eventName = retrievedEvent.getString(5);
                 String description = retrievedEvent.getString(6);
 
-                events.add(new GameEvent(eventId, gameIdInt, eventDate, minutes, eventName, description));
+                events.put(String.valueOf(eventId), new GameEvent(eventId, gameIdInt, eventDate, minutes, eventName, description));
             }
         }
         catch (SQLException e){
@@ -210,4 +230,6 @@ public class GameEventDBAccess implements DBAccess<GameEvent>{
         }
         return events;
     }
+
+
 }

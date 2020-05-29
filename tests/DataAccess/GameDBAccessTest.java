@@ -198,6 +198,7 @@ class GameDBAccessTest {
         connection.commit();
     }
 
+    /*
     @Test
     void selectGamesByUser() throws SQLException {
         assertNull(gameDBAccess.selectGamesByUser(""));
@@ -205,6 +206,8 @@ class GameDBAccessTest {
         ArrayList<Integer> selectGamesByUser = gameDBAccess.selectGamesByUser("Referee_1");
         assertEquals(1000, selectGamesByUser.get(0));
     }
+
+     */
 
     @Test
     void conditionedSelect() {
