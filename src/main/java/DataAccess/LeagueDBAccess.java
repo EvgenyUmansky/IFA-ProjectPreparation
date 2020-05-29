@@ -1,6 +1,5 @@
 package DataAccess;
 
-import domain.Field;
 import domain.League;
 import domain.OneGameSchedulingMethod;
 import org.apache.log4j.Logger;
@@ -109,9 +108,9 @@ public class LeagueDBAccess implements DBAccess<League>{
                             break;
 
                         case "year":
-                        case "winPoints":
-                        case "drawPoints":
-                        case "losePoints":
+                        case "winpoints":
+                        case "drawpoints":
+                        case "losepoints":
                             statement.setInt((int) (i / 2) + 1, Integer.valueOf(conditions[i + 1]));
                             break;
 
