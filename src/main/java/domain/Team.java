@@ -395,7 +395,7 @@ public class Team {
      *
      * @param owner the new owner
      */
-    protected void addOwner(TeamOwner owner) {
+    public void addOwner(TeamOwner owner) {
         if (owner.getTeam() == null) {
             owner.setTeam(teamName);
         }
