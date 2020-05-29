@@ -10,7 +10,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TeamDBAccess implements DBAccess<Team>{
+
     static Logger logger = Logger.getLogger(TeamDBAccess.class.getName());
+
+    /**
+     * Singleton
+     */
     private static final TeamDBAccess instance = new TeamDBAccess();
 
     public TeamDBAccess() {
@@ -20,6 +25,10 @@ public class TeamDBAccess implements DBAccess<Team>{
         return instance;
     }
 
+    /**
+     * Saves an object as a record in the matching table in the database
+     * @param team the object
+     */
     @Override
     public void save(Team team) {
         if(team == null){
@@ -62,6 +71,10 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
     }
 
+    /**
+     * Updates the object's matching record in the database
+     * @param team the object
+     */
     @Override
     public void update(Team team) {
         if(team == null){
@@ -106,6 +119,10 @@ public class TeamDBAccess implements DBAccess<Team>{
         }
     }
 
+    /**
+     * Deletes the object's matching record from the database
+     * @param team the object
+     */
     @Override
     public void delete(Team team) {
         if(team == null){
@@ -146,6 +163,10 @@ public class TeamDBAccess implements DBAccess<Team>{
 
     }
 
+    /**
+     * Retrieves an object that matches the given id from the database
+     * @param teamName the id of the object
+     */
     @Override
     public Team select(String teamName) {
         String query = "select * from Teams where TeamName = ?";
@@ -191,6 +212,11 @@ public class TeamDBAccess implements DBAccess<Team>{
         return team;
     }
 
+    /**
+     * Retrieves one or more objects that fit the given conditions in the database
+     * @param conditions the wanted values of the fields in the table
+     * @return the matching objects
+     */
     @Override
     public HashMap<String, Team> conditionedSelect(String[] conditions) {
         return null;
