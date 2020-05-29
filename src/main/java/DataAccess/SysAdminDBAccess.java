@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 
 public class SysAdminDBAccess implements DBAccess<SystemAdministrator> {
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(SysAdminDBAccess.class.getName());
     private static final SysAdminDBAccess instance = new SysAdminDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

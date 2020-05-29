@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class GameEventDBAccess implements DBAccess<GameEvent>{
 
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(GameEventDBAccess.class.getName());
     private static final GameEventDBAccess instance = new GameEventDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

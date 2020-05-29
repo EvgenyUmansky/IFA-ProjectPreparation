@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(TeamFieldsDBAccess.class.getName());
     private static final TeamFieldsDBAccess instance = new TeamFieldsDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

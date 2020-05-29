@@ -1,90 +1,86 @@
 package DataAccess;
 
-import domain.Field;
 import domain.League;
-import domain.OneGameSchedulingMethod;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LeagueDBAccess implements DBAccess<League>{
-    static Logger logger = Logger.getLogger(LeagueDBAccess.class.getName());
-    private static final LeagueDBAccess instance = new LeagueDBAccess();
+public class LeagueSeasonDBAccess implements DBAccess<ArrayList<League>> {
+
+    static Logger logger = Logger.getLogger(LeagueSeasonDBAccess.class.getName());
+    private static final LeagueSeasonDBAccess instance = new LeagueSeasonDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
-    private LeagueDBAccess(){ }
+    private LeagueSeasonDBAccess() {
 
-    public static LeagueDBAccess getInstance(){
+    }
+
+    public static LeagueSeasonDBAccess getInstance() {
         return instance;
     }
 
+    /**
+     * Saves an object as a record in the matching table in the database
+     *
+     * @param leagues the object
+     */
     @Override
-    public void save(League league) {
-        if(league == null){
-            logger.error("league object is null");
-        }
+    public void save(ArrayList<League> leagues) {
 
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        String query = "insert into [Leagues] values (?, ?, ?, ?, ?, ?)";
-
-        try {
-            statement = connection.prepareStatement(query);
-            statement.setString(1,league.getLeagueName());
-            statement.setInt(2,league.getSeason());
-            statement.setBoolean(3,(league.getSchedulingMethod() instanceof OneGameSchedulingMethod)); //FIXME: change to !instanceof if test fails
-            statement.setInt(4,league.getRankingMethod().getWinPoints());
-            statement.setInt(5,league.getRankingMethod().getLosePoints());
-            statement.setInt(6,league.getRankingMethod().getDrawPoints());
-
-            statement.executeUpdate();
-            connection.commit();
-        }
-        catch (SQLException | NullPointerException e){
-            logger.error(e.getMessage());
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                connection.close();
-            }
-            catch (SQLException e3) {
-                logger.error(e3.getMessage());
-            }
-        }
     }
 
+    /**
+     * Updates the object's matching record in the database
+     *
+     * @param leagues the object
+     */
     @Override
-    public void update(League league) {
+    public void update(ArrayList<League> leagues) {
+
     }
 
+    /**
+     * Deletes the object's matching record from the database
+     *
+     * @param leagues the object
+     */
     @Override
-    public void delete(League league) {
+    public void delete(ArrayList<League> leagues) {
+
     }
 
+    /**
+     * Retrieves an object that matches the given id from the database
+     *
+     * @param id the id of the object
+     */
     @Override
-    public League select(String id) {
+    public ArrayList<League> select(String id) {
         return null;
     }
 
+    /**
+     * Retrieves one or more objects that fit the given conditions in the database
+     *
+     * @param conditions the wanted values of the fields in the table
+     * @return the matching objects
+     */
     @Override
-    public HashMap<String, League> conditionedSelect(String[] conditions) {
+    public HashMap<String, ArrayList<League>> conditionedSelect(String[] conditions) {
         String query;
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedLeagues = null;
-        HashMap<String, League> leagues = new HashMap<>();
+        HashMap<String, ArrayList<League>> leagues = new HashMap<>();
 
-        if(conditions.length == 0){
+        if (conditions.length == 0) {
             query = "select * from [Leagues]";
-        }
-        else {
+        } else {
             query = "select * from [Leagues] where";
 
             for (int i = 0; i < conditions.length; i++) {
@@ -100,7 +96,7 @@ public class LeagueDBAccess implements DBAccess<League>{
         try {
             statement = connection.prepareStatement(query);
 
-            if(conditions.length > 0) {
+            if (conditions.length > 0) {
                 int i = 0;
                 while (i < conditions.length) {
                     switch (conditions[i].toLowerCase()) {
@@ -116,7 +112,7 @@ public class LeagueDBAccess implements DBAccess<League>{
                             break;
 
                         case "schedulingmethod":
-                            statement.setBoolean((int) (i / 2) + 1,conditions[i + 1].equals("1"));
+                            statement.setBoolean((int) (i / 2) + 1, conditions[i + 1].equals("1"));
 
                         default:
                             break;
@@ -128,7 +124,7 @@ public class LeagueDBAccess implements DBAccess<League>{
             retrievedLeagues = statement.executeQuery();
 
 
-            while(retrievedLeagues.next()){
+            while (retrievedLeagues.next()) {
                 String leagueName = retrievedLeagues.getString(1);
                 int season = retrievedLeagues.getInt(2);
                 boolean scheduling = retrievedLeagues.getBoolean(3);
@@ -136,7 +132,18 @@ public class LeagueDBAccess implements DBAccess<League>{
                 int losePoints = retrievedLeagues.getInt(5);
                 int drawPoints = retrievedLeagues.getInt(6);
 
-                leagues.put(leagueName,new League(leagueName,season,scheduling,winPoints,drawPoints,losePoints));
+                League league = new League(leagueName, season, scheduling, winPoints, drawPoints, losePoints);
+                String seasonString = Integer.toString(season);
+                ArrayList<League> leaguesList;
+
+                if (leagues.containsKey(seasonString)) {
+                    leaguesList = leagues.get(seasonString);
+                } else {
+                    leaguesList = new ArrayList<>();
+                    leagues.put(seasonString, leaguesList);
+                }
+
+                leaguesList.add(league);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -145,3 +152,4 @@ public class LeagueDBAccess implements DBAccess<League>{
         return leagues;
     }
 }
+

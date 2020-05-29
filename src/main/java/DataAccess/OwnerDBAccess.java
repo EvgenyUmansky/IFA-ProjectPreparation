@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 
 public class OwnerDBAccess implements DBAccess<TeamOwner> {
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(OwnerDBAccess.class.getName());
     private static final OwnerDBAccess instance = new OwnerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

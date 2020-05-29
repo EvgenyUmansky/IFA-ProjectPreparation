@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>{
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(FanGamesDBAccess.class.getName());
 
     private static final FanGamesDBAccess instance = new FanGamesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
