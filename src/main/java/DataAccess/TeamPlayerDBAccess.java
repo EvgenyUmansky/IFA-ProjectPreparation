@@ -239,7 +239,10 @@ public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
                 String squadnumber =  retrievedPlayers.getString(5);
                 String name =  retrievedPlayers.getString(6);
 
-                players.put(username,new TeamPlayer(username, "",birthdate, position, squadnumber,name));
+
+                TeamPlayer teamPlayer = new TeamPlayer(username, "",birthdate, position, squadnumber,name);
+                teamPlayer.setCurrentTeam(teamname);
+                players.put(username,teamPlayer);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

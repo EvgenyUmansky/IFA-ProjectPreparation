@@ -51,10 +51,10 @@ public class FieldDBAccess implements DBAccess<Field>{
 
 
         if(conditions.length == 0){
-            query = "select * from [Field]";
+            query = "select * from [Fields]";
         }
         else {
-            query = "select * from [Field] where";
+            query = "select * from [Fields] where";
 
             for (int i = 0; i < conditions.length; i++) {
                 if (i % 2 == 0) {
