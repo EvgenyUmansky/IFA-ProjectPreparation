@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import service.pojos.GameDTO;
 
 import java.util.ArrayList;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiFieldController {
 
