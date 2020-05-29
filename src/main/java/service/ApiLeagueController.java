@@ -4,6 +4,7 @@ import domain.League;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiLeagueController {
     private final domain.controllers.LeagueController controller;
