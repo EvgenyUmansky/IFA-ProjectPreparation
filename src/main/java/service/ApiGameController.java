@@ -6,7 +6,7 @@ import service.pojos.GameDTO;
 import service.pojos.GameEventDTO;
 
 import java.util.ArrayList;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiGameController {
 
@@ -24,7 +24,10 @@ public class ApiGameController {
 
     @GetMapping("/games")
     // This will get games by referee user in the following way: /games?referee=<username>
-    public ArrayList<GameDTO> getRefereeGames(@RequestParam("referee") String userName){
+    public ArrayList<GameDTO> getRefereeGames(@RequestParam(value = "referee", required = false) String userName){
+        if(userName == null){
+            return controller.getGames();
+        }
         return controller.getRefereeGames(userName);
     }
 
