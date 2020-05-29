@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiPlayerController {
     private final domain.controllers.PlayerController controller;

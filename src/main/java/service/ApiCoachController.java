@@ -4,7 +4,7 @@ import domain.TeamCoach;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiCoachController {
     private final domain.controllers.CoachController controller;

@@ -215,8 +215,9 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 String userName = retrievedOwners.getString(1);
                 String teamName = retrievedOwners.getString(2);
 
-
-                teamOwners.put(userName,new TeamOwner(userName,"",teamName));
+                TeamOwner teamOwner = new TeamOwner(userName,"","");
+                teamOwner.setTeam(teamName);
+                teamOwners.put(userName,teamOwner);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

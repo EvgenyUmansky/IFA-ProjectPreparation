@@ -117,11 +117,11 @@ public class Alert {
         // TODO: save this map in DB
         Map isSentMap = new HashMap<>();
 
-        for(Subscriber user : this.mailAlertList){
-            boolean isSent = sendMailAlert(user.getMail(), notification);
-            isSentMap.put(user.getUserName(), isSent);
-
-        }
+//        for(Subscriber user : this.mailAlertList){
+//            boolean isSent = sendMailAlert(user.getMail(), notification);
+//            isSentMap.put(user.getUserName(), isSent);
+//
+//        }
 
         for(Subscriber user : this.inSystemAlertList){
             sendInSystemAlert(user, notification);
