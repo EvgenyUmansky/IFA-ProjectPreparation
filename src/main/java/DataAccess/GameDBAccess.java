@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDBAccess implements DBAccess<Game>{
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(GameDBAccess.class.getName());
 
     private static final GameDBAccess instance = new GameDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class RefereeGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>{
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(RefereeGamesDBAccess.class.getName());
 
     private static final RefereeGamesDBAccess instance = new RefereeGamesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/

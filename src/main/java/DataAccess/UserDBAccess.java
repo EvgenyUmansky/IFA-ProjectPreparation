@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class UserDBAccess implements DBAccess<User> {
 
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(UserDBAccess.class.getName());
     private static final UserDBAccess instance = new UserDBAccess();
   /*  private DBConnector dbc = DBConnector.getInstance();*/
 

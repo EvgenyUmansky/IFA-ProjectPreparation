@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 
 public class ManagerDBAccess implements DBAccess<TeamManager> {
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(ManagerDBAccess.class.getName());
     private static final ManagerDBAccess instance = new ManagerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
