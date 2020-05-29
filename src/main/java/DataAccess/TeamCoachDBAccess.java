@@ -180,16 +180,20 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
     @Override
     public HashMap<String, TeamCoach> conditionedSelect(String[] conditions) {
-        String query = "select * from [Coaches] where";
+        String query = "select * from [Coaches] where ";
         Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedCoaches = null;
+        PreparedStatement statement;
+        ResultSet retrievedCoaches;
         HashMap<String, TeamCoach> coaches = new HashMap<>();
 
         for (int i = 0; i < conditions.length; i++) {
             if (i % 2 == 0) {
                 query += " " + conditions[i];
             } else {
+                if(conditions[i].equals("null")){
+                    query += " is null";
+                    continue;
+                }
                 query += " = ?";
                 if (i < conditions.length - 1)
                     query += ",";
@@ -202,13 +206,15 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                 switch (conditions[i].toLowerCase()) {
                     case "username":
                     case "teamname":
+                        if(!conditions[i + 1].equals("null")) {
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                        }
+                        break;
                     case "role":
                     case "qualification":
                     case "name":
                         statement.setString((int) (i / 2) + 1, conditions[i + 1]);
                         break;
-
-
                     default:
                         break;
                 }
