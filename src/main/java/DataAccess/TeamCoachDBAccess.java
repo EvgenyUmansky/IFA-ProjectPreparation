@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 
 public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(TeamCoachDBAccess.class.getName());
     private static final TeamCoachDBAccess instance = new TeamCoachDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

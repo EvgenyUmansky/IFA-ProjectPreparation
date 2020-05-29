@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 
 public class TeamPlayerDBAccess implements DBAccess<TeamPlayer> {
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(TeamPlayerDBAccess.class.getName());
     private static final TeamPlayerDBAccess instance = new TeamPlayerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

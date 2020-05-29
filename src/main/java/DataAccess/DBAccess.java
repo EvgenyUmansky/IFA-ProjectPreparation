@@ -51,5 +51,13 @@ public interface DBAccess<T> {
             }
         }
 
+        int index = 1;
+            for(int i = 0; i < conditions.length; i++){
+                if(i % 2 != 0){
+                    statement.setString(index, conditions[i]);
+                    index++;
+                }
+            }
+
     }*/
 }

@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<String>> >{
 
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(UserRolesDBAccess.class.getName());
     private static final UserRolesDBAccess instance = new UserRolesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

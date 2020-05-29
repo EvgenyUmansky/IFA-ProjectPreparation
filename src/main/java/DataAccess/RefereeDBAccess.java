@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 
 public class RefereeDBAccess implements DBAccess<Referee> {
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(RefereeDBAccess.class.getName());
     private static final RefereeDBAccess instance = new RefereeDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 

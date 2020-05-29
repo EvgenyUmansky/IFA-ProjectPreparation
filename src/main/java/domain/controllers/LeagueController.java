@@ -2,6 +2,7 @@ package domain.controllers;
 
 import DataAccess.DBAccess;
 import DataAccess.LeagueDBAccess;
+import DataAccess.LeagueSeasonDBAccess;
 import domain.*;
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ public class LeagueController {
     static Logger logger = Logger.getLogger(LeagueController.class.getName());
 
     private DBAccess<League> lda = LeagueDBAccess.getInstance();
+    private DBAccess<ArrayList<League>> lsda = LeagueSeasonDBAccess.getInstance();
 
     public ArrayList<League> getLeagues() {
         // TODO: get leagues from DB
@@ -36,6 +38,17 @@ public class LeagueController {
 
         logger.info(leagueName + " " + season + "  was created");
         return league;
+    }
+
+    public ArrayList<League> getAllSeasonsInLeagues(){
+        HashMap<String,ArrayList<League>> allLeaguesPerSeason = lsda.conditionedSelect(new String[0]);
+        ArrayList<League> allLeagues = new ArrayList<>();
+        ArrayList<ArrayList<League>> values = new ArrayList<>(allLeaguesPerSeason.values());
+        for(ArrayList<League> leagues : values){
+            allLeagues.addAll(leagues);
+        }
+
+        return allLeagues;
     }
 
     // =================== Guest functions ====================

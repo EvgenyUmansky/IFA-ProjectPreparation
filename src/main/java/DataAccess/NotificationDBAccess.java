@@ -103,42 +103,6 @@ public class NotificationDBAccess implements DBAccess<Notification> {
 
     }
 
-    public int selectNotificationId(String subject) {
-        String query = "select * from [Notification] where Subject = ?";
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedGame = null;
-        int notificationId = 0;
-
-        try{
-            statement = connection.prepareStatement(query);
-            statement.setString(1, subject);
-            retrievedGame = statement.executeQuery();
-
-            if(retrievedGame.next()){
-                notificationId = retrievedGame.getInt(1);
-            }
-        }
-        catch (SQLException e){
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (retrievedGame != null) {
-                    retrievedGame.close();
-                }
-                connection.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-        return notificationId;
-    }
 
     @Override
     public void delete(Notification notification) {
@@ -223,6 +187,67 @@ public class NotificationDBAccess implements DBAccess<Notification> {
 
     @Override
     public HashMap<String, Notification> conditionedSelect(String[] conditions) {
-        return null;
+        String query = "select * from [Notification] "; // where Subject = ?";
+        HashMap<String, Notification> notificationMap = new HashMap<>();
+        if(conditions == null || conditions.length == 0){
+            // no need
+            return null;
+        }
+
+        query += "where ";
+        for(int i = 0; i < conditions.length; i++){
+            if(i % 2 == 0){
+                query += " " + conditions[i];
+            }
+            else {
+                query += " = ?";
+            }
+        }
+
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedGame = null;
+        Notification notification = null;
+
+        try{
+            statement = connection.prepareStatement(query);
+
+            int index = 1;
+            for(int i = 0; i < conditions.length; i++){
+                if(i % 2 != 0){
+                    statement.setString(index, conditions[i]);
+                    index++;
+                }
+            }
+
+            retrievedGame = statement.executeQuery();
+
+            if(retrievedGame.next()){
+                int id = retrievedGame.getInt(1);
+                String subject =  retrievedGame.getString(2);
+                notification = new Notification(id, subject);
+                notificationMap.put(String.valueOf(id), notification);
+
+            }
+        }
+        catch (SQLException e){
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (retrievedGame != null) {
+                    retrievedGame.close();
+                }
+                connection.close();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return notificationMap;
     }
 }

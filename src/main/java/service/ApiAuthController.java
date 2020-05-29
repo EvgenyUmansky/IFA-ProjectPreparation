@@ -23,7 +23,7 @@ public class ApiAuthController {
         controller.connectToExternalSystems();
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public UserDTO login(@RequestBody LoginDTO login) throws Exception {
         return controller.login(login.getUsername(), login.getPassword());
     }

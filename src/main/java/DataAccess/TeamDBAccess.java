@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class TeamDBAccess implements DBAccess<Team>{
-    static Logger logger = Logger.getLogger(NotificationDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(TeamDBAccess.class.getName());
     private static final TeamDBAccess instance = new TeamDBAccess();
 
     public TeamDBAccess() {

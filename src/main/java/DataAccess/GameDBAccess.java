@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameDBAccess implements DBAccess<Game>{
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(GameDBAccess.class.getName());
 
     private static final GameDBAccess instance = new GameDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -146,98 +146,112 @@ public class GameDBAccess implements DBAccess<Game>{
         return game;
     }
 
+
+//    /**
+//     * Retrieves a games that user follows
+//     * @param username the id of the game
+//     */
+//    public ArrayList<Integer> selectGamesByUser(String username) {
+//        String query = "select Game.GameId, RefereesInGames.UserName as RefereeName, FansInGames.UserName as FanName " +
+//                "from Game " +
+//                "join RefereesInGames on Game.GameId = RefereesInGames.GameId " +
+//                "join FansInGames on Game.GameId = FansInGames.GameId " +
+//                "where RefereesInGames.UserName = ? or FansInGames.UserName = ?";
+//        Connection connection = DBConnector.getConnection();
+//        PreparedStatement statement = null;
+//        ResultSet retrievedGame = null;
+//        ArrayList<Integer> gameIds = new ArrayList<>();
+//
+//        try{
+//            statement = connection.prepareStatement(query);
+//            statement.setString(1, username);
+//            statement.setString(2, username);
+//            retrievedGame = statement.executeQuery();
+//
+//            if(retrievedGame.next()){
+//                int gameId = Integer.parseInt(retrievedGame.getString(1));
+//                gameIds.add(gameId);
+//            }
+//        }
+//        catch (SQLException e){
+//            logger.error(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        finally {
+//            try {
+//                if (statement != null) {
+//                    statement.close();
+//                }
+//                if (retrievedGame != null) {
+//                    retrievedGame.close();
+//                }
+//                connection.close();
+//            } catch (SQLException e) {
+//                logger.error(e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
+//        return gameIds;
+//    }
+//
+//
+//
+//    public int selectGameId(String hostTeam, String guestTeam, String gameDate) {
+//        String query = "select * from [Game] where HostTeam = ? and GuestTeam = ? and GameDate = ?";
+//        Connection connection = DBConnector.getConnection();
+//        PreparedStatement statement = null;
+//        ResultSet retrievedGame = null;
+//        int gameId = 0;
+//
+//        try{
+//            statement = connection.prepareStatement(query);
+//            statement.setString(1, hostTeam);
+//            statement.setString(2, guestTeam);
+//            statement.setString(3, gameDate);
+//            retrievedGame = statement.executeQuery();
+//
+//            if(retrievedGame.next()){
+//                gameId = retrievedGame.getInt(1);
+//            }
+//        }
+//        catch (SQLException e){
+//            logger.error(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        finally {
+//            try {
+//                if (statement != null) {
+//                    statement.close();
+//                }
+//                if (retrievedGame != null) {
+//                    retrievedGame.close();
+//                }
+//                connection.close();
+//            } catch (SQLException e) {
+//                logger.error(e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
+//        return gameId;
+//    }
+//    */
+
     /**
-     * Retrieves a games that user follows
-     * @param username the id of the game
+     * Retrieves one or more games that fit the given conditions in the database
+     * @param conditions the wanted values of the fields in the table
+     * @return the matching games
      */
-    public ArrayList<Integer> selectGamesByUser(String username) {
-        String query = "select Game.GameId, RefereesInGames.UserName as RefereeName, FansInGames.UserName as FanName " +
-                "from Game " +
-                "join RefereesInGames on Game.GameId = RefereesInGames.GameId " +
-                "join FansInGames on Game.GameId = FansInGames.GameId " +
-                "where RefereesInGames.UserName = ? or FansInGames.UserName = ?";
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedGame = null;
-        ArrayList<Integer> gameIds = new ArrayList<>();
-
-        try{
-            statement = connection.prepareStatement(query);
-            statement.setString(1, username);
-            statement.setString(2, username);
-            retrievedGame = statement.executeQuery();
-
-            if(retrievedGame.next()){
-                int gameId = Integer.parseInt(retrievedGame.getString(1));
-                gameIds.add(gameId);
-            }
-        }
-        catch (SQLException e){
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (retrievedGame != null) {
-                    retrievedGame.close();
-                }
-                connection.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-        return gameIds;
-    }
-
-    public int selectGameId(String hostTeam, String guestTeam, String gameDate) {
-        String query = "select * from [Game] where HostTeam = ? and GuestTeam = ? and GameDate = ?";
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedGame = null;
-        int gameId = 0;
-
-        try{
-            statement = connection.prepareStatement(query);
-            statement.setString(1, hostTeam);
-            statement.setString(2, guestTeam);
-            statement.setString(3, gameDate);
-            retrievedGame = statement.executeQuery();
-
-            if(retrievedGame.next()){
-                gameId = retrievedGame.getInt(1);
-            }
-        }
-        catch (SQLException e){
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (retrievedGame != null) {
-                    retrievedGame.close();
-                }
-                connection.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-        return gameId;
-    }
-
-    public ArrayList<Game> selectAllGames() {
+    @Override
+    public HashMap<String, Game> conditionedSelect(String[] conditions) {
         String query = "select * from [Game]";
+        if(conditions != null && conditions.length > 0){
+            // no need
+        }
+
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
         ResultSet retrievedGame = null;
-        ArrayList<Game> games = new ArrayList<>();
+        HashMap<String, Game> games = new HashMap<>();
 
         try{
             statement = connection.prepareStatement(query);
@@ -255,7 +269,7 @@ public class GameDBAccess implements DBAccess<Game>{
                 int season = retrievedGame.getInt(9);
 
                 Game game = new Game(gameId, hostTeamName, guestTeamName, fieldName, gameDate, hostScore, guestScore, leagueName, season);
-                games.add(game);
+                games.put(String.valueOf(gameId), game);
             }
         }
         catch (SQLException e){
@@ -277,16 +291,7 @@ public class GameDBAccess implements DBAccess<Game>{
             }
         }
         return games;
-    }
 
-    /**
-     * Retrieves one or more games that fit the given conditions in the database
-     * @param conditions the wanted values of the fields in the table
-     * @return the matching games
-     */
-    @Override
-    public HashMap<String, Game> conditionedSelect(String[] conditions) {
-        return null;
     }
 
 }

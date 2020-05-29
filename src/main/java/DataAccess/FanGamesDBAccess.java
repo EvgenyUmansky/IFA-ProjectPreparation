@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>{
-    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
+    static Logger logger = Logger.getLogger(FanGamesDBAccess.class.getName());
 
     private static final FanGamesDBAccess instance = new FanGamesDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -167,56 +167,6 @@ public class FanGamesDBAccess implements DBAccess<Pair<String, ArrayList<Game>>>
         return new Pair<>(username,games);
     }
 
-    public Pair<String, ArrayList<Fan>> selectFansOfGame(String gameId) {
-        String query = "select [FansInGames].GameId, [User].Username, [User].[Name], [User].Mail, [User].IsMail " +
-                "from [FansInGames] " +
-                "join [User] on [FansInGames].username = [User].username " +
-                "where GameId = ?";
-
-
-        Connection connection = DBConnector.getConnection();
-        PreparedStatement statement = null;
-        ResultSet retrievedFans = null;
-        ArrayList<Fan> fans = new ArrayList<>();
-
-        try{
-            statement = connection.prepareStatement(query);
-            statement.setString(1, gameId);
-            retrievedFans = statement.executeQuery();
-
-            while(retrievedFans.next()){
-                String userName = retrievedFans.getString(2);
-                String name = retrievedFans.getString(3);
-                String mail = retrievedFans.getString(4);
-                boolean isMail = retrievedFans.getBoolean(5);
-
-                Fan fan = new Fan(userName, mail, name);
-                fan.setMail(isMail);
-
-                fans.add(fan);
-            }
-        }
-        catch (SQLException e){
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (retrievedFans != null) {
-                    retrievedFans.close();
-                }
-                connection.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-
-        return new Pair<>(gameId, fans);
-    }
 
     /**
      * @param conditions
