@@ -61,7 +61,7 @@ class LeagueControllerTest {
         assertEquals(3,newSeason.getRankingMethod().getWinPoints());
         assertEquals(0,newSeason.getRankingMethod().getLosePoints());
         assertEquals(2,newSeason.getRankingMethod().getDrawPoints());
-        assertEquals("oneGameSchedulingMethod", newSeason.getSchedulingMethod().getClass().getName());
+        assertEquals("domain.TwoGameSchedulingMethod", newSeason.getSchedulingMethod().getClass().getName());
     }
 
     @Test

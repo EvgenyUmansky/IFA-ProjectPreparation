@@ -187,7 +187,7 @@ public class ManagerDBAccess implements DBAccess<TeamManager> {
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }
