@@ -33,7 +33,14 @@ public class TeamController {
         Team newTeam = new Team(name, field, owner);
 
         tda.save(newTeam);
-        oda.save(owner);
+
+        TeamOwner checkOwner = oda.select(teamOwner);
+        if(checkOwner == null) {
+            oda.save(owner);
+        }
+        else {
+            oda.update(owner);
+        }
 
         uda.update(user);
 
