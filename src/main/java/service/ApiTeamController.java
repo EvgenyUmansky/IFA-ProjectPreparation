@@ -56,8 +56,8 @@ public class ApiTeamController {
     }
 
     @PostMapping("/teams")
-    public void createTeam(@RequestBody newTeamDTO newTeam, @RequestHeader String username) throws Exception {
+    public void createTeam(@RequestBody newTeamDTO newTeam) throws Exception {
         // Create new team to specific user ...? -> should Add user validation
-        controller.createTeam(username, newTeam.getTeamName(), newTeam.getStadium(), newTeam.getCoach(), newTeam.getPlayers());
+        controller.createTeam( newTeam.getTeamName(), newTeam.getStadium(), newTeam.getCoach(), newTeam.getPlayers(), newTeam.getOwner());
     }
 }

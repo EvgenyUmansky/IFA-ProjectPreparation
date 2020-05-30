@@ -9,12 +9,13 @@ public class newTeamDTO {
     private String stadium;
     private String[] players;
     private String coach;
-
-    public newTeamDTO(String teamName, String stadium, String[] players, String coach) {
+    private String owner;
+    public newTeamDTO(String teamName, String stadium, String[] players, String coach, String owner) {
         this.teamName = teamName;
         this.stadium = stadium;
         this.players = players;
         this.coach = coach;
+        this.owner = owner;
     }
 
     public String getTeamName() {
@@ -31,5 +32,9 @@ public class newTeamDTO {
 
     public String getCoach() {
         return coach;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }
