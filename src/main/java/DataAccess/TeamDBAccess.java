@@ -1,6 +1,5 @@
 package DataAccess;
 
-import domain.League;
 import domain.Team;
 import org.apache.log4j.Logger;
 
@@ -273,7 +272,7 @@ public class TeamDBAccess implements DBAccess<Team>{
                 String status = retrievedTeams.getString(4);
 
 
-                teams.put(teamName,new Team(teamName,fieldName,email,status));
+                teams.put(teamName,new Team(teamName,email,fieldName,status));
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

@@ -13,13 +13,13 @@ public enum TeamStatus {
     TempClose {
         @Override
         public String toString(){
-            return "Temporarily Closed";
+            return "TempClose";
         }
     },
     PermanentlyClose {
         @Override
         public String toString(){
-            return "Permanently Closed";
+            return "PermanentlyClose";
         }
     }
 }
