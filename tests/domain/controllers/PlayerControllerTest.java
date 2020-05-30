@@ -128,6 +128,8 @@ class PlayerControllerTest {
         ArrayList<TeamPlayer> availablePlayers = playerController.getAvailablePlayers();
         assertEquals(4,availablePlayers.size());
 
-        //TODO: more checks
+        for(TeamPlayer player : availablePlayers){
+            assertNull(player.getCurrentTeam());
+        }
     }
 }

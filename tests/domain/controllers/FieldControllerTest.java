@@ -41,7 +41,5 @@ class FieldControllerTest {
     @Test
     void getAvailableFields() {
         assertEquals(7,fieldController.getAvailableFields().size());
-
-        //TODO: more checks
     }
 }
