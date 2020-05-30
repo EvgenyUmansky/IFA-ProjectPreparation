@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ApiCoachControllerTest {
     ApiCoachController controller;
     TeamCoachDBAccess teamCoachDBAccess;
-    UserDTO userDTO;
 
     @BeforeEach
     public void insertBeforeTest() {
@@ -24,7 +23,8 @@ class ApiCoachControllerTest {
 
     @AfterEach
     public void deleteAfterTest() {
-        userDTO = null;
+        controller = null;
+        teamCoachDBAccess = null;
     }
 
     @Test
