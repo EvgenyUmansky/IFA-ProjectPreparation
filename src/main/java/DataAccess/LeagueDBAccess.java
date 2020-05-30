@@ -65,6 +65,37 @@ public class LeagueDBAccess implements DBAccess<League>{
 
     @Override
     public void delete(League league) {
+        if(league == null){
+            logger.error("Couldn't execute 'delete(League league)' in LeagueDBAccess: the league is null");
+            return;
+        }
+
+        String query = "delete from [Leagues] where leagueName = ? and year = ?";
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+
+        try{
+            statement = connection.prepareStatement(query);
+            statement.setString(1,league.getLeagueName());
+            statement.setInt(2,league.getSeason());
+
+            statement.executeUpdate();
+            connection.commit();
+        }
+        catch(SQLException e){
+            logger.error(e.getMessage());
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            }
+            catch (SQLException e3) {
+                logger.error("Couldn't execute 'delete(League league)' in LeagueDBAccess for " + league.getLeagueName() + " and season " + league.getSeason());
+            }
+        }
     }
 
     @Override
