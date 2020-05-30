@@ -123,7 +123,7 @@ public class LeagueDBAccess implements DBAccess<League>{
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }
