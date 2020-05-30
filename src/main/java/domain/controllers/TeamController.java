@@ -20,35 +20,54 @@ public class TeamController {
     DBAccess<TeamPlayer> pda = TeamPlayerDBAccess.getInstance();
     DBAccess<TeamManager> mda = ManagerDBAccess.getInstance();
     DBAccess<TeamCoach> cda = TeamCoachDBAccess.getInstance();
+    DBAccess< Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
-    public TeamDTO createTeam(String teamOwner, String name, String stadium) {
+
+    public void createTeam(String teamOwner, String name, String stadium, String coachUserName, String[] players) {
         User user = uda.select(teamOwner);
-        Field field = fda.select(stadium);
+        Field field = fda.conditionedSelect(new String[]{"Fields.FieldName", stadium}).values().iterator().next();
         user.addRoleToUser(Role.TEAM_OWNER);
         TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
         Team newTeam = new Team(name, field, owner);
 
         tda.save(newTeam);
-        uda.update(user);
         oda.save(owner);
+
+        uda.update(user);
+
+        ArrayList<String> ownerRole = new ArrayList<>();
+        ownerRole.add("TEAM_OWNER");
+        urda.save(new Pair<>(teamOwner,ownerRole));
         tfda.save(new Pair<>(name, stadium));
 
+        for(String player : players){
+            TeamPlayer selectedPlayer = pda.select(player);
+            newTeam.addPlayer(selectedPlayer);
+            selectedPlayer.setCurrentTeam(newTeam.getTeamName());
+            pda.update(selectedPlayer);
+        }
+
+        TeamCoach coach = cda.select(coachUserName);
+        newTeam.addCoach(coach);
+        coach.setCurrentTeam(newTeam.getTeamName());
+        cda.update(coach);
+
         logger.info(name + " team was created");
-        return new TeamDTO(
-                newTeam.getTeamName(),
-                newTeam.getStadium(),
-                //newTeam.getFields().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getFields().values()),
-                //newTeam.getPlayers().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getPlayers().values()),
-                //newTeam.getCoaches().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getCoaches().values()),
-                //newTeam.getManagers().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getManagers().values()),
-                //newTeam.getOwners().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getOwners().values()),
-                newTeam.getTeamStatus().name()
-        );
+//        return new TeamDTO(
+//                newTeam.getTeamName(),
+//                newTeam.getStadium(),
+//                //newTeam.getFields().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getFields().values()),
+//                //newTeam.getPlayers().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getPlayers().values()),
+//                //newTeam.getCoaches().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getCoaches().values()),
+//                //newTeam.getManagers().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getManagers().values()),
+//                //newTeam.getOwners().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getOwners().values()),
+//                newTeam.getTeamStatus().name()
+//        );
     }
 
     public ArrayList<TeamDTO> getTeams() {
@@ -76,7 +95,6 @@ public class TeamController {
             User playerUser = allUsers.get(player.getUserName());
             player.setName(playerUser.getName());
             player.setMail(playerUser.getMail());
-
 
             if(player.getCurrentTeam() != null) {
                 Team team = allTeams.get(player.getCurrentTeam());
@@ -170,7 +188,7 @@ public class TeamController {
      */
     public Team getTeamDetails(String teamName) {
         logger.info(teamName + " get details");
-        return Team.getTeamByName(teamName);
+        return tda.select(teamName);
     }
 
 
@@ -187,11 +205,11 @@ public class TeamController {
      */
     public void addPlayer(String teamName, String userName) throws Exception {
         // TODO: get team from DB by teamName
-        Team team = Team.getTeamByName(teamName);
+        Team team = tda.select(teamName);
         if (team.getTeamStatus() != TeamStatus.Open) {
             throw new Exception("This team is currently closed");
         }
-        TeamPlayer player = (TeamPlayer) (User.getUserByID(userName).getRoles().get(Role.TEAM_PLAYER));
+        TeamPlayer player = pda.select(userName);
         if (player == null) {
             throw new Exception("This user is not a player");
         }
@@ -210,11 +228,11 @@ public class TeamController {
      */
     public void addCoach(String teamName, String userName) throws Exception {
         // TODO: get team from DB by teamName
-        Team team = Team.getTeamByName(teamName);
+        Team team = tda.select(teamName);
         if (team.getTeamStatus() != TeamStatus.Open) {
             throw new Exception("This team is currently closed");
         }
-        TeamCoach coach = (TeamCoach) (User.getUserByID(userName).getRoles().get(Role.COACH));
+        TeamCoach coach = cda.select(userName);
         if (coach == null) {
             throw new Exception("This user is not a coach");
         }
@@ -232,11 +250,11 @@ public class TeamController {
      */
     public void addField(String teamName, String fieldName) throws Exception {
         // TODO: get team from DB by teamName
-        Team team = Team.getTeamByName(teamName);
+        Team team = tda.select(teamName);
         if (team.getTeamStatus() != TeamStatus.Open) {
             throw new Exception("This team is currently closed");
         }
-        team.addField(Field.getFieldByName(fieldName));
+        team.addField(fda.select(fieldName));
 
         logger.info(fieldName + " field was added to team " + teamName);
     }
@@ -251,7 +269,7 @@ public class TeamController {
      */
     public void removePlayer(String teamName, String userName) throws Exception {
         // TODO: get team from DB by teamName
-        Team team = Team.getTeamByName(teamName);
+        Team team = tda.select(teamName);
         if (team.getTeamStatus() != TeamStatus.Open) {
             throw new Exception("This team is currently closed");
         }

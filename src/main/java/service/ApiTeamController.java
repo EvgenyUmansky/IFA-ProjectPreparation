@@ -3,6 +3,7 @@ package service;
 import domain.Team;
 import org.springframework.web.bind.annotation.*;
 import service.pojos.TeamDTO;
+import service.pojos.newTeamDTO;
 
 import java.util.ArrayList;
 
@@ -48,8 +49,8 @@ public class ApiTeamController {
     }
 
     @PostMapping("/teams")
-    public TeamDTO createTeam(@RequestBody TeamDTO newTeam, @RequestHeader String username) throws Exception {
+    public void createTeam(@RequestBody newTeamDTO newTeam, @RequestHeader String username) throws Exception {
         // Create new team to specific user ...? -> should Add user validation
-        return controller.createTeam(username, newTeam.getTeamName(), newTeam.getStadium().getFieldName());
+        controller.createTeam(username, newTeam.getTeamName(), newTeam.getStadium(), newTeam.getCoach(), newTeam.getPlayers());
     }
 }

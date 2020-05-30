@@ -80,14 +80,12 @@ public class AuthController {
 
 
     /////////// Games ///////////
-        ArrayList<Game> games = new ArrayList<>();
         ArrayList<String> gameIds = new ArrayList<>();
 
-        if(rolesAsStrings.contains("FAN")){
-            games = fgda.select(userName).getValue();
-        }
-        else if(rolesAsStrings.contains("REFEREE")){
-            games = rgda.select(userName).getValue();
+        ArrayList<Game> games = new ArrayList<>(fgda.select(userName).getValue());
+
+        if(rolesAsStrings.contains("REFEREE")){
+            games.addAll(rgda.select(userName).getValue());
         }
 
         for(Game game : games){

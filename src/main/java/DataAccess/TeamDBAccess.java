@@ -1,6 +1,5 @@
 package DataAccess;
 
-import domain.League;
 import domain.Team;
 import org.apache.log4j.Logger;
 

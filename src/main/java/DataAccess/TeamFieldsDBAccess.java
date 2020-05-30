@@ -1,7 +1,6 @@
 package DataAccess;
 
-import domain.Game;
-import domain.Team;
+
 import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
@@ -9,10 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
+public class TeamFieldsDBAccess implements DBAccess<Pair<String, String>> {
     static Logger logger = Logger.getLogger(TeamFieldsDBAccess.class.getName());
     private static final TeamFieldsDBAccess instance = new TeamFieldsDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -31,18 +29,16 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
         PreparedStatement statement = null;
         String query = "insert into [TeamFields] values (?, ?)";
 
-        try{
+        try {
             statement = connection.prepareStatement(query);
             statement.setString(1, teamFieldPair.getKey());
             statement.setString(2, teamFieldPair.getValue());
 
             statement.executeUpdate();
             connection.commit();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             logger.error(e.getMessage());
-        }
-        finally {
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
@@ -78,10 +74,9 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
         ResultSet retrievedTeams = null;
         HashMap<String, Pair<String, String>> teamFields = new HashMap<>();
 
-        if(conditions.length == 0){
+        if (conditions.length == 0) {
             query = "select * from [TeamFields]";
-        }
-        else {
+        } else {
             query = "select * from [TeamFields] where";
 
             for (int i = 0; i < conditions.length; i++) {
@@ -97,7 +92,7 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
         try {
             statement = connection.prepareStatement(query);
 
-            if(conditions.length > 0) {
+            if (conditions.length > 0) {
                 int i = 0;
                 while (i < conditions.length) {
                     switch (conditions[i].toLowerCase()) {
@@ -116,11 +111,11 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String,String>>{
             retrievedTeams = statement.executeQuery();
 
 
-            while(retrievedTeams.next()){
+            while (retrievedTeams.next()) {
                 String teamName = retrievedTeams.getString(1);
                 String fieldName = retrievedTeams.getString(2);
 
-                teamFields.put(teamName+fieldName,new Pair<>(teamName,fieldName));
+                teamFields.put(teamName + fieldName, new Pair<>(teamName, fieldName));
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
