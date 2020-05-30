@@ -180,7 +180,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
     @Override
     public HashMap<String, TeamCoach> conditionedSelect(String[] conditions) {
-        String query = "select * from [Coaches] where ";
+        String query;
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement;
         ResultSet retrievedCoaches;
@@ -192,7 +192,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
 
 
         else {
-            query = "select * from [TeamFields] where";
+            query = "select * from [Coaches] where";
 
             for (int i = 0; i < conditions.length; i++) {
                 if (i % 2 == 0) {
