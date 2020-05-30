@@ -36,7 +36,7 @@ public class CoachPage extends PersonalPage {
      */
     public void setRole(String role) {
         this.role = role;
-        getAlert().sendAlert(new AlertNotification("Role of the user of page " + getName() + "  has changed", "The new role is " + role));
+        getAlert().sendAlert(new Notification("Role of the user of page " + getName() + "  has changed. The new role is " + role));
     }
 
     /**
@@ -46,7 +46,7 @@ public class CoachPage extends PersonalPage {
      */
     public void setQualification(String qualification) {
         this.qualification = qualification;
-        getAlert().sendAlert(new AlertNotification("Qualification of the user of page " + getName() + "  has changed", "The new qualification is " + qualification));
+        getAlert().sendAlert(new Notification("Qualification of the user of page " + getName() + "  has changed. The new qualification is " + qualification));
     }
 
     /**
@@ -56,7 +56,7 @@ public class CoachPage extends PersonalPage {
      */
     public void setCurrentTeam(String currentTeam) {
         this.currentTeam = currentTeam;
-        getAlert().sendAlert(new AlertNotification("Team of the user of page " + getName() + "  has changed", "The new team is " + currentTeam));
+        getAlert().sendAlert(new Notification("Team of the user of page " + getName() + "  has changed. The new team is " + currentTeam));
     }
 
     /**

@@ -245,4 +245,9 @@ class ManagerDBAccessTest {
         preparedStatement.executeUpdate();
         connection.commit();
     }
+
+    @Test
+    void conditionedSelect() {
+        managerDBAccess.conditionedSelect(null);
+    }
 }

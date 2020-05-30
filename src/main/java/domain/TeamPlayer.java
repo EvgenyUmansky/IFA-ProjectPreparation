@@ -41,6 +41,13 @@ public class TeamPlayer extends TeamMember {
         super(userName, mail, name);
     }
 
+    public TeamPlayer(String username, String mail, Date birthDate, String position, String squadNumber, String name){
+        super(username, mail, name);
+        this.birthDate = birthDate;
+        this.position = position;
+        this.squadNumber = squadNumber;
+    }
+
     // Functionality
 
 

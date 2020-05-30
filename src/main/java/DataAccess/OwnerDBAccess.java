@@ -1,15 +1,18 @@
 package DataAccess;
 
+import domain.Team;
 import domain.TeamOwner;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class OwnerDBAccess implements DBAccess<TeamOwner> {
-
+    static Logger logger = Logger.getLogger(OwnerDBAccess.class.getName());
     private static final OwnerDBAccess instance = new OwnerDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -24,7 +27,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void save(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'save(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
+            logger.error("teamOwner object is null");
             return;
         }
 
@@ -33,13 +36,11 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
         String query = "insert into [Owners] values (?, ?)";
 
         try {
-            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1, teamOwner.getUserName());
-            if(teamOwner.getTeam() != null) {
-                statement.setString(2, teamOwner.getTeam().getTeamName());
-            }
-            else {
+            if (teamOwner.getTeam() != null) {
+                statement.setString(2, teamOwner.getTeam());
+            } else {
                 statement.setString(2, null);
             }
 
@@ -47,7 +48,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException | NullPointerException e) {
-            System.out.println("Couldn't execute 'save(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -55,7 +56,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -64,7 +65,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void update(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'update(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
+            logger.error("Couldn't execute 'update(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
             return;
         }
 
@@ -76,15 +77,14 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
 
         try {
             statement = connection.prepareStatement(query);
-            statement.setString(1, teamOwner.getTeam().getTeamName());
+            statement.setString(1, teamOwner.getTeam());
             statement.setString(2, teamOwner.getUserName());
-
 
 
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'update(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -92,7 +92,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -100,7 +100,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
     @Override
     public void delete(TeamOwner teamOwner) {
         if (teamOwner == null) {
-            System.out.println("Couldn't execute 'delete(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
+            logger.error("Couldn't execute 'delete(TeamOwner teamOwner)' in OwnerDBAccess: the teamOwner is null");
             return;
         }
 
@@ -115,7 +115,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
-            System.out.println("Couldn't execute 'delete(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -123,7 +123,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -148,7 +148,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
             }
         } catch (SQLException e) {
             assert false;
-            System.out.println("Couldn't execute 'select(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (statement != null) {
@@ -159,10 +159,71 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 }
                 connection.close();
             } catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(TeamOwner teamOwner)' in OwnerDBAccess for " + teamOwner.getUserName());
+                logger.error(e3.getMessage());
             }
         }
         return teamOwner;
+    }
+
+    @Override
+    public HashMap<String, TeamOwner> conditionedSelect(String[] conditions) {
+        String query;
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedOwners = null;
+        HashMap<String, TeamOwner> teamOwners = new HashMap<>();
+
+        if(conditions.length == 0){
+            query = "select * from [Owners]";
+        }
+        else {
+            query = "select * from [Owners] where";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "username":
+                        case "teamname":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    i += 2;
+                }
+            }
+
+            retrievedOwners = statement.executeQuery();
+
+
+            while(retrievedOwners.next()){
+                String userName = retrievedOwners.getString(1);
+                String teamName = retrievedOwners.getString(2);
+
+                TeamOwner teamOwner = new TeamOwner(userName,"","");
+                teamOwner.setTeam(teamName);
+                teamOwners.put(userName,teamOwner);
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return teamOwners;
     }
 
 

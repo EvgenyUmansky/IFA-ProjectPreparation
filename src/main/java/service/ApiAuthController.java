@@ -3,14 +3,14 @@ package service;
 import domain.Role;
 import domain.Subscriber;
 import domain.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import service.pojos.LoginDTO;
+import service.pojos.UserDTO;
 
 import java.util.HashMap;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
 public class ApiAuthController {
     private final domain.controllers.AuthController controller;
 
@@ -23,15 +23,14 @@ public class ApiAuthController {
         controller.connectToExternalSystems();
     }
 
-    @GetMapping("/login")
-    // This will log in a user
-    public User login(@RequestBody LoginDTO login) throws Exception {
+    @PostMapping("/login")
+    public UserDTO login(@RequestBody LoginDTO login) throws Exception {
         return controller.login(login.getUsername(), login.getPassword());
     }
 
-    @GetMapping("/users")
+    @PostMapping("/logout")
     // This will log out in the following way: /users?username=<username>
-    public void logout(@RequestParam("username") String userName) throws Exception {
+    public void logout(@RequestParam("username") String userName) {
         controller.logout(userName);
     }
 

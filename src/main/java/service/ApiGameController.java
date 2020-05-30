@@ -1,10 +1,12 @@
 package service;
 
-import domain.*;
 import org.springframework.web.bind.annotation.*;
+import service.pojos.FollowDTO;
+import service.pojos.GameDTO;
+import service.pojos.GameEventDTO;
 
 import java.util.ArrayList;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class ApiGameController {
 
@@ -14,20 +16,34 @@ public class ApiGameController {
         controller = new domain.controllers.GameController();
     }
 
+    @GetMapping("/games/all_games")
+    // This will get games by referee user in the following way: /games?referee=<username>
+    public ArrayList<GameDTO> getGames(){
+        return controller.getGames();
+    }
+
     @GetMapping("/games")
-    // This will get games by referee user in the following way: /games?username=<username>
-    public ArrayList<Game> getRefereeGames(@RequestParam("username") String userName){
+    // This will get games by referee user in the following way: /games?referee=<username>
+    public ArrayList<GameDTO> getRefereeGames(@RequestParam(value = "referee", required = false) String userName){
+        if(userName == null){
+            return controller.getGames();
+        }
         return controller.getRefereeGames(userName);
     }
 
     @GetMapping("/games/{gameId}")
-    public Game getGame(@PathVariable String gameId){
+    public GameDTO getGame(@PathVariable String gameId){
         return controller.getGame(gameId);
     }
 
     @PostMapping("/games/{gameId}")
-    public void addFanSubscriptionToGame(@PathVariable String gameId, @RequestParam String eventName, @RequestParam String description) throws Exception {
-        controller.addGameEventToGame(gameId, eventName, description);
+    public GameDTO addGameEventToGame(@RequestBody GameEventDTO event) {
+        return controller.addGameEventToGame(event.getGameId(), event.getMinutes(), event.getEvent(), event.getDescription());
+    }
+
+    @PostMapping("/games/follow")
+    public void addFanSubscriptionToGame(@RequestBody FollowDTO follow) {
+        controller.addFanSubscriptionToGame(follow.getGameId(), follow.getUserName());
     }
 
     // This will update event by referee user in the following way: /games/{gameId}?eventId=<eventId>
@@ -35,6 +51,4 @@ public class ApiGameController {
     public void changeGameEvent(@PathVariable String gameId, @RequestParam("eventId") String eventId, @RequestParam String dateTimeStr, @RequestParam String gameMinutes, @RequestParam String eventName, @RequestParam String description) throws Exception {
         controller.changeGameEvent(gameId, eventId,  dateTimeStr, gameMinutes, eventName, description);
     }
-
-
 }

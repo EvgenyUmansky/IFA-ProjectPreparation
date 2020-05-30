@@ -47,6 +47,25 @@ public class League {
      */
     public League(String leagueName) {
         this.leagueName = leagueName;
+        this.season = season;
+        this.teamsTable = new LinkedHashMap<>();
+        this.games = new ArrayList<>();
+        this.isBegin = false;
+        this.referees = new HashSet<>();
+    }
+
+    /**
+     * Constructor
+     * @param leagueName the name of the league
+     * @param season the season
+     */
+    public League(String leagueName, int season) {
+        this.leagueName = leagueName;
+        this.season = season;
+        this.teamsTable = new LinkedHashMap<>();
+        this.games = new ArrayList<>();
+        this.isBegin = false;
+        this.referees = new HashSet<>();
     }
 
 
@@ -68,6 +87,18 @@ public class League {
     }
 
 
+    public League(String leagueName, int season, boolean scheduling, int winPoints, int drawPoints, int losePoints){
+        this.leagueName = leagueName;
+        this.season = season;
+
+        if(scheduling)
+            this.schedulingMethod = new OneGameSchedulingMethod();
+        else
+            this.schedulingMethod = new TwoGameSchedulingMethod();
+        this.rankingMethod = new RankingMethod();
+
+        rankingMethod.setRankingMethod(winPoints,drawPoints,losePoints);
+    }
 
     //====================== DB Access Functions =====================//
 
@@ -115,7 +146,7 @@ public class League {
             }
             return true;
         }
-       return false;
+        return false;
     }
 
 
@@ -125,7 +156,7 @@ public class League {
      */
     public boolean scheduledGames(){
         if(isBegin){
-           return false;
+            return false;
         }
         int i = 0;
         Team [] teamArray = new Team[this.teamsTable.size()];
@@ -176,9 +207,9 @@ public class League {
         if(homeTeam != null && awayTeam != null){
             if(hostTeamScore > awayTeamScore){
                 teamsTable.put(homeTeam, teamsTable.get(homeTeam) + rankingMethod.getWinPoints());
-                teamsTable.put(awayTeam, teamsTable.get(awayTeam) + rankingMethod.getLoosPoints());
+                teamsTable.put(awayTeam, teamsTable.get(awayTeam) + rankingMethod.getLosePoints());
             }else if(awayTeamScore > hostTeamScore){
-                teamsTable.put(homeTeam, teamsTable.get(homeTeam) + rankingMethod.getLoosPoints());
+                teamsTable.put(homeTeam, teamsTable.get(homeTeam) + rankingMethod.getLosePoints());
                 teamsTable.put(awayTeam, teamsTable.get(awayTeam) + rankingMethod.getWinPoints());
             }else{
                 teamsTable.put(homeTeam, teamsTable.get(homeTeam) + rankingMethod.getDrawPoints());

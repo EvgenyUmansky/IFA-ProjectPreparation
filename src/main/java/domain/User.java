@@ -1,6 +1,5 @@
 package domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -18,6 +17,8 @@ public class User {
     private String mail;
     private boolean isClosed;
     private boolean isMail;
+
+    private ArrayList<Notification> notifications;
 
     // ========================= Constructor ==========================
 
@@ -37,6 +38,8 @@ public class User {
         addRoleToUser(Role.FAN);
         isClosed = false;
         setMail(true);
+
+        notifications = new ArrayList<>();
     }
 
 
@@ -60,6 +63,21 @@ public class User {
 
     // ========================= Getters and Setters ==========================
 
+    /**
+     * Adds a notification to the user's notifications box in the system
+     * @param notification alert message
+     */
+    public void addNotifications(Notification notification){
+        this.notifications.add(notification);
+    }
+
+    /**
+     * Returns all the notifications the user has received.
+     * @return all the notifications the user has received.
+     */
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
 
     public boolean isMail() {
         return isMail;

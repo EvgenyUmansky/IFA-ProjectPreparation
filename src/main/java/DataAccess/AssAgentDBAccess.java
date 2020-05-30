@@ -1,10 +1,14 @@
 package DataAccess;
 import domain.AssociationAgent;
+import domain.controllers.GameController;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
+    static Logger logger = Logger.getLogger(AssAgentDBAccess.class.getName());
 
     private static final AssAgentDBAccess instance = new AssAgentDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -20,6 +24,7 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
     @Override
     public void save(AssociationAgent associationAgent) {
         if(associationAgent == null){
+            logger.error("Couldn't execute 'save(AssociationAgent associationAgent)' in AssAgentDBAccess: the associationAgent is null");
             System.out.println("Couldn't execute 'save(AssociationAgent associationAgent)' in AssAgentDBAccess: the associationAgent is null");
             return;
         }
@@ -38,6 +43,7 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
             connection.commit();
         }
         catch (SQLException | NullPointerException e){
+            logger.error(e.getMessage());
             System.out.println("Couldn't execute 'save(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
         }
         finally {
@@ -47,7 +53,8 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'save(AssociationAgent associationAgent)' in UserDBAccess for " + associationAgent.getUserName());
             }
         }
@@ -62,6 +69,7 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
     @Override
     public void delete(AssociationAgent associationAgent) {
         if(associationAgent == null){
+            logger.error("Couldn't execute 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess: the associationAgent is null");
             System.out.println("Couldn't execute 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess: the associationAgent is null");
             return;
         }
@@ -78,6 +86,7 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
             connection.commit();
         }
         catch(SQLException e){
+            logger.error(e.getMessage());
             System.out.println("Couldn't execute 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
         }
         finally {
@@ -87,7 +96,8 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
             }
         }
@@ -115,6 +125,7 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
             }
         }
         catch (SQLException e){
+            logger.error(e.getMessage());
             assert false;
             System.out.println("Couldn't execute 'select(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
         }
@@ -128,10 +139,16 @@ public class AssAgentDBAccess implements DBAccess<AssociationAgent> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'delete(AssociationAgent associationAgent)' in AssAgentDBAccess for " + associationAgent.getUserName());
             }
         }
         return associationAgent;
+    }
+
+    @Override
+    public HashMap<String, AssociationAgent> conditionedSelect(String[] conditions) {
+        return null;
     }
 }

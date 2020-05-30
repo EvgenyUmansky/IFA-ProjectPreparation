@@ -1,31 +1,63 @@
 package DataAccess;
 
+import domain.Referee;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
- *
+ * Represents an object that accesses the database
  */
 public interface DBAccess<T> {
 
     /**
-     *
-     * @param
+     * Saves an object as a record in the matching table in the database
+     * @param t the object
      */
     void save(T t);
 
     /**
-     *
-     * @param
+     * Updates the object's matching record in the database
+     * @param t the object
      */
     void update(T t);
 
     /**
-     *
-     * @param
+     * Deletes the object's matching record from the database
+     * @param t the object
      */
     void delete(T t);
 
     /**
-     *
-     * @param
+     * Retrieves an object that matches the given id from the database
+     * @param id the id of the object
      */
     T select(String id);
+
+    /**
+     * Retrieves one or more objects that fit the given conditions in the database
+     * @param conditions the wanted values of the fields in the table
+     * @return the matching objects
+     */
+   HashMap<String,T> conditionedSelect(String[] conditions);
+
+       /* String query = "select * from User where";
+        for(int i=0; i<conditions.length; i++){
+            if(i%2 == 0){
+                query += " " + conditions[i];
+            }
+            else {
+                query += " = ?";
+            }
+        }
+
+        int index = 1;
+            for(int i = 0; i < conditions.length; i++){
+                if(i % 2 != 0){
+                    statement.setString(index, conditions[i]);
+                    index++;
+                }
+            }
+
+    }*/
 }

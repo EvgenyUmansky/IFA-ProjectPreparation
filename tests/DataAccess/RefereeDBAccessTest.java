@@ -215,6 +215,10 @@ class RefereeDBAccessTest {
         preparedStatement = connection.prepareStatement("delete from [Referee] where username = 'UserName_1'");
         preparedStatement.executeUpdate();
         connection.commit();
+    }
 
+    @Test
+    void conditionedSelect() {
+        refereeDBAccess.conditionedSelect(null);
     }
 }

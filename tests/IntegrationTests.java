@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,7 +45,7 @@ class IntegrationTests {
     SystemAdministrator sysAdminMail;
     SystemAdministrator sysAdminNotMail;
     ArrayList<SystemAdministrator> sysAdminsList;
-    AlertNotification alertNotification;
+    Notification notification;
 
 
     // ========================= TeamMembers receive Alerts from Team Tests =================================
@@ -118,7 +117,7 @@ class IntegrationTests {
         sysAdminsList.add(sysAdminMail);
         sysAdminsList.add(sysAdminNotMail);
 
-        alertNotification = new AlertNotification("Complaint to admins", "This project is very very hard, it eats all our time!");
+        notification = new Notification("This project is very very hard, it eats all our time!");
 
 
         // ========================= TeamMembers receive Alerts from Team Tests =================================
@@ -197,7 +196,7 @@ class IntegrationTests {
     @Test
     void fansReceiveAlertsFromPersonalPage() {
 
-        assertEquals(0, fanNotMail.getAlertsMessages().size());
+        assertEquals(0, fanNotMail.getNotifications().size());
         // Team Page
 
         teamPage.addSubscriber(fanMail);
@@ -205,101 +204,101 @@ class IntegrationTests {
 
 
         teamPage.setName("Test Name team");
-        assertEquals("The new name is Test Name team", fanNotMail.getAlertsMessages().get(0).getMessage());
+        assertEquals("The new name is Test Name team", fanNotMail.getNotifications().get(0).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString()); // check print
         outContent.reset(); // clean print log
 
         teamPage.setInfo("Test info team");
-        assertEquals("The new info is Test info team", fanNotMail.getAlertsMessages().get(1).getMessage());
+        assertEquals("The new info is Test info team", fanNotMail.getNotifications().get(1).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         teamPage.setMail("Test mail team");
-        assertEquals("The new mail is Test mail team", fanNotMail.getAlertsMessages().get(2).getMessage());
+        assertEquals("The new mail is Test mail team", fanNotMail.getNotifications().get(2).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         teamPage.setPlayers(players);
-        assertEquals("The new players are Test player 2, Test player 1", fanNotMail.getAlertsMessages().get(3).getMessage());
+        assertEquals("The new players are Test player 2, Test player 1", fanNotMail.getNotifications().get(3).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         teamPage.setCoaches(coaches);
-        assertEquals("The new coaches are Test coach 2, Test coach 1", fanNotMail.getAlertsMessages().get(4).getMessage());
+        assertEquals("The new coaches are Test coach 2, Test coach 1", fanNotMail.getNotifications().get(4).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         teamPage.setManagers(managers);
-        assertEquals("The new managers are Test manager 1, Test manager 2", fanNotMail.getAlertsMessages().get(5).getMessage());
+        assertEquals("The new managers are Test manager 1, Test manager 2", fanNotMail.getNotifications().get(5).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         teamPage.setStadium(fieldPlayerPage);
-        assertEquals("The new stadium is Test player page field", fanNotMail.getAlertsMessages().get(6).getMessage());
+        assertEquals("The new stadium is Test player page field", fanNotMail.getNotifications().get(6).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         coachPage.addSubscriber(fanMail);
         coachPage.addSubscriber(fanNotMail);
         coachPage.setName("Test Name coach");
-        assertEquals("The new name is Test Name coach", fanNotMail.getAlertsMessages().get(7).getMessage());
+        assertEquals("The new name is Test Name coach", fanNotMail.getNotifications().get(7).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         coachPage.setInfo("Test info coach");
-        assertEquals("The new info is Test info coach", fanNotMail.getAlertsMessages().get(8).getMessage());
+        assertEquals("The new info is Test info coach", fanNotMail.getNotifications().get(8).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         coachPage.setMail("Test mail coach");
-        assertEquals("The new mail is Test mail coach", fanNotMail.getAlertsMessages().get(9).getMessage());
+        assertEquals("The new mail is Test mail coach", fanNotMail.getNotifications().get(9).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         coachPage.setCurrentTeam(teamCoach.getTeamName());
-        assertEquals("The new team is Test Coach Team", fanNotMail.getAlertsMessages().get(10).getMessage());
+        assertEquals("The new team is Test Coach Team", fanNotMail.getNotifications().get(10).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         coachPage.setQualification("Test qualification");
-        assertEquals("The new qualification is Test qualification", fanNotMail.getAlertsMessages().get(11).getMessage());
+        assertEquals("The new qualification is Test qualification", fanNotMail.getNotifications().get(11).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         coachPage.setRole("Test Role");
-        assertEquals("The new role is Test Role", fanNotMail.getAlertsMessages().get(12).getMessage());
+        assertEquals("The new role is Test Role", fanNotMail.getNotifications().get(12).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         playerPage.addSubscriber(fanMail);
         playerPage.addSubscriber(fanNotMail);
         playerPage.setName("Test Name player");
-        assertEquals("The new name is Test Name player", fanNotMail.getAlertsMessages().get(13).getMessage());
+        assertEquals("The new name is Test Name player", fanNotMail.getNotifications().get(13).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         playerPage.setInfo("Test info player");
-        assertEquals("The new info is Test info player", fanNotMail.getAlertsMessages().get(14).getMessage());
+        assertEquals("The new info is Test info player", fanNotMail.getNotifications().get(14).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         playerPage.setMail("Test mail player");
-        assertEquals("The new mail is Test mail player", fanNotMail.getAlertsMessages().get(15).getMessage());
+        assertEquals("The new mail is Test mail player", fanNotMail.getNotifications().get(15).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         playerPage.setBirthDate(birthdayDate);
-        assertEquals("The new birthday is Sat May 07 00:00:00 IDT 3892", fanNotMail.getAlertsMessages().get(16).getMessage());
+        assertEquals("The new birthday is Sat May 07 00:00:00 IDT 3892", fanNotMail.getNotifications().get(16).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         playerPage.setPosition("Test position");
-        assertEquals("Position is Test position", fanNotMail.getAlertsMessages().get(17).getMessage());
+        assertEquals("Position is Test position", fanNotMail.getNotifications().get(17).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         playerPage.setSquadNumber("Test squad");
-        assertEquals("The new squad number is Test squad", fanNotMail.getAlertsMessages().get(18).getMessage());
+        assertEquals("The new squad number is Test squad", fanNotMail.getNotifications().get(18).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
@@ -312,27 +311,27 @@ class IntegrationTests {
         game.addFanToAlerts(fanNotMail);
 
         game.sendAlertScoreToFan();
-        assertEquals("The score of the game between Real Madrid and unReal Madrid is 0:0", fanNotMail.getAlertsMessages().get(0).getMessage());
+        assertEquals("The score of the game between Real Madrid and unReal Madrid is 0:0", fanNotMail.getNotifications().get(0).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         game.sendAlertCloseGame();
-        assertEquals("Before the game between Real Madrid and unReal Madrid remains one day!", fanNotMail.getAlertsMessages().get(1).getMessage());
+        assertEquals("Before the game between Real Madrid and unReal Madrid remains one day!", fanNotMail.getNotifications().get(1).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         game.sendAlertChangeDateGame();
-        assertEquals("The new date of the game between Real Madrid and unReal Madrid is " + game.getGameDate().withSecond(0).withNano(0).toString(), fanNotMail.getAlertsMessages().get(2).getMessage());
+        assertEquals("The new date of the game between Real Madrid and unReal Madrid is " + game.getGameDate().withSecond(0).withNano(0).toString(), fanNotMail.getNotifications().get(2).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         game.addEvent(gameEvent);
-        assertEquals(gameEvent.toString(), fanNotMail.getAlertsMessages().get(3).getMessage());
+        assertEquals(gameEvent.toString(), fanNotMail.getNotifications().get(3).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
        // game.changeEvent(gameEvent, null, -1, null, null);
-        assertEquals(gameEvent.toString(), fanNotMail.getAlertsMessages().get(4).getMessage());
+        assertEquals(gameEvent.toString(), fanNotMail.getNotifications().get(4).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
     }
@@ -344,22 +343,22 @@ class IntegrationTests {
         game.addRefereeToGame(refereeNotMail);
 
         game.sendAlertCloseGame();
-        assertEquals("Before the game between Real Madrid and unReal Madrid remains one day!", refereeNotMail.getAlertsMessages().get(0).getMessage());
+        assertEquals("Before the game between Real Madrid and unReal Madrid remains one day!", refereeNotMail.getNotifications().get(0).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         game.sendAlertChangeDateGame();
-        assertEquals("The new date of the game between Real Madrid and unReal Madrid is " + game.getGameDate().withSecond(0).withNano(0).toString(), refereeNotMail.getAlertsMessages().get(1).getMessage());
+        assertEquals("The new date of the game between Real Madrid and unReal Madrid is " + game.getGameDate().withSecond(0).withNano(0).toString(), refereeNotMail.getNotifications().get(1).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
         game.addEvent(gameEvent);
-        assertEquals(gameEvent.toString(), refereeNotMail.getAlertsMessages().get(2).getMessage());
+        assertEquals(gameEvent.toString(), refereeNotMail.getNotifications().get(2).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
 
       //  game.changeEvent(gameEvent, null, -1, null, null);
-        assertEquals(gameEvent.toString(), refereeNotMail.getAlertsMessages().get(3).getMessage());
+        assertEquals(gameEvent.toString(), refereeNotMail.getNotifications().get(3).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
     }
@@ -367,8 +366,8 @@ class IntegrationTests {
     // ========================= Sys Admins receive Alerts (complaints) from Fans Tests ======================
     @Test
     void sysAdminsReceiveAlertsFromFans() {
-        fanNotMail.sendComplaintToSysAdmin(sysAdminsList, alertNotification);
-        assertEquals(alertNotification.getMessage(), sysAdminsList.get(1).getAlertsMessages().get(0).getMessage());
+        fanNotMail.sendComplaintToSysAdmin(sysAdminsList, notification);
+        assertEquals(notification.getSubject(), sysAdminsList.get(1).getNotifications().get(0).getSubject());
         assertEquals("The mail sent successfully\r\n", outContent.toString());
         outContent.reset();
     }
@@ -379,10 +378,10 @@ class IntegrationTests {
         team.closeTeam(teamOwnerUser);
         String mailPrintedMassage = "The mail sent successfully\r\n";
         mailPrintedMassage = mailPrintedMassage + mailPrintedMassage + mailPrintedMassage;
-        assertEquals("you team close temporary", teamPlayerNotMail.getAlertsMessages().get(0).getMessage());
-        assertEquals("you team close temporary", teamCoachNotMail.getAlertsMessages().get(0).getMessage());
-        assertEquals("you team close temporary", teamManagerNotMail.getAlertsMessages().get(0).getMessage());
-        assertEquals("you team close temporary", team.getOwners().get(teamOwnerUser.getUserName()).getAlertsMessages().get(0).getMessage());
+        assertEquals("you team close temporary", teamPlayerNotMail.getNotifications().get(0).getSubject());
+        assertEquals("you team close temporary", teamCoachNotMail.getNotifications().get(0).getSubject());
+        assertEquals("you team close temporary", teamManagerNotMail.getNotifications().get(0).getSubject());
+        assertEquals("you team close temporary", team.getOwners().get(teamOwnerUser.getUserName()).getNotifications().get(0).getSubject());
         assertEquals(mailPrintedMassage, outContent.toString());
         outContent.reset();
     }

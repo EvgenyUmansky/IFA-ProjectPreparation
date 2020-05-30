@@ -1,10 +1,14 @@
 package DataAccess;
 import domain.Fan;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class FanDBAccess implements DBAccess<Fan> {
+    static Logger logger = Logger.getLogger(FanDBAccess.class.getName());
+
 
     private static final FanDBAccess instance = new FanDBAccess();
     /*  private DBConnector dbc = DBConnector.getInstance();*/
@@ -20,6 +24,7 @@ public class FanDBAccess implements DBAccess<Fan> {
     @Override
     public void save(Fan fan) {
         if(fan == null){
+            logger.error("Couldn't execute 'save(AssociationAgent associationAgent)' in AssAgentDBAccess: the associationAgent is null");
             System.out.println("Couldn't execute 'save(Fan fan)' in FanDBAccess: the fan is null");
             return;
         }
@@ -38,6 +43,7 @@ public class FanDBAccess implements DBAccess<Fan> {
             connection.commit();
         }
         catch (SQLException | NullPointerException e){
+            logger.error(e.getMessage());
             System.out.println("Couldn't execute 'save(Fan fan)' in FanDBAccess for " + fan.getUserName());
         }
         finally {
@@ -47,7 +53,8 @@ public class FanDBAccess implements DBAccess<Fan> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'save(Fan fan)' in UserDBAccess for " + fan.getUserName());
             }
         }
@@ -62,6 +69,7 @@ public class FanDBAccess implements DBAccess<Fan> {
     @Override
     public void delete(Fan fan) {
         if(fan == null){
+            logger.error("Couldn't execute 'delete(Fan fan)' in FanDBAccess: the fan is null");
             System.out.println("Couldn't execute 'delete(Fan fan)' in FanDBAccess: the fan is null");
             return;
         }
@@ -87,7 +95,7 @@ public class FanDBAccess implements DBAccess<Fan> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
                 System.out.println("Couldn't close 'delete(Fan fan)' in FanDBAccess for " + fan.getUserName());
             }
         }
@@ -109,12 +117,11 @@ public class FanDBAccess implements DBAccess<Fan> {
             retrievedUser = statement.executeQuery();
 
             if(retrievedUser.next()){
-
-
                 fan = new Fan(username, "");
             }
         }
         catch (SQLException e){
+            logger.error(e.getMessage());
             assert false;
             System.out.println("Couldn't execute 'select(Fan fan)' in FanDBAccess for " + fan.getUserName());
         }
@@ -128,10 +135,16 @@ public class FanDBAccess implements DBAccess<Fan> {
                 }
                 connection.close();
             }
-            catch (SQLException e3) {
+            catch (SQLException e) {
+                logger.error(e.getMessage());
                 System.out.println("Couldn't close 'delete(Fan fan)' in FanDBAccess for " + fan.getUserName());
             }
         }
         return fan;
+    }
+
+    @Override
+    public HashMap<String, Fan> conditionedSelect(String[] conditions) {
+        return null;
     }
 }

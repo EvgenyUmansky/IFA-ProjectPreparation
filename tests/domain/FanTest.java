@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class FanTest {
 
     Fan fan;
-    AlertNotification alertNotification;
+    Notification notification;
     ArrayList<SystemAdministrator> sysAdmins;
 
     @BeforeEach
     public void insert() {
         fan = new Fan("Evgeny", "euguman@gmail.com");
-        alertNotification = new AlertNotification("Title sysAdmin", "Text");
+        notification = new Notification("Text");
 
         sysAdmins = new ArrayList<>();
         sysAdmins.add(new SystemAdministrator("SysAdmin_1", "euguman@gmail.com"));
@@ -29,12 +29,12 @@ class FanTest {
     public void delete(){
         fan = null;
         sysAdmins = null;
-        alertNotification = null;
+        notification = null;
     }
 
     @Test
     void sendComplaintToSysAdmin() {
-        Map<String, Boolean> isSentMap = fan.sendComplaintToSysAdmin(sysAdmins, alertNotification);
+        Map<String, Boolean> isSentMap = fan.sendComplaintToSysAdmin(sysAdmins, notification);
 
         for(String user : isSentMap.keySet()){
             assertTrue(isSentMap.get(user));

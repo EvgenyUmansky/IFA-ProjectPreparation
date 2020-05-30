@@ -1,9 +1,7 @@
 package domain;
 
-import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,15 +11,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  * This class represents a football match
  */
 public class Game {
-    static AtomicInteger nextId = new AtomicInteger();
-    private final int id;
+    // static AtomicInteger nextId = new AtomicInteger();
+    private int id;
 
     private League league;
     private Team hostTeam;
     private Team guestTeam;
     private Field field;
     private LocalDateTime gameDate;
-    private final ArrayList<Referee> referees;
+    private ArrayList<Referee> referees;
     private final HashMap<Integer, GameEvent> gameEvents;
     private int hostTeamScore;
     private int guestTeamScore;
@@ -41,7 +39,8 @@ public class Game {
      */
     public Game(League league, Team hostTeam, Team guestTeam, Field field, String gameDateStr, ArrayList<Referee> referees) {
         // set id
-        this.id = nextId.incrementAndGet();
+       // this.id = nextId.incrementAndGet();
+        this.id = 0;
 
         this.league = league;
         this.hostTeam = hostTeam;
@@ -73,7 +72,8 @@ public class Game {
      */
     public Game(League league, Team hostTeam, Team guestTeam, Field field, LocalDateTime gameDate, ArrayList<Referee> referees) {
         // set id
-        this.id = nextId.incrementAndGet();
+        // this.id = nextId.incrementAndGet();
+        this.id = 0;
 
         this.league = league;
         this.hostTeam = hostTeam;
@@ -89,6 +89,38 @@ public class Game {
         // referees of the game automatically receives alerts
         addRefereesOfGameToAlerts();
         this.gameDate = gameDate;
+    }
+
+    public Game(int gameID, League league, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore){
+        this.id = gameID;
+        this.league = league;
+        this.field = new Field(fieldName,0);
+        this.hostTeam = new Team(hostTeam,field,null);
+        this.guestTeam = new Team(guestTeam,null,null);
+        this.gameDate = gameDate;
+        this.hostTeamScore = hostTeamScore;
+        this.guestTeamScore = guestTeamScore;
+
+        this.gameEvents = new HashMap<>();
+        this.referees = new ArrayList<>();
+        this.alertFans = new Alert();
+        this.alertReferees = new Alert();
+    }
+
+    public Game(int gameID, String hostTeam, String guestTeam, String fieldName, LocalDateTime gameDate, int hostTeamScore, int guestTeamScore, String leagueName, int season){
+        this.id = gameID;
+        this.field = new Field(fieldName,0);
+        this.hostTeam = new Team(hostTeam,field,null);
+        this.guestTeam = new Team(guestTeam,null,null);
+        this.gameDate = gameDate;
+        this.hostTeamScore = hostTeamScore;
+        this.guestTeamScore = guestTeamScore;
+
+        this.gameEvents = new HashMap<>();
+        this.referees = new ArrayList<>();
+        this.alertFans = new Alert();
+        this.alertReferees = new Alert();
+        this.league = new League(leagueName,season,true,0,0,0);
     }
 
 
@@ -161,13 +193,10 @@ public class Game {
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the notification or false otherwise
      */
     public Map<String, Boolean> sendAlertScoreToFan()  {
-        //TODO some logic with observer: when the game ends
-
-        String title = "Score between " + this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName();
         String message = "The score of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + getGameScore();
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(message);
 
-        return alertFans.sendAlert(alertNotification);
+        return alertFans.sendAlert(notification);
     }
 
 
@@ -176,15 +205,12 @@ public class Game {
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the notification or false otherwise
      */
     public Map<String, Boolean> sendAlertCloseGame()  {
-        //TODO some logic with observer: when remains one day
-
-        String title =  "It's close! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "Before the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " remains " + "one day!";
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
-        isSentMap.putAll(alertFans.sendAlert(alertNotification));
-        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+        isSentMap.putAll(alertFans.sendAlert(notification));
+        isSentMap.putAll(alertReferees.sendAlert(notification));
 
         return isSentMap;
     }
@@ -195,13 +221,12 @@ public class Game {
      * @return a Map that holds a Subscriber's username as key and a boolean value of true whether he has received the notification or false otherwise
      */
     public Map<String, Boolean> sendAlertChangeDateGame() {
-        String title =  "The date has changed! " + this.hostTeam.getTeamName() + " vs. " + this.guestTeam.getTeamName();
         String message = "The new date of the game between " +  this.hostTeam.getTeamName() + " and " + this.guestTeam.getTeamName() + " is " + this.gameDate.withNano(0).withSecond(0).toString();
-        AlertNotification alertNotification = new AlertNotification(title, message);
+        Notification notification = new Notification(message);
 
         Map<String, Boolean> isSentMap = new HashMap<>();
-        isSentMap.putAll(alertFans.sendAlert(alertNotification));
-        isSentMap.putAll(alertReferees.sendAlert(alertNotification));
+        isSentMap.putAll(alertFans.sendAlert(notification));
+        isSentMap.putAll(alertReferees.sendAlert(notification));
 
         return isSentMap;
     }
@@ -216,11 +241,20 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        AlertNotification alertNotification = new AlertNotification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Notification notification = new Notification("New event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName() + ": " + event.toString());
+        alertFans.sendAlert(notification);
+        alertReferees.sendAlert(notification);
     }
 
+    /**
+     * Adds a game events from DB
+     * @param events - Referee creates the event: game.addGameEvent(new GameEvent(String dateTimeStr, int gameMinutes, GameAlert eventName, String subscription))
+     */
+    public void addEvents(ArrayList<GameEvent> events) {
+        for(GameEvent event : events){
+            this.gameEvents.put(event.getId(), event);
+        }
+    }
 
     /**
      * UC 10.4
@@ -231,9 +265,9 @@ public class Game {
         this.gameEvents.put(event.getId(), event);
 
         // send alerts
-        AlertNotification alertNotification = new AlertNotification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName(), event.toString());
-        alertFans.sendAlert(alertNotification);
-        alertReferees.sendAlert(alertNotification);
+        Notification notification = new Notification("Changed event: " + hostTeam.getTeamName() + " vs " + guestTeam.getTeamName() + " " + event.toString());
+        alertFans.sendAlert(notification);
+        alertReferees.sendAlert(notification);
     }
 
     /**
@@ -248,23 +282,6 @@ public class Game {
     }
 
 
-    /**
-     * UC 10.2
-     * Retrieves all the matches that a given referee has refereed
-     * @param referee the given referee
-     * @return all the matches the referee has refereed
-     */
-    public static ArrayList<Game> getGamesByReferee(Referee referee){
-        //TODO: Get data from DB (like SELECT * FROM GAMES WHERE Referee=username)
-        Game mockGame = new Game(new League("Test league"), new Team("Test guest team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Team("Test team", new Field("Test field", 500), new TeamOwner("Test name", "")), new Field("Test field", 500), LocalDateTime.now().withNano(0).withSecond(0), new ArrayList<Referee>() {{
-            add(referee);
-        }});
-        mockGame.addEvent(new GameEvent(60, GameAlert.GOAL, "Messi did goal"));
-        return new ArrayList<Game>() {{
-            add(mockGame);
-        }};
-    }
-
 /////////// Getters and Setters ///////////
 
     /**
@@ -274,6 +291,14 @@ public class Game {
     public int getId() {
         return this.id;
     }
+
+    /**
+     *  Sets the id of game
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 
     /**
@@ -346,6 +371,14 @@ public class Game {
      */
     public ArrayList<Referee> getReferees() {
         return referees;
+    }
+
+    /**
+     * Adds a referee to the list of referees in this match
+     * @param referees the added referees
+     */
+    public void setReferees(ArrayList<Referee> referees){
+        this.referees = referees;
     }
 
     /**

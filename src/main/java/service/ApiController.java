@@ -3,6 +3,8 @@ package service;
 import domain.*;
 import domain.controllers.AuthController;
 import domain.controllers.SystemAdministratorController;
+import service.pojos.UserDTO;
+import service.pojos.GameDTO;
 
 import java.text.ParseException;
 import java.util.*;
@@ -60,7 +62,7 @@ public class ApiController {
      * @param password the user's password
      * @return the user's instance
      */
-    public User login(String userName, String password) throws Exception {
+    public UserDTO login(String userName, String password) throws Exception {
         return startController.login(userName, password);
     }
 
@@ -250,7 +252,7 @@ public class ApiController {
      * @param sysAdmins the list of system administrators
      * @param message the complaint
      */
-    public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, AlertNotification message) {
+    public void sendComplaintToSysAdmin(String username, ArrayList<SystemAdministrator> sysAdmins, Notification message) {
         // TODO: Strings in signature
         //((Fan) User.getUserByID(username).getRoles().get(Role.FAN)).sendComplaintToSysAdmin(sysAdmins, message);
     }
@@ -325,7 +327,7 @@ public class ApiController {
      * @param username the referee's username
      * @return the list of games that the referee referees at
      */
-    public ArrayList<Game> getRefereeGames(String username) {
+    public ArrayList<GameDTO> getRefereeGames(String username) {
         return gameController.getRefereeGames(username);
     }
 
@@ -337,17 +339,16 @@ public class ApiController {
      *
      * @throws Exception in case the addition was unsuccessful
      */
-    public void addGameEventToGame(String gameId, String eventName, String description) throws Exception {
-        gameController.addGameEventToGame(gameId, eventName, description);
+    public void addGameEventToGame(String gameId, String gameMinutes, String eventName, String description) throws Exception {
+        gameController.addGameEventToGame(gameId, gameMinutes, eventName, description);
     }
 
 
     /**
      * UC 10.4
      * Updates an event that took place during a game
-     * @param username the referee's username
-     * @param game the match
-     * @param gameEvent the event
+     * @param gameId the game
+     * @param eventId the event
      * @param dateTimeStr the time the event took place
      * @param gameMinutes the minute of the game the event took place in
      * @param eventName the name of the event
@@ -710,16 +711,6 @@ public class ApiController {
     public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
         return startController.getUserRoles(userName);
     }
-
-
-
-    /**
-     * TEST function - SHOULD BE IMPLEMENTED IN UI
-     */
-    public User showLoginPanel() throws Exception {
-        return startController.showLoginPanel();
-    }
-
 
     /**
      *  TEST function - SHOULD BE IMPLEMENTED IN UI

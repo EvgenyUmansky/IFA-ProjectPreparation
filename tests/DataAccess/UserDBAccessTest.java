@@ -89,7 +89,7 @@ public class UserDBAccessTest {
         connection.commit();
 
         // insert the user to DB
-        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_2', 'password_2', 'testMail_2@gmail.com', 'false')");
+        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_2', 'password_2', 'testMail_2@gmail.com', 'false', 'false')");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -131,7 +131,7 @@ public class UserDBAccessTest {
         connection.commit();
 
         // insert the user to DB
-        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_2', 'password_2', 'testMail_2@gmail.com', 'false')");
+        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_2', 'password_2', 'testMail_2@gmail.com', 'false', 'false')");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -160,7 +160,7 @@ public class UserDBAccessTest {
         connection.commit();
 
         // insert the user to DB
-        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_2', 'password_2', 'testMail_2@gmail.com', 'false')");
+        preparedStatement = connection.prepareStatement("insert into [User] values ('UserName_1', 'name_2', 'password_2', 'testMail_2@gmail.com', 'false', 'false')");
         preparedStatement.executeUpdate();
         connection.commit();
 
@@ -177,6 +177,10 @@ public class UserDBAccessTest {
         assertEquals("password_2", selectedUser.getPassword());
         assertEquals("testMail_2@gmail.com", selectedUser.getMail());
         assertFalse(selectedUser.isClosed());
+    }
 
+    @Test
+    void conditionedSelect() {
+        // TODO: write test
     }
 }

@@ -38,7 +38,7 @@ public class PlayerPage extends PersonalPage {
      */
     public PlayerPage setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-        getAlert().sendAlert(new AlertNotification("Birthday date of the user of page " + getName() + "  has changed", "The new birthday is " + birthDate));
+        getAlert().sendAlert(new Notification("Birthday date of the user of page " + getName() + "  has changed. The new birthday is " + birthDate));
 
         return this;
     }
@@ -51,7 +51,7 @@ public class PlayerPage extends PersonalPage {
      */
     public PlayerPage setSquadNumber(String squadNumber) {
         this.squadNumber = squadNumber;
-        getAlert().sendAlert(new AlertNotification("Squad number of the user of page " + getName() + "  has changed", "The new squad number is " + squadNumber));
+        getAlert().sendAlert(new Notification("Squad number of the user of page " + getName() + "  has changed. The new squad number is " + squadNumber));
 
         return this;
     }
@@ -64,7 +64,7 @@ public class PlayerPage extends PersonalPage {
      */
     public PlayerPage setPosition(String position) {
         this.position = position;
-        getAlert().sendAlert(new AlertNotification("Position of the user of page " + getName() + "  has changed", "Position is " + position));
+        getAlert().sendAlert(new Notification("Position of the user of page " + getName() + "  has changed. Position is " + position));
 
         return this;
     }
@@ -78,7 +78,7 @@ public class PlayerPage extends PersonalPage {
      */
     public PlayerPage setCurrentTeam(String currentTeam) {
         this.currentTeam = currentTeam;
-        getAlert().sendAlert(new AlertNotification("Team of the user of page " + getName() + "  has changed", "The new team is " + currentTeam));
+        getAlert().sendAlert(new Notification("Team of the user of page " + getName() + "  has changed. The new team is " + currentTeam));
 
         return this;
     }

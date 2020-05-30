@@ -1,8 +1,11 @@
 package domain.controllers;
 
-import DataAccess.DBAccess;
-import DataAccess.UserDBAccess;
+import DataAccess.*;
+import ExternalSystemsAccess.*;
 import domain.*;
+import javafx.util.Pair;
+import org.apache.log4j.Logger;
+import service.pojos.UserDTO;
 
 import java.util.*;
 
@@ -10,9 +13,18 @@ import java.util.*;
  * This class is the controller in the system - it receives calls from the UI and activates the functionality in each class in the domain layer.
  */
 public class AuthController {
+    static Logger logger = Logger.getLogger(AuthController.class.getName());
 
     private LinkedList<SystemEvent> systemEvents;
     private HashSet<League> leagues;
+    private DBAccess<User> uda = UserDBAccess.getInstance();
+    private DBAccess< Pair<String,ArrayList<String>> > urda = UserRolesDBAccess.getInstance();
+    private DBAccess<Pair<String, ArrayList<Notification>>> ada = AlertDBAccess.getInstance();
+    private RefereeGamesDBAccess rgda = RefereeGamesDBAccess.getInstance();
+    private FanGamesDBAccess fgda = FanGamesDBAccess.getInstance();
+
+    private TaxSystemAccess taxSystem;
+    private AccountingSystemAccess accountingSystem;
 
 
     // ========================= Constructor =========================
@@ -25,7 +37,7 @@ public class AuthController {
     }
 
 
-     // ========================= System functions ========================
+    // ========================= System functions ========================
     // ====================================================================
 
     /**
@@ -33,7 +45,8 @@ public class AuthController {
      * Connects to external systems
      */
     public void connectToExternalSystems() {
-        // TODO: Connect to external system. if fails throws Exception
+        taxSystem = new TaxProxy();
+        accountingSystem = new AccountingProxy();
     }
 
 
@@ -44,23 +57,70 @@ public class AuthController {
      * @param password the user's password
      * @return the user's instance
      */
-    public User login(String userName, String password) throws Exception {
-        UserDBAccess userDBAccess = UserDBAccess.getInstance();
-        User user = userDBAccess.select(userName);
+    public UserDTO login(String userName, String password) throws Exception {
+        User user = uda.select(userName);
 
         if (user == null) {
-            throw new Exception("User not found!");
+            logger.info(userName + ": User not found!");
+            throw new Exception(userName + ": User not found!");
         }
 
         if (!user.getPassword().equals(hash(password))) {
-            throw new Exception("Wrong password!");
+            logger.info(userName + ": Wrong password!");
+            throw new Exception(userName + ": Wrong password!");
         }
 
-
         user.connect();
-        return user;
+
+    /////////// Roles ///////////
+        ArrayList<String> rolesAsStrings = urda.select(userName).getValue();
+
+    /////////// Notifications ///////////
+        ArrayList<String> notifications = getNotSeenNotifications(userName);
+
+
+    /////////// Games ///////////
+        ArrayList<String> gameIds = new ArrayList<>();
+
+        ArrayList<Game> games = new ArrayList<>(fgda.select(userName).getValue());
+
+        if(rolesAsStrings.contains("REFEREE")){
+            games.addAll(rgda.select(userName).getValue());
+        }
+
+        for(Game game : games){
+            gameIds.add(String.valueOf(game.getId()));
+        }
+
+        // add notifications to UserDTO
+        // add gameIds to UserDTO
+        logger.info(userName + " login to the system");
+        return new UserDTO(user.getUserName(), user.getName(), rolesAsStrings.toArray(new String[0]), user.getMail(), notifications.toArray(new String[0]), gameIds.toArray(new String[0]));
     }
 
+    /**
+     * get all not seen notifications of a user and update them as seen in DB
+     *
+     * @param userName - user name of user
+     * @return array list with all not seen notifications of the user
+     */
+    private ArrayList<String> getNotSeenNotifications(String userName){
+        ArrayList<Notification> notifications = ada.select(userName).getValue();
+        ArrayList<Notification> seenNotifications = new ArrayList<>(); // notifications marked seen
+        ArrayList<String> notificationsString = new ArrayList<>();
+
+        for(Notification notification : notifications){
+            if(!notification.isSeen()) {
+                notificationsString.add(notification.getSubject());
+                notification.setSeen(true); // mark the notification as seen
+                seenNotifications.add(notification);
+            }
+        }
+
+        ada.update(new Pair<>(userName, seenNotifications)); // update not seen notification as seen
+
+        return notificationsString;
+    }
 
     /**
      * UC 3.1
@@ -70,6 +130,7 @@ public class AuthController {
     public void logout(String userName) {
         User user = User.getUserByID(userName);
         user.disconnect();
+        logger.info(userName + " logout from the system");
     }
 
     /**
@@ -85,19 +146,23 @@ public class AuthController {
     public User register(String userName, String password, String name, String mail) throws Exception {
         User user = User.getUserByID(userName);
         if (user != null) {
-            throw new Exception("User already exist");
+            logger.info(userName + " already exists in the system");
+            throw new Exception(userName + " already exists");
         }
 
         if (!User.isValidUserName(userName)) {
-            throw new Exception("Username is not valid");
+            logger.info(userName + " is not valid");
+            throw new Exception(userName + " is not valid");
         }
         if (!User.isValidPassword(password)) {
-            throw new Exception("Password is not valid");
+            logger.info("The password is not valid");
+            throw new Exception("The password is not valid");
         }
 
         User newUser = new User(userName, password, name, mail);
         newUser.addRoleToUser(Role.FAN, new Fan(newUser.getUserName(), newUser.getMail()));
 
+        logger.info(userName + " registers to the system");
         return newUser;
     }
 
@@ -121,6 +186,7 @@ public class AuthController {
         try {
             c.init();
         } catch (Exception e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -129,15 +195,15 @@ public class AuthController {
     /**
      * TEST function - SHOULD BE IMPLEMENTED IN UI
      */
-    public User showLoginPanel() throws Exception {
-        Scanner getInput = new Scanner(System.in);
-        System.out.println("Please Login to system");
-        System.out.println("Username: ");
-        String userName = getInput.nextLine();
-        System.out.println("Password: ");
-        String password = getInput.nextLine();
-        return this.login(userName, password);
-    }
+//    public UserDTO showLoginPanel() throws Exception {
+//        Scanner getInput = new Scanner(System.in);
+//        System.out.println("Please Login to system");
+//        System.out.println("Username: ");
+//        String userName = getInput.nextLine();
+//        System.out.println("Password: ");
+//        String password = getInput.nextLine();
+//        return this.login(userName, password);
+//    }
 
 
     /**
@@ -145,7 +211,7 @@ public class AuthController {
      */
     public void runSystem() throws Exception {
         // Load test Data (Use mock)
-        User connectedUser = showLoginPanel();
+//        User connectedUser = showLoginPanel();
 //        while (connectedUser.isConnected()) {
 //            System.out.println("Please choose the role you wanna use now:");
 //            HashMap<Role, Subscriber> roles = connectedUser.getRoles();
@@ -187,4 +253,5 @@ public class AuthController {
         }
         return Integer.toString(hash);
     }
+
 }

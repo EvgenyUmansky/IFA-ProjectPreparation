@@ -1,11 +1,18 @@
 package DataAccess;
-import domain.User;
 
-import java.sql.*;
+import domain.User;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class UserDBAccess implements DBAccess<User> {
 
+    static Logger logger = Logger.getLogger(UserDBAccess.class.getName());
     private static final UserDBAccess instance = new UserDBAccess();
   /*  private DBConnector dbc = DBConnector.getInstance();*/
 
@@ -20,7 +27,7 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void save(User user) {
         if(user == null){
-            System.out.println("Couldn't execute 'save(User user)' in UserDBAccess: the user is null");
+            logger.error("Couldn't execute 'save(User user)' in UserDBAccess: the user is null");
             return;
         }
 
@@ -29,7 +36,6 @@ public class UserDBAccess implements DBAccess<User> {
         String query = "insert into [User] values (?, ?, ?, ?, ?, ?)";
 
         try {
-            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
             statement = connection.prepareStatement(query);
             statement.setString(1,user.getUserName());
             statement.setString(2,user.getName());
@@ -42,7 +48,7 @@ public class UserDBAccess implements DBAccess<User> {
             connection.commit();
         }
         catch (SQLException | NullPointerException e){
-            System.out.println("Couldn't execute 'save(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -52,7 +58,7 @@ public class UserDBAccess implements DBAccess<User> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'save(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -61,12 +67,12 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void update(User user) {
         if(user == null){
-            System.out.println("Couldn't execute 'update(User user)' in UserDBAccess: the user is null");
+            logger.error("Couldn't execute 'update(User user)' in UserDBAccess: the user is null");
             return;
         }
 
         String query = "update [User] " +
-                "set Name = ?, Password = ?, Email = ?, Activated = ?, IsMail = ? " +
+                "set Name = ?, Password = ?, Mail = ?, IsClosed = ?, IsMail = ? " +
                 "where username = ?";
         Connection connection = DBConnector.getConnection();
         PreparedStatement statement = null;
@@ -85,7 +91,7 @@ public class UserDBAccess implements DBAccess<User> {
             connection.commit();
         }
         catch(SQLException e){
-            System.out.println("Couldn't execute 'update(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -95,7 +101,7 @@ public class UserDBAccess implements DBAccess<User> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'update(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error(e3.getMessage());
             }
         }
     }
@@ -103,7 +109,7 @@ public class UserDBAccess implements DBAccess<User> {
     @Override
     public void delete(User user) {
         if(user == null){
-            System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess: the user is null");
+            logger.error("Couldn't execute 'delete(User user)' in UserDBAccess: the user is null");
             return;
         }
 
@@ -119,7 +125,7 @@ public class UserDBAccess implements DBAccess<User> {
             connection.commit();
         }
         catch(SQLException e){
-            System.out.println("Couldn't execute 'delete(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -129,7 +135,7 @@ public class UserDBAccess implements DBAccess<User> {
                 connection.close();
             }
             catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
+                logger.error("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
             }
         }
     }
@@ -161,7 +167,7 @@ public class UserDBAccess implements DBAccess<User> {
         }
         catch (SQLException e){
             assert false;
-            System.out.println("Couldn't execute 'select(User user)' in UserDBAccess for " + user.getUserName());
+            logger.error(e.getMessage());
         }
         finally {
             try {
@@ -172,16 +178,85 @@ public class UserDBAccess implements DBAccess<User> {
                     retrievedUser.close();
                 }
                 connection.close();
-            }
-            catch (SQLException e3) {
-                System.out.println("Couldn't close 'delete(User user)' in UserDBAccess for " + user.getUserName());
+            } catch (SQLException e3) {
+                logger.error(e3.getMessage());
             }
         }
         return user;
     }
 
+    @Override
+    public HashMap<String, User> conditionedSelect(String[] conditions) {
+        String query;
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        ResultSet retrievedUsers = null;
+        HashMap<String, User> users = new HashMap<>();
 
 
+        if(conditions.length == 0){
+            query = "select * from [User]";
+        }
+
+        else {
+            query = "select * from [User] where ";
+
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
+                }
+            }
+        }
+        try {
+            statement = connection.prepareStatement(query);
+            if(conditions.length > 0) {
+                int i = 0;
+                while (i < conditions.length) {
+                    switch (conditions[i].toLowerCase()) {
+                        case "username":
+                        case "name":
+                        case "mail":
+                        case "password":
+                            statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                            break;
+
+                        case "ismail":
+                        case "isclosed":
+                            statement.setBoolean((int) (i / 2) + 1, conditions[i + 1].equals("true"));
+                            break;
+
+                        default:
+                            break;
+                    }
+                    i += 2;
+                }
+            }
+            retrievedUsers = statement.executeQuery();
+
+
+            while(retrievedUsers.next()){
+                String username = retrievedUsers.getString(1);
+                String name = retrievedUsers.getString(2);
+                String password =  retrievedUsers.getString(3);
+                String mail =  retrievedUsers.getString(4);
+                boolean isClosed = retrievedUsers.getBoolean(5);
+                boolean isMail = retrievedUsers.getBoolean(6);
+
+                users.put(username,new User(username, password, name, mail, isClosed, isMail));
+            }
+        } catch (SQLException e) {
+            // TODO: Alert window
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 
 
 }

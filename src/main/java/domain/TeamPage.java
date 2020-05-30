@@ -39,7 +39,7 @@ public class TeamPage extends PersonalPage {
      */
     public void setStadium(Field stadium) {
         this.stadium = stadium;
-        getAlert().sendAlert(new AlertNotification("Stadium of the team " + getName() + "  has changed", "The new stadium is " + stadium.getFieldName()));
+        getAlert().sendAlert(new Notification("Stadium of the team " + getName() + "  has changed. The new stadium is " + stadium.getFieldName()));
     }
 
 
@@ -55,7 +55,7 @@ public class TeamPage extends PersonalPage {
         for(String player : players.keySet()){
             playersStr += player + ", ";
         }
-        getAlert().sendAlert(new AlertNotification("Players of the team " + getName() + "  have changed", "The new players are " + playersStr.replaceFirst(", $", "")));
+        getAlert().sendAlert(new Notification("Players of the team " + getName() + "  have changed. The new players are " + playersStr.replaceFirst(", $", "")));
         return this;
     }
 
@@ -73,7 +73,7 @@ public class TeamPage extends PersonalPage {
             coachesStr += coach + ", ";
         }
 
-        getAlert().sendAlert(new AlertNotification("Coaches of the team " + getName() + "  have changed", "The new coaches are " + coachesStr.replaceFirst(", $", "")));
+        getAlert().sendAlert(new Notification("Coaches of the team " + getName() + "  have changed. The new coaches are " + coachesStr.replaceFirst(", $", "")));
         return this;
     }
 
@@ -91,7 +91,7 @@ public class TeamPage extends PersonalPage {
             managersStr += manager + ", ";
         }
 
-        getAlert().sendAlert(new AlertNotification("Managers of the team " + getName() + "  have changed", "The new managers are " + managersStr.replaceFirst(", $", "")));
+        getAlert().sendAlert(new Notification("Managers of the team " + getName() + "  have changed. The new managers are " + managersStr.replaceFirst(", $", "")));
         return this;
     }
 
