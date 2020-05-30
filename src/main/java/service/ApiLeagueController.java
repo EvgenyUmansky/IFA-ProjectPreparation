@@ -2,6 +2,7 @@ package service;
 
 import domain.League;
 import org.springframework.web.bind.annotation.*;
+import service.pojos.LeagueDTO;
 
 import java.util.ArrayList;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -16,6 +17,12 @@ public class ApiLeagueController {
     @GetMapping("/leagues")
     public ArrayList<League> getLeagueDetails(){
         return controller.getLeagues();
+    }
+
+    @PostMapping("/leagues")
+    public void createSeason(@RequestBody LeagueDTO season){
+        // Create new team to specific user ...? -> should Add user validation
+        controller.createSeason(season.getLeagueName(), season.getSeason(), season.getScheduling(), season.getWinPoints(), season.getLosePoints(), season.getDrawPoints());
     }
 
     // This will get league by league name in the following way: /leagues?leagueName=<leagueName>

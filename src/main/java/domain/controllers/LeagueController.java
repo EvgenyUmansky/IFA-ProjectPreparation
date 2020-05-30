@@ -22,23 +22,16 @@ public class LeagueController {
     public ArrayList<League> getLeagues() {
         HashMap<String, League> allLeagues = lda.conditionedSelect(new String[0]);
 
-        ArrayList<League> leagueArray = new ArrayList<>(allLeagues.values());
-
-        for(League league : leagueArray){
-
-        }
-
         return new ArrayList<>(allLeagues.values());
     }
 
-    public League createSeason(String leagueName, String season, String scheduling, String winPoints, String losePoints, String drawPoints) {
+    public void createSeason(String leagueName, String season, String scheduling, String winPoints, String losePoints, String drawPoints) {
         League league = new League(leagueName, Integer.parseInt(season), scheduling.equalsIgnoreCase("oneGameSchedulingMethod"),
-                Integer.parseInt(winPoints), Integer.parseInt(losePoints), Integer.parseInt(drawPoints));
+                Integer.parseInt(winPoints), Integer.parseInt(drawPoints), Integer.parseInt(losePoints));
 
         lda.save(league);
 
         logger.info(leagueName + " " + season + "  was created");
-        return league;
     }
 
     public ArrayList<League> getAllSeasonsInLeagues(){
