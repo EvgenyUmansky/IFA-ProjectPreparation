@@ -25,6 +25,8 @@ public class TeamController {
 
     public void createTeam( String name, String stadium, String coachUserName, String[] players,String teamOwner) {
         User user = uda.select(teamOwner);
+        ArrayList<String> roles = urda.select(teamOwner).getValue();
+
         Field field = fda.conditionedSelect(new String[]{"Fields.FieldName", stadium}).values().iterator().next();
         user.addRoleToUser(Role.TEAM_OWNER);
         TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
@@ -37,7 +39,11 @@ public class TeamController {
 
         ArrayList<String> ownerRole = new ArrayList<>();
         ownerRole.add("TEAM_OWNER");
-        urda.save(new Pair<>(teamOwner,ownerRole));
+
+        if(!roles.contains("TEAM_OWNER")){
+            urda.save(new Pair<>(teamOwner,ownerRole));
+        }
+
         tfda.save(new Pair<>(name, stadium));
 
         for(String player : players){
@@ -499,4 +505,9 @@ public class TeamController {
     }
 
 
+    public void changeStatus(String teamName, String status) {
+        Team team = tda.select(teamName);
+        team.setTeamStatus(status);
+        tda.update(team);
+    }
 }

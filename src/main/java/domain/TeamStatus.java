@@ -21,5 +21,12 @@ public enum TeamStatus {
         public String toString(){
             return "PermanentlyClose";
         }
+    },
+
+    Pending {
+        @Override
+        public String toString(){
+            return "Pending";
+        }
     }
 }
