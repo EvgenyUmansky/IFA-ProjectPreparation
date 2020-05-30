@@ -3,7 +3,9 @@ package domain.controllers;
 import DataAccess.DBAccess;
 import DataAccess.FieldDBAccess;
 import domain.Field;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +15,7 @@ class FieldControllerTest {
     DBAccess<Field> fda = FieldDBAccess.getInstance();
 
 
-    @BeforeEach
+    @BeforeAll
     void setUp() {
         fda.save(new Field("field1",100000));
         fda.save(new Field("field2",100000));
@@ -24,7 +26,7 @@ class FieldControllerTest {
         fda.save(new Field("field7",100000));
     }
 
-    @AfterEach
+    @AfterAll
     void tearDown() {
         fda.delete(new Field("field1",100000));
         fda.delete(new Field("field2",100000));
@@ -38,6 +40,6 @@ class FieldControllerTest {
 
     @Test
     void getAvailableFields() {
-        assertTrue(fieldController.getAvailableFields().size() > 0);
+        assertEquals(7,fieldController.getAvailableFields().size());
     }
 }
