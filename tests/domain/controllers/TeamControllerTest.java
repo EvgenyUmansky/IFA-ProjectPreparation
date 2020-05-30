@@ -141,11 +141,11 @@ class TeamControllerTest {
 //        tfda.save(new Pair<>("team2","field2"));
 
 
-        TeamDTO team2Test = teamController.createTeam("user6","team2","field2");
-        assertNotNull(team2Test);
-        assertEquals("team2",team2Test.getTeamName());
-        assertEquals("field2",team2Test.getStadium().getFieldName());
-        assertNotEquals(0,team2Test.getOwners().size());
+       // TeamDTO team2Test = teamController.createTeam("user6","team2","field2");
+//        assertNotNull(team2Test);
+//        assertEquals("team2",team2Test.getTeamName());
+//        assertEquals("field2",team2Test.getStadium().getFieldName());
+//        assertNotEquals(0,team2Test.getOwners().size());
     }
 
     @Test
