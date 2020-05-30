@@ -22,7 +22,7 @@ class PlayerControllerTest {
     DBAccess<Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         uda.save(new User("user11", "pass11", "name11", "mail11@mail.com"));
         uda.save(new User("user12", "pass12", "name12", "mail12@mail.com"));
@@ -78,7 +78,7 @@ class PlayerControllerTest {
         urda.save(new Pair<>("user19",playerRole));
     }
 
-    @AfterAll
+    @AfterEach
     void tearDown() {
         ArrayList<String> playerRole = new ArrayList<>();
         playerRole.add("TEAM_PLAYER");
@@ -128,6 +128,8 @@ class PlayerControllerTest {
         ArrayList<TeamPlayer> availablePlayers = playerController.getAvailablePlayers();
         assertEquals(4,availablePlayers.size());
 
-        //TODO: more checks
+        for(TeamPlayer player : availablePlayers){
+            assertNull(player.getCurrentTeam());
+        }
     }
 }
