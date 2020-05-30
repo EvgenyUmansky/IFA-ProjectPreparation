@@ -60,7 +60,7 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
         }
         catch (SQLException | NullPointerException e){
             logger.error(e.getMessage());
-            System.out.println("Couldn't execute 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess for " + userName);
+            e.printStackTrace();
         }
         finally {
             try {
@@ -71,7 +71,7 @@ public class UserRolesDBAccess implements DBAccess< Pair<String, ArrayList<Strin
             }
             catch (SQLException e) {
                 logger.error(e.getMessage());
-                System.out.println("Couldn't close 'save(Pair<String,ArrayList<String>> roles)' in UserRolesDBAccess for " + userName);
+                e.printStackTrace();
             }
         }
     }

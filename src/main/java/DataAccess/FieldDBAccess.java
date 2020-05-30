@@ -144,7 +144,9 @@ public class FieldDBAccess implements DBAccess<Field>{
             int i = 0;
             while (i < conditions.length) {
                 switch (conditions[i].toLowerCase()) {
-                    case "fieldname":
+                    case "fields.fieldname":
+                        statement.setString((int) (i / 2) + 1, conditions[i + 1]);
+                        break;
                     case "propertycost":
                     case "teamname":
                         if (!conditions[i + 1].equals("null")) {
