@@ -23,26 +23,28 @@ public class TeamController {
     DBAccess< Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
 
-    public TeamDTO createTeam(String teamOwner, String name, String stadium, String coachUserName, TeamPlayer[] players) {
+    public void createTeam(String teamOwner, String name, String stadium, String coachUserName, String[] players) {
         User user = uda.select(teamOwner);
-        Field field = fda.select(stadium);
+        Field field = fda.conditionedSelect(new String[]{"Fields.FieldName", stadium}).values().iterator().next();
         user.addRoleToUser(Role.TEAM_OWNER);
         TeamOwner owner = (TeamOwner) user.getRoles().get(Role.TEAM_OWNER);
         Team newTeam = new Team(name, field, owner);
 
         tda.save(newTeam);
-        uda.update(user);
         oda.save(owner);
+
+        uda.update(user);
+
         ArrayList<String> ownerRole = new ArrayList<>();
         ownerRole.add("TEAM_OWNER");
         urda.save(new Pair<>(teamOwner,ownerRole));
         tfda.save(new Pair<>(name, stadium));
 
-        for(TeamPlayer player : players){
-            player = pda.select(player.getUserName());
-            newTeam.addPlayer(player);
-            player.setCurrentTeam(newTeam.getTeamName());
-            pda.update(player);
+        for(String player : players){
+            TeamPlayer selectedPlayer = pda.select(player);
+            newTeam.addPlayer(selectedPlayer);
+            selectedPlayer.setCurrentTeam(newTeam.getTeamName());
+            pda.update(selectedPlayer);
         }
 
         TeamCoach coach = cda.select(coachUserName);
@@ -51,21 +53,21 @@ public class TeamController {
         cda.update(coach);
 
         logger.info(name + " team was created");
-        return new TeamDTO(
-                newTeam.getTeamName(),
-                newTeam.getStadium(),
-                //newTeam.getFields().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getFields().values()),
-                //newTeam.getPlayers().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getPlayers().values()),
-                //newTeam.getCoaches().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getCoaches().values()),
-                //newTeam.getManagers().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getManagers().values()),
-                //newTeam.getOwners().keySet().toArray(new String[0]),
-                new ArrayList<>(newTeam.getOwners().values()),
-                newTeam.getTeamStatus().name()
-        );
+//        return new TeamDTO(
+//                newTeam.getTeamName(),
+//                newTeam.getStadium(),
+//                //newTeam.getFields().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getFields().values()),
+//                //newTeam.getPlayers().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getPlayers().values()),
+//                //newTeam.getCoaches().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getCoaches().values()),
+//                //newTeam.getManagers().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getManagers().values()),
+//                //newTeam.getOwners().keySet().toArray(new String[0]),
+//                new ArrayList<>(newTeam.getOwners().values()),
+//                newTeam.getTeamStatus().name()
+//        );
     }
 
     public ArrayList<TeamDTO> getTeams() {

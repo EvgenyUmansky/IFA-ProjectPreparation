@@ -82,9 +82,7 @@ public class AuthController {
     /////////// Games ///////////
         ArrayList<String> gameIds = new ArrayList<>();
 
-
         ArrayList<Game> games = new ArrayList<>(fgda.select(userName).getValue());
-
 
         if(rolesAsStrings.contains("REFEREE")){
             games.addAll(rgda.select(userName).getValue());
