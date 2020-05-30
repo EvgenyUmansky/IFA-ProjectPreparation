@@ -39,7 +39,7 @@ public class Team {
         this.coaches = new HashMap<>();
         this.players = new HashMap<>();
         this.alert = new Alert();
-        this.teamStatus = TeamStatus.Open;
+        this.teamStatus = TeamStatus.Pending;
 
         if(stadium != null){
             this.stadium = stadium;
@@ -215,6 +215,10 @@ public class Team {
 
             case "permanentlyclose":
                 setTeamStatus(TeamStatus.PermanentlyClose);
+                break;
+
+            case "pending":
+                setTeamStatus(TeamStatus.Pending);
                 break;
 
             default:

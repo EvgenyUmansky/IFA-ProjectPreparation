@@ -2,7 +2,9 @@ package service;
 
 import domain.Team;
 import org.springframework.web.bind.annotation.*;
+import service.pojos.LoginDTO;
 import service.pojos.TeamDTO;
+import service.pojos.TeamStatusDTO;
 import service.pojos.newTeamDTO;
 
 import java.util.ArrayList;
@@ -20,6 +22,11 @@ public class ApiTeamController {
     @GetMapping("/teams")
     public ArrayList<TeamDTO> getTeams() {
         return controller.getTeams();
+    }
+
+    @PutMapping ("/teams")
+    public void changeStatus(@RequestBody TeamStatusDTO status) {
+        controller.changeStatus(status.getTeamName(), status.getStatus());
     }
 
     @GetMapping("/teams/{teamName}")

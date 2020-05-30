@@ -175,8 +175,7 @@ public class AuthController {
      * @return the user's list of roles
      * @throws Exception if the user doesn't exist
      */
-    public HashMap<Role, Subscriber> getUserRoles(String userName) throws Exception {
-        //TODO: run over all the DBACCESS objects and activate the select function to get the user's roles
+    public HashMap<Role, Subscriber> getUserRoles(String userName) {
         return null;
     }
 
