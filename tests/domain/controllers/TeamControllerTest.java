@@ -7,7 +7,6 @@ import org.junit.jupiter.api.*;
 import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +23,7 @@ class TeamControllerTest {
     DBAccess<TeamCoach> cda = TeamCoachDBAccess.getInstance();
     DBAccess<Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         uda.save(new User("user1", "pass1", "name1", "mail1@mail.com"));
         uda.save(new User("user2", "pass2", "name2", "mail2@mail.com"));
@@ -32,8 +31,8 @@ class TeamControllerTest {
         uda.save(new User("user4", "pass4", "name4", "mail4@mail.com"));
         uda.save(new User("user5", "pass5", "name5", "mail5@mail.com"));
 
-        pda.save(new TeamPlayer("user1", "mail1@mail.com", new Date(), "CDM", "6"));
-        pda.save(new TeamPlayer("user2", "mail2@mail.com", new Date(), "CAM", "8"));
+        pda.save(new TeamPlayer("user1", "mail1@mail.com", new java.sql.Date(new java.util.Date().getTime()), "CDM", "6"));
+        pda.save(new TeamPlayer("user2", "mail2@mail.com", new java.sql.Date(new java.util.Date().getTime()), "CAM", "8"));
 
         cda.save(new TeamCoach("user3", "mail3@mail.com", "main coach", "qualification3", "name3"));
         mda.save(new TeamManager("user4", "mail4@mail.com", "name4"));
@@ -79,7 +78,7 @@ class TeamControllerTest {
         tfda.save(new Pair<>("team1", "field1"));
     }
 
-    @AfterAll
+    @AfterEach
     void tearDown() {
         tfda.delete(new Pair<>("team1", "field1"));
         tda.delete(new Team("team1", null, null));
@@ -123,8 +122,6 @@ class TeamControllerTest {
         uda.delete(new User("user3", "pass3", "name3", "mail3@mail.com"));
         uda.delete(new User("user4", "pass4", "name4", "mail4@mail.com"));
         uda.delete(new User("user5", "pass5", "name5", "mail5@mail.com"));
-
-
     }
 
     @Test
@@ -221,81 +218,6 @@ class TeamControllerTest {
     @Test
     void getTeams() {
         ArrayList<TeamDTO> teams = teamController.getTeams();
-        assertEquals(2, teams.size());
-
-
-        //TODO: more checks
+        assertTrue(teams.size() > 0);
     }
-
-   /* @Test
-    void getTeamDetails() {
-    }
-
-    @Test
-    void addPlayer() {
-    }
-
-    @Test
-    void addCoach() {
-    }
-
-    @Test
-    void addField() {
-    }
-
-    @Test
-    void addManager() {
-    }
-
-    @Test
-    void addOwner() {
-    }*/
-
-    /*@Test
-    void removePlayer() {
-    }
-
-    @Test
-    void removeCoach() {
-    }
-
-    @Test
-    void removeField() {
-    }*/
-
-    /*@Test
-    void removeOwner() {
-    }*/
-
-    /*@Test
-    void removeManager() {
-    }*/
-
-   /* @Test
-    void closeTeam() {
-    }
-
-    @Test
-    void openTeam() {
-    }
-
-    @Test
-    void manageFinance() {
-    }
-
-    @Test
-    void setPermissionsToManager() {
-    }
-
-    @Test
-    void setRulesForBudgetControl() {
-    }*/
-
-  /*  @Test
-    void setTeamBudget() {
-    }*/
-
-    /*@Test
-    void getTeamByName() {
-    }*/
 }

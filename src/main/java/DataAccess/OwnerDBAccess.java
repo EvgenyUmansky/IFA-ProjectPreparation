@@ -185,7 +185,7 @@ public class OwnerDBAccess implements DBAccess<TeamOwner> {
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }

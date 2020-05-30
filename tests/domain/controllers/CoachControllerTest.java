@@ -124,7 +124,7 @@ class CoachControllerTest {
     @Test
     void getAvailableCoaches() {
         ArrayList<TeamCoach> availableCoaches = coachController.getAvailableCoaches();
-        assertEquals(4,availableCoaches.size());
+        assertTrue(availableCoaches.size() > 0);
 
         for(TeamCoach coach : availableCoaches){
             assertNull(coach.getCurrentTeam());

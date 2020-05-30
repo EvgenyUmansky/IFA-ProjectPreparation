@@ -89,7 +89,7 @@ public class LeagueSeasonDBAccess implements DBAccess<ArrayList<League>> {
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }
