@@ -186,17 +186,26 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
         ResultSet retrievedCoaches;
         HashMap<String, TeamCoach> coaches = new HashMap<>();
 
-        for (int i = 0; i < conditions.length; i++) {
-            if (i % 2 == 0) {
-                query += " " + conditions[i];
-            } else {
-                if(conditions[i].equals("null")){
-                    query += " is null";
-                    continue;
+        if(conditions.length == 0){
+            query = "select * from [Coaches]";
+        }
+
+
+        else {
+            query = "select * from [TeamFields] where";
+
+            for (int i = 0; i < conditions.length; i++) {
+                if (i % 2 == 0) {
+                    query += " " + conditions[i];
+                } else {
+                    if (conditions[i].equals("null")) {
+                        query += " is null";
+                        continue;
+                    }
+                    query += " = ?";
+                    if (i < conditions.length - 1)
+                        query += ",";
                 }
-                query += " = ?";
-                if (i < conditions.length - 1)
-                    query += ",";
             }
         }
         try {
