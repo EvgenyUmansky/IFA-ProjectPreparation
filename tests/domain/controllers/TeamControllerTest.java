@@ -22,7 +22,7 @@ class TeamControllerTest {
     DBAccess<TeamPlayer> pda = TeamPlayerDBAccess.getInstance();
     DBAccess<TeamManager> mda = ManagerDBAccess.getInstance();
     DBAccess<TeamCoach> cda = TeamCoachDBAccess.getInstance();
-    DBAccess< Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
+    DBAccess<Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
     @BeforeAll
     void setUp() {
@@ -59,11 +59,11 @@ class TeamControllerTest {
         user4Roles.add("TEAM_MANAGER");
         user5Roles.add("TEAM_OWNER");
 
-        urda.save(new Pair<>("user1",user1Roles));
-        urda.save(new Pair<>("user2",user2Roles));
-        urda.save(new Pair<>("user3",user3Roles));
-        urda.save(new Pair<>("user4",user4Roles));
-        urda.save(new Pair<>("user5",user5Roles));
+        urda.save(new Pair<>("user1", user1Roles));
+        urda.save(new Pair<>("user2", user2Roles));
+        urda.save(new Pair<>("user3", user3Roles));
+        urda.save(new Pair<>("user4", user4Roles));
+        urda.save(new Pair<>("user5", user5Roles));
 
 
         Field field1 = new Field("field1", 10000);
@@ -82,17 +82,17 @@ class TeamControllerTest {
     @AfterAll
     void tearDown() {
         tfda.delete(new Pair<>("team1", "field1"));
-        tda.delete(new Team("team1",null,null));
-        fda.delete(new Field("field1",0));
-        fda.delete(new Field("field2",0));
-        fda.delete(new Field("field3",0));
-        fda.delete(new Field("field4",0));
+        tda.delete(new Team("team1", null, null));
+        fda.delete(new Field("field1", 0));
+        fda.delete(new Field("field2", 0));
+        fda.delete(new Field("field3", 0));
+        fda.delete(new Field("field4", 0));
 
-        oda.delete(new TeamOwner("user4",null,null));
+        oda.delete(new TeamOwner("user4", null, null));
         mda.delete(new TeamManager("user4", null, null));
         cda.delete(new TeamCoach("user3", "mail3@mail.com", "main coach", "qualification3", "name3"));
         pda.delete(new TeamPlayer("user1", "mail1@mail.com", null, "CDM", "6"));
-        pda.delete(new TeamPlayer("user2", "mail2@mail.com",null, "CAM", "8"));
+        pda.delete(new TeamPlayer("user2", "mail2@mail.com", null, "CAM", "8"));
 
         ArrayList<String> user1Roles = new ArrayList<>();
         ArrayList<String> user2Roles = new ArrayList<>();
@@ -112,17 +112,19 @@ class TeamControllerTest {
         user4Roles.add("TEAM_MANAGER");
         user5Roles.add("TEAM_OWNER");
 
-        urda.delete(new Pair<>("user1",user1Roles));
-        urda.delete(new Pair<>("user2",user2Roles));
-        urda.delete(new Pair<>("user3",user3Roles));
-        urda.delete(new Pair<>("user4",user4Roles));
-        urda.delete(new Pair<>("user5",user5Roles));
+        urda.delete(new Pair<>("user1", user1Roles));
+        urda.delete(new Pair<>("user2", user2Roles));
+        urda.delete(new Pair<>("user3", user3Roles));
+        urda.delete(new Pair<>("user4", user4Roles));
+        urda.delete(new Pair<>("user5", user5Roles));
 
         uda.delete(new User("user1", "pass1", "name1", "mail1@mail.com"));
         uda.delete(new User("user2", "pass2", "name2", "mail2@mail.com"));
         uda.delete(new User("user3", "pass3", "name3", "mail3@mail.com"));
         uda.delete(new User("user4", "pass4", "name4", "mail4@mail.com"));
         uda.delete(new User("user5", "pass5", "name5", "mail5@mail.com"));
+
+
     }
 
     @Test
@@ -131,7 +133,14 @@ class TeamControllerTest {
         ArrayList<String> roles = new ArrayList<>();
         roles.add("Fan");
         roles.add("Team_Owner");
-        urda.save(new Pair<>("user6",roles));
+        urda.save(new Pair<>("user6", roles));
+
+        uda.save(new User("user7", "pass7", "name7", "mail7@mail.com"));
+        roles = new ArrayList<>();
+        roles.add("Fan");
+        roles.add("Coach");
+        cda.save(new TeamCoach("user7", "mail7@mail.com", "main coach", "qualification7", "name7"));
+        urda.save(new Pair<>("user7", roles));
 
 //        TeamOwner owner6 = new TeamOwner("user6", "mail6@mail.com", "name6");
 //        oda.save(owner6);
@@ -140,18 +149,80 @@ class TeamControllerTest {
 //        tda.save(team2);
 //        tfda.save(new Pair<>("team2","field2"));
 
+        uda.save(new User("user11", "pass11", "name11", "mail11@mail.com"));
+        uda.save(new User("user12", "pass12", "name12", "mail12@mail.com"));
+        uda.save(new User("user13", "pass13", "name13", "mail13@mail.com"));
+        uda.save(new User("user14", "pass14", "name14", "mail14@mail.com"));
+        uda.save(new User("user15", "pass15", "name15", "mail15@mail.com"));
+        uda.save(new User("user16", "pass16", "name16", "mail16@mail.com"));
+        uda.save(new User("user17", "pass17", "name17", "mail17@mail.com"));
+        uda.save(new User("user18", "pass18", "name18", "mail18@mail.com"));
+        uda.save(new User("user19", "pass19", "name19", "mail19@mail.com"));
+        uda.save(new User("user20", "pass20", "name20", "mail20@mail.com"));
+        uda.save(new User("user21", "pass21", "name21", "mail121@mail.com"));
+        TeamPlayer player11 = new TeamPlayer("user11", "mail11@mail.com");
+        TeamPlayer player12 = new TeamPlayer("user12", "mail12@mail.com");
+        TeamPlayer player13 = new TeamPlayer("user13", "mail13@mail.com");
+        TeamPlayer player14 = new TeamPlayer("user14", "mail14@mail.com");
+        TeamPlayer player15 = new TeamPlayer("user15", "mail15@mail.com");
+        TeamPlayer player16 = new TeamPlayer("user16", "mail16@mail.com");
+        TeamPlayer player17 = new TeamPlayer("user17", "mail17@mail.com");
+        TeamPlayer player18 = new TeamPlayer("user18", "mail18@mail.com");
+        TeamPlayer player19 = new TeamPlayer("user19", "mail19@mail.com");
+        TeamPlayer player20 = new TeamPlayer("user20", "mail120@mail.com");
+        TeamPlayer player21 = new TeamPlayer("user21", "mail121@mail.com");
 
-       // TeamDTO team2Test = teamController.createTeam("user6","team2","field2");
-//        assertNotNull(team2Test);
-//        assertEquals("team2",team2Test.getTeamName());
-//        assertEquals("field2",team2Test.getStadium().getFieldName());
-//        assertNotEquals(0,team2Test.getOwners().size());
+        pda.save(player11);
+        pda.save(player12);
+        pda.save(player13);
+        pda.save(player14);
+        pda.save(player15);
+        pda.save(player16);
+        pda.save(player17);
+        pda.save(player18);
+        pda.save(player19);
+        pda.save(player20);
+        pda.save(player21);
+
+        String[] players = new String[]{"user11", "user12", "user13", "user14", "user15", "user16", "user17", "user18", "user19", "user20", "user21"};
+        teamController.createTeam("team2", "field2", "user7", players, "user6");
+
+        player11 = pda.select("user11");
+        player12 = pda.select("user12");
+        player13 = pda.select("user13");
+        player14 = pda.select("user14");
+        player15 = pda.select("user15");
+        player16 = pda.select("user16");
+        player17 = pda.select("user17");
+        player18 = pda.select("user18");
+        player19 = pda.select("user19");
+        player20 = pda.select("user20");
+        player21 = pda.select("user21");
+
+        Team team2Test = tda.select("team2");
+        assertNotNull(team2Test);
+        assertEquals("team2", team2Test.getTeamName());
+        assertEquals("field2", team2Test.getStadium().getFieldName());
+        assertNotEquals(0, team2Test.getOwners().size());
+
+        assertEquals("team2",player11.getCurrentTeam());
+        assertEquals("team2",player12.getCurrentTeam());
+        assertEquals("team2",player13.getCurrentTeam());
+        assertEquals("team2",player14.getCurrentTeam());
+        assertEquals("team2",player15.getCurrentTeam());
+        assertEquals("team2",player16.getCurrentTeam());
+        assertEquals("team2",player17.getCurrentTeam());
+        assertEquals("team2",player18.getCurrentTeam());
+        assertEquals("team2",player19.getCurrentTeam());
+        assertEquals("team2",player20.getCurrentTeam());
+        assertEquals("team2",player21.getCurrentTeam());
     }
 
     @Test
     void getTeams() {
         ArrayList<TeamDTO> teams = teamController.getTeams();
-        assertEquals(2,teams.size());
+        assertEquals(2, teams.size());
+
 
         //TODO: more checks
     }
