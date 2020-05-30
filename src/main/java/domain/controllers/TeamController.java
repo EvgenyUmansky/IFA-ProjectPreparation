@@ -23,7 +23,7 @@ public class TeamController {
     DBAccess< Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
 
-    public void createTeam(String teamOwner, String name, String stadium, String coachUserName, String[] players) {
+    public void createTeam( String name, String stadium, String coachUserName, String[] players,String teamOwner) {
         User user = uda.select(teamOwner);
         Field field = fda.conditionedSelect(new String[]{"Fields.FieldName", stadium}).values().iterator().next();
         user.addRoleToUser(Role.TEAM_OWNER);
