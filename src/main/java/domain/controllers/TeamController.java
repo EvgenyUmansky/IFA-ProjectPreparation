@@ -23,7 +23,7 @@ public class TeamController {
     DBAccess< Pair<String, ArrayList<String>>> urda = UserRolesDBAccess.getInstance();
 
 
-    public void createTeam( String name, String stadium, String coachUserName, String[] players,String teamOwner) {
+    public void createTeam(String name, String stadium, String coachUserName, String[] players,String teamOwner) {
         User user = uda.select(teamOwner);
         ArrayList<String> roles = urda.select(teamOwner).getValue();
 
@@ -33,7 +33,14 @@ public class TeamController {
         Team newTeam = new Team(name, field, owner);
 
         tda.save(newTeam);
-        oda.save(owner);
+
+        TeamOwner checkOwner = oda.select(teamOwner);
+        if(checkOwner == null) {
+            oda.save(owner);
+        }
+        else {
+            oda.update(owner);
+        }
 
         uda.update(user);
 
