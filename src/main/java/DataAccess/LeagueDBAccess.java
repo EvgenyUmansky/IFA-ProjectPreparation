@@ -35,7 +35,7 @@ public class LeagueDBAccess implements DBAccess<League>{
             statement = connection.prepareStatement(query);
             statement.setString(1,league.getLeagueName());
             statement.setInt(2,league.getSeason());
-            statement.setBoolean(3,(league.getSchedulingMethod() instanceof OneGameSchedulingMethod)); //FIXME: change to !instanceof if test fails
+            statement.setBoolean(3, !(league.getSchedulingMethod() instanceof OneGameSchedulingMethod));
             statement.setInt(4,league.getRankingMethod().getWinPoints());
             statement.setInt(5,league.getRankingMethod().getLosePoints());
             statement.setInt(6,league.getRankingMethod().getDrawPoints());
