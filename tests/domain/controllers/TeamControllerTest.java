@@ -7,7 +7,6 @@ import org.junit.jupiter.api.*;
 import service.pojos.TeamDTO;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,8 +31,8 @@ class TeamControllerTest {
         uda.save(new User("user4", "pass4", "name4", "mail4@mail.com"));
         uda.save(new User("user5", "pass5", "name5", "mail5@mail.com"));
 
-        pda.save(new TeamPlayer("user1", "mail1@mail.com", new Date(), "CDM", "6"));
-        pda.save(new TeamPlayer("user2", "mail2@mail.com", new Date(), "CAM", "8"));
+        pda.save(new TeamPlayer("user1", "mail1@mail.com", new java.sql.Date(new java.util.Date().getTime()), "CDM", "6"));
+        pda.save(new TeamPlayer("user2", "mail2@mail.com", new java.sql.Date(new java.util.Date().getTime()), "CAM", "8"));
 
         cda.save(new TeamCoach("user3", "mail3@mail.com", "main coach", "qualification3", "name3"));
         mda.save(new TeamManager("user4", "mail4@mail.com", "name4"));
