@@ -204,7 +204,7 @@ public class TeamCoachDBAccess implements DBAccess<TeamCoach> {
                     }
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }

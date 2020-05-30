@@ -237,7 +237,7 @@ public class TeamDBAccess implements DBAccess<Team>{
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }
