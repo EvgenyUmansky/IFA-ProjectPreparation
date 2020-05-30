@@ -39,6 +39,8 @@ class ApiTeamControllerTest {
 
     @Test
     void getTeamDetails() {
+        assertEquals("Arsenal", controller.getTeamDetails("Arsenal").getTeamName());
+        assertEquals("Field_15", controller.getTeamDetails("Arsenal").getStadium().getFieldName());
     }
 
 }
