@@ -209,11 +209,11 @@ public class Team {
                 setTeamStatus(TeamStatus.Open);
                 break;
 
-            case "temporarily closed":
+            case "tempclose":
                 setTeamStatus(TeamStatus.TempClose);
                 break;
 
-            case "permanently closed":
+            case "permanentlyclose":
                 setTeamStatus(TeamStatus.PermanentlyClose);
                 break;
 
