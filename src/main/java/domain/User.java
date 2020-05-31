@@ -393,12 +393,6 @@ public class User {
             return false;
         }
 
-        for (int i = 0; i < passwordLength; i++) {
-            char currentLetter = password.charAt(i);
-            if (!Character.isLetter(currentLetter) && !Character.isDigit(currentLetter))
-                return false;
-        }
-
         return true;
     }
 
