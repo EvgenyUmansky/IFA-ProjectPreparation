@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="">
+    <list default="true" id="cbc8bfdd-e786-45ed-8fc3-cd0edee20d22" name="Default Changelist" comment="tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/domain/controllers/TeamControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/domain/controllers/TeamControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/service/ApiGameControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/service/ApiGameControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +91,8 @@
       <recent name="C:\Users\EvgeniyU\Desktop\ThirdYear\Semestr_2\Project Preparation\IFA-ProjectPreparation\src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TeamControllerTest.createTeam">
-    <configuration name="ApiTeamControllerTest.getTeams" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.SpringRestApiApplication">
+    <configuration name="ApiGameControllerTest.getGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
@@ -101,24 +101,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.ApiTeamControllerTest" />
-      <option name="METHOD_NAME" value="getTeams" />
+      <option name="MAIN_CLASS_NAME" value="service.ApiGameControllerTest" />
+      <option name="METHOD_NAME" value="getGame" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LeagueControllerTest.createSeason" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ApiGameControllerTest.getGames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IFA-ProjectPreparation" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="domain.controllers.*" />
+          <option name="PATTERN" value="service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="domain.controllers" />
-      <option name="MAIN_CLASS_NAME" value="domain.controllers.LeagueControllerTest" />
-      <option name="METHOD_NAME" value="createSeason" />
+      <option name="PACKAGE_NAME" value="service" />
+      <option name="MAIN_CLASS_NAME" value="service.ApiGameControllerTest" />
+      <option name="METHOD_NAME" value="getGames" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -178,11 +178,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ApiGameControllerTest.getGames" />
+        <item itemvalue="JUnit.ApiGameControllerTest.getGame" />
         <item itemvalue="JUnit.TeamControllerTest.createTeam" />
         <item itemvalue="JUnit.TeamControllerTest" />
         <item itemvalue="JUnit.domain.controllers in IFA-ProjectPreparation" />
-        <item itemvalue="JUnit.LeagueControllerTest.createSeason" />
-        <item itemvalue="JUnit.ApiTeamControllerTest.getTeams" />
       </list>
     </recent_temporary>
   </component>
@@ -545,7 +545,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590877750890</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="tests">
+      <created>1590881044856</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1590881044857</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +604,6 @@
     <MESSAGE value="NotificationDBAccess" />
     <MESSAGE value="NotificationDBAccessTest" />
     <MESSAGE value="GameController" />
-    <MESSAGE value="tests" />
     <MESSAGE value="tests for GameController DB" />
     <MESSAGE value="getGame works" />
     <MESSAGE value="id fixed&#10;tests for GameController" />
@@ -613,7 +619,8 @@
     <MESSAGE value="put request for TeamStatus, API tests" />
     <MESSAGE value="createTeam owner bug fixed" />
     <MESSAGE value="API tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="API tests" />
+    <MESSAGE value="tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -657,17 +664,17 @@
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
     <state x="92" y="92" width="1736" height="856" key="AVDManager" timestamp="1590679782374" />
     <state x="92" y="92" width="1736" height="856" key="AVDManager/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
-    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1590877748984">
+    <state x="427" y="113" key="CommitChangelistDialog2" timestamp="1590882522259">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="427" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
     <state x="427" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590778646939" />
-    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590877748984" />
+    <state x="427" y="113" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590882522259" />
     <state x="2262" y="2" key="CommitChangelistDialog2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
-    <state width="675" height="517" key="DebuggerActiveHint" timestamp="1590870922604">
+    <state width="675" height="517" key="DebuggerActiveHint" timestamp="1590882489163">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="675" height="517" key="DebuggerActiveHint/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590870922604" />
+    <state width="675" height="517" key="DebuggerActiveHint/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590882489163" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1590869489098">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -676,53 +683,53 @@
     <state x="2511" y="222" key="FileChooserDialogImpl" timestamp="1590679782374" />
     <state x="739" y="275" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
     <state x="2511" y="222" key="FileChooserDialogImpl/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
-    <state width="1877" height="383" key="GridCell.Tab.0.bottom" timestamp="1590880661065">
+    <state width="1877" height="383" key="GridCell.Tab.0.bottom" timestamp="1590883940170">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="383" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590880661065" />
+    <state width="1877" height="383" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883940170" />
     <state width="1493" height="330" key="GridCell.Tab.0.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
-    <state width="1877" height="383" key="GridCell.Tab.0.center" timestamp="1590880661065">
+    <state width="1877" height="383" key="GridCell.Tab.0.center" timestamp="1590883940169">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="383" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590880661065" />
+    <state width="1877" height="383" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883940169" />
     <state width="1493" height="330" key="GridCell.Tab.0.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
-    <state width="1877" height="383" key="GridCell.Tab.0.left" timestamp="1590880661065">
+    <state width="1877" height="383" key="GridCell.Tab.0.left" timestamp="1590883940169">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="383" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590880661065" />
+    <state width="1877" height="383" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883940169" />
     <state width="1493" height="330" key="GridCell.Tab.0.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
-    <state width="1877" height="383" key="GridCell.Tab.0.right" timestamp="1590880661065">
+    <state width="1877" height="383" key="GridCell.Tab.0.right" timestamp="1590883940169">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="383" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590880661065" />
+    <state width="1877" height="383" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883940169" />
     <state width="1493" height="330" key="GridCell.Tab.0.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
-    <state width="1877" height="338" key="GridCell.Tab.1.bottom" timestamp="1590879147648">
+    <state width="1877" height="383" key="GridCell.Tab.1.bottom" timestamp="1590883720689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="338" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590879147648" />
+    <state width="1877" height="383" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883720689" />
     <state width="1493" height="330" key="GridCell.Tab.1.bottom/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458588" />
-    <state width="1877" height="338" key="GridCell.Tab.1.center" timestamp="1590879147648">
+    <state width="1877" height="383" key="GridCell.Tab.1.center" timestamp="1590883720688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="338" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590879147648" />
+    <state width="1877" height="383" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883720688" />
     <state width="1493" height="330" key="GridCell.Tab.1.center/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458588" />
-    <state width="1877" height="338" key="GridCell.Tab.1.left" timestamp="1590879147648">
+    <state width="1877" height="383" key="GridCell.Tab.1.left" timestamp="1590883720688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="338" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590879147648" />
+    <state width="1877" height="383" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883720688" />
     <state width="1493" height="330" key="GridCell.Tab.1.left/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458587" />
-    <state width="1877" height="338" key="GridCell.Tab.1.right" timestamp="1590879147648">
+    <state width="1877" height="383" key="GridCell.Tab.1.right" timestamp="1590883720688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1843" height="303" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590782899784" />
-    <state width="1877" height="338" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590879147648" />
+    <state width="1877" height="383" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590883720688" />
     <state width="1493" height="330" key="GridCell.Tab.1.right/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590698458588" />
     <state x="0" y="0" key="MergeDialog" timestamp="1590679782374" />
     <state x="0" y="0" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
@@ -742,12 +749,12 @@
     </state>
     <state x="93" y="93" width="1350" height="638" key="ShowDiffWithBranchDialog/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
     <state x="116" y="117" width="1688" height="806" key="ShowDiffWithBranchDialog/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590869489098" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590877752406">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590881047802">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="442" y="200" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590679782374" />
     <state x="504" y="73" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1590778649530" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590877752406" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590881047802" />
     <state x="2362" y="204" key="Vcs.Push.Dialog.v2/1920.2.1536.832/0.0.1920.1040@1920.2.1536.832" timestamp="1590679782374" />
     <state width="968" height="520" key="XDebugger.FullValuePopup" timestamp="1590679782374" />
     <state width="968" height="520" key="XDebugger.FullValuePopup/1920.2.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590679782374" />
@@ -890,6 +897,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/DataAccess/LeagueDBAccess.java</url>
           <line>108</line>
           <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="176" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/domain/controllers/TeamController.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="177" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
