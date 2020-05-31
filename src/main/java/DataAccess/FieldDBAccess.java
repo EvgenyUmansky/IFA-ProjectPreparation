@@ -26,7 +26,40 @@ public class FieldDBAccess implements DBAccess<Field>{
     @Override
     public void save(Field field) {
 
+
+        if (field == null) {
+            logger.error("Couldn't execute 'save(Field field)' in RefereeDBAccess: the field is null");
+            return;
+        }
+
+        Connection connection = DBConnector.getConnection();
+        PreparedStatement statement = null;
+        String query = "insert into [Fields] values (?, ?)";
+
+        try {
+            //TODO: make sure that the NullPointerException warning disappears when getConnection() is implemented
+            statement = connection.prepareStatement(query);
+            statement.setString(1, field.getFieldName());
+
+            statement.setDouble(2, field.getPropertyCost());
+
+
+            statement.executeUpdate();
+            connection.commit();
+        } catch (SQLException | NullPointerException e) {
+            logger.error(e.getMessage());
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                connection.close();
+            } catch (SQLException e3) {
+                logger.error(e3.getMessage());
+            }
+        }
     }
+
 
     @Override
     public void update(Field field) {
