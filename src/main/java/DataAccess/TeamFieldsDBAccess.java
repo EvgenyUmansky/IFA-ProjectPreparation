@@ -85,7 +85,7 @@ public class TeamFieldsDBAccess implements DBAccess<Pair<String, String>> {
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }

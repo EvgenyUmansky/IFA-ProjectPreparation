@@ -208,7 +208,7 @@ public class UserDBAccess implements DBAccess<User> {
                 } else {
                     query += " = ?";
                     if (i < conditions.length - 1)
-                        query += ",";
+                        query += " and";
                 }
             }
         }
